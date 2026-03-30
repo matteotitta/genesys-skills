@@ -4,7 +4,7 @@
 
 <p align="center">
   Production-grade Claude Code skills for B2B SaaS GTM.<br/>
-  Shared weekly via the <a href="https://newsletter.genesysgrowth.com">GTM Engineer newsletter</a>.
+  Shared weekly via the <a href="https://newsletter.genesysgrowth.com">Genesys newsletter</a>.
 </p>
 
 <p align="center">
@@ -64,11 +64,11 @@ In Claude Code, the skill will auto-trigger when you mention competitor analysis
 
 ## About
 
-These skills are built and battle-tested at [Genesys Growth](https://genesysgrowth.com) — a B2B SaaS GTM consultancy that helps Series A-B startups with positioning, messaging, content, and launches.
+These skills are built and battle-tested at [Genesys Growth](https://genesysgrowth.com) — a B2B SaaS GTM consultancy that helps Series A-C startups with positioning, messaging, content, and launches.
 
-Each skill has been used across 45+ client engagements and refined through real feedback. They're the same skills we use daily with Claude Code to deliver client work.
+Each skill has been used across 50+ client engagements and refined through real feedback. They're the same skills we use daily with Claude Code to deliver client work.
 
-New skills are shared weekly via the [GTM Engineer newsletter](https://newsletter.genesysgrowth.com). Subscribe to get them as they drop.
+New skills are shared weekly via the [Genesys newsletter](https://newsletter.genesysgrowth.com). Subscribe to get them as they drop.
 
 ## License
 
