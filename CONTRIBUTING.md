@@ -30,7 +30,7 @@ Process steps, quality gates, and output format.
 
 ## New skills
 
-New skills are added weekly via the [GTM Engineer newsletter](https://newsletter.genesysgrowth.com). If you'd like to request a skill or suggest improvements, [open an issue](https://github.com/matteotitta/genesys-skills/issues).
+New skills are added weekly via the [Genesys newsletter](https://newsletter.genesysgrowth.com). If you'd like to request a skill or suggest improvements, [open an issue](https://github.com/matteotitta/genesys-skills/issues).
 
 ## Bug reports
 
