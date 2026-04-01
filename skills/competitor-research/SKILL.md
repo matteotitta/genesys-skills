@@ -3,77 +3,12 @@ name: competitor-research
 version: "2.6"
 author: genesys-growth
 last_updated: 2026-03-19
-description: |
-  Use when client needs deep analysis of a specific competitor.
-  Use when positioning, sales-enablement, or product-messaging need competitive context.
-  Use when user mentions competitor name or asks for "competitive analysis".
-  Use when preparing battlecard content or competitive positioning.
-
-# Agentic Layer Fields
-dependencies:
-  required: []
-  recommended:
-    - company-context
-
-outputs:
-  - type: competitor-profile
-    feeds_into:
-      - positioning
-      - sales-enablement
-      - product-messaging
-  - type: comparison-matrix
-    feeds_into:
-      - positioning
-      - sales-enablement
-  - type: aggregate-insights
-    feeds_into:
-      - positioning
-      - product-messaging
-      - sales-enablement
-
-triggers:
-  auto_suggest_when:
-    - "user mentions competitor name or competitive analysis"
-    - "positioning skill needs competitive context"
-    - "sales-enablement needs battlecard content"
-    - "user has completed 2+ competitor deep dives for same client"
-    - "user asks for 'aggregate analysis' or 'cross-competitor insights'"
-  auto_run_when: null  # Always require confirmation
-
-review_gate: 1  # Quick review (research output)
-
-export_destinations:
-  - google_docs: "client_folder/context/competitor-research/"
-  - notion: "Competitor Research Database"
-
-# MCP Integrations
-mcp_integrations:
-  ahrefs:
-    purpose: "SEO metrics, backlink analysis, organic traffic estimates"
-    tools_used:
-      - "domain_overview"
-      - "backlinks"
-      - "organic_keywords"
-      - "competing_domains"
-    when_to_use: "Dimension 8 (SEO/AEO), traffic estimation, content strategy analysis"
-  apify:
-    purpose: "Google Ads Transparency scraping, LinkedIn Ads Library scraping (JS-rendered pages)"
-    tools_used:
-      - "call-actor"
-      - "search-actors"
-      - "fetch-actor-details"
-    when_to_use: "Dimension 13 (Paid advertising) — primary scraping method for ads libraries"
-  firecrawl:
-    purpose: "Browser-rendered scraping fallback for JS-heavy pages"
-    tools_used:
-      - "firecrawl_scrape"
-      - "firecrawl_browser_create"
-      - "firecrawl_browser_execute"
-    when_to_use: "Dimension 13 fallback if no suitable Apify actor found"
-  serper:
-    purpose: "Free SERP position checks and keyword ranking verification"
-    when_to_use: "Dimension 8 (SEO/AEO) when Ahrefs MCP not available"
-    note: "2500 free searches/month — requires SERPER_API_KEY env var (serper.dev)"
+description: >
+  Deep 13-dimension competitor analysis for B2B SaaS. Use when client
+  needs competitive context for positioning, sales-enablement, or
+  product-messaging. Covers company, product, ICP, pricing, reviews,
+  content, launches, SEO/AEO, technographics, hiring signals, GTM
+  motion, social presence, and paid advertising.
 ---
 
 # Competitor research
