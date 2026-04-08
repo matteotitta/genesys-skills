@@ -30,6 +30,7 @@ Drop a skill into your `.claude/skills/` directory and invoke it with `/skill-na
 | Skill | Description | Added |
 |-------|-------------|-------|
 | [competitor-research](skills/competitor-research/) | Deep 13-dimension competitor analysis for B2B SaaS. Covers company, product, ICP, pricing, reviews, content, launches, SEO/AEO, technographics, hiring signals, GTM motion, social, and paid advertising. Includes templates, schemas, and real examples. | Mar 2026 |
+| [icp-research](skills/icp-research/) | 12-section ideal customer profile research for B2B SaaS. Produces TAM analysis, firmographic segments, champion and economic buyer persona deep-dives, negative ICP, intent signals, voice of customer synthesis, and segment-level recommendations. Includes dimension schemas, output templates, search patterns, and a worked Strapi example. | Apr 2026 |
 
 ## How to use
 
