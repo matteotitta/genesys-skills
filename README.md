@@ -31,6 +31,8 @@ Drop a skill into your `.claude/skills/` directory and invoke it with `/skill-na
 |-------|-------------|-------|
 | [competitor-research](skills/competitor-research/) | Deep 13-dimension competitor analysis for B2B SaaS. Covers company, product, ICP, pricing, reviews, content, launches, SEO/AEO, technographics, hiring signals, GTM motion, social, and paid advertising. Includes templates, schemas, and real examples. | Mar 2026 |
 | [icp-research](skills/icp-research/) | 12-section ideal customer profile research for B2B SaaS. Produces TAM analysis, firmographic segments, champion and economic buyer persona deep-dives, negative ICP, intent signals, voice of customer synthesis, and segment-level recommendations. Includes dimension schemas, output templates, search patterns, and a worked Strapi example. | Apr 2026 |
+| [tov-guidelines](skills/tov-guidelines/) | Two-phase tone of voice extraction for B2B SaaS. Phase 1 scrapes 15-20 pages to extract sentence, paragraph, word, and structural patterns with frequency scores. Phase 2 generates codified voice rules with source attribution. Includes analysis template, guidelines template, founder interview questions, and Genesys Growth examples. | Apr 2026 |
+| [brand-kit](skills/brand-kit/) | Screenshot-first visual identity extraction for B2B SaaS. Produces an 8-section brand system file: visual identity description, colors, typography, components, data viz, logo usage, spacing, and signature elements. Confidence-scored tokens (0-5). Includes brand kit template and worked examples (Genesys Growth, Cursor). | Apr 2026 |
 
 ## How to use
 
