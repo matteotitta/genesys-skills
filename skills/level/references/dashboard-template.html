@@ -1,0 +1,199 @@
+<!--
+  DASHBOARD TEMPLATE for /level. Replace every {{TOKEN}}, write to
+  ~/Desktop/claude-code-level.html, then open it.
+
+  ── BRAND TOKENS ──────────────────────────────────────────────────────────────
+  Resolve these from a brand kit (DESIGN.md) when --brand-kit <path> is given OR
+  the mode default resolves one (see SKILL.md "Generate the dashboard"). If no
+  brand kit, use the DARK DEFAULTS shown in [brackets].
+
+  {{FONT_LINK}}    <link> tag for the brand font, or "" if a system font.
+                   General Sans: <link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600&display=swap" rel="stylesheet">
+                   [default: ""]
+  {{FONT}}         CSS font-family stack. [default: Consolas, 'Courier New', monospace]
+  {{BG}}           page background        ← colors.background   [#0a0a0a]
+  {{SURFACE}}      cards/boxes            ← colors.surface      [#111]
+  {{SURFACE_2}}    bar track / elevated   ← colors.surface-elevated [#1a1a1a]
+  {{BORDER}}       borders                ← colors.border       [#222]
+  {{TEXT}}         primary text           ← colors.on-background [#fff]
+  {{TEXT_MUTED}}   secondary text         ← colors.on-background-muted [#888]
+  {{TEXT_SUBTLE}}  tertiary text          ← colors.on-background-subtle [#555]
+  {{ACCENT}}       PRIMARY (number, current dot, bars, links) ← colors.accent [#f59e0b]
+  {{DONE}}         CLEARED (done dots/rows) ← colors.tertiary OR colors.success [#4ade80]
+  {{BRAND_NAME}}   brand display name     ← name   [The 10 Levels of Claude Code]
+  {{BRAND_URL}}    brand domain           ← domain/url [thegenaicircle.com]
+
+  Mode defaults when no --brand-kit: beginner → GTM Engineer School kit (or the
+  bracket defaults); internal → Genesys Growth kit at
+  projects/genesys/brand/0626-brand-kit.md (purple #6400D7 / teal #BAFDFF / General Sans).
+
+  ── CONTENT TOKENS ────────────────────────────────────────────────────────────
+  {{LEVEL_NUMBER}} {{LEVEL_NAME}} {{LEVEL_VIBE}}  — e.g. 4 / Architect / designs the system
+  {{SUMMARY_TEXT}}            — the "short version" paragraph
+  {{PROGRESS_DOTS}}           — 11 dots (see format)
+  {{PILLAR_BARS}}             — 4 bars, Context/Skills/Integrations/Orchestration (see format)
+  {{CAPABILITY_CARDS}}        — one card per detected capability (see format)
+  {{NEXT_LEVEL_NUMBER}} {{NEXT_LEVEL_NAME}} {{GAP_EXPLANATION}} {{ROADMAP_STEPS}}
+  {{LEVELS_TABLE_ROWS}}       — 11 rows (see format)
+
+  DOT format (11 total; done | current | future):
+    <div class="dot done"><span>0</span></div>
+    <div class="dot current"><span>4</span></div>
+    <div class="dot"><span>5</span></div>
+  PILLAR BAR format (fill width = score/4 * 100%):
+    <div class="pillar"><div class="pillar-name">Context</div>
+      <div class="bar"><div class="fill" style="width:75%"></div></div><div class="pillar-score">3/4</div></div>
+  CARD format (use class "missing" for gaps above the user's level):
+    <div class="cap-card"><div class="cap-icon">●</div><div class="cap-title">CONTEXT</div>
+      <div class="cap-detail">CLAUDE.md 180 lines, routes to memory + rules</div></div>
+  STEP format (add a <div class="step-time"> inside step-body):
+    <div class="step"><div class="step-num">1</div><div class="step-body">
+      <div class="step-title">...</div><div class="step-desc">...</div><div class="step-time">~10 minutes</div></div></div>
+  LEVELS TABLE ROW format (current level → "current-row", cleared → "done-row"):
+    <tr class="current-row"><td class="lvl-num">4</td><td class="lvl-name">Architect</td><td class="lvl-desc">...</td></tr>
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Level {{LEVEL_NUMBER}} {{LEVEL_NAME}} | The 10 Levels of Claude Code</title>
+{{FONT_LINK}}
+<style>
+  :root {
+    --bg: {{BG}}; --surface: {{SURFACE}}; --surface-2: {{SURFACE_2}};
+    --border: {{BORDER}};
+    --text: {{TEXT}}; --text-muted: {{TEXT_MUTED}}; --text-subtle: {{TEXT_SUBTLE}};
+    --accent: {{ACCENT}};   /* primary */
+    --done: {{DONE}};       /* cleared */
+    --font: {{FONT}};
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: var(--font); min-height: 100vh; -webkit-font-smoothing: antialiased; }
+  .container { max-width: 960px; margin: 0 auto; padding: 48px 40px 64px; }
+  .top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 48px; }
+  .top-bar h1 { font-size: 13px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: var(--text-subtle); }
+  .top-bar .brand { font-size: 12px; color: var(--text-subtle); letter-spacing: 1px; }
+  .hero { display: flex; gap: 40px; align-items: stretch; margin-bottom: 40px; }
+  .card { flex-shrink: 0; min-width: 248px; border: 1px solid var(--border); background: var(--surface); padding: 32px 28px;
+          text-align: center; display: flex; flex-direction: column; justify-content: center; border-radius: 16px; }
+  .card .label { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-subtle); }
+  .card .num { font-size: 100px; font-weight: 600; color: var(--accent); line-height: 1; margin: 6px 0; letter-spacing: -0.04em; }
+  .card .name { font-size: 24px; font-weight: 600; color: var(--text); letter-spacing: -0.02em; }
+  .card .vibe { font-size: 13px; color: var(--text-muted); margin-top: 6px; }
+  .card .share { font-size: 11px; color: var(--text-subtle); margin-top: 20px; letter-spacing: 1px; }
+  .summary-box { flex: 1; border: 1px solid var(--border); background: var(--surface); padding: 26px; color: var(--text-muted);
+                 font-size: 14.5px; line-height: 1.75; border-radius: 16px; }
+  .summary-box strong { color: var(--text); font-weight: 600; }
+  .summary-box code { color: var(--done); font-size: 13px; }
+  .progress { display: flex; justify-content: center; gap: 4px; margin-bottom: 40px; padding: 20px 0;
+              border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .dot { width: 60px; text-align: center; padding: 8px 0; font-size: 12px; color: var(--text-subtle); font-weight: 500; }
+  .dot::before { content: ''; display: block; width: 10px; height: 10px; border-radius: 50%; border: 1px solid var(--border); margin: 0 auto 7px; }
+  .dot.done::before { background: var(--done); border-color: var(--done); }
+  .dot.done { color: var(--done); }
+  .dot.current::before { background: var(--accent); border-color: var(--accent); width: 15px; height: 15px; }
+  .dot.current { color: var(--accent); font-weight: 600; }
+  .section-label { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-subtle);
+                   margin-bottom: 18px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+  .pillars { margin-bottom: 48px; }
+  .pillar { display: flex; align-items: center; gap: 16px; margin-bottom: 11px; }
+  .pillar-name { width: 130px; font-size: 13px; color: var(--text); font-weight: 500; }
+  .pillar .bar { flex: 1; height: 14px; background: var(--surface-2); border-radius: 7px; overflow: hidden; }
+  .pillar .fill { height: 100%; background: var(--accent); border-radius: 7px; }
+  .pillar-score { width: 36px; text-align: right; font-size: 12px; color: var(--text-muted); }
+  .capabilities { margin-bottom: 48px; }
+  .cap-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(208px, 1fr)); gap: 12px; }
+  .cap-card { border: 1px solid var(--border); padding: 18px; background: var(--surface); border-radius: 12px; }
+  .cap-card.missing { opacity: 0.45; }
+  .cap-icon { font-size: 15px; margin-bottom: 9px; color: var(--done); }
+  .cap-card.missing .cap-icon { color: var(--text-subtle); }
+  .cap-title { font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text); margin-bottom: 7px; font-weight: 600; }
+  .cap-detail { font-size: 12px; color: var(--text-muted); line-height: 1.55; }
+  .next-level { margin-bottom: 48px; }
+  .next-header { font-size: 19px; color: var(--text); margin-bottom: 8px; font-weight: 600; letter-spacing: -0.01em; }
+  .next-header span { color: var(--accent); }
+  .gap-text { color: var(--text-muted); font-size: 14px; line-height: 1.7; margin-bottom: 24px; max-width: 720px; }
+  .steps { display: flex; flex-direction: column; gap: 12px; }
+  .step { display: flex; gap: 16px; border: 1px solid var(--border); padding: 20px; background: var(--surface); border-radius: 12px; }
+  .step-num { font-size: 24px; color: var(--accent); flex-shrink: 0; width: 32px; font-weight: 600; }
+  .step-body { flex: 1; }
+  .step-title { font-size: 14.5px; color: var(--text); margin-bottom: 6px; font-weight: 600; }
+  .step-desc { font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-bottom: 8px; }
+  .step-time { font-size: 11px; color: var(--text-subtle); letter-spacing: 1px; text-transform: uppercase; }
+  .reference { margin-bottom: 48px; }
+  .ref-table { width: 100%; border-collapse: collapse; }
+  .ref-table th { text-align: left; color: var(--text-subtle); font-size: 11px; font-weight: 500; text-transform: uppercase;
+                  letter-spacing: 1px; padding: 11px 16px; border-bottom: 1px solid var(--border); }
+  .ref-table td { padding: 11px 16px; border-bottom: 1px solid var(--surface); font-size: 13px; }
+  .lvl-num { color: var(--text-subtle); width: 40px; } .lvl-name { color: var(--text-muted); width: 160px; font-weight: 500; } .lvl-desc { color: var(--text-subtle); }
+  .ref-table .current-row td, .ref-table .current-row .lvl-num, .ref-table .current-row .lvl-name { color: var(--accent); }
+  .ref-table .done-row .lvl-num, .ref-table .done-row .lvl-name { color: var(--done); }
+  .ref-table .done-row td { color: var(--text-muted); }
+  .footer { text-align: center; padding-top: 32px; border-top: 1px solid var(--border); color: var(--text-subtle); font-size: 12px; letter-spacing: 1px; }
+  .footer a { color: var(--text-muted); text-decoration: none; } .footer a:hover { color: var(--accent); }
+  .footer .cta { color: var(--text-subtle); margin-top: 8px; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="top-bar">
+    <h1>The 10 Levels of Claude Code</h1>
+    <div class="brand">{{BRAND_NAME}} · {{BRAND_URL}}</div>
+  </div>
+
+  <div class="hero">
+    <div class="card">
+      <div class="label">Your Level</div>
+      <div class="num">{{LEVEL_NUMBER}}</div>
+      <div class="name">{{LEVEL_NAME}}</div>
+      <div class="vibe">{{LEVEL_VIBE}}</div>
+      <div class="share">screenshot + share →</div>
+    </div>
+    <div class="summary-box">{{SUMMARY_TEXT}}</div>
+  </div>
+
+  <div class="progress">
+    {{PROGRESS_DOTS}}
+  </div>
+
+  <div class="pillars">
+    <div class="section-label">The Dual Lens — your 4 systems</div>
+    {{PILLAR_BARS}}
+  </div>
+
+  <div class="capabilities">
+    <div class="section-label">What You Have</div>
+    <div class="cap-grid">
+      {{CAPABILITY_CARDS}}
+    </div>
+  </div>
+
+  <div class="next-level">
+    <div class="section-label">Your Roadmap</div>
+    <div class="next-header">Level <span>{{NEXT_LEVEL_NUMBER}}</span>: {{NEXT_LEVEL_NAME}}</div>
+    <div class="gap-text">{{GAP_EXPLANATION}}</div>
+    <div class="steps">
+      {{ROADMAP_STEPS}}
+    </div>
+  </div>
+
+  <div class="reference">
+    <div class="section-label">All 10 Levels</div>
+    <table class="ref-table">
+      <thead><tr><th>Level</th><th>Name</th><th>What It Means</th></tr></thead>
+      <tbody>
+        {{LEVELS_TABLE_ROWS}}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="footer">
+    <a href="https://{{BRAND_URL}}">{{BRAND_NAME}}</a> / /level
+    <div class="cta">Run /level again when you're ready for the next step.</div>
+  </div>
+
+</div>
+</body>
+</html>
