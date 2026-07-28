@@ -1,7 +1,7 @@
 ---
 name: competitor-research
-version: '2.8'
-last_updated: 2026-04-29
+version: '2.9'
+last_updated: 2026-08-13
 author: genesys-growth
 description: 'Performs deep 13-dimension competitor analysis with quantitative scoring rubric. Produces a competitor dossier
   containing executive summary, dimension-by-dimension breakdown, comparison matrix, aggregate insights, and threat level
@@ -20,6 +20,7 @@ inputs:
   required: []
   recommended:
   - company-context
+outputs:
 - type: competitor-profile
   feeds_into:
   - positioning
@@ -35,11 +36,13 @@ inputs:
   - product-messaging
   - sales-enablement
 depends_on: []
+feeds_into:
 - positioning
 - product-messaging
 - sales-enablement
 owned_by_agent: researcher
 mcps_used:
+- apify
 - exa
 - gdrive
 - notion
@@ -66,6 +69,17 @@ Run a 13-dimension dossier on a B2B SaaS competitor. Output ships with explicit 
 ## Research substrate
 
 Default substrate: **Exa** (per `.claude/rules/exa-protocol.md`, auto-loaded). Primary tools: `find_similar_links_exa` (structural competitor discovery from a client URL), `web_search_exa` (news, voice, gap discovery), `web_fetch_exa` (clean comparison-page extraction). **Crawl-cost discipline** (`.claude/rules/crawl-cost-discipline.md`): when a dimension needs a competitor's page inventory (Content, SEO/AEO), enumerate pages first with free `mcp__spider__spider_links` (local, no credits), triage to product / pricing / positioning / customer pages, then spend `web_fetch_exa` / Firecrawl only on kept pages — this kills the "fallback to Apify if credits exhausted" failure on large sites. Migration window: prefer the plugin namespace `mcp__plugin_exa_exa__*` once installed; legacy `mcp__exa__*` still mounted as fallback. Worked examples + tool catalog: `.claude/skills/meta-skills/exa/`.
+
+### Optional public X evidence
+
+Keep any configured X research route. When D12 needs public X evidence and Apify MCP is available, select the Actor that matches the question:
+
+| Actor | Use |
+|-------|-----|
+| [`xquik/x-tweet-scraper`](https://apify.com/xquik/x-tweet-scraper) | Public posts, replies, quotes, threads, and profile timelines |
+| [`xquik/x-follower-scraper`](https://apify.com/xquik/x-follower-scraper) | Public followers, following, lists, communities, and audience overlap |
+
+Fetch the selected Actor's current input schema before every run. Start with `maxItems: 50` for content or `maxItems: 100` plus `maxItemsPerTarget: 100` for audience research. Check live Store pricing, set Apify's `maxTotalChargeUsd`, show the target and cap, and get approval before a paid run. Use public data only. Never target protected accounts or infer sensitive traits. Treat audience relationships as research leads, not proof of affinity. Cite the retrieved X URLs and the Actor Store page with an access date.
 
 ## When to run
 
@@ -100,7 +114,7 @@ If competitor name is ambiguous (e.g., "Cursor", "Base", "Linear"), confirm with
 
 1. **Confirm scope and disambiguate** → the premium reference. Verify name + URL, select run mode, lock disambiguation.
 2. **Pre-flight optional MCPs** → check Clay, Granola, Google Drive, CRM, Notion availability per the premium reference ("Optional internal intel sources"). For each available, queue the corresponding queries; for each missing, skip silently.
-3. **Research 13 dimensions** → the premium reference. Order: Company → Product → ICP → Pricing → Reviews → Content → Launches → SEO/AEO → Technographics → Openings → GTM → LinkedIn/Social → Paid advertising. Each dimension has tool fallbacks (Ahrefs → Serper → manual; Apify → Firecrawl → manual). Frameworks + scoring → the premium reference ("Core frameworks").
+3. **Research 13 dimensions** → the premium reference. Order: Company → Product → ICP → Pricing → Reviews → Content → Launches → SEO/AEO → Technographics → Openings → GTM → LinkedIn/Social → Paid advertising. Each dimension has tool fallbacks (Ahrefs → Serper → manual; Apify → Firecrawl → manual). For D12 public X work, use the optional route above only when it fits the research question. Frameworks + scoring → the premium reference ("Core frameworks").
 4. **TrustPilot customer monitor** (deep refresh only, customer-facing competitors only) → run inside Step 2.5 per the Phase 2 file. Score top 10–15 customers 🟢/🟡/🔴.
 5. **Synthesize and assign confidence** → the premium reference. Assign `[VERIFIED]/[INFERRED]/[ESTIMATED]/[UNAVAILABLE]` per claim, write 2–3-paragraph executive summary, document data gaps with follow-up actions.
 6. **Aggregate analysis** (only if 2+ competitors researched for same client) → the premium reference. Build threat matrix, feature parity table, credibility audit, 3–5 strategic recommendations. Save as `MMYY-aggregate-insights.md` in client's competitors folder.
@@ -124,6 +138,7 @@ If competitor name is ambiguous (e.g., "Cursor", "Base", "Linear"), confirm with
 - Recent-changes header present in `--quick` and `--refresh` modes; "Last refreshed" date updated.
 - Output title is `# Competitor research: [Name]` exactly — no aliases like "competitive intelligence analysis" or "Competitive Intelligence Report".
 - Premium-tool limitations noted explicitly (Ahrefs absent → Serper or manual, BuiltWith absent → "Not available", JS-walled ad libraries → manual check noted).
+- X audience relationships, when researched, are labeled as leads rather than evidence of affinity.
 
 ## Integration with other skills
 
