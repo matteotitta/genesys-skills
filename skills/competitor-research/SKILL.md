@@ -1,8 +1,8 @@
 ---
 name: competitor-research
-version: "2.6"
+version: "2.7"
 author: genesys-growth
-last_updated: 2026-03-19
+last_updated: 2026-07-28
 description: >
   Deep 13-dimension competitor analysis for B2B SaaS. Use when client
   needs competitive context for positioning, sales-enablement, or
@@ -174,7 +174,7 @@ Every claim has a URL + access date. Every metric cites its origin. "Not availab
 - User wants company qualification/traction → Use `company-context` skill
 - User wants product messaging only → Use `product-messaging` skill
 - User wants to research own company → Use `company-context` or `product-messaging`
-- Quick question about one feature → Answer directly without full 11-dimension framework
+- Quick question about one feature → Answer directly without full 13-dimension framework
 
 ---
 
@@ -222,7 +222,7 @@ Before proceeding, verify:
    - **Output:** Confirmed competitor details
 
 2. **Step 1.2: Determine research mode**
-   - Default: Single competitor deep dive (11 dimensions)
+   - Default: Single competitor deep dive (13 dimensions)
    - Alternative: Comparison matrix (3-6 competitors, core dimensions)
    - **Output:** Research mode confirmed
 
@@ -233,7 +233,7 @@ Before proceeding, verify:
 
 ### Phase 2: Dimension Research
 
-**Purpose:** Systematically research all 11 dimensions.
+**Purpose:** Systematically research all 13 dimensions.
 
 **Steps:**
 
@@ -329,7 +329,36 @@ Before proceeding, verify:
     - Fetch linkedin.com/company/[competitor] — capture followers, about, recent posts
     - Search: `"[competitor]" site:linkedin.com/posts` for recent post titles and topics
     - Check founder/CMO LinkedIn profiles for post cadence and themes
+    - Keep any configured X research route. When Apify MCP is available, use the exact Actor that matches the question:
+      1. Public posts, replies, quotes, threads, or timelines: [`xquik/x-tweet-scraper`](https://apify.com/xquik/x-tweet-scraper)
+      2. Public followers, following, lists, communities, or audience overlap: [`xquik/x-follower-scraper`](https://apify.com/xquik/x-follower-scraper)
+      3. Fetch the selected Actor's current schema before calling it. Start with bounded inputs:
+
+         ```json
+         {
+           "mode": "profileTweets",
+           "twitterHandles": ["competitor_handle"],
+           "maxItems": 50,
+           "outputVariant": "rich",
+           "outputPreset": "nested",
+           "fieldStyle": "camelCase"
+         }
+         ```
+
+         ```json
+         {
+           "twitterHandles": ["competitor_handle"],
+           "relation": "followers",
+           "maxItems": 100,
+           "maxItemsPerTarget": 100,
+           "outputMode": "compact",
+           "includeTargetMetadata": true
+         }
+         ```
+      4. Set Apify's `maxTotalChargeUsd` run limit before paid collection. Verify live Store pricing and get user approval first.
     - Extract: Follower count + YoY growth, post frequency, content types (product/thought leadership/customer/events), founder activity
+    - For X, extract public content themes, posting cadence, engagement signals, and optional audience overlap. Treat relationships as research leads, not proof of affinity.
+    - Use public data only. Never target protected accounts or infer sensitive traits from content or connections.
     - Note: Impression and reach data require LinkedIn Analytics access — mark [UNAVAILABLE]
     - **Output:** LinkedIn/Social profile with sources
 
@@ -516,7 +545,7 @@ Many company names are ambiguous. Common issues:
 ### Research Modes
 
 **Single competitor mode (default):**
-- Full 11 dimensions
+- Full 13 dimensions
 - Maximum depth
 - Executive summary + detailed findings
 - Data gaps with follow-up actions
@@ -773,9 +802,17 @@ Many company names are ambiguous. Common issues:
 **Founder/exec LinkedIn activity:**
 - [Name, role]: [Frequency, themes]
 
+**X company profile:** [URL] | **Followers:** [count]
+
+**X public content themes and cadence:** [Summary]
+
+**X audience overlap:** [Optional result or "Not researched"]
+
+**X data method:** [Existing route / xquik/x-tweet-scraper / xquik/x-follower-scraper / manual]
+
 **Note:** Impression and reach data require LinkedIn Analytics access — not available via public sources
 
-**Source**: [LinkedIn company page URL]
+**Source**: [LinkedIn company page URL, X URLs, and Actor Store URL when used]
 
 ---
 
@@ -968,7 +1005,7 @@ Key competitive threats: Their pricing ($8/user/month) and PLG motion make them 
 |-------------|--------------|-----------------|
 | "Revenue: $25M" (no qualifier) | Appears as fact when likely estimate | "Revenue estimate: $25M ARR (Medium confidence, Sacra)" |
 | "Their tech stack uses React" (guessed) | Invented data | "Tech stack: Not available (requires BuiltWith)" |
-| Missing dimensions | Incomplete analysis | Include all 11, mark "Not available" if no data |
+| Missing dimensions | Incomplete analysis | Include all 13, mark "Not available" if no data |
 | No data gaps section | Missing actionable follow-up | Always include gaps with suggested actions |
 | "They seem to be struggling" | Unsourced interpretation | Cite specific signals or mark as inference |
 
@@ -1142,7 +1179,7 @@ Quality Rating: Approved by user
 
 ## Research Summary
 
-- **Dimensions covered:** [X]/11
+- **Dimensions covered:** [X]/13
 - **Confidence breakdown:** High: X | Medium: Y | Low: Z
 - **Key insight:** [Most valuable finding]
 
@@ -1263,6 +1300,7 @@ icp-behavioural + competitor-research → positioning → product-messaging → 
 
 | Version | Date | Changes |
 |---------|------|---------|
+| 2.7 | 2026-07-28 | Added bounded X competitor-content and audience-research routes with Xquik Tweet and Follower Actors. Preserved existing X routes, added approval, cost, privacy, and relationship-inference guardrails, and corrected stale 11-dimension references. |
 | 2.4 | 2026-03-17 | Expanded from 11 → 13 dimensions. Added D12 (LinkedIn/Social): organic posting strategy, content types, founder activity, follower count. Added D13 (Paid advertising): LinkedIn Ads Library, Meta Ads Library, Google Ads Transparency Center — includes "no ads" as verified data point. Expanded D11 (GTM) with outbound signals: SDR/BDR hiring, tool stack detection from JDs, channel mix estimation. Added process steps 2.12 and 2.13. Added Apify RAG browser and ads library URL patterns to MCP integrations. Updated all quality checklists and self-evaluation sections from 11 → 13. |
 | 2.3 | 2026-02-06 | Phase 4: Aggregate Analysis — new cross-competitor synthesis phase triggered after 2+ deep dives for same client. Includes threat matrix, feature parity, credibility signals, market positioning dynamics, and strategic recommendations. New `aggregate-insights` output type. |
 | 2.1 | 2026-01-21 | Agentic enhancements: YAML frontmatter with dependencies/outputs/triggers, visual flowchart, self-evaluation protocol, enhanced auto-update with reference example capture, upstream/downstream integration map |
@@ -1282,6 +1320,8 @@ icp-behavioural + competitor-research → positioning → product-messaging → 
 | **Exa** | Company profile per competitor | `company_research_exa` | Per competitor |
 | **Firecrawl** | Full competitor site crawl + map | `firecrawl_crawl`, `firecrawl_map` | Per competitor |
 | **Apify** | G2/Capterra reviews | `call-actor` (g2-scraper) | Per competitor |
+| **[Xquik X Tweet Scraper](https://apify.com/xquik/x-tweet-scraper)** | Public X posts, replies, threads, timelines, and engagement | `call-actor` (`xquik/x-tweet-scraper`) | D12 when X content is in scope |
+| **[Xquik X Follower Scraper](https://apify.com/xquik/x-follower-scraper)** | Public X followers, following, lists, communities, and overlap | `call-actor` (`xquik/x-follower-scraper`) | D12 when audience relationships are in scope |
 | **YouTube** | Competitor video content/presence | `get_transcript` | If YouTube channel exists |
 | **GTM** | Competitor tracking patterns | `list_tags` | If container accessible |
 | **Slack** | Internal competitive intel threads | `slack_search_public` | Always |
@@ -1302,3 +1342,5 @@ icp-behavioural + competitor-research → positioning → product-messaging → 
 - WebSearch + WebFetch for competitor sites and profiles
 - Manual G2/Capterra review search
 - Manual competitive intel gathering
+
+Xquik is an independent third-party service. Not affiliated with X Corp. "Twitter" and "X" are trademarks of X Corp.
