@@ -1,0 +1,308 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://genesysgrowth.com/schemas/skill-frontmatter.schema.json",
+  "title": "Genesys Growth SKILL.md frontmatter (Phase 4 locked-down spec)",
+  "description": "Validates the YAML frontmatter of every active SKILL.md across .claude/skills/. Locked-down spec adopted Phase 4 (2026-04-29) to make the catalog auto-syncable and the chain graph queryable. Source of truth for ontology_type / primitive enums: .claude/rules/ontology.md.",
+  "type": "object",
+  "required": [
+    "name",
+    "version",
+    "last_updated",
+    "description",
+    "goal",
+    "outcome",
+    "primitive",
+    "ontology_type",
+    "review_gate",
+    "inputs",
+    "outputs",
+    "depends_on",
+    "feeds_into",
+    "owned_by_agent",
+    "status"
+  ],
+  "properties": {
+    "name": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$",
+      "description": "Slug-style skill identifier (lowercase, hyphens, no spaces). Must match the parent folder name."
+    },
+    "version": {
+      "type": ["string", "number"],
+      "description": "Semantic version. String form preferred (e.g. \"1.0\", \"2.3\")."
+    },
+    "author": {
+      "type": "string",
+      "description": "Skill author. Defaults to genesys-growth for first-party skills."
+    },
+    "last_updated": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+      "description": "ISO date (YYYY-MM-DD) of the last meaningful edit to skill behavior."
+    },
+    "description": {
+      "type": "string",
+      "minLength": 80,
+      "description": "Single-paragraph description used by Claude Code for trigger matching. Min 80 chars to enforce useful detail."
+    },
+    "goal": {
+      "type": "string",
+      "minLength": 20,
+      "maxLength": 200,
+      "description": "One-sentence outcome — what the skill produces. Imperative voice (\"Develop a positioning strategy with...\")."
+    },
+    "outcome": {
+      "type": "string",
+      "minLength": 20,
+      "maxLength": 300,
+      "description": "What the locked artifact contains and what it unblocks downstream."
+    },
+    "primitive": {
+      "type": "string",
+      "enum": [
+        "research",
+        "product-marketing",
+        "product-management",
+        "content",
+        "website",
+        "social",
+        "lifecycle",
+        "seo-aeo",
+        "paid-marketing",
+        "outbound",
+        "sales-enablement",
+        "design",
+        "clients",
+        "ops",
+        "meta"
+      ],
+      "description": "Top-level GTM primitive grouping. Drives folder placement under .claude/skills/{primitives|meta}/. `ops` = Genesys-internal business operations (e.g. company-cfo)."
+    },
+    "sub_primitive": {
+      "type": ["string", "null"],
+      "enum": [
+        "audit",
+        "strategy",
+        "execution",
+        "research",
+        "linkedin",
+        "youtube",
+        "newsletter",
+        "list-building",
+        "enrichment",
+        "email-copywriting",
+        "catalog",
+        "orchestration",
+        "session",
+        "learning",
+        "infra",
+        "motion",
+        null
+      ],
+      "description": "Sub-primitive grouping (audit/strategy/execution for most primitives, channel-specific for social, role-specific for meta, motion for video render skills)."
+    },
+    "ontology_type": {
+      "type": "string",
+      "enum": [
+        "company-context",
+        "competitor-intel",
+        "icp-profile",
+        "tone-of-voice",
+        "brand-kit",
+        "funnel-strategy",
+        "win-loss-analysis",
+        "content-audit",
+        "transcript-insights",
+        "expert-pov",
+        "client-engagement",
+        "positioning",
+        "messaging",
+        "segment-messaging-map",
+        "content-strategy",
+        "pricing-strategy",
+        "website-score",
+        "lead-assessment",
+        "youtube-strategy",
+        "landing-page-copy",
+        "aeo-content",
+        "battlecard",
+        "launch-plan",
+        "lifecycle-campaign",
+        "help-center-article",
+        "onboarding-video-script",
+        "case-study",
+        "technical-paper",
+        "outreach-sequence",
+        "sales-enablement-asset",
+        "reply-classification",
+        "list-grade",
+        "linkedin-post",
+        "youtube-script",
+        "newsletter",
+        "thought-leadership",
+        "runbook",
+        "experiment-log",
+        "dashboard",
+        "product-strategy",
+        "product-pulse",
+        "ship-learnings",
+        "ad-creative-brief",
+        "ad-creative-asset",
+        "video-composition",
+        "temporal-signal-brief",
+        "call-coaching-report",
+        "idea-validation",
+        "source-notes",
+        "financial-report",
+        "domain-shortlist",
+        "revops-incident-report"
+      ],
+      "description": "Knowledge type from .claude/rules/ontology.md. Drives output classification + downstream consumer routing."
+    },
+    "review_gate": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 4,
+      "description": "0=auto-approve, 1=quick, 2=standard, 3=deep, 4=collaborative. See ontology.md."
+    },
+    "inputs": {
+      "type": "object",
+      "required": ["required", "recommended"],
+      "additionalProperties": false,
+      "properties": {
+        "required": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Skills whose output must exist before this skill can run."
+        },
+        "recommended": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Skills whose output meaningfully improves this skill's quality."
+        }
+      },
+      "description": "Upstream skill dependencies. The required list mirrors depends_on."
+    },
+    "outputs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["type"],
+        "additionalProperties": false,
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Knowledge type from ontology.md. Usually matches top-level ontology_type."
+          },
+          "feeds_into": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        }
+      },
+      "description": "Structured output declarations. At least one entry required."
+    },
+    "depends_on": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Flat list of upstream skill slugs. Mirrors inputs.required for chain-lint queries."
+    },
+    "feeds_into": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Flat list of downstream skill slugs. Mirrors outputs[].feeds_into for chain-lint queries."
+    },
+    "owned_by_agent": {
+      "type": "string",
+      "enum": [
+        "researcher",
+        "pmm",
+        "product-manager",
+        "growth",
+        "content",
+        "sales",
+        "b2b-consultant",
+        "paid",
+        "operator"
+      ],
+      "description": "Role-agent that executes this skill. Mirrors the role-agent roster in .claude/agents/."
+    },
+    "mcps_used": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "MCP servers this skill calls. Used for credit-gate routing and skill-injection."
+    },
+    "push_targets": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["gdrive", "notion", "framer", "github", "vercel"]
+      },
+      "description": "Publishable destinations. Empty array if skill output stays local-only."
+    },
+    "triggers": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "slash_commands": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Slash commands in .claude/commands/ that invoke this skill."
+        },
+        "natural_language": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Phrase fragments that auto-suggest this skill. Used by orchestrator + Claude Code triggering."
+        }
+      }
+    },
+    "status": {
+      "type": "string",
+      "enum": ["draft", "review", "locked", "superseded"],
+      "description": "Lifecycle state. draft=Phase 4 default; locked=team-approved canonical reference."
+    },
+    "locked_by": {
+      "type": ["string", "null"],
+      "description": "Who approved the lock (\"Team\", \"Genesys\", or null while draft)."
+    },
+    "locked_date": {
+      "type": ["string", "null"],
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$|^$",
+      "description": "ISO date of lock. Null while draft."
+    },
+    "lock_version": {
+      "type": ["integer", "null"],
+      "minimum": 1,
+      "description": "Increments with each unlock-refresh-relock cycle. Null while draft."
+    },
+    "sources_count": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Count of inputs verified during last run. 0 at rollout; populated on first execution."
+    },
+    "context": {
+      "type": "string",
+      "enum": ["fork", "inherit", "fresh"],
+      "description": "Legacy field — context strategy. fork=copy parent context, inherit=share, fresh=clean slate."
+    },
+    "effort": {
+      "type": "string",
+      "enum": ["low", "medium", "high", "max"],
+      "description": "Legacy field — expected effort/duration tier."
+    },
+    "paths": {
+      "type": "string",
+      "description": "Legacy field — glob hint for which workspace paths this skill applies to."
+    },
+    "disable-model-invocation": {
+      "type": "boolean",
+      "description": "Legacy field — if true, skill is internal-only (no auto-invoke)."
+    },
+    "slim_exemption": {
+      "type": ["string", "null"],
+      "description": "Documented reason this SKILL.md exceeds the 300-line slim discipline cap. When set, Gate 8 verification accepts this file as a known exception. Format: brief-reason-YYYY-MM-DD (e.g. 'gbp-split-deferred-2026-04-30'). Default null/absent — most skills should slim, not exempt."
+    }
+  },
+  "additionalProperties": false
+}
