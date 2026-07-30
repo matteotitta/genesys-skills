@@ -1,0 +1,8 @@
+# Surface this as a Markdown skill library, not "HTML"
+*.md linguist-detectable=true
+*.md linguist-documentation=false
+*.html linguist-documentation=true
+*.css linguist-documentation=true
+*.json linguist-documentation=true
+*.py linguist-documentation=true
+*.xsd linguist-documentation=true

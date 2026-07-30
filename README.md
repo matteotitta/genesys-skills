@@ -1,5 +1,7 @@
 # genesys-skills
 
+![Skills](https://img.shields.io/badge/skills-168-6400D7) ![Stars](https://img.shields.io/github/stars/matteotitta/genesys-skills?color=6400D7&labelColor=181723) ![License](https://img.shields.io/badge/license-MIT-BAFDFF?labelColor=181723) ![Last commit](https://img.shields.io/github/last-commit/matteotitta/genesys-skills?color=6400D7&labelColor=181723)
+
 **Production Claude Code skills for B2B SaaS go-to-market.** This is the actual skill library I use to run GTM for B2B SaaS founders — content, outbound, paid, SEO/AEO, social, PMM, sales enablement, lifecycle, plus the meta-tooling that keeps 168 skills coherent. Shared, and updated, weekly.
 
 Built by [Matteo Titta](https://github.com/matteotitta) — AI-pilled GTM operator, founder of [Genesys Growth](https://genesysgrowth.com).
