@@ -22,16 +22,13 @@ inputs:
   - transcript-analysis
   - icp-behavioural
   - tov-guidelines
-outputs:
 - type: linkedin-hook-library
   feeds_into:
   - linkedin-weekly-content
 depends_on: []
-feeds_into:
 - linkedin-weekly-content
 owned_by_agent: content
 mcps_used: []
-push_targets:
 - gdrive
 - notion
 triggers:
@@ -113,7 +110,7 @@ Output complies with [`output-tenets.md`](../../../../../rules/output-tenets.md)
 
 ## Process
 
-4-phase flow: Context Gathering → Template Matching (14 categories scored HIGH/MEDIUM/LOW) → Hook Generation (2-3 per selected category) → Quality + Organisation (top 5 ranked). Full step-by-step in `references/process.md`.
+4-phase flow: Context Gathering → Template Matching (14 categories scored HIGH/MEDIUM/LOW) → Hook Generation (2-3 per selected category) → Quality + Organisation (top 5 ranked). Full step-by-step in the premium reference.
 
 ---
 
@@ -126,7 +123,7 @@ Five fundamentals to apply on every hook — regardless of template. These are v
 3. **Trigger one emotion.** Pick: curiosity, fear, desire, or surprise. Don't try to do all four — pick the sharpest one for this ICP.
 4. **Lead with bold or contrarian.** Safe openers get scrolled past. A statement that challenges the status quo creates tension.
 5. **Ask the question they're already asking.** Mirror the internal monologue of your ICP. "How do I generate pipeline without a big budget?" lands if they're already thinking it.
-6. **Use ≥3 PLACE ingredients per hook.** Person, Location, Action, Cost, Era. Templates control hook shape; PLACE controls specificity. Below 3 ingredients, hooks slide into the generic-trap. See `references/place-framework.md`.
+6. **Use ≥3 PLACE ingredients per hook.** Person, Location, Action, Cost, Era. Templates control hook shape; PLACE controls specificity. Below 3 ingredients, hooks slide into the generic-trap. See the premium reference.
 
 ### Inspiration accounts
 
@@ -165,30 +162,9 @@ Study these profiles for strong hook execution patterns:
 
 ---
 
-## Output Format
-
-Hook library output includes Top 5 ranked hooks, all hooks grouped by category with relevance score, full category scoring table, and a usage guide. Full template + iteration prompts in `references/output-format.md`.
-
----
-
 ## Quality
 
-Pre-delivery checklist covers hook quality (under 25 words, no emojis, curiosity gap), specificity quality (no placeholders, real ICP language), and voice quality (sounds like author, no buzzwords, passes 100 Posts Test). Worked example + anti-examples in `references/quality.md`.
-
----
-
-## Reference Files
-
-| File | Purpose |
-|------|---------|
-| `references/process.md` | 4-phase workflow + integration with upstream/downstream skills |
-| `references/output-format.md` | Hook library template + iteration prompts |
-| `references/quality.md` | Pre-delivery checklist + worked example + anti-examples |
-| `references/auto-update.md` | Self-evaluation protocol + feedback signals that trigger updates |
-| `references/hook-templates.md` | Nick Broekema's 42 templates (14 categories) — structured for generation |
-| `references/place-framework.md` | Magali De Reu's PLACE ingredients (Person/Location/Action/Cost/Era) — specificity layer on top of templates |
-| `references/original-pdf-extract.md` | Verbatim extract from Nick Broekema's original PDF carousel |
-| `references/genesys-hook-library-v2.md` | Canonical worked example (Genesys / GTM Engineer School ICP) |
+Pre-delivery checklist covers hook quality (under 25 words, no emojis, curiosity gap), specificity quality (no placeholders, real ICP language), and voice quality (sounds like author, no buzzwords, passes 100 Posts Test). Worked example + anti-examples in the premium reference.
 
 ---
 

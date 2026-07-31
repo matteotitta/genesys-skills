@@ -21,14 +21,11 @@ inputs:
   required: []
   recommended:
   - skill-catalog
-outputs:
 - type: skill-review-report
   feeds_into: []
 depends_on: []
-feeds_into: []
 owned_by_agent: operator
 mcps_used: []
-push_targets:
 - gdrive
 - notion
 triggers:
@@ -41,7 +38,7 @@ lock_version: null
 sources_count: 0
 context: fork
 effort: medium
-paths: .claude/skills/**
+paths:.claude/skills/**
 disable-model-invocation: true
 ---
 
@@ -210,9 +207,6 @@ Before proceeding, verify:
 
 ---
 
-## Output Format
-
-```markdown
 # Skill Review: [skill-name]
 
 **Date:** YYYY-MM-DD

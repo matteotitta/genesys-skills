@@ -25,18 +25,15 @@ inputs:
   - icp-behavioural
   - tov-guidelines
   - brand-kit
-outputs:
 - type: one-pager
   feeds_into:
   - sales-enablement
   - gdrive-create
 depends_on: []
-feeds_into:
 - gdrive-create
 - sales-enablement
 owned_by_agent: content
 mcps_used: []
-push_targets:
 - framer
 triggers:
   slash_commands: []
@@ -53,7 +50,7 @@ effort: medium
 
 Single-page enablement documents that communicate a product, feature, solution, event, insight, or competitive comparison in a format scannable in 30 seconds. Three-phase process: design the wireframe layout, fill with structured content, then polish the copy.
 
-The body of this file holds decision-grade context (when to invoke, inputs, type-selection table, anti-hallucination guardrails, gotchas, integration). Step-by-step process, output template + worked example, quality gates, and DESIGN.md integration spec live in `references/`.
+The body of this file holds decision-grade context (when to invoke, inputs, type-selection table, anti-hallucination guardrails, gotchas, integration). Step-by-step process, output template + worked example, quality gates, and DESIGN.md integration spec live in the premium reference.
 
 ---
 
@@ -145,7 +142,7 @@ Before proceeding, verify:
 | **Insight summary** | Hero → SCQA insight → Supporting evidence → Implications → CTA | Content cascade output, research distribution | Transcript analysis, thought leadership |
 | **Competitive** | At-a-glance → Feature comparison → When to choose → CTA | Competitive evaluation, sales leave-behind | Competitor research, battlecards |
 
-Each type has a reference template in `references/`. Load the template in Phase 1 and adapt to the specific content.
+Each type has a reference template in the premium reference. Load the template in Phase 1 and adapt to the specific content.
 
 ---
 
@@ -157,7 +154,7 @@ Each type has a reference template in `references/`. Load the template in Phase 
 | 2. Content structuring | Hero, body sections, proof elements (metrics + pull quote), CTA | Filled draft |
 | 3. Copy polish | Voice, tightening to 500-600 words, anti-hallucination, export format | Export-ready markdown |
 
-Full step-by-step (with checkpoints, flowchart, review gate) in `references/process.md`.
+Full step-by-step (with checkpoints, flowchart, review gate) in the premium reference.
 
 ---
 
@@ -172,7 +169,7 @@ This skill consumes the client's DESIGN.md at `projects/consulting/{client}/bran
 - Spacing on the brand's `spacing.*` scale
 - If no DESIGN.md exists → pause and recommend `/brand-kit` first; do not invent tokens
 
-Full integration contract (spec rules, forbidden patterns, output-format specifics for PDF/PPTX/web) in `references/quality.md`. Authoritative cross-skill rules in `.claude/rules/design-production.md` (auto-loaded).
+Full integration contract (spec rules, forbidden patterns, output-format specifics for PDF/PPTX/web) in the premium reference. Authoritative cross-skill rules in `.claude/rules/design-production.md` (auto-loaded).
 
 ---
 
@@ -208,20 +205,6 @@ Full integration contract (spec rules, forbidden patterns, output-format specifi
 | **case-study** | Related | For full narrative customer stories; one-pager handles condensed proof |
 | **transcript-analysis** | Upstream source | Provides SCQA insights for insight-summary type |
 | **brand-kit** | Upstream context | Provides design tokens for formatted output |
-
----
-
-## Reference files
-
-| File | Purpose |
-|------|---------|
-| `references/process.md` | 3-phase runbook + flowchart + checkpoint criteria |
-| `references/output-format.md` | Output template + worked example (ClientCo) + anti-examples + iteration prompts |
-| `references/quality.md` | Pre-delivery checklist + self-eval + full DESIGN.md integration spec |
-| `references/design-specs.md` | Layout, typography, spacing for print/digital |
-| `references/product-overview-template.md` | Product overview type template |
-| `references/solution-brief-template.md` | Solution brief type template |
-| `references/insight-summary-template.md` | Insight summary type template (used by content-cascade) |
 
 ---
 

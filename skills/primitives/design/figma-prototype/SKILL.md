@@ -22,17 +22,14 @@ inputs:
   - landing-page-wireframe
   - brand-kit
   recommended: []
-outputs:
 - type: landing-page-copy
   feeds_into: []
 depends_on:
 - landing-page-wireframe
 - brand-kit
-feeds_into: []
 owned_by_agent: operator
 mcps_used:
 - figma
-push_targets:
 - gdrive
 - notion
 triggers:
@@ -132,9 +129,9 @@ Output complies with [`output-tenets.md`](../../../../rules/output-tenets.md), [
 Extract `fileKey` and `nodeId` from the URL, then use Figma MCP:
 
 ```
-get_design_context(fileKey, nodeId)  → code hints + screenshot
-get_screenshot(fileKey, nodeId)      → visual reference
-get_variable_defs(fileKey)           → design tokens (if defined)
+get_design_context(fileKey, nodeId) → code hints + screenshot
+get_screenshot(fileKey, nodeId) → visual reference
+get_variable_defs(fileKey) → design tokens (if defined)
 ```
 
 **From pasted screenshot:**

@@ -20,7 +20,6 @@ inputs:
   - icp-behavioural
   - tov-guidelines
   - onboarding-video-script
-outputs:
 - type: video-composition
   feeds_into:
   - lifecycle-marketing
@@ -30,14 +29,12 @@ depends_on:
 - brand-kit
 - positioning
 - product-messaging
-feeds_into:
 - lifecycle-marketing
 - email-nurture
 - linkedin-weekly-content
 owned_by_agent: content
 mcps_used:
 - firecrawl
-push_targets:
 - notion
 - gdrive
 triggers:
@@ -66,7 +63,7 @@ This is the *rendered* counterpart to [`/onboarding-video-script`](../../product
 
 Inherits the rendering engine, brand-kit binding, and DESIGN.md token contract from [`/product-ui-frames`](../product-ui-frames/SKILL.md) (the generic product-UI animation engine). Adds four craft rules on top: UI-pieces doctrine, caption discipline, cursor discipline, stills-intake gate.
 
-The body holds decision-grade context (when to invoke, validation gate, the four rules summarised). Full craft for each rule lives in `references/`.
+The body holds decision-grade context (when to invoke, validation gate, the four rules summarised). Full craft for each rule lives in the premium reference.
 
 ---
 
@@ -83,7 +80,7 @@ Output complies with:
 
 | Code | Refinement | How it lands in onboarding-video |
 |---|---|---|
-| **R1** | Source placement (three layers) | Rendered MP4 is **end-customer-facing**. **No source frames in the video itself.** Brand-kit citations + DESIGN.md tokens live in sidecar metadata for QA only. Captions never carry `[VERIFIED: ...]` overlays. |
+| **R1** | Source placement (three layers) | Rendered MP4 is **end-customer-facing**. **No source frames in the video itself.** Brand-kit citations + DESIGN.md tokens live in sidecar metadata for QA only. Captions never carry `[VERIFIED:...]` overlays. |
 | **R3** | Product-update tone | Captions frame as "[Product] does X" not "we are thrilled to introduce X." Even on launch-day onboarding videos. The visual demonstrates; the caption labels — neither oversells. |
 | **R6** | CTA hierarchy | End-card CTA names the product-action tied to the feature being demonstrated — "open [Feature] in the dashboard" — NOT sign-up (viewer already signed up to see onboarding). Per Step 6 warm-base = product-action rule. |
 | **R9** | Action-oriented section names | Caption beats are verb-led ("Connect / See the runway / Open Reporting") — not status-led ("Setup / Dashboard view / Features"). |
@@ -119,7 +116,7 @@ Output complies with:
 | **brand-kit** | Locked DESIGN.md tokens (colors, typography, rounded, spacing) | `brand-kit` skill output (`status: locked`) |
 | **positioning** | Locked primary anchor + differentiators the video reflects | `positioning` skill output (`status: locked`) |
 | **product-messaging** | Locked messaging library — captions pull from value props | `product-messaging` skill output (`status: locked`) |
-| **stills** | 2–4 screenshots per onboarding screen, with state label + intent statement per screen | User-uploaded, formatted per `references/stills-intake-gate.md` |
+| **stills** | 2–4 screenshots per onboarding screen, with state label + intent statement per screen | User-uploaded, formatted per the premium reference |
 
 ### Recommended (improve quality)
 
@@ -150,13 +147,13 @@ Each beat shows a *piece* of the feature in action: a button being tapped, a tog
 
 Quantitative: focal element occupies ≥60% of canvas. Chrome blurred or tinted (never full opacity). One feature per beat.
 
-Full craft → `references/ui-pieces-doctrine.md`
+Full craft → the premium reference
 
 ### Rule 2 — Caption discipline
 
 Captions anchor to a fixed top band (200–240px reserve), rise from below (60px offset, `Easing.bezier(0.16, 1, 0.3, 1)`), ~54px @ 1080w default, weight 700. Persist across cuts when text is identical. Never below the focal UI; never drift between beats.
 
-Full craft → `references/caption-discipline.md`
+Full craft → the premium reference
 
 ### Rule 3 — Cursor discipline
 
@@ -164,13 +161,13 @@ Cursor leads every tap. Fades in at focal area center, moves in *one straight se
 
 Three primitives by function: `Pointer` (persistent dot, leads eye), `TapDot` (ripple at tap moment), `GlowRing` (illustrative-only, no tap implied). Code patterns parallel the source's Remotion components but built in Hyperframes/GSAP.
 
-Full craft → `references/cursor-discipline.md`
+Full craft → the premium reference
 
 ### Rule 4 — Stills-intake gate
 
 2–4 stills per onboarding screen, with state labels (resting / mid-interaction / result) and a one-sentence intent statement per screen. Refuse to run without them. This is the anti-hallucination gate — the model does not invent UI from descriptions.
 
-Full craft → `references/stills-intake-gate.md`
+Full craft → the premium reference
 
 ---
 
@@ -178,7 +175,7 @@ Full craft → `references/stills-intake-gate.md`
 
 DESIGN.md tokens flow into the rendered output via the brand-kit-mapper inherited from `/product-ui-frames`. Per [`design-production.md`](../../../rules/design-production.md), this skill follows the canonical token-citation discipline: no hardcoded hex codes, font names, or radii in composition code. Captions, focal-area backgrounds, cursor colors, and overlay surfaces all reference DESIGN.md tokens.
 
-Specific mappings → `references/brand-binding.md`.
+Specific mappings → the premium reference.
 
 ---
 
@@ -191,7 +188,7 @@ Specific mappings → `references/brand-binding.md`.
 | 3. Compose | Build HTML composition per beat with Hyperframes blocks + craft rules | `index.html` + sidecar metadata |
 | 4. Render + iterate | `npx hyperframes render` → preview → adjust timing/easing | MP4 + revision loop |
 
-Full runbook → `references/process.md`.
+Full runbook → the premium reference.
 
 ---
 
@@ -222,42 +219,6 @@ Full runbook → `references/process.md`.
 
 ---
 
-## Reference files
-
-| File | Purpose |
-|------|---------|
-| `references/process.md` | 4-phase runbook with validation gates and checkpoints |
-| `references/ui-pieces-doctrine.md` | Rule 1 craft + quantitative thresholds + anti-patterns |
-| `references/caption-discipline.md` | Rule 2 craft + Hyperframes/GSAP code skeleton |
-| `references/cursor-discipline.md` | Rule 3 craft + three primitives + anti-patterns table |
-| `references/stills-intake-gate.md` | Rule 4 craft + intake template + refuse-to-run conditions |
-| `references/brand-binding.md` | DESIGN.md token → composition CSS variable mapping |
-| `references/quality.md` | Pre-delivery checklist + worked example + voice/design review gates |
-
-### Examples
-
-- `examples/0526-saas-three-beat-demo.md` — synthetic 3-beat SaaS onboarding video (resting state → tap interaction → result), brand-bound to a synthetic DESIGN.md
-
----
-
-## Output routing
-
-- **Client-scoped:** `projects/consulting/active/{client}/content/execution/video/MMYY-{topic}-onboarding-video/` per `.claude/rules/consulting-clients.md` auto-routing rule
-- **Genesys-internal:** `projects/genesys/content/execution/video/MMYY-{topic}-onboarding-video/`
-
-Per-run folder structure (parallel to `/product-ui-frames`):
-```
-MMYY-{topic}-onboarding-video/
-├── index.html           # composition source
-├── stills/              # supplied screenshots with state labels
-├── output.mp4           # rendered video
-└── metadata.json        # sidecar — brand-kit hash, positioning version, model run, cost
-```
-
-Filename convention: `MMYY-{topic-slug}-onboarding-video.mp4` per `.claude/CLAUDE.md` File Naming Convention.
-
----
-
 ## MCP data integration
 
 **Level:** 2 — Execution
@@ -272,24 +233,11 @@ Filename convention: `MMYY-{topic-slug}-onboarding-video.mp4` per `.claude/CLAUD
 
 ---
 
-## Push
-
-Auto-route to Notion via `.claude/rules/notion-protocol.md` for collaboration on the composition source HTML before render. Founders / stakeholders preview the timeline structure in Notion, comment, then run final render.
-
-Optional: push to GDoc on demand via `.claude/mcp/gdrive/create-doc-unified.mjs --client {slug}` for stakeholder review of the beat plan (text-only summary).
-
-Chain suggestions after delivery:
-- `email-nurture` (embed in onboarding email sequence)
-- `lifecycle` (place in multi-channel onboarding flow)
-- `linkedin-weekly-content` (short cut variant for LinkedIn)
-
----
-
 ## Design cycle (post-authoring phases)
 
-Per `.claude/rules/design-production.md` § Skill authorship contract, run these phases before final delivery:
+Per `.claude/rules/design-production.md`, run these phases before final delivery:
 
-1. **Layout** — focal-element placement validated per `design-reviewer/references/layout-craft.md`
+1. **Layout** — focal-element placement validated per `design-reviewer/the premium reference
 2. **Distill** — caption text passes voice review (no banned buzzwords)
 3. **Typeset** — typography tokens from brand-kit applied, no hardcoded font families
 4. **Polish** — easing curves match canonical UI ease-out, no bounce on routine state transitions

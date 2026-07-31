@@ -29,23 +29,12 @@ inputs:
     - icp-behavioural
     - transcript-analysis
     - brand-kit
-outputs:
-  - type: help-center-article
-    feeds_into:
-      - lifecycle-marketing
-      - email-nurture
 depends_on:
   - product-messaging
-feeds_into:
-  - lifecycle-marketing
-  - email-nurture
 owned_by_agent: growth
 mcps_used:
   - exa
   - firecrawl
-push_targets:
-  - gdrive
-  - notion
 triggers:
   slash_commands:
     - /help-center
@@ -69,9 +58,9 @@ effort: high
 
 Produce Intercom-ready help-center / knowledge-base articles for one product, organized by a researched canonical collection taxonomy and scoped per user persona. The output is the canonical link target that onboarding emails, in-product tooltips, and Intercom Fin AI agents reference.
 
-The taxonomy (which collections to include) is **researched and codified** — see `references/help-center-taxonomy-research.md`. The skill picks from a 12-module library based on product shape; it does not invent collections at runtime.
+The taxonomy (which collections to include) is **researched and codified** — see the premium reference. The skill picks from a 12-module library based on product shape; it does not invent collections at runtime.
 
-For the full template library by collection → `references/article-templates.md`. For Intercom-native voice + structure rules → `references/intercom-best-practices.md`. For persona scoping → `references/persona-scoping-process.md`. For the JSON export schema + script → `references/intercom-export-format.md`.
+For the full template library by collection → the premium reference. For Intercom-native voice + structure rules → the premium reference. For persona scoping → the premium reference. For the JSON export schema + script → the premium reference.
 
 ---
 
@@ -126,7 +115,6 @@ Output complies with:
 
 - `positioning` — anchors article voice + the "why this product exists" framing
 - `tov-guidelines` — applies house writing rules; for ClientCo this means "no em dashes" etc.
-- `icp-behavioural` — primary persona-scoping input (admin / end-user / integrator). Without it, the skill runs the 4-question mini-interview from `references/persona-scoping-process.md`.
 - `transcript-analysis` — surfaces real user language for opening hooks AND surfaces recurring issues that warrant a `troubleshooting` collection.
 - `brand-kit` — DESIGN tokens for any custom callout styling on the Intercom side (post-v1.0).
 
@@ -144,13 +132,13 @@ The skill executes in 5 phases. Phases 1–3 run with you in the loop (taxonomy 
 
 ### Phase 1 — Taxonomy selection (which collections to include)
 
-Read inputs. Run the 6-question product-shape interview from `references/help-center-taxonomy-research.md` § "Implications for the skill" → derives which Tier-2 and Tier-3 modules to include. `getting-started` is always present.
+Read inputs. Run the 6-question product-shape interview from the premium reference → derives which Tier-2 and Tier-3 modules to include. `getting-started` is always present.
 
 Produce `00-taxonomy.md` listing selected collections, the trigger-justification per collection, and any modules explicitly excluded with reasoning. **You review and approve before phase 2.**
 
 ### Phase 2 — Persona scoping
 
-Read `icp-behavioural` (or run mini-interview per `references/persona-scoping-process.md`). Decompose buyer personas into **user personas** (admin / end-user / integrator are the canonical three; the persona scoping doc shows when to add more).
+Read `icp-behavioural` (or run mini-interview per the premium reference). Decompose buyer personas into **user personas** (admin / end-user / integrator are the canonical three; the persona scoping doc shows when to add more).
 
 Map each user persona to which collections they need:
 - Admin persona → `account-and-profile`, `settings-and-configuration`, `admin-sso-user-management`, `billing-and-plans`, `integrations` (admin views)
@@ -161,7 +149,7 @@ Produce `00-article-matrix.md` listing every (persona, collection, article) cell
 
 ### Phase 3 — Per-cell article tuning (approval-loop pattern)
 
-Per [`.claude/rules/approval-loop-pattern.md`](../../../../rules/approval-loop-pattern.md): pick one representative cell from the matrix (highest-stakes; usually the `getting-started` × end-user × `setup` article). Generate it using the matching template from `references/article-templates.md`. Show you the result. Edit prompt; regenerate. Two consecutive zero-correction rounds = locked tuning prompt.
+Per [`.claude/rules/approval-loop-pattern.md`](../../../../rules/approval-loop-pattern.md): pick one representative cell from the matrix (highest-stakes; usually the `getting-started` × end-user × `setup` article). Generate it using the matching template from the premium reference. Show you the result. Edit prompt; regenerate. Two consecutive zero-correction rounds = locked tuning prompt.
 
 ### Phase 4 — Fan-out generation
 
@@ -182,42 +170,7 @@ Per [`.claude/rules/outbound-research-hygiene.md`](../../../../rules/outbound-re
 
 ### Phase 5 — Intercom export
 
-Run `python3 scripts/export-intercom.py` (per `references/intercom-export-format.md`) to walk `collections/` and emit `intercom-import.json` — one collections array, one articles array, parent-child references intact. Hand off to client CX team for Intercom Articles API import.
-
----
-
-## Output structure
-
-```
-projects/consulting/active/{client}/lifecycle/help-center/MMYY-{product}/
-├── MMYY-taxonomy.md                ← collection map for this product (planning file — MMYY convention)
-├── MMYY-personas.md                ← user-persona scoping (planning file)
-├── MMYY-article-matrix.md          ← persona × collection × article grid (planning file)
-├── collections/
-│   ├── getting-started/             ← always present (platform-level activation arc)
-│   │   └── personas/{persona-slug}/{01-capabilities,02-benefits,03-setup,04-aha,05-habit}.md
-│   ├── {product-1}/                 ← MULTI-PRODUCT mode: one collection per shipped product
-│   │   └── personas/{persona-slug}/{01-capabilities,...,NN-product-specific}.md
-│   ├── {product-2}/
-│   ├── account-and-profile/         ← when product has user/org concept
-│   ├── integrations/                ← when product connects to other tools
-│   ├── settings-and-configuration/  ← when product has admin/team controls
-│   ├── advanced-workflows/          ← when source material exposes power-user paths
-│   ├── troubleshooting/             ← when transcripts surface recurring issues
-│   └── {other Tier-2/3 modules selected in phase 1}/
-└── intercom-import.json             ← v1.0 ships this
-```
-
-**Filename conventions (clarified after ClientCo real-test 2026-05-06):**
-
-- **Top-level planning files** (`MMYY-taxonomy.md`, `MMYY-personas.md`, `MMYY-article-matrix.md`) follow the canonical `MMYY-topic.md` convention per `.claude/rules/consulting-clients.md`.
-- **Internal article files** under `collections/{coll}/personas/{persona}/{NN}-{type}.md` are SUB-ARTIFACTS of one parent skill output — they're exempt from the MMYY convention because (a) the parent folder already encodes the date, (b) the file path becomes the Intercom article slug used by the export script, and (c) the `NN-` numeric prefix is what enforces article ordering inside each collection.
-
-**Multi-product mode (MULTI_PRODUCT pattern, observed in Anthropic + OpenAI taxonomy research):**
-
-When a client has 3+ shipped products (e.g., ClientCo's Treasury, Payroll, Business Accounts, Bookkeeping, Invoice Pay, Team Cards, Reporting & Cashflow), the skill creates **one collection per product** in addition to the cross-cutting collections (getting-started platform-level, account-and-profile, settings, integrations, troubleshooting, etc.). Each product collection contains its own persona × spine matrix.
-
-Per [`.claude/rules/consulting-clients.md`](../../../../rules/consulting-clients.md) auto-routing: outputs land in the client's `lifecycle/` execution lane (verb = "produce" → execution sub-folder).
+Run `python3 scripts/export-intercom.py` (per the premium reference) to walk `collections/` and emit `intercom-import.json` — one collections array, one articles array, parent-child references intact. Hand off to client CX team for Intercom Articles API import.
 
 ---
 

@@ -20,14 +20,11 @@ review_gate: 0
 inputs:
   required: []
   recommended: []
-outputs:
 - type: runbook
   feeds_into: []
 depends_on: []
-feeds_into: []
 owned_by_agent: operator
 mcps_used: []
-push_targets:
 - gdrive
 - notion
 triggers:
@@ -192,7 +189,7 @@ On approval:
 Run the session indexer to capture this session in the recall database:
 
 ```bash
-cd "$CLAUDE_CODE_ROOT" && python3 .claude/hooks/session-indexer.py
+cd "$CLAUDE_CODE_ROOT" && python3.claude/hooks/session-indexer.py
 ```
 
 ### Step 9: Lightweight consolidate-memory pass

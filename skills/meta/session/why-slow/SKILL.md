@@ -18,14 +18,11 @@ status: draft
 inputs:
   required: []
   recommended: []
-outputs:
 - type: runbook
   feeds_into: []
 depends_on: []
-feeds_into: []
 owned_by_agent: operator
 mcps_used: []
-push_targets: []
 triggers:
   slash_commands:
   - /why-slow
@@ -44,7 +41,7 @@ When the user says "why is this slow" or invokes `/why-slow`, run the four check
 
 ### 1. Recent startup-timing log (last 10 entries)
 ```bash
-tail -10 .claude/automation/sync-pull/startup-timing.log
+tail -10.claude/automation/sync-pull/startup-timing.log
 ```
 Look for: rising `parent_age` values across recent sessions (cold-start getting slower) OR a row where `worktrees` count spiked.
 
@@ -56,14 +53,14 @@ Look for: any process with high CPU% (wedged), or duplicate processes (failed ha
 
 ### 3. Latest sync-pull debug log (tail)
 ```bash
-tail -30 .claude/automation/sync-pull/session-start.debug.log
+tail -30.claude/automation/sync-pull/session-start.debug.log
 ```
 Look for: timeout errors ("timeout after 10s"), gdrive/notion error messages, OAuth failures.
 
 ### 4. Worktree count + size
 ```bash
 git worktree list | grep -c worktrees/
-du -sh .claude/worktrees/
+du -sh.claude/worktrees/
 ```
 Look for: count >20 or size >2GB (run the worktree-cleanup runbook).
 
@@ -92,7 +89,7 @@ Other observations:
 
 | Symptom | Top suspect | Action |
 |---|---|---|
-| Recent sessions show `parent_age` >10s | Slow MCP handshake | Read .claude/rules/mcp-on-demand.md § Current inventory; demote a B-tier MCP |
+| Recent sessions show `parent_age` >10s | Slow MCP handshake | Read.claude/rules/mcp-on-demand.md; demote a B-tier MCP |
 | MCP process at >100% CPU | Wedged MCP | `kill -9 <pid>` and the next tool call will respawn it fresh |
 | sync-pull log shows `invalid_grant` | OAuth-expired MCP | Run the relevant recovery (see reference_gdrive_oauth_reauth.md, reference_xero_mcp_refresh.md) |
 | Worktree count >25 | Search-domain bloat | Run worktree-cleanup runbook |

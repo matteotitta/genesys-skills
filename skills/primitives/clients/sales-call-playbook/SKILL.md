@@ -20,16 +20,13 @@ inputs:
   - product-messaging
   - battlecards
   recommended: []
-outputs:
 - type: sales-enablement-asset
   feeds_into: []
 depends_on:
 - product-messaging
 - battlecards
-feeds_into: []
 owned_by_agent: operator
 mcps_used: []
-push_targets:
 - gdrive
 - notion
 triggers:
@@ -74,7 +71,7 @@ Five steps:
 
 Output: 8-phase during-call cheat sheet (diagnosis → summary → tour → math → investment → reaction → objections → close).
 
-Full flowchart, step-by-step runbook, and operational rules in `references/process.md`.
+Full flowchart, step-by-step runbook, and operational rules in the premium reference.
 
 ---
 
@@ -136,26 +133,6 @@ These are the non-negotiable behaviors the playbook must encode at every phase. 
 2. **Never invent financial projections.** Use prospect's real numbers or leave blanks.
 3. **Anonymise all client references.** Use role + situation, never names.
 4. **Mark estimates.** If pre-filling math with researched numbers, note they're estimates to confirm on the call.
-
----
-
-## Output
-
-Full 8-phase output template + iteration prompts in `references/output-format.md`.
-
-Pre-delivery checklist + worked example + anti-examples in `references/quality.md`.
-
----
-
-## Reference files
-
-| File | Purpose |
-|------|---------|
-| `references/process.md` | Detailed flowchart + 5-step runbook with operational rules |
-| `references/output-format.md` | Full 8-phase output template + iteration prompts |
-| `references/quality.md` | Pre-delivery checklist + worked example + anti-examples |
-| `references/auto-update.md` | Feedback signals + pattern detection rules |
-| `projects/research/taste-library/resources/0626-sales-qualification-frameworks/` | Qualification frameworks (BANT/SPICED/MEDDPICC/Gap Selling/Sandler/CotM/Next Steps) + call-type taxonomy — the canonical reference for the call structures this playbook teaches |
 
 ---
 

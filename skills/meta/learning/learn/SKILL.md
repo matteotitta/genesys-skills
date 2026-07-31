@@ -18,7 +18,6 @@ review_gate: 1
 inputs:
   required: []
   recommended: []
-outputs:
 - type: context-file
   feeds_into:
   - company-context
@@ -27,7 +26,6 @@ outputs:
   - positioning
   - product-messaging
 depends_on: []
-feeds_into:
 - company-context
 - competitor-research
 - icp-research
@@ -35,7 +33,6 @@ feeds_into:
 - product-messaging
 owned_by_agent: operator
 mcps_used: []
-push_targets:
 - gdrive
 - notion
 triggers:
@@ -203,33 +200,33 @@ This loop trains taste over time: the same prediction format across 50+ `/learn`
 
 ### Phase 2.5 — Atomic claim extraction + reweave check (optional)
 
-Insert between Phase 2 (Extract) and Phase 3 (Structure and file). Full protocol in `references/claim-extraction.md`.
+Insert between Phase 2 (Extract) and Phase 3 (Structure and file). Full protocol in the premium reference.
 
 **Skip when:** source is purely informational (skim-read for context, not absorbed into client knowledge); user says "just file this, don't reweave"; client folder has no `latest.md` / `history.md` yet (first /learn run — nothing to reweave against).
 
 **Run when:** source contradicts or refines a locked-down strategic output (positioning, messaging, pricing); source is from a sales call; source is from a competitor (these three categories produce the most reweave signal per dollar of effort).
 
-1. **Split** each Phase 2 insight bullet into atomic claims — one assertion per claim. See `references/claim-extraction.md` for the "atomic" definition + worked examples.
+1. **Split** each Phase 2 insight bullet into atomic claims — one assertion per claim. See the premium reference for the "atomic" definition + worked examples.
 2. **Number** each claim `[CLIENT]-[YYYYMMDD]-[NN]` (e.g., `ADV-20260517-03`). Append-only across all `/learn` runs for that client.
 3. **Tag** each claim with confidence (`[VERIFIED]` / `[INFERRED]` / `[ESTIMATED]` / `[UNAVAILABLE]` per `.claude/rules/ontology.md`) and maturity (`[EMERGENT]` / `[VALIDATED]` / `[CANONICAL]`). New claims default to `[EMERGENT]`.
 4. **Reweave scan** — for each claim, grep the client's `latest.md` + `history.md` for the subject. Classify the relationship: `[NEW]` / `[CONFIRMS: claim-id]` (promotes EMERGENT → VALIDATED) / `[EXTENDS: claim-id]` / `[CONTRADICTS: claim-id]`.
-5. **Stop on contradiction** — if any claim has `[CONTRADICTS: ...]`, halt the run and surface to user. The system never auto-resolves; user picks new-wins, old-wins, or both-with-conditional. Log the resolution in `history.md` under `[REWEAVE]`.
+5. **Stop on contradiction** — if any claim has `[CONTRADICTS:...]`, halt the run and surface to user. The system never auto-resolves; user picks new-wins, old-wins, or both-with-conditional. Log the resolution in `history.md` under `[REWEAVE]`.
 
 The reweave verdict block (count of new / confirmed / extended / contradicted) goes into the Phase 3 output file as a new section between "Key insights" and "Evidence."
 
 ### Phase 2.5 — Atomic claim extraction + reweave check (optional)
 
-Insert between Phase 2 (Extract) and Phase 3 (Structure and file). Full protocol in `references/claim-extraction.md`.
+Insert between Phase 2 (Extract) and Phase 3 (Structure and file). Full protocol in the premium reference.
 
 **Skip when:** source is purely informational (skim-read for context, not absorbed into client knowledge); user says "just file this, don't reweave"; client folder has no `latest.md` / `history.md` yet (first /learn run — nothing to reweave against).
 
 **Run when:** source contradicts or refines a locked-down strategic output (positioning, messaging, pricing); source is from a sales call; source is from a competitor (these three categories produce the most reweave signal per dollar of effort).
 
-1. **Split** each Phase 2 insight bullet into atomic claims — one assertion per claim. See `references/claim-extraction.md` for the "atomic" definition + worked examples.
+1. **Split** each Phase 2 insight bullet into atomic claims — one assertion per claim. See the premium reference for the "atomic" definition + worked examples.
 2. **Number** each claim `[CLIENT]-[YYYYMMDD]-[NN]` (e.g., `ADV-20260517-03`). Append-only across all `/learn` runs for that client.
 3. **Tag** each claim with confidence (`[VERIFIED]` / `[INFERRED]` / `[ESTIMATED]` / `[UNAVAILABLE]` per `.claude/rules/ontology.md`) and maturity (`[EMERGENT]` / `[VALIDATED]` / `[CANONICAL]`). New claims default to `[EMERGENT]`.
 4. **Reweave scan** — for each claim, grep the client's `latest.md` + `history.md` for the subject. Classify the relationship: `[NEW]` / `[CONFIRMS: claim-id]` (promotes EMERGENT → VALIDATED) / `[EXTENDS: claim-id]` / `[CONTRADICTS: claim-id]`.
-5. **Stop on contradiction** — if any claim has `[CONTRADICTS: ...]`, halt the run and surface to user. The system never auto-resolves; user picks new-wins, old-wins, or both-with-conditional. Log the resolution in `history.md` under `[REWEAVE]`.
+5. **Stop on contradiction** — if any claim has `[CONTRADICTS:...]`, halt the run and surface to user. The system never auto-resolves; user picks new-wins, old-wins, or both-with-conditional. Log the resolution in `history.md` under `[REWEAVE]`.
 
 The reweave verdict block (count of new / confirmed / extended / contradicted) goes into the Phase 3 output file as a new section between "Key insights" and "Evidence."
 

@@ -20,7 +20,6 @@ inputs:
   required: []
   recommended:
   - company-context
-outputs:
 - type: competitor-profile
   feeds_into:
   - positioning
@@ -36,7 +35,6 @@ outputs:
   - product-messaging
   - sales-enablement
 depends_on: []
-feeds_into:
 - positioning
 - product-messaging
 - sales-enablement
@@ -45,7 +43,6 @@ mcps_used:
 - exa
 - gdrive
 - notion
-push_targets:
 - gdrive
 - notion
 triggers:
@@ -80,7 +77,7 @@ Three run modes — pick by cadence and depth needed:
 - **Quick scan** (~30 min, weekly) — `/competitor-research --quick [competitor]` or `/loop 1w`. Refreshes fast-moving data only (news, Clay, G2, internal sources). Updates "Recent changes" header — sections without changes stay untouched.
 - **Deep refresh** (~90 min, monthly) — `/competitor-research --refresh [competitor]` or `/loop 1M`. Full 13-dimension cycle with TrustPilot monitor and Phase 4 aggregate (if 2+ competitors refreshed this cycle).
 
-Full cadence + refresh discipline → `references/refresh-protocol.md`. Visual phase map → `references/process-flowchart.md`.
+Full cadence + refresh discipline → the premium reference. Visual phase map → the premium reference.
 
 **The Iron Law:** no data point without source. Every claim cites a URL + access date or is marked `[Not available]`. Estimates need explicit confidence + reasoning. "Fast + wrong = useless."
 
@@ -93,7 +90,6 @@ Full cadence + refresh discipline → `references/refresh-protocol.md`. Visual p
 
 **Recommended (improve quality):**
 
-- `market category` — disambiguates ambiguous names (e.g., `Bolt` could be ride-share, fintech, or `bolt.new`). See `references/steps/phase-1-confirmation-setup.md` for the disambiguation reference.
 - `client context` — current positioning sharpens the comparative angle.
 - `specific questions` — focus areas (e.g., "deep dive on their pricing model and outbound motion").
 - `research mode` — `single deep dive` (default) or `comparison matrix` (3–6 competitors).
@@ -102,39 +98,19 @@ If competitor name is ambiguous (e.g., "Cursor", "Base", "Linear"), confirm with
 
 ## Steps
 
-1. **Confirm scope and disambiguate** → `references/steps/phase-1-confirmation-setup.md`. Verify name + URL, select run mode, lock disambiguation.
-2. **Pre-flight optional MCPs** → check Clay, Granola, Google Drive, CRM, Notion availability per `references/refresh-protocol.md` ("Optional internal intel sources"). For each available, queue the corresponding queries; for each missing, skip silently.
-3. **Research 13 dimensions** → `references/steps/phase-2-dimension-research.md`. Order: Company → Product → ICP → Pricing → Reviews → Content → Launches → SEO/AEO → Technographics → Openings → GTM → LinkedIn/Social → Paid advertising. Each dimension has tool fallbacks (Ahrefs → Serper → manual; Apify → Firecrawl → manual). Frameworks + scoring → `references/competitor-data-schema.md` ("Core frameworks").
+1. **Confirm scope and disambiguate** → the premium reference. Verify name + URL, select run mode, lock disambiguation.
+2. **Pre-flight optional MCPs** → check Clay, Granola, Google Drive, CRM, Notion availability per the premium reference ("Optional internal intel sources"). For each available, queue the corresponding queries; for each missing, skip silently.
+3. **Research 13 dimensions** → the premium reference. Order: Company → Product → ICP → Pricing → Reviews → Content → Launches → SEO/AEO → Technographics → Openings → GTM → LinkedIn/Social → Paid advertising. Each dimension has tool fallbacks (Ahrefs → Serper → manual; Apify → Firecrawl → manual). Frameworks + scoring → the premium reference ("Core frameworks").
 4. **TrustPilot customer monitor** (deep refresh only, customer-facing competitors only) → run inside Step 2.5 per the Phase 2 file. Score top 10–15 customers 🟢/🟡/🔴.
-5. **Synthesize and assign confidence** → `references/steps/phase-3-synthesis-gaps.md`. Assign `[VERIFIED]/[INFERRED]/[ESTIMATED]/[UNAVAILABLE]` per claim, write 2–3-paragraph executive summary, document data gaps with follow-up actions.
-6. **Aggregate analysis** (only if 2+ competitors researched for same client) → `references/steps/phase-4-aggregate-analysis.md`. Build threat matrix, feature parity table, credibility audit, 3–5 strategic recommendations. Save as `MMYY-aggregate-insights.md` in client's competitors folder.
+5. **Synthesize and assign confidence** → the premium reference. Assign `[VERIFIED]/[INFERRED]/[ESTIMATED]/[UNAVAILABLE]` per claim, write 2–3-paragraph executive summary, document data gaps with follow-up actions.
+6. **Aggregate analysis** (only if 2+ competitors researched for same client) → the premium reference. Build threat matrix, feature parity table, credibility audit, 3–5 strategic recommendations. Save as `MMYY-aggregate-insights.md` in client's competitors folder.
 7. **Apply attribution standard** — inline `(Source: X)` per claim (not the verbose `[VERIFIED: url, date]` block); consolidate full URLs + access dates + confidence in the **Sources & data quality** table at the end of the document. Quality threshold: ≥50% Verified, ≤20% Estimated.
-8. **Write to client folder** per output template → `references/output-template.md` ("Inline canonical, v2.7" — 13 dimensions, TrustPilot sub-section, Recent changes header, Sources & data quality table). For matrix mode → `references/matrix-template.md` ("Compact alternative"). Search query patterns per dimension → `references/search-patterns.md`. Common source URL patterns → `references/source-urls.md`.
-9. **Self-evaluate against quality gates** → `references/quality-gates.md`. Run completeness, evidence-quality, and guardrail checks before declaring "done".
+8. **Write to client folder** per output template → the premium reference ("Inline canonical, v2.7" — 13 dimensions, TrustPilot sub-section, Recent changes header, Sources & data quality table). For matrix mode → the premium reference ("Compact alternative"). Search query patterns per dimension → the premium reference. Common source URL patterns → the premium reference.
+9. **Self-evaluate against quality gates** → the premium reference. Run completeness, evidence-quality, and guardrail checks before declaring "done".
 10. **Push** to Notion (Competitor Research Database) and Google Docs (`client_folder/context/competitor-research/`) per the push targets in frontmatter. For refresh mode, update the existing Notion page rather than creating a duplicate.
-11. **Offer iteration prompts** post-delivery → `references/iteration-prompts.md`. If user signals approval (`"great research"`, quick approval), offer to save the output as a reference example under `references/examples/{date}-{competitor-slug}.md`.
+11. **Offer iteration prompts** post-delivery → the premium reference. If user signals approval (`"great research"`, quick approval), offer to save the output as a reference example under the premium reference.
 
 ## What good looks like
-
-### References
-
-- **Output template (single competitor, canonical)** → `references/output-template.md` — full structure including Recent changes header, Confidence summary, 13 dimension sections, TrustPilot customer monitor, Sources & data quality table, Iteration prompts. Two formats included: detailed v2.0 and current canonical v2.7.
-- **Comparison matrix template** → `references/matrix-template.md` — multi-competitor matrix (3–6 competitors, 5 core dimensions). Detailed and compact alternatives both included.
-- **Frameworks + scoring rubric** → `references/competitor-data-schema.md` — centralized YAML schema for competitor data, plus the 13 dimensions table, 3-level confidence scoring, and single-competitor vs matrix mode definitions.
-- **Living-dossier refresh protocol** → `references/refresh-protocol.md` — quick scan vs deep refresh cadences, "Recent changes" rolling log discipline, optional internal intel MCPs (Clay, Granola, Drive, CRM, Notion).
-- **Per-phase walkthroughs** → `references/steps/phase-1-confirmation-setup.md`, `phase-2-dimension-research.md`, `phase-3-synthesis-gaps.md`, `phase-4-aggregate-analysis.md` — full step-by-step for each phase, including disambiguation, dimension-by-dimension search queries, MCP fallbacks, and aggregate analysis triggers.
-- **Process flowchart (visual)** → `references/process-flowchart.md` — ASCII flowchart of the full execution path (input validation → 13 dimensions → synthesis → aggregate → self-eval → review gate → chain suggestions).
-- **Search query patterns per dimension** → `references/search-patterns.md`.
-- **Common source URL patterns** → `references/source-urls.md` (Crunchbase, G2, Vendr, Reddit, ad libraries, etc.).
-- **Quality gates** → `references/quality-gates.md` — Iron Law, Red Flags, Anti-hallucination guardrails (9 rules), Missing-data labels, Pre-delivery checklist, Self-evaluation protocol with self-roast questions, Anti-examples.
-- **Iteration prompts + skill auto-update** → `references/iteration-prompts.md` — post-delivery offers (refinement / expansion / quality), feedback-signal table, reference-example capture format, pattern-detection rules.
-- **Gotchas + changelog + MCP integration table** → `references/gotchas-changelog.md` — fabrication risks, "company doesn't exist" trap, threat-level enforcement, full version history, MCP data integration table for Level 0 (heavy pulls) with D13 URL patterns.
-
-### Examples
-
-- **Linear** (single competitor, deep) → `references/examples/0226-linear.md` — issue-tracking platform, $1.25B+ valuation, $52M raised. Full 13-dimension dossier; demonstrates confidence-level discipline and Sacra revenue estimate handling.
-- **Lovable** (single competitor, deep) → `references/examples/0226-lovable.md` — AI app builder. Demonstrates fast-moving company tracking and launch cadence analysis.
-- **Genesys service overlap** (Genesys-internal use) → `references/examples/0226-genesys-service-overlap.md` — using competitor-research for service-portfolio comparison rather than client work.
 
 ### Evaluations (binary pass/fail before declaring "done")
 
@@ -148,11 +124,6 @@ If competitor name is ambiguous (e.g., "Cursor", "Base", "Linear"), confirm with
 - Recent-changes header present in `--quick` and `--refresh` modes; "Last refreshed" date updated.
 - Output title is `# Competitor research: [Name]` exactly — no aliases like "competitive intelligence analysis" or "Competitive Intelligence Report".
 - Premium-tool limitations noted explicitly (Ahrefs absent → Serper or manual, BuiltWith absent → "Not available", JS-walled ad libraries → manual check noted).
-
-## Push
-
-- **Google Docs** → `client_folder/context/competitor-research/` (per-client GDrive folder via `.claude/mcp/gdrive/create-doc-unified.mjs --client {slug}`). Each dossier ships as a branded doc; refresh runs UPDATE the existing doc rather than creating a duplicate.
-- **Notion** → `Competitor Research Database` (per-client). Refresh runs UPDATE the existing page (use `mcp__claude_ai_Notion__notion-update-page`) — don't duplicate.
 
 ## Integration with other skills
 
@@ -174,18 +145,18 @@ If competitor name is ambiguous (e.g., "Cursor", "Base", "Linear"), confirm with
 ## Scheduling (recurring runs)
 
 ```
-/loop 1w /competitor-research --quick [competitor-name]            # weekly quick scan, set-and-forget
-/loop 1M /competitor-research --refresh [competitor-name]          # monthly deep refresh, review-and-approve
+/loop 1w /competitor-research --quick [competitor-name] # weekly quick scan, set-and-forget
+/loop 1M /competitor-research --refresh [competitor-name] # monthly deep refresh, review-and-approve
 
-/schedule create --name "competitor-[name]-weekly"  --cron "0 9 * * 1" --prompt "/competitor-research --quick [name]"
+/schedule create --name "competitor-[name]-weekly" --cron "0 9 * * 1" --prompt "/competitor-research --quick [name]"
 /schedule create --name "competitor-[name]-monthly" --cron "0 9 1 * *" --prompt "/competitor-research --refresh [name]"
 ```
 
-For multiple competitors in parallel: `/competitor-research --refresh --all` spawns one subagent per competitor in `references/competitors.json`.
+For multiple competitors in parallel: `/competitor-research --refresh --all` spawns one subagent per competitor in the premium reference.
 
 ## Pre-slim original
 
-Pre-slim SKILL.md (1609 lines, v2.7) archived at `.claude/skills/_archive/competitor-research/SKILL-pre-slim-20260429.md`. See `references/gotchas-changelog.md` for the v2.8 changelog entry documenting the slim.
+Pre-slim SKILL.md (1609 lines, v2.7) archived at `.claude/skills/_archive/competitor-research/SKILL-pre-slim-20260429.md`. See the premium reference for the v2.8 changelog entry documenting the slim.
 
 ---
 

@@ -19,14 +19,11 @@ review_gate: 0
 inputs:
   required: []
   recommended: []
-outputs:
 - type: runbook
   feeds_into: []
 depends_on: []
-feeds_into: []
 owned_by_agent: operator
 mcps_used: []
-push_targets:
 - gdrive
 - notion
 triggers:
@@ -170,11 +167,11 @@ gantt
     title Project Timeline
     dateFormat YYYY-MM-DD
     section Phase 1
-        Research     :a1, 2026-02-13, 7d
-        Analysis     :a2, after a1, 5d
+        Research:a1, 2026-02-13, 7d
+        Analysis:a2, after a1, 5d
     section Phase 2
-        Design       :b1, after a2, 10d
-        Build        :b2, after b1, 14d
+        Design:b1, after a2, 10d
+        Build:b2, after b1, 14d
 ```
 
 ### Quadrant chart (positioning)

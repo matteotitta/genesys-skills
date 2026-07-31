@@ -14,14 +14,12 @@ inputs:
   required:
   - strategy-doc
   recommended: []
-outputs:
 - type: product-pulse
   feeds_into:
   - ship-learnings
   - strategy-doc
 depends_on:
 - strategy-doc
-feeds_into:
 - ship-learnings
 - strategy-doc
 owned_by_agent: product-manager
@@ -33,7 +31,6 @@ mcps_used:
 - stripe
 - datadog
 - sentry
-push_targets:
 - gdrive
 - notion
 triggers:
@@ -87,26 +84,6 @@ Do NOT invoke when:
 
 **If MCP connection missing for a metric:** flag the data gap explicitly; don't fabricate a number. Per `.claude/rules/financial-data.md` — never invent metrics.
 
-## Output structure (locked: 4 sections, 30-40 lines total)
-
-The format is **load-bearing**. Don't expand it. Per Moretti: "single page, about 30 to 40 lines." This is the P4 single-page discipline.
-
-### 1. Headlines (3-5 lines)
-
-The 1-3 things that moved most. Each line: metric name, value, delta vs. previous period, 1-line interpretation.
-
-### 2. Usage (8-12 lines)
-
-How are people actually using the product? Pulled from product analytics MCPs. Cite the metric defined in strategy-doc § Key metrics. Note anomalies.
-
-### 3. System Performance (5-8 lines)
-
-Errors, latency, uptime. Pulled from Datadog / Sentry / Logfire / Honeycomb if connected. Skip if not relevant (e.g., a content product without infra).
-
-### 4. Followups (5-10 lines)
-
-What needs human attention this cycle? Each followup: 1-line problem statement, owner, suggested next step. Quote at least one user conversation per pulse (K3: quant + qual together).
-
 ## Steps
 
 1. **Phase 1 — Load locked strategy.** Read `strategy-doc` (the upstream dependency). Extract the metrics section. These are what we measure.
@@ -132,35 +109,26 @@ This skill calls free / read-only operations on PostHog / Mixpanel / Amplitude /
 - [ ] Each followup has an owner + suggested next step (not just "look into this")
 - [ ] No fabricated numbers — data gaps flagged explicitly per `financial-data.md`
 
-## Output format
-
-```markdown
 # {Product} pulse — {YYYY-MM-DD}
 
 **Period:** {start} → {end} · **Strategy ref:** {strategy-doc path/version}
 
 ## Headlines
 - {metric}: {value} ({±%} vs {prev}) — {1-line interpretation}
-- ...
+-...
 
 ## Usage
 - {metric_1}: {value} ({±%}) — {note}
-- ...
+-...
 
 ## System Performance
 - {error rate / latency / uptime} — {note}
-- ...
+-...
 
 ## Followups
 - **{problem}** (owner: {name}) — {next step}. *User signal: "{quote}" — {source}*
-- ...
+-...
 ```
-
-## Push
-
-- `client_folder/{product}/pulse/MMYY-DD-pulse.md` (per-day; one file per pulse)
-- Or `projects/genesys/{ship-slug}/pulse/MMYY-DD-pulse.md`
-- Slack notification on cron-fire — link to GDoc
 
 ## Composition rule reference
 

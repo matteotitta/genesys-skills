@@ -13,14 +13,11 @@ review_gate: 0
 inputs:
   required: []
   recommended: []
-outputs:
 - type: runbook
   feeds_into: []
 depends_on: []
-feeds_into: []
 owned_by_agent: operator
 mcps_used: []
-push_targets: []
 triggers:
   slash_commands:
   - /think
@@ -43,7 +40,7 @@ effort: medium
 
 Answer "when did X last Y" / "what changed since Z" / "what's the latest on W" by splicing dated entries from client `history.md`, sprint `goals/MMYY-NN-cycle.md`, memory pages, and session decisions into a chronological timeline. Zero LLM cost on intent classification — regex routes the query, the splice does the work.
 
-Stolen from `garrytan/gbrain` § `gbrain think` (v0.40.2.0) via /steal Phase 5–6 (2026-05-23). See [`.claude/discovery/0526-gbrain-steal-analysis.md`](../../../../discovery/0526-gbrain-steal-analysis.md) item G19.
+Stolen from `garrytan/gbrain` (v0.40.2.0) via /steal Phase 5–6 (2026-05-23). See [`.claude/discovery/0526-gbrain-steal-analysis.md`](../../../../discovery/0526-gbrain-steal-analysis.md) item G19.
 
 ---
 
@@ -104,13 +101,13 @@ Output format:
 ```
 TIMELINE — "<query>"
 ────────────────────────────────────────
-2026-05-23  [history]   {history.md entry}
+2026-05-23 [history] {history.md entry}
                         ↳ projects/consulting/active/{client}/history.md
-2026-05-21  [decision]  {decision text}
+2026-05-21 [decision] {decision text}
                         ↳ session {id_short}
-2026-05-17  [memory]    {memory page title}
+2026-05-17 [memory] {memory page title}
                         ↳ memory/{slug}.md (tier {boost}x)
-2026-05-15  [cycle]     {cycle file headline}
+2026-05-15 [cycle] {cycle file headline}
                         ↳ goals/0526-02-cycle.md
 ...
 ```
@@ -142,7 +139,7 @@ If the intent classifier returns `other`, the question isn't temporal-shaped. Do
 
 - Intent: **temporal** (matches `\bwhen did\b`)
 - Sources scanned: `projects/consulting/active/ClientCo/history.md` + memory pages with "alan" + session decisions filtered to `--client "ClientCo"`
-- Output: most-recent entry surfaces (e.g., `2026-03-18  [decision]  Alan pushed back on "MVP test" → compliance friction reclassification`)
+- Output: most-recent entry surfaces (e.g., `2026-03-18 [decision] Alan pushed back on "MVP test" → compliance friction reclassification`)
 
 ### Example 2 — "What's the latest on ClientCo's GTM stack build?"
 
@@ -169,7 +166,7 @@ If the intent classifier returns `other`, the question isn't temporal-shaped. Do
 
 | Source | Path | Date field |
 |---|---|---|
-| Client history.md | `projects/consulting/active/{client}/history.md` | date prefix on each line (e.g., `2026-05-21 — ...`) |
+| Client history.md | `projects/consulting/active/{client}/history.md` | date prefix on each line (e.g., `2026-05-21 —...`) |
 | Client sprint cycles | `projects/consulting/active/{client}/goals/*-cycle.md` | filename `MMYY-NN-cycle.md` (NN = sprint #) |
 | Memory pages | recall.db `memory_pages` table | `indexed_at` column |
 | Session decisions | recall.db `decisions` table | `timestamp` column |
@@ -182,7 +179,7 @@ For client name extraction from the query, match against CLIENT_MAP from `sessio
 
 1. **Never fabricate timeline entries.** Only return entries actually found in the source files. If a query matches nothing, say "no temporal entries found for {query}" — don't synthesize.
 2. **Always cite the source path + date.** Every timeline row has a `↳ {path}` line. The user can verify.
-3. **Don't paraphrase entries.** Quote the verbatim line from `history.md` or memory page; the verbatim phrasing IS the signal (per `.claude/rules/auto-memory.md` § Exact-phrasing).
+3. **Don't paraphrase entries.** Quote the verbatim line from `history.md` or memory page; the verbatim phrasing IS the signal (per `.claude/rules/auto-memory.md`).
 4. **Respect the brain-first-lookup ladder.** If the timeline is empty AND the question is research-shaped, escalate per `.claude/rules/brain-first-lookup.md` Step 4 — don't fill the gap with external data without explicit user approval.
 5. **Cap output at top-20 or 90 days.** Longer timelines drown the reader; if more depth is needed, the user can ask `/think --since 6mo`.
 
@@ -202,16 +199,6 @@ For client name extraction from the query, match against CLIENT_MAP from `sessio
 | "Pick up where I left off" | `/recall` (default session search) |
 
 The fast-path short-circuit means `/think` is safe to invoke broadly — non-temporal questions just route through to `/recall` without overhead.
-
----
-
-## Reference files
-
-| File | Purpose |
-|---|---|
-| `references/process.md` | Full intent-classifier regex spec, splice algorithm pseudocode, since-anchor resolution table, client name extraction logic, output format examples |
-
-(References file ships separately for slim-body discipline; current SKILL.md is the canonical entry point.)
 
 ---
 

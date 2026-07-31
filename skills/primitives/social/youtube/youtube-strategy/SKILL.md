@@ -21,13 +21,11 @@ inputs:
   required:
   - positioning
   recommended: []
-outputs:
 - type: youtube-strategy
   feeds_into:
   - youtube-scripts
 depends_on:
 - positioning
-feeds_into:
 - youtube-scripts
 owned_by_agent: content
 mcps_used:
@@ -35,7 +33,6 @@ mcps_used:
 - exa
 - gdrive
 - youtube-transcript
-push_targets:
 - gdrive
 - notion
 triggers:
@@ -54,7 +51,7 @@ effort: high
 
 Generate a YouTube channel launch strategy for B2B SaaS operators. Output is a deck-style markdown document with keyword demand research, competitor segmentation, gap analysis, 6 video ideas, case-study / testimonial framework, and a Month-1 plan. Feeds into `youtube-scripts` for per-video production.
 
-For full process, frameworks, and MCP integration → `references/process.md`.
+For full process, frameworks, and MCP integration → the premium reference.
 
 ---
 
@@ -141,13 +138,13 @@ If positioning or ICP is missing, ask before proceeding. Do not hallucinate.
 
 | Topic | Reference |
 |-------|-----------|
-| 5-phase process + frameworks + MCP integration | `references/process.md` |
-| Output template + render targets + iteration prompts + handoff | `references/output-format.md` |
-| Pre-delivery checklist + worked example + anti-examples + quality gate | `references/quality.md` |
-| 5-bucket competitor taxonomy with detection rules | `references/competitor-bucket-taxonomy.md` |
-| 6-field video idea template with examples | `references/video-idea-template.md` |
-| Month-1 mix rules + funnel outcomes | `references/tofu-bofu-mix.md` |
-| Ahrefs MCP calls + competition scoring method | `references/keyword-research-method.md` |
+| 5-phase process + frameworks + MCP integration | the premium reference |
+| Output template + render targets + iteration prompts + handoff | the premium reference |
+| Pre-delivery checklist + worked example + anti-examples + quality gate | the premium reference |
+| 5-bucket competitor taxonomy with detection rules | the premium reference |
+| 6-field video idea template with examples | the premium reference |
+| Month-1 mix rules + funnel outcomes | the premium reference |
+| Ahrefs MCP calls + competition scoring method | the premium reference |
 | Worked example — Matteo's own YouTube strategy | `examples/0426-matteo-youtube-strategy.md` |
 
 ---
@@ -156,15 +153,15 @@ If positioning or ICP is missing, ask before proceeding. Do not hallucinate.
 
 ```yaml
 depends_on:
-  - company-context   # required — pulls positioning, clients, services
-  - icp-profile       # required — defines channel audience
-  - positioning       # recommended — sharpens "your edge" per idea
+  - company-context # required — pulls positioning, clients, services
+  - icp-profile # required — defines channel audience
+  - positioning # recommended — sharpens "your edge" per idea
 feeds_into:
-  - youtube-scripts        # per-video script production
-  - content-operations     # add Month-1 plan to weekly calendar
-  - case-study             # BOFU case-study production
+  - youtube-scripts # per-video script production
+  - content-operations # add Month-1 plan to weekly calendar
+  - case-study # BOFU case-study production
 enhances:
-  - content-strategy  # if multi-channel strategy exists, refines YouTube lane
+  - content-strategy # if multi-channel strategy exists, refines YouTube lane
 ```
 
 Knowledge type produced: `youtube-strategy` (Level 1 — Strategy, review gate 2).

@@ -21,15 +21,12 @@ inputs:
   required:
   - content-strategy
   recommended: []
-outputs:
 - type: content-strategy
   feeds_into: []
 depends_on:
 - content-strategy
-feeds_into: []
 owned_by_agent: operator
 mcps_used: []
-push_targets:
 - gdrive
 - notion
 triggers:
@@ -68,31 +65,31 @@ Take a completed content strategy and operationalize it. Design series arcs, seq
 
 ## Process
 
-Four phases. Each ends in a checkpoint that gates the next phase. Detailed step-by-step protocols, templates, and tables live in `references/`.
+Four phases. Each ends in a checkpoint that gates the next phase. Detailed step-by-step protocols, templates, and tables live in the premium reference.
 
-### Phase 1 — Content serialization → `references/serialization-playbook.md`
+### Phase 1 — Content serialization → the premium reference
 
 Turn strategic pillars into executable multi-part series with narrative arcs.
 
-1. **Design series arcs per pillar** — 1-3 series per pillar, picking arc type (problem / mechanism / case-study / framework / opinion) per `references/frameworks-and-examples.md` (series architecture framework).
+1. **Design series arcs per pillar** — 1-3 series per pillar, picking arc type (problem / mechanism / case-study / framework / opinion) per the premium reference (series architecture framework).
 2. **Define installment structure** — hook escalation, knowledge progression, callback structure, cadence.
 3. **Map funnel-stage formats** — assign each series to TOFU / MOFU / BOFU; verify mix matches strategy ratios (typical 40/35/25).
 4. **Create series tracking framework** — status, installments published, performance, decision triggers (TWE > 2 → expand; < 0.5 → retire).
 
 **Checkpoint:** every pillar has 1+ series with clear arc; installments show progression; funnel mapping verified; tracking ready.
 
-### Phase 2 — Cross-channel sequencing → `references/sequencing-calendar.md`
+### Phase 2 — Cross-channel sequencing → the premium reference
 
 Orchestrate how content flows across channels over time.
 
-1. **Design cascade rules** — anchor → derivatives per channel with timing and adaptation rules. Targets 80% cascade efficiency (1 anchor → 6-10 derivatives) per the cascade efficiency model in `references/frameworks-and-examples.md`.
+1. **Design cascade rules** — anchor → derivatives per channel with timing and adaptation rules. Targets 80% cascade efficiency (1 anchor → 6-10 derivatives) per the cascade efficiency model in the premium reference.
 2. **Define channel cadence** — weekly rhythm per channel, coordinated cross-channel timing.
 3. **Map cross-channel coordination** — lead / amplification / conversion channel roles + stagger rules.
 4. **Build calendar planning protocol** — Sunday review checklist, backlog management (evergreen / timely / launch queues), buffer rules (2-week minimum, 1 reactive slot/week).
 
 **Checkpoint:** cascade map complete, weekly rhythm defined per channel, channel roles assigned, Sunday review checklist documented.
 
-### Phase 3 — Production pipeline & team → `references/pipeline-team-playbook.md`
+### Phase 3 — Production pipeline & team → the premium reference
 
 Build the operational mechanics — Kanban pipeline, team roles, handoff workflows.
 
@@ -103,7 +100,7 @@ Build the operational mechanics — Kanban pipeline, team roles, handoff workflo
 
 **Checkpoint:** pipeline stages set with exit criteria, card fields specified, roles adapted to team size, handoffs documented per content type.
 
-### Phase 4 — Channel optimization & lead capture → `references/channel-optimization.md`
+### Phase 4 — Channel optimization & lead capture → the premium reference
 
 Make content work harder per platform, then capture results into pipeline.
 
@@ -129,22 +126,11 @@ Present series plan, cascade map, pipeline, calendar, and optimization. Actions:
 
 ### Output
 
-Use the standard playbook template in `references/frameworks-and-examples.md` (sections: series plan → cross-channel sequence → production pipeline → channel optimization & lead capture). Pre-delivery checklist + worked examples + anti-examples + iteration prompts also in that file.
+Use the standard playbook template in the premium reference (sections: series plan → cross-channel sequence → production pipeline → channel optimization & lead capture). Pre-delivery checklist + worked examples + anti-examples + iteration prompts also in that file.
 
 ## Chain suggestions
 
 After approval: `linkedin-content` (execute LinkedIn series), `youtube-scripts` (video series), `social-selling` (lead capture plays), `outreach-emails` (email retargeting flows), `linkedin-infographics` (graphic derivatives).
-
-## References
-
-- `references/serialization-playbook.md` — Phase 1: series arc templates, installment patterns, funnel-stage formats.
-- `references/sequencing-calendar.md` — Phase 2: cascade templates, Sunday planning checklist, backlog rules.
-- `references/pipeline-team-playbook.md` — Phase 3: Kanban template, role definitions, handoff workflows.
-- `references/channel-optimization.md` — Phase 4: algorithm guidance, lead capture methods, retargeting triggers.
-- `references/frameworks-and-examples.md` — cross-phase frameworks (series architecture, cascade efficiency, pipeline velocity), output template, worked examples, anti-examples, quality checklist, iteration prompts, integrations table, MCP integration.
-- `references/platform-native-adaptation-matrix.md` — Phase 2 cascade output template. One row per platform with hook adaptation + length cap + format constraint + asset reference + first-90-min rule. Worked example: Pulse newsletter → 7 platforms. Source: 2026-05-17 MCP Market /steal Item E.
-
----
 
 ## Final ship gate
 

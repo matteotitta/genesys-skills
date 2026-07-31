@@ -16,18 +16,10 @@ inputs:
   recommended:
     - brand-kit
     - paid-campaign-strategy
-outputs:
-  - type: dashboard
-    feeds_into:
-      - paid-ads-audit
 depends_on: []
-feeds_into:
-  - paid-ads-audit
 owned_by_agent: paid
 mcps_used:
   - linkedin-ads
-push_targets:
-  - gdrive
 triggers:
   slash_commands:
     - /paid-ads-report
@@ -78,7 +70,7 @@ Output complies with:
 
 | Input | Role |
 |---|---|
-| `linkedin-ads` MCP (authenticated) | Data source. Dormant until credentialed — see `.claude/mcp/linkedin-ads/README.md`. Until then, validate against `references/sample-payload.json`. |
+| `linkedin-ads` MCP (authenticated) | Data source. Dormant until credentialed — see `.claude/mcp/linkedin-ads/README.md`. Until then, validate against the premium reference. |
 | Account ID + reporting window | The account to report on; window defaults to the last complete week vs the prior week (WoW), with a 90-day daily trend. |
 | DESIGN.md (brand-kit) | Token frontmatter (colors, typography). Recommended — falls back to the Genesys kit if the client has none. Cite tokens, never hardcode hex. |
 | `--client {slug}` | Routes output to `projects/consulting/active/{slug}/paid/execution/` and triggers the client brand-kit lookup. |
@@ -116,13 +108,12 @@ Output complies with:
 - **Top movers:** name the 2–3 campaigns with the largest absolute spend Δ or CPL Δ.
 - **Weekday read:** best + worst weekday by CTR across the trend window (from `get_daily_trends` weekday averages).
 - **Below the volume floor:** if a metric's denominator is under the floor (`quantitative-evidence-floors.md` — e.g. <~1,000 impressions, <3 conversions, before a full attribution window), the mover sentence carries a "too early" caveat instead of a verdict, even when the % delta is large. A 40% CPL swing on 5 conversions is noise, not a win.
-- **No live account yet:** run steps 3–5 against `references/sample-payload.json` to validate the render + the insight logic before a real connection lands.
 
 ---
 
 ## Design cycle (post-authoring phases)
 
-After the happy-path render, walk these before ship. Each references the shared design-quality library at `../../../meta/catalog/design-reviewer/references/`. Run `/design-reviewer` as the final ship-ready gate.
+After the happy-path render, walk these before ship. Each references the shared design-quality library at `../../../meta/catalog/design-reviewer/the premium reference. Run `/design-reviewer` as the final ship-ready gate.
 
 - **Layout** — one accent, clear KPI hierarchy, tables scannable (`layout-*`).
 - **Distill** — cut every metric the reader doesn't act on; the opener carries the story (`distill-*`).

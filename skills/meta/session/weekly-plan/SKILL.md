@@ -20,18 +20,15 @@ review_gate: 0
 inputs:
   required: []
   recommended: []
-outputs:
 - type: runbook
   feeds_into: []
 depends_on: []
-feeds_into: []
 owned_by_agent: operator
 mcps_used:
 - gmail
 - google-calendar
 - granola
 - slack
-push_targets:
 - gdrive
 - notion
 triggers:
@@ -51,7 +48,7 @@ disable-model-invocation: true
 
 Plan the week's work across all active clients. Scan communications, check engagement state, suggest tasks with the right skills and agents, then create them in Paperclip and Linear for automated execution.
 
-For full 6-phase process (gather / state-check / suggest / approve / create / summary) → `references/process.md`. For agent IDs, project IDs, status IDs, and other Linear lookups → `references/lookup.md`.
+For full 6-phase process (gather / state-check / suggest / approve / create / summary) → the premium reference. For agent IDs, project IDs, status IDs, and other Linear lookups → the premium reference.
 
 ---
 
@@ -89,7 +86,7 @@ For full 6-phase process (gather / state-check / suggest / approve / create / su
 | **5. Create** | Linear issue + Paperclip task per approved item | Created task IDs |
 | **6. Summary** | Present what was created with agent routing | Summary report |
 
-For full per-phase commands and curl payloads → `references/process.md`.
+For full per-phase commands and curl payloads → the premium reference.
 
 ---
 
@@ -105,7 +102,7 @@ For full per-phase commands and curl payloads → `references/process.md`.
 | Paid Marketer | ad-creative-brief, google-ads, linkedin-ads, paid-ads-audit, paid-campaign-strategy |
 | Operator | skill-catalog, reviewers, brand-context, runbook, dashboard, experiment, workflow-design, recall |
 
-For full agent IDs and Linear project/status/label IDs → `references/lookup.md`.
+For full agent IDs and Linear project/status/label IDs → the premium reference.
 
 ---
 
@@ -116,15 +113,6 @@ For full agent IDs and Linear project/status/label IDs → `references/lookup.md
 3. **Don't fabricate communications.** If an MCP fails, note "[Source] unavailable" and proceed with what's available.
 4. **Status logic:** No dependencies → "Next up". Has unresolved dependencies → "Backlog".
 5. **Task title prefix:** AD —, SP —, GG —, GES —, PV — per client.
-
----
-
-## Reference Files
-
-| File | Purpose |
-|------|---------|
-| `references/process.md` | Full 6-phase workflow with parallel-pull commands, Linear GraphQL queries, Paperclip API calls, summary template |
-| `references/lookup.md` | Agent IDs, Linear project IDs, status IDs, label IDs, Paperclip company ID, server URL |
 
 ---
 

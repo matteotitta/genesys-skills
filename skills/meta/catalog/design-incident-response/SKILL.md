@@ -22,14 +22,11 @@ inputs:
   required: []
   recommended:
   - design-reviewer
-outputs:
 - type: runbook
   feeds_into: []
 depends_on: []
-feeds_into: []
 owned_by_agent: operator
 mcps_used: []
-push_targets: []
 triggers:
   slash_commands:
   - /design-incident-response
@@ -132,7 +129,7 @@ The first action is non-negotiable per branch. The full sequence is the recommen
 
 **Day-0 (rest).** Audit the page for motion-on-scroll triggers. Disable everything except a single hero entrance (if any). Keep entry/exit motion for modal/drawer surfaces — those are functional, not decorative.
 
-**Day-1.** Set project-wide motion budget: ≤3 motion moments per screen, all routine state transitions ≤200ms, only entry/exit motion may run 300–600ms. Document in `docs/motion-rules.md` (or extend `design-reviewer/references/motion-craft.md` into the project repo).
+**Day-1.** Set project-wide motion budget: ≤3 motion moments per screen, all routine state transitions ≤200ms, only entry/exit motion may run 300–600ms. Document in `docs/motion-rules.md` (or extend `design-reviewer/the premium reference into the project repo).
 
 **Day-14.** Add a `prefers-reduced-motion` media query that disables non-essential motion entirely. Re-run `/design-reviewer` on the homepage and a feature page to confirm motion dimension passes.
 
@@ -253,18 +250,6 @@ This skill is a **decision tree**, not an executor. It tells you what to fix and
 - [ ] Hand-off target is a real existing skill (not invented)
 - [ ] Atomic-commit pattern documented with example
 - [ ] Re-measurement plan named
-
----
-
-## Reference files
-
-| File | Purpose |
-|---|---|
-| [`../../../rules/audit-triage-pairing.md`](../../../../rules/audit-triage-pairing.md) | The contract this skill satisfies — every audit needs a paired triage |
-| [`../design-reviewer/SKILL.md`](../design-reviewer/SKILL.md) | The audit half this skill pairs with |
-| `../design-reviewer/references/anti-patterns.md` | Branch 1 source-of-truth |
-| `../design-reviewer/references/motion-craft.md` | Branch 4 source-of-truth |
-| [`../../../rules/design-production.md`](../../../../rules/design-production.md) | Token system + render paths Branch 5 references |
 
 ---
 

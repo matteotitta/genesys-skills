@@ -18,20 +18,17 @@ review_gate: 2
 inputs:
   required: []
   recommended: []
-outputs:
 - type: website-score
   feeds_into:
   - website-build
   - website-copy
 depends_on: []
-feeds_into:
 - website-build
 - website-copy
 owned_by_agent: operator
 mcps_used:
 - exa
 - gdrive
-push_targets:
 - gdrive
 - notion
 triggers:
@@ -63,7 +60,7 @@ Two assessment modes — pick by depth needed:
 - **Quick** — 5 categories scored, normalized to /100. Best for lead-magnet output, prospect triage, fast diagnostic.
 - **Full** — 9 categories scored, raw /100. Best for active client engagements, comprehensive teardown, before/after planning.
 
-Visual phase map → `references/process-flowchart.md`. Full scoring rubric → `references/scoring-rubric.md`.
+Visual phase map → the premium reference. Full scoring rubric → the premium reference.
 
 ## Inputs
 
@@ -78,7 +75,6 @@ Visual phase map → `references/process-flowchart.md`. Full scoring rubric → 
 - `vertical context` — adjusts expectations for industry.
 - `specific focus areas` — weights certain categories higher.
 - `known positioning` — helps evaluate differentiation accuracy.
-- `ICP personas list` (2-5) — enables per-ICP scoring matrix mode → `references/scoring-rubric.md` ("Per-ICP scoring mode").
 
 If website URL missing, ask. If mode unclear, confirm Quick (lead magnet) vs. Full (comprehensive). If competitor URLs invalid, drop competitive context section without blocking.
 
@@ -86,40 +82,21 @@ If website URL missing, ask. If mode unclear, confirm Quick (lead magnet) vs. Fu
 
 1. **Validate inputs** — confirm URL is fetchable, mode is set, competitor URLs (if any) are valid.
 2. **Fetch primary pages** — homepage required; Full mode also pulls pricing, features, customers, about. Capture hero section verbatim. Use `web_fetch_exa` for clean extraction.
-3. **Apply 5-second test** — first viewport only. Check for tool anchor OR task anchor (one suffices). Frameworks → `references/scoring-rubric.md` ("The Amorphous Software Problem"). Output pass/fail with rationale.
+3. **Apply 5-second test** — first viewport only. Check for tool anchor OR task anchor (one suffices). Frameworks → the premium reference ("The Amorphous Software Problem"). Output pass/fail with rationale.
 4. **Competitor fetch** (if competitor URLs provided) — fetch homepages, apply same 5-second test, note comparative observations.
 5. **Score Quick categories** (both modes) — Product clarity /12, Audience specificity /12, Problem articulation /15, Differentiation /15, Action clarity /10. Each score requires verbatim evidence from fetched pages.
 6. **Score Full categories** (Full mode only) — Outcome clarity /15, Trust & proof /10, Risk reduction /6, Product visualization /5. Same evidence rule.
-7. **Calculate total + interpretation** — Quick: sum to 64, normalize to /100. Full: raw /100. Apply score interpretation table (`references/scoring-rubric.md`): 85-100 Excellent / 70-84 Good / 55-69 Needs work / 40-54 Weak / 0-39 Critical.
-8. **Per-ICP matrix** (if ≥2 personas provided) — score per persona × per category instead of single number. Per-persona evidence + recommendations + priority. Full protocol → `references/scoring-rubric.md` ("Per-ICP scoring mode").
-9. **Prioritize recommendations by tier** — Fix this week (blocking copy-only), Fix this month (structural/new content), Fix this quarter (strategic/research-required). Tier criteria → `references/scoring-rubric.md` ("Recommendation tiers").
+7. **Calculate total + interpretation** — Quick: sum to 64, normalize to /100. Full: raw /100. Apply score interpretation table (the premium reference): 85-100 Excellent / 70-84 Good / 55-69 Needs work / 40-54 Weak / 0-39 Critical.
+8. **Per-ICP matrix** (if ≥2 personas provided) — score per persona × per category instead of single number. Per-persona evidence + recommendations + priority. Full protocol → the premium reference ("Per-ICP scoring mode").
+9. **Prioritize recommendations by tier** — Fix this week (blocking copy-only), Fix this month (structural/new content), Fix this quarter (strategic/research-required). Tier criteria → the premium reference ("Recommendation tiers").
 10. **Create before/after wireframes** — hero rewrites, key section additions, CTA improvements. Verbatim "before"; concrete copy in "after". Box-drawing format per template.
-11. **Estimate impact** — apply benchmarks from `references/impact-estimates.md` and `references/comparison-benchmarks.md`. Provide ranges, not precise numbers; cite basis.
+11. **Estimate impact** — apply benchmarks from the premium reference and the premium reference. Provide ranges, not precise numbers; cite basis.
 12. **Add competitive context** (if competitor URLs provided) — element-by-element comparison matrix (hero anchor, status quo named, differentiator, gap assessment).
-13. **Self-evaluate against guardrails** → `references/scoring-rubric.md` ("Anti-hallucination guardrails" + "Pre-delivery quality checklist"). Mark inferences explicitly. Note "Not quantified" for missing metrics.
-14. **Write output** per template → `references/output-template.md` (full structure: score summary, 5-second test, category analysis, prioritized recommendations, competitive context, iteration prompts).
-15. **Offer iteration prompts** post-delivery → `references/iteration-prompts.md` (refinement / expansion / quality offers + auto-update protocol).
+13. **Self-evaluate against guardrails** → the premium reference ("Anti-hallucination guardrails" + "Pre-delivery quality checklist"). Mark inferences explicitly. Note "Not quantified" for missing metrics.
+14. **Write output** per template → the premium reference (full structure: score summary, 5-second test, category analysis, prioritized recommendations, competitive context, iteration prompts).
+15. **Offer iteration prompts** post-delivery → the premium reference (refinement / expansion / quality offers + auto-update protocol).
 
 ## What good looks like
-
-### References
-
-- **Scoring rubric (canonical)** → `references/scoring-rubric.md` — 9 first-principles questions, tool/task anchor framework, category weights table (100 pts), Quick vs. Full mode breakdown, score interpretation, recommendation tiers, per-ICP scoring mode, anti-hallucination guardrails, pre-delivery quality checklist, anti-examples.
-- **Output template** → `references/output-template.md` — full output structure including score summary, 5-second test block, category analysis, before/after wireframes, competitive context matrix, iteration prompts. Two worked examples included (Clay Quick assessment + before/after hero wireframe).
-- **Process flowchart (visual)** → `references/process-flowchart.md` — ASCII flowchart of execution path with phase checkpoints.
-- **Iteration prompts + skill auto-update** → `references/iteration-prompts.md` — post-delivery prompts (refinement/expansion/quality), feedback signal table, reference-example capture, pattern-detection rules, full changelog, MCP data integration.
-- **Common issues pattern library** → `references/common-issues.md` — frequent problems and fixes.
-- **Comparison benchmarks** → `references/comparison-benchmarks.md` — industry benchmarks by stage.
-- **Impact estimates** → `references/impact-estimates.md` — quantified estimates with sources.
-- **Full report template** → `references/full-report-template.md` — complete template for full audit deliverable.
-- **LinkedIn launch post** → `references/linkedin-launch-post.md` — Website Grader launch announcement (Jan 2026).
-- **Phase 2 merge log** → `references/merged-from.md` — `/website-pm-score` command absorbed (Step 5 of Phase 2 refactor).
-
-### Examples
-
-- **Clay** (Quick assessment, 69/100) → `examples/worked-example-clay.md` — GTM data platform Series B; demonstrates verbatim quoting, partial-pass 5-second test, normalized scoring.
-- **Augment Code** (Full audit, 81/100) → `examples/worked-example-augment.md` — full 9-category teardown.
-- **HockeyStack** (Full audit, 68/100) → `examples/worked-example-hockeystack.md` — needs-work range, prioritized fixes.
 
 ### Evaluations (binary pass/fail before declaring "done")
 
@@ -129,16 +106,10 @@ If website URL missing, ask. If mode unclear, confirm Quick (lead magnet) vs. Fu
 - 5-second test result includes pass/fail + grounding check (tool anchor / task anchor presence).
 - ≥1 recommendation per tier (Fix this week / month / quarter).
 - Before/after wireframes for hero changes use box-drawing characters and verbatim "before".
-- Impact estimates use ranges, not precise numbers; cite basis (`references/impact-estimates.md` or external benchmark).
 - No invented metrics — every claim quantified is on the site or marked "Not quantified".
 - No assumed pages — only score what was fetched.
 - Output title is `# Website PM Score: [Company Name]` exactly.
 - Per-ICP matrix present if ≥2 personas were provided.
-
-## Push
-
-- **Google Docs** → `client_folder/audit/website-score/` (per-client GDrive folder via `.claude/mcp/gdrive/create-doc-unified.mjs --client {slug}`).
-- **Notion** → client's audit/scoring database (if present).
 
 ## Integration with other skills
 
@@ -158,7 +129,7 @@ If website URL missing, ask. If mode unclear, confirm Quick (lead magnet) vs. Fu
 
 ## Pre-slim original
 
-Pre-slim SKILL.md (777 lines, v2.0) archived at `.claude/skills/_archive/website-score/SKILL-pre-slim-20260429.md`. See `references/iteration-prompts.md` ("Changelog") for the v2.3 entry documenting the slim.
+Pre-slim SKILL.md (777 lines, v2.0) archived at `.claude/skills/_archive/website-score/SKILL-pre-slim-20260429.md`. See the premium reference ("Changelog") for the v2.3 entry documenting the slim.
 
 ---
 

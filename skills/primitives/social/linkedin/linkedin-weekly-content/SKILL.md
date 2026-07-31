@@ -27,18 +27,15 @@ inputs:
   - linkedin-infographics
   - linkedin-algo-audit
   - voice-reviewer
-outputs:
 - type: linkedin-weekly-batch
   feeds_into:
   - gdrive-create
 depends_on:
 - linkedin-content-guide
-feeds_into:
 - gdrive-create
 owned_by_agent: content
 mcps_used:
 - slack
-push_targets: []
 triggers:
   slash_commands: []
   natural_language: []
@@ -79,14 +76,14 @@ Voice-locked operational constants — these stay in body.
 9-phase orchestration:
 
 ```
-Phase 1: Load Context  →  Phase 2: Generate Hooks  →  Phase 3: Generate 4 Posts
+Phase 1: Load Context → Phase 2: Generate Hooks → Phase 3: Generate 4 Posts
                                                               ↓
-Phase 6: Photo Rec  ←  Phase 5: Visual Briefs  ←  Phase 4: Algo Audit
+Phase 6: Photo Rec ← Phase 5: Visual Briefs ← Phase 4: Algo Audit
        ↓
-Phase 7: GDrive Append  →  Phase 8: Slack Notify  →  Phase 9: Update Rotation Tracker
+Phase 7: GDrive Append → Phase 8: Slack Notify → Phase 9: Update Rotation Tracker
 ```
 
-Phase-by-phase detail (skill invocations, post lengths, archetype rotation logic, MCP detection, GDrive append script) in `references/process.md`.
+Phase-by-phase detail (skill invocations, post lengths, archetype rotation logic, MCP detection, GDrive append script) in the premium reference.
 
 ---
 
@@ -101,13 +98,7 @@ Voice-locked rules — these stay in body.
 - **No "genuinely asking":** Stop using pseudo-engagement closings
 - **Source integrity:** No fabricated stories, metrics, or quotes — all from content banks
 
-Full per-post and per-batch checks in `references/quality.md`.
-
----
-
-## Output Format
-
-The 9-phase pipeline assembles a single weekly markdown file with all 4 posts (each with hook category, content, photo recommendation if story, algo audit summary), the infographic brief, and the carousel brief. The file is saved locally, appended to the persistent GDoc, and the GDoc URL goes into the Slack DM. Full template + Slack format in `references/output-format.md`.
+Full per-post and per-batch checks in the premium reference.
 
 ---
 
@@ -121,17 +112,6 @@ This skill is triggered weekly via Claude Code `/schedule`:
 
 **Cron:** Every Friday at 08:00 UTC
 **Why Friday:** Full weekend to review. Monday = newsletter. Tuesday's story post = first LinkedIn post of the week. 4 days of buffer.
-
----
-
-## Reference Files
-
-| File | Purpose |
-|------|---------|
-| `references/process.md` | 9-phase runbook + per-post skill invocations + post-approval reference capture |
-| `references/output-format.md` | Weekly markdown template + Slack notification format |
-| `references/quality.md` | Per-post + per-batch + voice compliance + source integrity checks |
-| `references/auto-update.md` | Self-evaluation protocol + feedback signals |
 
 ---
 

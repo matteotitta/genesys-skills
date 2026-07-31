@@ -20,18 +20,15 @@ review_gate: 1
 inputs:
   required: []
   recommended: []
-outputs:
 - type: wiki-lint-report
   feeds_into:
   - learn
   - session-wrap
 depends_on: []
-feeds_into:
 - learn
 - session-wrap
 owned_by_agent: operator
 mcps_used: []
-push_targets:
 - gdrive
 - notion
 triggers:

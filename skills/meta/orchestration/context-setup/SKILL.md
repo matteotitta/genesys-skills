@@ -5,9 +5,9 @@ last_updated: 2026-07-23
 author: genesys-growth
 description: 'Orchestrates a Lane-3 client context engagement end to end — scaffolds the Pattern A client folder, drives the
   canonical context spine as a locked, dependency-gated sequence, then generates the per-client context repo (context/ + workspace/
-  + skills/ + agents/ + commands/ + .claude-plugin/) modelled on ClientCo-marketing. Start here when standing up a paid "build
+  + skills/ + agents/ + commands/ +.claude-plugin/) modelled on ClientCo-marketing. Start here when standing up a paid "build
   your context layer" engagement — the £9-10.8K/mo AI-transformation build (ClientCo live, ClientCo in-flight). Upstream:
-  /discovery. Drives the spine skills (company-context → competitor-research → ... → product-messaging) and emits a repo ready
+  /discovery. Drives the spine skills (company-context → competitor-research →... → product-messaging) and emits a repo ready
   for its own GitHub remote. Triggers: "build the context OS for {client}", "stand up {client}''s context repo", "run the Lane-3
   context build". NOT for folder-only scaffolding (use /new-client), NOT for packaging existing skills into a plugin bundle
   (use /plugin-scaffold), NOT for producing a single spine artifact (run that skill directly).'
@@ -20,14 +20,11 @@ review_gate: 0
 inputs:
   required: []
   recommended: []
-outputs:
 - type: runbook
   feeds_into: []
 depends_on: []
-feeds_into: []
 owned_by_agent: operator
 mcps_used: []
-push_targets: []
 triggers:
   slash_commands:
   - /context-setup
@@ -79,8 +76,8 @@ The methodology adapts patterns surfaced in the `/steal` analysis at [`../../../
 
 - **Upstream: `/discovery`** (`primitives/clients/discovery`) — the discovery brief feeds the engagement scope this build runs against. Run it first; this skill assumes discovery is done.
 - **After scaffold: `/client-onboarding`** — the human-facing onboarding steps run alongside this build's technical scaffold.
-- **Drives: the spine skills** — `company-context` through `product-messaging` (see § Phase 2). This skill sequences and locks them; it does not reimplement them.
-- **Reuses: `/plugin-scaffold`** ([`../../infra/plugin-scaffold/SKILL.md`](../../infra/plugin-scaffold/SKILL.md)) for the repo's `.claude-plugin/` manifest + skill symlink mechanics (see § Phase 7).
+- **Drives: the spine skills** — `company-context` through `product-messaging` (see). This skill sequences and locks them; it does not reimplement them.
+- **Reuses: `/plugin-scaffold`** ([`../../infra/plugin-scaffold/SKILL.md`](../../infra/plugin-scaffold/SKILL.md)) for the repo's `.claude-plugin/` manifest + skill symlink mechanics (see).
 
 ---
 
@@ -109,9 +106,9 @@ Run the canonical new-client spine **in order**, gating each step on the prior c
 
 `company-context → competitor-research → icp-research → icp-behavioural → tov-guidelines → brand-kit → expert-pov → positioning → product-messaging → brand-context-sync → [execution fan-out]`
 
-The authoritative ordering + dependency rationale live in [`../../../../rules/ontology.md`](../../../../rules/ontology.md) § Skill chain patterns → "New client (full engagement)". Do not re-derive it here. The gating mechanism is the sequential-pipeline + lock-down state in [`../../../../rules/orchestration-patterns.md`](../../../../rules/orchestration-patterns.md) (Pattern 1 + § Orchestration mechanics → Lock-down state): step N does not start until step N-1 is `status: locked`.
+The authoritative ordering + dependency rationale live in [`../../../../rules/ontology.md`](../../../../rules/ontology.md)→ "New client (full engagement)". Do not re-derive it here. The gating mechanism is the sequential-pipeline + lock-down state in [`../../../../rules/orchestration-patterns.md`](../../../../rules/orchestration-patterns.md) (Pattern 1 +→ Lock-down state): step N does not start until step N-1 is `status: locked`.
 
-After each step, set the lock-down frontmatter on its output (`status: locked` / `locked_by: {named owner}` / `lock_version: N`). A `lock_version` bump is a **release** — "ready for the team" is a decision an owner makes, not a save (steal I5). Mechanics + the exact frontmatter block + the rubric-as-scaffolding note (steal B, for any scoring step in the build) are in `references/spine-drive.md`.
+After each step, set the lock-down frontmatter on its output (`status: locked` / `locked_by: {named owner}` / `lock_version: N`). A `lock_version` bump is a **release** — "ready for the team" is a decision an owner makes, not a save (steal I5). Mechanics + the exact frontmatter block + the rubric-as-scaffolding note (steal B, for any scoring step in the build) are in the premium reference.
 
 ### Phase 3 — Layer buildtime vs runtime
 
@@ -119,17 +116,17 @@ Label every artifact as one of two lifecycles (steal I1):
 - **Buildtime** — the locked spine. Collective context built ahead, owned and versioned. This is what Phase 2 produces.
 - **Runtime** — live pulls from the client's system of record (CRM, analytics, DB) via MCP. Fetched fresh, not owned, not versioned.
 
-Build the brain before the engines — lock the buildtime spine before wiring any client-facing engine or asset (steal D). Transcripts are the highest-value buildtime seed: a CRM says *what* happened, transcripts say *why*, so seed the spine from calls and interviews first. Detail in `references/methodology.md`.
+Build the brain before the engines — lock the buildtime spine before wiring any client-facing engine or asset (steal D). Transcripts are the highest-value buildtime seed: a CRM says *what* happened, transcripts say *why*, so seed the spine from calls and interviews first. Detail in the premium reference.
 
 ### Phase 4 — Structure knowledge packages (multi-suite clients)
 
-For a multi-suite or multi-brand client (ClientCo's 4 product lines; ClientCo' multi-brand), structure `workspace/` as **owned packages per domain** rather than one flat pile (steal I4). Each package carries a dependency note (what it reads from) and a named owner. Single-product clients skip this — one package is enough. Package template in `references/methodology.md`.
+For a multi-suite or multi-brand client (ClientCo's 4 product lines; ClientCo' multi-brand), structure `workspace/` as **owned packages per domain** rather than one flat pile (steal I4). Each package carries a dependency note (what it reads from) and a named owner. Single-product clients skip this — one package is enough. Package template in the premium reference.
 
 ### Phase 5 — Wire citation traceability
 
 Every spine output carries `[VERIFIED: source]` tags per [`../../../../rules/ontology.md`](../../../../rules/ontology.md) + [`../../../../rules/evidence-bound-outputs.md`](../../../../rules/evidence-bound-outputs.md) (steal I2). For regulated clients (ClientCo / FCA), traceable-and-defensible AI output is the differentiator — every claim links to a source.
 
-When the engagement ships AI-assisted content, attach an **Evidence Map** — a claim → source → type appendix as proof-of-work (steal A). Scope it per [`../../../../rules/output-simplicity.md`](../../../../rules/output-simplicity.md) §9: internal or client-team layer only (appendix / collapsible), **never** on customer-facing content, where a sources block is itself a robot tell. Detail in `references/methodology.md`.
+When the engagement ships AI-assisted content, attach an **Evidence Map** — a claim → source → type appendix as proof-of-work (steal A). Scope it per [`../../../../rules/output-simplicity.md`](../../../../rules/output-simplicity.md) §9: internal or client-team layer only (appendix / collapsible), **never** on customer-facing content, where a sources block is itself a robot tell. Detail in the premium reference.
 
 ### Phase 6 — Note runtime access technique
 
@@ -141,28 +138,17 @@ Emit the `ClientCo-marketing`-style layout at `projects/consulting/active/{clien
 
 ```
 {client}-marketing/
-├── README.md · STRUCTURE.md · settings.json · .gitignore
-├── .claude-plugin/plugin.json
-├── context/     — condensed snapshots of the locked spine (fast skill-context loads)
-├── workspace/   — canonical PMM-core artifacts (the shared brain; Phase 4 packages)
-├── skills/      — client-wired SKILL.md (symlinks/copies of global skills)
-├── agents/      — role-agents + specialists
-├── commands/    — slash commands
-└── docs/        — README, QUICKSTART, INSTALL, SKILL-INDEX, MCP-CONNECTIONS
+├── README.md · STRUCTURE.md · settings.json ·.gitignore
+├──.claude-plugin/plugin.json
+├── context/ — condensed snapshots of the locked spine (fast skill-context loads)
+├── workspace/ — canonical PMM-core artifacts (the shared brain; Phase 4 packages)
+├── skills/ — client-wired SKILL.md (symlinks/copies of global skills)
+├── agents/ — role-agents + specialists
+├── commands/ — slash commands
+└── docs/ — README, QUICKSTART, INSTALL, SKILL-INDEX, MCP-CONNECTIONS
 ```
 
-Compose with `/plugin-scaffold` for the `.claude-plugin/plugin.json` + symlink mechanics. **Document** the dual-push routing (own GitHub remote + `git subtree`) per root CLAUDE.md § "App Repos — Push Routing Rules" — **do not create the remote or push.** Full layout spec, `context/` vs `workspace/` split, and the routing doc are in `references/repo-generator.md`.
-
----
-
-## Output format
-
-The engagement produces three things, reported at the end:
-1. A scaffolded Pattern A client folder (Phase 1).
-2. A locked context spine — each output `status: locked`, owner-named, versioned (Phase 2), labelled buildtime/runtime (Phase 3), packaged (Phase 4), citation-traced (Phase 5).
-3. A generated per-client context repo at `projects/consulting/active/{client}/workflows/{client}-marketing/`, ready for its own GitHub remote (Phase 7).
-
-Report the paths created, which spine steps locked vs still open, and the dual-push commands the user runs manually when they choose to publish.
+Compose with `/plugin-scaffold` for the `.claude-plugin/plugin.json` + symlink mechanics. **Document** the dual-push routing (own GitHub remote + `git subtree`) per root CLAUDE.md— Push Routing Rules" — **do not create the remote or push.** Full layout spec, `context/` vs `workspace/` split, and the routing doc are in the premium reference.
 
 ---
 
@@ -177,11 +163,4 @@ Report the paths created, which spine steps locked vs still open, and the dual-p
 - Voice + seven-tenet gate ([`../../../../rules/output-tenets.md`](../../../../rules/output-tenets.md)) passed.
 
 ---
-
-## References
-
-- `references/spine-drive.md` — the locked dependency-gated sequence: lock frontmatter, gating rule, release cadence (I5), rubric-as-scaffolding note (B).
-- `references/methodology.md` — the context layers: buildtime/runtime + build-brain-before-engines (I1, D), knowledge packages (I4), citation traceability + Evidence Map (I2, A), runtime access / CodeMode (E).
-- `references/repo-generator.md` — the per-client repo layout spec (mirrors `ClientCo-marketing`) + dual-push routing doc.
-- Source (cite-only): [`../../../../discovery/0726-jacob-dietle-context-os-steal-analysis.md`](../../../../discovery/0726-jacob-dietle-context-os-steal-analysis.md).
 

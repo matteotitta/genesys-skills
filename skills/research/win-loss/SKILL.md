@@ -17,7 +17,6 @@ review_gate: 1
 inputs:
   required: []
   recommended: []
-outputs:
 - type: win-loss-analysis
   feeds_into:
   - case-study
@@ -25,14 +24,12 @@ outputs:
   - positioning
   - product-messaging
 depends_on: []
-feeds_into:
 - case-study
 - icp-behavioural
 - positioning
 - product-messaging
 owned_by_agent: researcher
 mcps_used: []
-push_targets:
 - gdrive
 - notion
 triggers:
@@ -100,7 +97,7 @@ If inputs are missing: ask the user for transcripts. Clarify if outcome should b
 
 ### Transcript intake — normalize any recorder format
 
-Transcripts arrive in many shapes: Gong, Fireflies, Otter, Grain exports, Zoom/Avoma VTT, SRT, recorder JSON, or plain pasted text. Before Phase 1, normalize whatever you're handed into one shape — speaker-attributed turns, timestamps where present. See `references/transcript-adapters.md` for the sniff-and-parse table per format and the normalized target shape. `/transcripts` inherits the same reference.
+Transcripts arrive in many shapes: Gong, Fireflies, Otter, Grain exports, Zoom/Avoma VTT, SRT, recorder JSON, or plain pasted text. Before Phase 1, normalize whatever you're handed into one shape — speaker-attributed turns, timestamps where present. See the premium reference for the sniff-and-parse table per format and the normalized target shape. `/transcripts` inherits the same reference.
 
 Two rules apply to every transcript before analysis:
 
@@ -111,14 +108,14 @@ Two rules apply to every transcript before analysis:
 
 ## Process
 
-The analysis runs in 3 phases. Read `references/process.md` for the full step-by-step (4 transcript-processing steps, 4 aggregation steps, 4 synthesis steps, plus per-phase checkpoints and the process flowchart).
+The analysis runs in 3 phases. Read the premium reference for the full step-by-step (4 transcript-processing steps, 4 aggregation steps, 4 synthesis steps, plus per-phase checkpoints and the process flowchart).
 
 Phase summary:
 
 1. **Transcript processing** — classify outcome, identify speakers, extract customer context, pull verbatim quotes for the 6 dimensions
 2. **Pattern aggregation** — group by outcome, count frequency, rank patterns (3+ mentions), cross-reference by ICP/competitor/persona
 3. **Insight synthesis** — state pattern, provide evidence with frequency + confidence, identify opportunity, generate executive summary
-4. **Canonical-doc drift → propose diff** *(optional — active client, cadenced batch only)* — check recurring patterns against the client's current positioning/messaging docs and emit gated diff **proposals**. See `references/canonical-doc-propose.md`.
+4. **Canonical-doc drift → propose diff** *(optional — active client, cadenced batch only)* — check recurring patterns against the client's current positioning/messaging docs and emit gated diff **proposals**. See the premium reference.
 
 ### Cadence
 
@@ -126,7 +123,7 @@ For an active client, run the batch analysis on a **monthly** cadence — the re
 
 ### Phase 4 — when it runs
 
-Phase 4 fires only on a **cadenced batch** for an **active client with canonical docs** (`projects/consulting/active/{client}/positioning/` or `messaging/`). It **proposes** diffs; it never applies them — the merge is a separate, two-layer human gate (Genesys PMM, then client signoff). Win-loss stays additive; positioning/messaging stay human-locked. Skip Phase 4 silently for single-call runs, comparison-only runs, prospects, or clients with no canonical docs. Full protocol, eligibility (recurrence gate), voice gate, and merge bridge: `references/canonical-doc-propose.md`.
+Phase 4 fires only on a **cadenced batch** for an **active client with canonical docs** (`projects/consulting/active/{client}/positioning/` or `messaging/`). It **proposes** diffs; it never applies them — the merge is a separate, two-layer human gate (Genesys PMM, then client signoff). Win-loss stays additive; positioning/messaging stay human-locked. Skip Phase 4 silently for single-call runs, comparison-only runs, prospects, or clients with no canonical docs. Full protocol, eligibility (recurrence gate), voice gate, and merge bridge: the premium reference.
 
 ---
 
@@ -172,16 +169,6 @@ Phase 4 fires only on a **cadenced batch** for an **active client with canonical
 
 ---
 
-## Output
-
-Produce a single win/loss report markdown file. Template + iteration prompts library: `references/output-format.md`.
-
-Pre-delivery quality checklist + worked example + anti-examples: `references/quality.md`.
-
-Auto-update protocol (feedback signals, pattern detection, skill-update template): `references/auto-update.md`.
-
----
-
 ## Anti-hallucination guardrails
 
 1. **Quote verbatim.** All insights must trace to specific transcript quotes.
@@ -208,23 +195,8 @@ Auto-update protocol (feedback signals, pattern detection, skill-update template
 |-------|--------------|-------|
 | **transcript-analysis** | Related | Use for general transcripts, not sales calls |
 | **sales-enablement** | Downstream | Feed insights into battlecards and objection handlers |
-| **positioning / product-messaging** | Downstream | Phase 4 proposes gated diffs to the client's canonical positioning/messaging docs from recurring patterns (propose only, human-merged). See `references/canonical-doc-propose.md` |
+| **positioning / product-messaging** | Downstream | Phase 4 proposes gated diffs to the client's canonical positioning/messaging docs from recurring patterns (propose only, human-merged). See the premium reference |
 | **competitor-research** | Related | Cross-reference competitor mentions |
-
----
-
-## Reference files
-
-| File | Purpose |
-|------|---------|
-| `references/process.md` | Full 3-phase step-by-step + flowchart |
-| `references/output-format.md` | Win/loss report template + iteration prompts |
-| `references/quality.md` | Pre-delivery checklist + worked example + anti-examples |
-| `references/auto-update.md` | Feedback signal detection + pattern rules (self-improvement of THIS skill) |
-| `references/canonical-doc-propose.md` | Phase 4 — propose gated diffs to client positioning/messaging docs |
-| `references/extraction-patterns.md` | Signal patterns for each dimension |
-| `references/output-template.md` | Legacy report template (kept for reference) |
-| `references/example-analysis.md` | Worked example with 5 transcripts |
 
 ---
 

@@ -33,26 +33,11 @@ inputs:
     - tov-guidelines
     - expert-pov
     - brand-kit
-outputs:
-  - type: sales-enablement-asset
-    feeds_into:
-      - sales-deck
-      - demo-script
-      - outreach-emails
-      - abm-campaign
 depends_on: []
-feeds_into:
-  - sales-deck
-  - demo-script
-  - outreach-emails
-  - abm-campaign
 owned_by_agent: sales
 mcps_used:
   - notion
   - granola
-push_targets:
-  - notion
-  - gdrive
 triggers:
   slash_commands:
     - sales-tracks
@@ -74,7 +59,7 @@ slim_exemption: null
 
 Persona-specific sales pitch tracks for live discovery and demo conversations. Each track is a single page the rep scans 60 seconds before a call: who they're talking to, the story arc to open with, the capability sequence to land, the objections they'll hear (with verbatim transcript quotes), the competitor moves to counter, and the discovery questions that confirm fit.
 
-The body of this file holds decision-grade context (when to invoke, inputs, output structure, anti-Frankenstein guardrails, gotchas). Step-by-step process, output template, quality gates, and iteration prompts live in `references/`.
+The body of this file holds decision-grade context (when to invoke, inputs, output structure, anti-Frankenstein guardrails, gotchas). Step-by-step process, output template, quality gates, and iteration prompts live in the premium reference.
 
 This is the **persona-axis** sales artifact, complementing battlecards (competitor-axis), sales-deck (full pitch deck), and demo-script (product demo flow). A rep typically uses two together: sales-tracks for "who am I selling to," battlecards for "they brought up [competitor]."
 
@@ -93,7 +78,7 @@ Output complies with:
 
 | Code | Refinement | How it lands in sales-tracks |
 |---|---|---|
-| **R1** | Source placement (three layers) | Rep-facing working markdown stays internal-inline cited (auditability). Published Notion playbook is a **client-team surface** — sources move to a collapsed "Sources" toggle at the bottom of each persona track. No `[VERIFIED: ...]` tags inline in the face doc. |
+| **R1** | Source placement (three layers) | Rep-facing working markdown stays internal-inline cited (auditability). Published Notion playbook is a **client-team surface** — sources move to a collapsed "Sources" toggle at the bottom of each persona track. No `[VERIFIED:...]` tags inline in the face doc. |
 | **R3** | Product-update tone | §3 capability pitches default to "we shipped X to address Y" framing. Never "we're thrilled to announce." Even Tier 1 features get product-update tone. |
 | **R6** | CTA hierarchy | §7 discovery questions end with the stage-appropriate next step — trial/sign-up for cold prospects, product-action for warm-base accounts already in motion. Never blog or PDF as primary CTA. |
 | **R9** | Action-oriented section names | Section names already verb-led (Story arc, Capability pitch, Objection handlers, Discovery questions). Preserve — do not rename to status-oriented variants ("Overview," "Background"). |
@@ -162,7 +147,7 @@ Before proceeding, verify:
 | 3. Objection + competitor enrichment | Mine win-loss for verbatim objections; build competitive anchor matrix | Draft sections 4-6 |
 | 4. Validation + optional Notion publish | Quality gates; convert to Notion blocks if push enabled | Final tracks + Notion pages |
 
-Full step-by-step (with checkpoints, persona-discovery flowchart, component-map consumption order, Granola fallback pattern, Notion publish commands) in `references/process.md`.
+Full step-by-step (with checkpoints, persona-discovery flowchart, component-map consumption order, Granola fallback pattern, Notion publish commands) in the premium reference.
 
 ---
 
@@ -179,7 +164,7 @@ Every track contains these sections in this order:
 7. **Discovery questions** — 3-5 fit-confirmation questions + 2-3 landmines that surface qualification signals
 8. **Sources** — every quote, claim, competitor fact carries `[VERIFIED: source, date]` per [`ontology.md`](../../../../rules/ontology.md)
 
-Full template with field-level guidance and a worked example in `references/track-template.md`.
+Full template with field-level guidance and a worked example in the premium reference.
 
 ---
 
@@ -262,18 +247,6 @@ This is the explicit consumption chain. Every section names its primary input (t
 **Inherits from:** all 9 recommended PMM inputs above. No fresh competitor pulls — that's `/competitor-research`'s job.
 
 **Fallback (no MCP):** Skip Notion publish step. Skip Granola fallback for objection mining. Skill still produces local markdown.
-
----
-
-## Reference files
-
-| File | Purpose |
-|------|---------|
-| `references/process.md` | 4-phase runbook + persona-discovery flowchart + component-map consumption order + Granola fallback + Notion publish commands |
-| `references/track-template.md` | Per-persona track structure (8 sections) with field-level guidance + one fully-worked example track |
-| `references/quality.md` | Pre-delivery checklist + voice match + objection-source attribution + competitor-claim verification + slim self-audit |
-| `references/auto-update.md` | Output wrapper + iteration prompts + feedback signal detection + lock protocol + upstream-staleness handling |
-| `projects/research/taste-library/resources/0626-sales-qualification-frameworks/` | Qualification frameworks + 14-call-type taxonomy — structure each persona's track around the methodology that fits its deal stage |
 
 ---
 

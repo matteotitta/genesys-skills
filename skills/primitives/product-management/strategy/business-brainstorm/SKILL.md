@@ -3,7 +3,7 @@ name: business-brainstorm
 version: '1.0'
 last_updated: 2026-07-08
 author: genesys-growth
-description: 'Pressure-tests a potential new business, product, or side project against a 9-dimension serial-founder filter (problem, audience, wedge, monetization, moat, portfolio fit, distribution, energy fit, opportunity cost), rating each strong/OK/weak/needs-research, and outputs a dated viability brief with a build / sleep-on-it / pass verdict plus a first-100-customers sketch and a domain read. Routes unknowns to /deep-research + Exa; checks .com availability via the sibling /domain skill (RDAP/WHOIS fallback). Archives every brief to references/ideas-archive/ so past calls stay searchable. Triggers: "business brainstorm", "should I build X", "pressure-test this idea", "validate this idea", "is X a good business", "new business idea", "what about a [type] for [audience]". Recommended upstream: company-context, icp-research. Downstream: promote to /strategy-doc when the verdict is build. NOT for marketing ideas for a product you already run (use /content-strategy) and NOT for a strategy doc on an already-committed build (use /strategy-doc).'
+description: 'Pressure-tests a potential new business, product, or side project against a 9-dimension serial-founder filter (problem, audience, wedge, monetization, moat, portfolio fit, distribution, energy fit, opportunity cost), rating each strong/OK/weak/needs-research, and outputs a dated viability brief with a build / sleep-on-it / pass verdict plus a first-100-customers sketch and a domain read. Routes unknowns to /deep-research + Exa; checks.com availability via the sibling /domain skill (RDAP/WHOIS fallback). Archives every brief to the premium reference so past calls stay searchable. Triggers: "business brainstorm", "should I build X", "pressure-test this idea", "validate this idea", "is X a good business", "new business idea", "what about a [type] for [audience]". Recommended upstream: company-context, icp-research. Downstream: promote to /strategy-doc when the verdict is build. NOT for marketing ideas for a product you already run (use /content-strategy) and NOT for a strategy doc on an already-committed build (use /strategy-doc).'
 goal: Pressure-test a business or product idea across nine founder-filter dimensions and return a build / sleep-on-it / pass verdict.
 outcome: A dated viability brief scoring the idea on 9 dimensions with a build / sleep-on-it / pass verdict, a first-100-customers sketch, a domain read, and open questions — archived and searchable, ready to promote to /strategy-doc if it's a build.
 primitive: product-management
@@ -15,17 +15,14 @@ inputs:
   recommended:
   - company-context
   - icp-research
-outputs:
 - type: idea-validation
   feeds_into:
   - strategy-doc
 depends_on: []
-feeds_into:
 - strategy-doc
 owned_by_agent: product-manager
 mcps_used:
 - exa
-push_targets:
 - gdrive
 - notion
 triggers:
@@ -47,7 +44,7 @@ sources_count: 0
 
 # Business brainstorm — pressure-test an idea against the founder filter
 
-Takes a vague idea, runs it through a 9-dimension founder filter, and returns a structured viability brief with a hard verdict: build, sleep on it, or pass. Composes with `/deep-research` (for market validation) and the sibling `/domain` skill (for naming and .com availability).
+Takes a vague idea, runs it through a 9-dimension founder filter, and returns a structured viability brief with a hard verdict: build, sleep on it, or pass. Composes with `/deep-research` (for market validation) and the sibling `/domain` skill (for naming and.com availability).
 
 This is the upstream question — *should this thing exist, and can you win it?* It's not marketing ideas for a product you already run (that's `/content-strategy`), and it's not a strategy doc for an already-greenlit build (that's `/strategy-doc`). Run this first; promote the winners to `/strategy-doc`.
 
@@ -82,7 +79,7 @@ Do NOT run when:
 
 ## The 9 dimensions
 
-Full rubric with per-dimension ✅/🟡/❌ criteria and the scoring-to-verdict gates: `references/framework.md`. In summary:
+Full rubric with per-dimension ✅/🟡/❌ criteria and the scoring-to-verdict gates: the premium reference. In summary:
 
 1. **Problem** — real, frequent, acute?
 2. **Audience** — who has it, can you reach them?
@@ -104,7 +101,7 @@ Get the *what* and the *why now*. If you point at a past chat or doc, load it fi
 
 ### 2 — Load the framework + portfolio overlay
 
-Read `references/framework.md` and apply each dimension in order.
+Read the premium reference and apply each dimension in order.
 
 Load your portfolio context before scoring the fit dimensions, so you don't have to name each property by hand. Check:
 
@@ -128,11 +125,11 @@ If 2+ dimensions are ❓, offer: *"Want me to run /deep-research on [topic] befo
 
 Useful targets: market size + who-pays signal; the competitive landscape ("alternatives to X" pages); ICP signal on the forums/Reddit/X where the audience gathers; pricing benchmarks off competitor pricing pages. Fold the findings into the score and re-rate the ❓ rows.
 
-### 5 — Check the .com
+### 5 — Check the.com
 
 Run the sibling `/domain` skill on the working name(s) for availability + pricing. If naming is wide open, run 5–10 candidate names through it and report which are free.
 
-If `/domain` isn't available yet, fall back to a free RDAP/WHOIS lookup via `WebFetch` on `https://rdap.org/domain/<name>.com` — a 404 means likely available, a 200 means registered. A strong idea on a $50k domain is worse than a B+ idea on a free .com.
+If `/domain` isn't available yet, fall back to a free RDAP/WHOIS lookup via `WebFetch` on `https://rdap.org/domain/<name>.com` — a 404 means likely available, a 200 means registered. A strong idea on a $50k domain is worse than a B+ idea on a free.com.
 
 ### 6 — Write the brief
 
@@ -140,7 +137,7 @@ Use the output format below.
 
 ### 7 — Archive
 
-Write the brief to `references/ideas-archive/<YYYY-MM-DD>-<slug>.md`. Append one line to `references/ideas-archive/INDEX.md` (create it on first run):
+Write the brief to the premium reference<YYYY-MM-DD>-<slug>.md`. Append one line to the premium reference (create it on first run):
 
 ```markdown
 - 2026-07-08 — [<idea>](./<filename>.md) — **<verdict>** — <one-line rationale>
@@ -157,9 +154,6 @@ Show the brief in chat and name the archive path. Then offer, by verdict:
 - **Pass / steal-an-angle** → nothing to scaffold; the "angle to steal" section is the payoff
 - Any verdict → "Push to Notion as a positioning canvas?" per [`.claude/rules/notion-protocol.md`](../../../../../rules/notion-protocol.md)
 
-## Output format
-
-```markdown
 # Business brainstorm: <name or idea slug>
 
 **Date:** <YYYY-MM-DD> · **Idea:** <1–2 sentences> · **Why now:** <1 sentence>
@@ -212,15 +206,9 @@ Show the brief in chat and name the archive path. Then offer, by verdict:
 ## Composition
 
 - `/deep-research` + Exa — market, competitor, and ICP validation for ❓ dimensions
-- `/domain` (sibling) — .com availability and naming; RDAP/WHOIS `WebFetch` fallback
+- `/domain` (sibling) —.com availability and naming; RDAP/WHOIS `WebFetch` fallback
 - `/strategy-doc` — the promotion target when the verdict is build
 - Memory (`project_*.md`, `MEMORY.md`) — portfolio context, so you don't pitch an idea you already run
-
-## Push
-
-- Genesys-internal: `projects/genesys/strategy/MMYY-<idea-slug>-brainstorm.md`
-- Client ideas: `projects/consulting/active/{client}/strategy/MMYY-<idea-slug>-brainstorm.md`
-- Optional GDoc/Notion per [`.claude/rules/gdrive-protocol.md`](../../../../../rules/gdrive-protocol.md) / [`.claude/rules/notion-protocol.md`](../../../../../rules/notion-protocol.md)
 
 ## Attribution
 

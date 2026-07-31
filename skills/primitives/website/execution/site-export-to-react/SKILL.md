@@ -16,18 +16,15 @@ inputs:
   recommended:
   - brand-kit
   - target_netlify_site
-outputs:
 - type: deployed-website
   feeds_into:
   - website-pm-score
 depends_on: []
-feeds_into:
 - website-pm-score
 owned_by_agent: operator
 mcps_used:
 - unframer
 - github
-push_targets:
 - github
 triggers:
   slash_commands:
@@ -90,20 +87,20 @@ If neither a Webflow export nor a Framer project is present, name what's missing
 source_export
      │
      ├─ Webflow static export (index.html + css/ + js/ + fonts/ + images/)
-     │        → references/webflow-adapter.md  (reconstruct-from-export, 12 phases)
+     │ → the premium reference (reconstruct-from-export, 12 phases)
      │
      └─ Framer project (React-Export plugin enabled)
-              → references/framer-adapter.md   (orchestrate unframer → real React components)
+              → the premium reference (orchestrate unframer → real React components)
                        │
                        ▼
-          shared backbone  → references/backbone.md
+          shared backbone → the premium reference
           (TanStack Start scaffold · repo layout · Storybook parity · SSR guards)
                        │
                        ▼
-          parity gates → references/checklists.md   (review_gate: 3)
+          parity gates → the premium reference (review_gate: 3)
                        │
                        ▼
-          ship → .claude/rules/tanstack-netlify-deploy.md
+          ship →.claude/rules/tanstack-netlify-deploy.md
 ```
 
 **Webflow** = reconstruct the DOM as owned components, keeping the vendor's compiled CSS + class names verbatim. **Framer** = the export can't be reconstructed the same way (obfuscated, motion-coupled), so delegate extraction to `unframer` (`mcp__unframer__exportReactComponents`), then wrap its emitted `.jsx`/`.css` in the same backbone. Both paths converge on the shared scaffold, Storybook SOT hierarchy, parity gates, and Netlify ship.
@@ -160,7 +157,7 @@ source_export
 
 ## Design cycle (post-authoring phases)
 
-The source design is inherited — parity is the goal, so most phases apply to **net-new** components added after parity. References at `../../../../meta/catalog/design-reviewer/references/` (adjust depth per this skill's location):
+The source design is inherited — parity is the goal, so most phases apply to **net-new** components added after parity. References at `../../../../meta/catalog/design-reviewer/the premium reference (adjust depth per this skill's location):
 
 - **Layout** — `layout-tenets.md` (rhythm, alignment) — for net-new sections only
 - **Typeset** — `typeset-principles.md` (measure, leading, scale) — verify migrated type matches source
@@ -180,18 +177,6 @@ Run `/design-reviewer` as the final ship-ready gate — after the premortem pass
 Trivial-case escape: `## Premortem\nNo failure modes — trivial change`.
 
 ---
-
-## Reference files
-
-| File | Purpose |
-|------|---------|
-| `references/backbone.md` | Shared TanStack Start scaffold, repo layout, Storybook parity, SSR — both adapters |
-| `references/webflow-adapter.md` | 12-phase reconstruct-from-export playbook (MIT port) |
-| `references/framer-adapter.md` | Orchestrate the `unframer` MCP → wrap emitted React into the backbone |
-| `references/gotchas.md` | Failure-mode catalog (fonts, cascade order, Netlify UI, `npm ci`, GSAP-SSR, stack fingerprints) |
-| `references/checklists.md` | The 5 parity gates (pre-migration → cleanup) |
-| [`templates/`](templates/) | `root-package.json`, `netlify.toml`, `web-netlify.toml`, Storybook preview, font-preload, PlausibleLoader, performance-overrides |
-| [`NOTICE.md`](NOTICE.md) | MIT attribution (Diego Menchaca) + `unframer` dependency note |
 
 ## External references
 

@@ -13,14 +13,11 @@ review_gate: 0
 inputs:
   required: []
   recommended: []
-outputs:
 - type: scope-risk-report
   feeds_into: []
 depends_on: []
-feeds_into: []
 owned_by_agent: operator
 mcps_used: []
-push_targets:
 - gdrive
 - notion
 triggers:
@@ -104,9 +101,6 @@ Composes with: `product-lens-reviewer`, `voice-reviewer`. Run as the **last** st
 - [ ] Fixes are specific enough to drop into the proposal
 - [ ] If a dimension PASSed because of an explicit bound (date, count, criteria), the bound is quoted
 
-## Output format
-
-```markdown
 # Scope-guardian review: {proposal name} ({YYYY-MM-DD})
 
 **Verdict:** Send it | Tighten before send | Don't send — rewrite
@@ -114,8 +108,8 @@ Composes with: `product-lens-reviewer`, `voice-reviewer`. Run as the **last** st
 ## Score table
 | Dimension | Verdict | Notes |
 |---|---|---|
-| 1. Open-ended deliverables | PASS/WARN/FAIL | ... |
-| ... | ... | ... |
+| 1. Open-ended deliverables | PASS/WARN/FAIL |... |
+|... |... |... |
 
 ## Findings
 **§{N} {Dimension}** — {verdict}

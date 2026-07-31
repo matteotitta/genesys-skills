@@ -26,19 +26,16 @@ inputs:
   - brand-kit
   - linkedin-hooks
   - genesys-design
-outputs:
 - type: carousel-blueprint
   feeds_into:
   - linkedin-weekly-content
   - linkedin-algo-audit
 depends_on:
 - genesys-design
-feeds_into:
 - linkedin-algo-audit
 - linkedin-weekly-content
 owned_by_agent: content
 mcps_used: []
-push_targets: []
 triggers:
   slash_commands: []
   natural_language: []
@@ -150,7 +147,7 @@ Output complies with [`output-tenets.md`](../../../../../rules/output-tenets.md)
 
 ## The 6-Part Carousel Framework
 
-Every carousel follows this structure. The framework is the same regardless of content type — what changes is the tone and approach within each section. Detailed per-content-type tables in `references/process.md`.
+Every carousel follows this structure. The framework is the same regardless of content type — what changes is the tone and approach within each section. Detailed per-content-type tables in the premium reference.
 
 | # | Section | Slides | Purpose |
 |---|---------|--------|---------|
@@ -215,7 +212,7 @@ Every carousel must follow:
 
 ## Process
 
-4-phase flow: Story Arc Design → Slide-by-Slide Copy → Wireframe Brief → Post Caption. Full step-by-step + per-content-type tables in `references/process.md`.
+4-phase flow: Story Arc Design → Slide-by-Slide Copy → Wireframe Brief → Post Caption. Full step-by-step + per-content-type tables in the premium reference.
 
 ---
 
@@ -229,26 +226,9 @@ Every carousel must follow:
 
 ---
 
-## Output Format
-
-Carousel blueprint output includes story arc table, per-slide copy + wireframe brief, post caption, design handoff notes (token-cited from DESIGN.md), and quality checklist. Full template in `references/output-format.md`.
-
----
-
 ## Quality
 
-Pre-delivery checklist covers Rule of Ones, readability, story arc, navigation, and design contract (DESIGN.md token compliance). Worked examples ("How I" + Listicle) and anti-examples in `references/quality.md`.
-
----
-
-## Reference Files
-
-| File | Purpose |
-|------|---------|
-| `references/process.md` | 4-phase workflow + deep per-content-type tables (Cover/Context/Breakdown/Results/Recap/CTA) + integration |
-| `references/output-format.md` | Carousel blueprint template |
-| `references/quality.md` | Pre-delivery checklist + 2 worked examples + anti-examples |
-| `references/auto-update.md` | Self-evaluation protocol + feedback signals |
+Pre-delivery checklist covers Rule of Ones, readability, story arc, navigation, and design contract (DESIGN.md token compliance). Worked examples ("How I" + Listicle) and anti-examples in the premium reference.
 
 ---
 
@@ -256,7 +236,7 @@ Pre-delivery checklist covers Rule of Ones, readability, story arc, navigation, 
 
 Run `/premortem --output` before ship. See [`/premortem` skill](../../../../meta/orchestration/premortem/SKILL.md) for the 5 execution domains (will-it-resonate / will-it-convert / will-it-stay-on-brand / will-stakeholder-push-back / will-it-degrade-over-time) and output template.
 
-Then run `/voice-reviewer` — the content ship gate: voice + brand quality (pm-loop.md § lens-reviewer).
+Then run `/voice-reviewer` — the content ship gate: voice + brand quality (pm-loop.md).
 
 Trivial-case escape: `## Premortem\nNo failure modes — trivial change` satisfies the contract for genuinely trivial outputs.
 

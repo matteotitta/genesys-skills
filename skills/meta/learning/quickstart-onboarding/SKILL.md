@@ -20,14 +20,11 @@ inputs:
   required: []
   recommended:
   - level
-outputs:
 - type: runbook
   feeds_into: []
 depends_on: []
-feeds_into: []
 owned_by_agent: operator
 mcps_used: []
-push_targets: []
 triggers:
   slash_commands:
   - /quickstart
@@ -48,14 +45,14 @@ disable-model-invocation: false
 
 **Situation.** Someone just got the link to the `claude-code-marketing-quickstart` repo — a fork-and-go marketing operating system built on the 4-systems framework (Context · Skills · Integrations · Orchestration), with a written 15-minute tour. **Complication.** A README is passive. People clone, skim, and stall *before* the first "aha" — the moment a real file lands in their spine from a skill they ran. That stall is where adoption dies. **Question.** How do we get a brand-new person from `git clone` to that first runnable win without them self-navigating a wall of text? **Answer.** This skill is the active wizard: it detects where they are, unblocks the exact next step, and drives them to run `/competitor-research` against a real target so they *feel* the framework in 15 minutes.
 
-This onboards onto ONE canonical repo: `matteotitta/claude-code-marketing-quickstart`. The repo's [`README.md`](https://github.com/matteotitta/claude-code-marketing-quickstart) is the source of truth for the tour — this skill mirrors and drives it. The full beat-by-beat script + troubleshooting lives in `references/tour-script.md`.
+This onboards onto ONE canonical repo: `matteotitta/claude-code-marketing-quickstart`. The repo's [`README.md`](https://github.com/matteotitta/claude-code-marketing-quickstart) is the source of truth for the tour — this skill mirrors and drives it. The full beat-by-beat script + troubleshooting lives in the premium reference.
 
-For an **async handoff** — distributing an MCP, plugin, or repo to a non-technical person you're *not* in a session with — use the one-paste install-prompt pattern in `references/install-prompt-pattern.md`. The pasted prompt carries the wizard when you can't.
+For an **async handoff** — distributing an MCP, plugin, or repo to a non-technical person you're *not* in a session with — use the one-paste install-prompt pattern in the premium reference. The pasted prompt carries the wizard when you can't.
 
 ```
-Detect state → Exa key → Clone → Wire .env → Driven tour → THE AHA → Week-1 plan
-     ↓            ↓         ↓        ↓            ↓             ↓          ↓
-   Phase 0     Phase 1   Phase 2  Phase 3     Phase 4       Phase 5    Phase 6
+Detect state → Exa key → Clone → Wire.env → Driven tour → THE AHA → Week-1 plan
+     ↓ ↓ ↓ ↓ ↓ ↓ ↓
+   Phase 0 Phase 1 Phase 2 Phase 3 Phase 4 Phase 5 Phase 6
 ```
 
 ---
@@ -78,7 +75,7 @@ Don't restart someone who's halfway. Detect state, then resume at the right phas
 3. **Tour progress?** Has the PulseAnalytics example been replaced (any file in `marketing/competitors/` dated this month, or `marketing/icp/ICP.md` edited)? If yes, they're past the tour → jump to Phase 5/6.
 4. **Nothing found?** Fresh start → Phase 1.
 
-State the detected position back to the person in one line ("Looks like you've cloned it but haven't wired your Exa key — let's do that") so they know you adapted. See `references/tour-script.md` § "State detection" for the exact checks.
+State the detected position back to the person in one line ("Looks like you've cloned it but haven't wired your Exa key — let's do that") so they know you adapted. See the premium reference for the exact checks.
 
 ---
 
@@ -100,14 +97,14 @@ gh repo create my-marketing-os --template matteotitta/claude-code-marketing-quic
 cd my-marketing-os
 ```
 
-The `--template` flag gives a clean fork with no inherited history. If they don't have the `gh` CLI, fall back to the GitHub UI "Use this template" button, then `git clone` + `cd`. Troubleshooting (no `gh`, auth, private-repo access) → `references/tour-script.md`.
+The `--template` flag gives a clean fork with no inherited history. If they don't have the `gh` CLI, fall back to the GitHub UI "Use this template" button, then `git clone` + `cd`. Troubleshooting (no `gh`, auth, private-repo access) → the premium reference.
 
 ---
 
 ## Phase 3 — wire `.env`
 
 ```bash
-cp .env.example .env
+cp.env.example.env
 # paste the Exa key after EXA_API_KEY=
 ```
 
@@ -117,7 +114,7 @@ cp .env.example .env
 
 ## Phase 4 — the driven 15-minute tour
 
-Walk them through the reading order, *driving* it (read the file with them, point out the one thing that matters in each), not just linking. The beats, in order (full version in `references/tour-script.md`):
+Walk them through the reading order, *driving* it (read the file with them, point out the one thing that matters in each), not just linking. The beats, in order (full version in the premium reference):
 
 1. Root `CLAUDE.md` — the lean index (under one page; pointers, not content).
 2. `marketing/CLAUDE.md` — the workspace index: the PMM spine (icp / competitors / brand / positioning / messaging) + 5 execution workstreams.
@@ -145,7 +142,7 @@ If they don't have a target ready, don't let the momentum die: offer to run it o
 
 ## Phase 5.5 — hand them the operating manual
 
-They've just watched a file land. That's *what the system does*. This is *how to drive it* — `references/how-to-operate.md`, which also ships at the root of the quickstart repo as `HOW-TO-OPERATE.md`.
+They've just watched a file land. That's *what the system does*. This is *how to drive it* — the premium reference, which also ships at the root of the quickstart repo as `HOW-TO-OPERATE.md`.
 
 Don't read all seven habits in the session — it's a 15-minute read of its own and the momentum from Phase 5 is worth more. Point at it, then walk **two** sections live, because these are the two walls they hit first:
 

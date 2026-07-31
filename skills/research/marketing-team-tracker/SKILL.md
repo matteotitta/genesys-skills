@@ -25,7 +25,6 @@ inputs:
   required: []
   recommended:
   - signal-scan
-outputs:
 - type: temporal-signal-brief
   feeds_into:
   - content-strategy
@@ -34,7 +33,6 @@ outputs:
   - gtme-pulse
   - linkedin-weekly-content
 depends_on: []
-feeds_into:
 - content-strategy
 - marketing-ideas
 - thought-leadership
@@ -45,7 +43,6 @@ mcps_used:
 - exa
 - firecrawl
 - apify
-push_targets: []
 triggers:
   slash_commands:
   - /marketing-team-tracker
@@ -65,7 +62,7 @@ sources_count: 0
 
 Keep a living roster of the marketing teams worth stealing from, and harvest their best plays on demand. Each play is classified against five repeatable patterns, given a one-line "steal this", and filed in an append-only swipe file your content, ideation, and social skills can pull from. Knowledge type: `temporal-signal-brief` (per `.claude/rules/ontology.md`); maturity: emergent — each scan is fresh and time-bound, briefs are not locked.
 
-Seeded from Tom Orbach's "Marketing Ideas" roundup (the 9 teams he follows + the five patterns they share), cite-only — same precedent as `.claude/rules/linkedin-cold-dm-doctrine.md`. The roster + swipe file are ours; the seed is attributed in `references/seed-data.md`.
+Seeded from Tom Orbach's "Marketing Ideas" roundup (the 9 teams he follows + the five patterns they share), cite-only — same precedent as `.claude/rules/linkedin-cold-dm-doctrine.md`. The roster + swipe file are ours; the seed is attributed in the premium reference.
 
 Cousin to `/signal-scan` — that skill answers "what happened with one topic in N days." This one carries a *standing roster* of marketing teams, classifies what it finds against a *marketing-play taxonomy*, and *accumulates* a swipe file across runs. Distinct from `/marketing-ideas` (ideation from a brief — the tracker feeds it raw plays) and `/competitor-research` (a deep static dossier on a threat, not an inspiration source).
 
@@ -91,7 +88,7 @@ Do **NOT** invoke for:
 | Mode | What it does |
 |------|--------------|
 | `/marketing-team-tracker` (default) | Scan the canonical roster for plays shipped since each team's `last_scanned`; emit a dated brief + append to the swipe file. |
-| `--seed` | Bootstrap (or rebuild) the roster + swipe file from `references/seed-data.md`. Idempotent. |
+| `--seed` | Bootstrap (or rebuild) the roster + swipe file from the premium reference. Idempotent. |
 | `--client {slug}` | Layer that client's overlay roster (`roster/client-{slug}-roster.md`) on the base; route the brief to `projects/consulting/active/{slug}/content/strategy/`. |
 | `--team {name}` | Deep single-team scan (full surface sweep, ignores `last_scanned`). |
 | `--add {company}` / `--remove {company}` | Roster management — resolve surfaces for a new team, or retire one. |
@@ -118,12 +115,12 @@ Read first, every run (brain-first):
 
 ## The scan loop
 
-Six steps. Schemas in `references/`. Surface→tool mapping in `references/monitoring-surfaces.md`.
+Six steps. Schemas in the premium reference. Surface→tool mapping in the premium reference.
 
 1. **Read state (brain-first).** Load the roster, the per-team swipe files, and the scratchpad. Apply locked decisions; suppress named anti-patterns. Only scan for the gap since `last_scanned`.
 2. **Resolve each team's surfaces.** From the roster: the named operator's LinkedIn + the company page + blog/changelog + X handle. Resolve before searching — this is the step that turns a brand-name keyword dump into actual plays (borrowed from `/signal-scan`). If a surface isn't in the roster, resolve it once and write it back.
 3. **Scan since `last_scanned`.** Per team, sweep the resolved surfaces for marketing *moves* (campaigns, launches, stunts, positioning shifts, content series, community plays) shipped inside the `--days` window. Engagement-ranked, recency-decayed. Free discovery before metered extraction (`crawl-cost-discipline.md`); gate paid Apify (`apify-credits.md`).
-4. **Extract → classify → steal-this.** For each new play: name it, classify it against the five patterns (`references/play-patterns.md`), write a one-line "steal this" takeaway, and tag confidence + source URL + access date. No quote, no metric you can't cite → mark `[Not available]`, never invent (per `evidence-bound-outputs.md`).
+4. **Extract → classify → steal-this.** For each new play: name it, classify it against the five patterns (the premium reference), write a one-line "steal this" takeaway, and tag confidence + source URL + access date. No quote, no metric you can't cite → mark `[Not available]`, never invent (per `evidence-bound-outputs.md`).
 5. **Cross-team cluster.** Note where teams converge on the same pattern this cycle ("three teams ran a pick-a-fight play this month") — that convergence is the signal worth surfacing to Pulse.
 6. **Emit + persist.** Write the dated brief; append new plays to each `swipe-file/{team}.md`; bump each team's `last_scanned`; update the scratchpad with anything that should carry forward. Apply the thin-input guard before you ship.
 
@@ -133,7 +130,7 @@ The refresh discipline mirrors `/competitor-research`: read the existing swipe f
 
 ## The five patterns
 
-Every play classifies into one (occasionally two). Full rubric + worked examples in `references/play-patterns.md`.
+Every play classifies into one (occasionally two). Full rubric + worked examples in the premium reference.
 
 | Pattern | The move |
 |---------|----------|
@@ -142,26 +139,6 @@ Every play classifies into one (occasionally two). Full rubric + worked examples
 | **Community-as-distribution** | Turn the community into the distribution channel (Clay's certifications + Slack, Lovable's clippers, Cluely's creator army). |
 | **Weird-creative** | Creative so weird people share it for you (Cluely's blank billboards, Ramp's wrecking ball, Anthropic's coffee shop). |
 | **Pick-a-fight** | Pick a fight on purpose — a category, a competitor, a norm (Cluely's whole brand, Torq's "SOAR is Dead", tl;dv vs "bot-free"). |
-
----
-
-## Output contract
-
-Three artifacts per run, all filled from the canonical `references/brief-template.md`. Field schemas: `references/roster-schema.md`, `references/swipe-file-schema.md`.
-
-**1. The dated brief** — `MMYY-marketing-plays-brief.md` (or the client folder under `--client`). Sections:
-
-- **Headline** — the single most stealable play across the roster this cycle.
-- **Fresh plays** — new plays since last scan, ranked, grouped by team. Each: the play · pattern · steal-this · source + access date.
-- **Pattern watch** — which of the five patterns is trending across the roster this cycle (the cross-team cluster).
-- **Roster status** — per team: scanned date · plays added · "thin / dry" if nothing new.
-- **Coverage footer** — which surfaces ran, were thin, or were skipped. No silent truncation.
-
-**2. The swipe file** — append new plays to `swipe-file/{team}.md`, each entry carrying the `references/swipe-file-schema.md` frontmatter (team · pattern · steal-this · source · date). A play without a steal-this is a bookmark, not a swipe — drop it or write the why (`taste-library` rule).
-
-**3. The roster** — bump `last_scanned` per scanned team; write back any newly resolved surface.
-
-Voice + structure follow `output-tenets.md`, `output-simplicity.md`, `doc-output-structure.md`, `ai-speak-anti-patterns.md`. Source placement per `output-simplicity.md` § three-layer (internal-input brief keeps citations inline).
 
 ---
 
@@ -202,17 +179,6 @@ Default surfaces — Exa news + Firecrawl blog/LinkedIn-page/changelog — incur
 | `goal-driven-loops.md` | Probe one team before fanning out across the roster. |
 | `evidence-bound-outputs.md` | Cite the play or lower confidence — never invent the move or the metric. |
 | `output-tenets.md` · `output-simplicity.md` · `doc-output-structure.md` · `ai-speak-anti-patterns.md` | Brief voice + structure. |
-
----
-
-## References
-
-- `references/play-patterns.md` — the five-pattern rubric + classification rules + worked examples.
-- `references/roster-schema.md` — the roster file + per-team dimension schema.
-- `references/swipe-file-schema.md` — the swipe entry frontmatter + worked example.
-- `references/brief-template.md` — the canonical output skeleton (brief + swipe entry + roster row + thin-cycle variant) every run fills.
-- `references/monitoring-surfaces.md` — per-team surfaces, the entity-resolution checklist, default-on/off, credit gates.
-- `references/seed-data.md` — the seed teams + operator additions (~50 documented plays) + sources + steal-this lines (cite-only, Tom Orbach attribution).
 
 ---
 

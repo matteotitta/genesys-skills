@@ -17,18 +17,15 @@ inputs:
   - icp-research
   - positioning
   - win-loss-analysis
-outputs:
 - type: product-strategy
   feeds_into:
   - product-pulse
   - ship-learnings
 depends_on: []
-feeds_into:
 - product-pulse
 - ship-learnings
 owned_by_agent: product-manager
 mcps_used: []
-push_targets:
 - gdrive
 - notion
 triggers:
@@ -150,9 +147,6 @@ If you have >4, you're not focused. Cut. If you have <2, the strategy is probabl
 - [ ] No requirements / specs leaked in (K6: strategy ≠ PRD)
 - [ ] Refresh date scheduled
 
-## Output format
-
-```markdown
 # {Product name} — Product strategy
 
 **Locked:** {date} · **Stakeholder:** {name} · **Refresh:** {next date}
@@ -169,18 +163,12 @@ If you have >4, you're not focused. Cut. If you have <2, the strategy is probabl
 ## 4. Key metrics
 | Metric | Source | Target | By when |
 |---|---|---|---|
-| ... | ... | ... | ... |
+|... |... |... |... |
 
 ## 5. Tracks
 1. **{Track 1}** — {capability description}
-2. **{Track 2}** — ...
+2. **{Track 2}** —...
 ```
-
-## Push
-
-- `client_folder/strategy/MMYY-strategy-doc.md` (Genesys client work)
-- Or `projects/genesys/strategy/MMYY-{ship-slug}-strategy-doc.md` (Genesys-internal)
-- Push to GDoc per `.claude/rules/gdrive-protocol.md` for stakeholder review
 
 ## Composition rule reference
 

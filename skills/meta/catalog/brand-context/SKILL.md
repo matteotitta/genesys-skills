@@ -25,7 +25,6 @@ inputs:
   - brand-kit
   - competitor-research
   - company-context
-outputs:
 - type: claude-md-section
   feeds_into:
   - linkedin-weekly-content
@@ -36,7 +35,6 @@ outputs:
   - storytelling
   - thought-leadership
 depends_on: []
-feeds_into:
 - aeo-content
 - website-copy
 - linkedin-weekly-content
@@ -46,7 +44,6 @@ feeds_into:
 - youtube-scripts
 owned_by_agent: operator
 mcps_used: []
-push_targets:
 - gdrive
 - notion
 triggers:
@@ -67,7 +64,7 @@ Synthesise the "Voice & Messaging" section for a client's CLAUDE.md from existin
 
 The purpose: every content skill auto-loads the client CLAUDE.md. By adding a standardised "Voice & Messaging" section, content skills get instant access to voice rules, messaging anchors, and competitive context without re-asking the user.
 
-For full 3-phase process + DESIGN.md awareness rules → `references/process.md`.
+For full 3-phase process + DESIGN.md awareness rules → the premium reference.
 
 ---
 
@@ -123,7 +120,7 @@ If no upstream files exist: tell the user "No brand files found. Run `/tov-guide
 | **2. Extract** | Pull voice rules, vocabulary, messaging anchors, competitive quick-ref, key people | Section content (or MISSING markers) |
 | **3. Write** | Format via template, insert/replace in client CLAUDE.md, verify | Updated CLAUDE.md |
 
-For full per-phase steps, MISSING-marker conventions, and DESIGN.md awareness → `references/process.md`.
+For full per-phase steps, MISSING-marker conventions, and DESIGN.md awareness → the premium reference.
 
 ---
 
@@ -134,15 +131,6 @@ For full per-phase steps, MISSING-marker conventions, and DESIGN.md awareness �
 3. **No invented competitors.** Only include competitors from competitor-research files. Don't add from general knowledge.
 4. **Source tracing.** Every section must reference its source file.
 5. **Mark unknowns explicitly.** Use `[MISSING — run /[skill-name] first]` for any section that can't be populated.
-
----
-
-## Output Format
-
-This skill modifies an existing file (the client's CLAUDE.md), not a standalone document. After completion, report:
-- Which sections were populated vs. marked MISSING
-- Source files used
-- Whether this was a CREATE or UPDATE operation
 
 ---
 
@@ -165,15 +153,6 @@ This skill modifies an existing file (the client's CLAUDE.md), not a standalone 
 - [ ] All 7 subsections present (even if some are MISSING)
 - [ ] Sources subsection lists all files that were read
 - [ ] No other CLAUDE.md sections modified
-
----
-
-## Reference Files
-
-| File | Purpose |
-|------|---------|
-| `references/process.md` | Full 3-phase process (locate / extract / write) + DESIGN.md awareness rules |
-| `VOICE-MESSAGING-TEMPLATE.md` | Canonical template for the "Voice & Messaging" section |
 
 ---
 

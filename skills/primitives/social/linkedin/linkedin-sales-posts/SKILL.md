@@ -21,17 +21,14 @@ inputs:
   recommended:
   - tov-guidelines
   - linkedin-hooks
-outputs:
 - type: linkedin-post
   feeds_into:
   - linkedin-comment
 depends_on:
 - linkedin-content-guide
-feeds_into:
 - linkedin-comment
 owned_by_agent: content
 mcps_used: []
-push_targets:
 - notion
 triggers:
   slash_commands: []
@@ -103,7 +100,7 @@ Five distinct converting-post types. Each sells the same offer from a different 
 | 4 | Quote hook | "[Exact DM/quote from prospect]" | Answer to stated need | Mature audiences |
 | 5 | Objection-led | "[Metric]" → "[skeptic quote]" | Proof against skepticism | Skeptical audiences |
 
-**Selection guide, archetype-specific section modifications, full reference posts** → `references/archetypes.md` and `references/nick-broekema-sales-posts-analysis.md`.
+**Selection guide, archetype-specific section modifications, full reference posts** → the premium reference and the premium reference.
 
 ## Inputs
 
@@ -144,9 +141,9 @@ If inputs missing:
 1.6 Extract scarcity elements — real ONLY, or mark "OMIT SECTION 12"
 
 ### Phase 2: Post construction (12-section template)
-2.1 Generate 2-3 hook options for section 1 (formulas in `references/frameworks.md`)
+2.1 Generate 2-3 hook options for section 1 (formulas in the premium reference)
 2.2 Present hooks for user selection
-2.3 Write all 12 sections following `references/converting-post-template.md`
+2.3 Write all 12 sections following the premium reference
    - Sections 1-3: Hook → extension → ICP pain
    - Section 4: "Easter egg" — full offer in case study story (→ bullets for deliverables)
    - Sections 5-6: Stack value + show results
@@ -163,7 +160,7 @@ If inputs missing:
 3.4 Scarcity integrity — all real, or section 12 omitted
 3.5 Character count target 1,200-1,500 (acceptable 1,000-2,000)
 
-**Full step-by-step walkthrough, flowchart, checkpoints, anti-hallucination guardrails** → `references/process.md`.
+**Full step-by-step walkthrough, flowchart, checkpoints, anti-hallucination guardrails** → the premium reference.
 
 ## What good looks like
 
@@ -178,28 +175,9 @@ If inputs missing:
 - 1,000-2,000 chars; first 3 lines hook before the LinkedIn cut
 - Voice: operator-first, first-person, founder's actual voice (not template language)
 
-**Pre-output 5-dim refine rubric** (score 1-10 each before delivery; iterate any ≤6): hook strength, clarity, engagement potential, platform fit, authenticity. **Coach's quality gates, full self-evaluation protocol, output format spec, iteration prompts, downstream chain integration** → `references/quality-and-output.md`.
+**Pre-output 5-dim refine rubric** (score 1-10 each before delivery; iterate any ≤6): hook strength, clarity, engagement potential, platform fit, authenticity. **Coach's quality gates, full self-evaluation protocol, output format spec, iteration prompts, downstream chain integration** → the premium reference.
 
-**Anti-hallucination guardrails** (full list in `references/process.md`): never invent metrics, never fabricate scarcity, never invent client names or stories, never generate testimonial quotes, never inflate results.
-
-## Push
-
-After delivery, suggest:
-- Another converting post for a different case study
-- `linkedin-comment` — engagement strategy for responses to the post
-- DM response sequence for people who DM the trigger word
-- Carousel version of the post
-- Export to Notion (Content Database) or Scripe (scheduled post)
-
-**Reference files:**
-- `references/archetypes.md` — 5 archetypes + selection guide + section modifications
-- `references/frameworks.md` — 12-section template quick ref + easter egg + hook formulas + process transparency + qualification layering + scarcity patterns + future-pacing + CTA patterns
-- `references/process.md` — phase walkthrough, flowchart, checkpoints, anti-hallucination guardrails
-- `references/quality-and-output.md` — output format, quality checklist, 5-dim rubric, self-evaluation, iteration prompts, integration table, gotchas, changelog
-- `references/converting-post-template.md` — 12-section template with formulas, examples, mappings (existing)
-- `references/nick-broekema-sales-posts-analysis.md` — 6 full posts with pattern analysis (existing)
-
----
+**Anti-hallucination guardrails** (full list in the premium reference): never invent metrics, never fabricate scarcity, never invent client names or stories, never generate testimonial quotes, never inflate results.
 
 ## Final ship gate
 

@@ -21,7 +21,6 @@ inputs:
   - product-messaging
   - positioning
   recommended: []
-outputs:
 - type: launch-plan
   feeds_into:
   - website-copy
@@ -33,7 +32,6 @@ outputs:
 depends_on:
 - product-messaging
 - positioning
-feeds_into:
 - website-copy
 - email-nurture
 - webinar-brief
@@ -42,7 +40,6 @@ feeds_into:
 - storytelling
 owned_by_agent: growth
 mcps_used: []
-push_targets:
 - gdrive
 - notion
 triggers:
@@ -83,7 +80,6 @@ Architect and execute B2B SaaS product launches that drive sustained pipeline. L
 - User wants LinkedIn content only → use `linkedin-weekly-content` or `linkedin-content-guide`
 - User wants email copy only → answer directly or use `email-nurture`
 - User wants live event production only → use `webinar-brief`
-- User wants a single launch tactic in isolation → go directly to its template-spec in `references/` rather than running the full skill
 
 ---
 
@@ -121,7 +117,7 @@ If inputs are missing: offer to run `product-messaging` and/or `icp-behavioural`
 
 The old launch playbook is dead. Most marketers launch by writing "we're excited to announce" on LinkedIn, ticking off a channel checklist (Product Hunt / Hacker News / Reddit / LinkedIn / X), and wondering why their CEO asks "wait, did we even launch?" the following Monday.
 
-A great launch is built on the **tactics around** the launch — not the channel checklist. The skill encodes 16 tactics in `references/tactic-library.md`. Strategy phase picks 5–8 of them. Development phase derives assets **from the chosen tactics**, not from a default 18-asset list.
+A great launch is built on the **tactics around** the launch — not the channel checklist. The skill encodes 16 tactics in the premium reference. Strategy phase picks 5–8 of them. Development phase derives assets **from the chosen tactics**, not from a default 18-asset list.
 
 The order matters: tactics first, then assets. Reverse this and you're back to the channel checklist mentality.
 
@@ -168,13 +164,13 @@ If you've ever shipped something that got crickets, this skill fixes it. The tri
 
 ### Seasonal alignment
 
-Every launch happens in a cultural context. Check for adjacent cultural moments (±14 days from launch), score alignment fit (Strong/Medium/Weak/Negative), choose strategy (ride the wave, counter-program, ignore, or avoid), and adapt messaging (hooks, imagery, CTAs). See `references/seasonal-calendar.md`.
+Every launch happens in a cultural context. Check for adjacent cultural moments (±14 days from launch), score alignment fit (Strong/Medium/Weak/Negative), choose strategy (ride the wave, counter-program, ignore, or avoid), and adapt messaging (hooks, imagery, CTAs). See the premium reference.
 
 ---
 
 ## Tactic library — Strategy starts here
 
-Before anything else in the Strategy phase, pick 5–8 tactics from `references/tactic-library.md`. The 16-tactic menu covers waitlist, ambassador army, partner co-launch, channel-specific copy, founder personal posts, gamified drops, filtered giveaways, weird swag, audience-as-detective narratives, named versions, public roadmap voting, grandfather policy, teaser videos, live events, recap cadences, and 60-day relaunches.
+Before anything else in the Strategy phase, pick 5–8 tactics from the premium reference. The 16-tactic menu covers waitlist, ambassador army, partner co-launch, channel-specific copy, founder personal posts, gamified drops, filtered giveaways, weird swag, audience-as-detective narratives, named versions, public roadmap voting, grandfather policy, teaser videos, live events, recap cadences, and 60-day relaunches.
 
 Selection criteria: launch tier, audience size, ICP shape, resource constraints, existing community signal. The chosen tactics drive the Development phase asset list — **not** a default 18-asset checklist.
 
@@ -190,7 +186,7 @@ Most launches won't match a stack cleanly — combine across stacks. The 5–8 s
 
 ## Process
 
-The launch runs in three phases. Read `references/process.md` for the full step-by-step (5 strategy steps, 8 development steps, 4 deployment steps, plus per-phase checkpoints and the process flowchart).
+The launch runs in three phases. Read the premium reference for the full step-by-step (5 strategy steps, 8 development steps, 4 deployment steps, plus per-phase checkpoints and the process flowchart).
 
 Phase summary:
 
@@ -207,51 +203,6 @@ Phase summary:
 3. **Quote verbatim.** Customer quotes from ICP research only.
 4. **Mark placeholders clearly.** Use `[PLACEHOLDER: description]` for unconfirmed details.
 5. **Cite sources.** Link each asset to its input source.
-
----
-
-## Output
-
-Produce a single launch-package markdown file. Template + iteration prompts library: `references/output-format.md`.
-
-Pre-delivery quality checklist + worked example + anti-examples: `references/quality.md`.
-
-Auto-update protocol (feedback signals, pattern detection, skill-update template): `references/auto-update.md`.
-
----
-
-## Reference files
-
-| File | Purpose |
-|------|---------|
-| `references/tactic-library.md` | **The 16-tactic menu. Strategy phase picks 5–8 of these.** |
-| `references/process.md` | Full step-by-step across 3 phases + flowchart |
-| `references/output-format.md` | Launch package template + iteration prompts |
-| `references/quality.md` | Pre-delivery checklist + worked example + anti-examples |
-| `references/auto-update.md` | Feedback signal detection + pattern rules |
-| `references/strategy-template.md` | Complete strategy brief structure |
-| `references/seasonal-calendar.md` | Cultural moments and alignment |
-| `references/landing-page-spec.md` | Landing page requirements |
-| `references/channel-copy-spec.md` | Per-platform copy (LinkedIn / X / Reddit / HN / PH / others) — was `linkedin-series-spec.md` |
-| `references/email-announcement-spec.md` | Email templates |
-| `references/sales-enablement-spec.md` | Enablement templates |
-| `references/coordination-playbook.md` | RACI matrix and protocols |
-| `references/blog-post-spec.md` | Blog post requirements |
-| `references/founder-video-spec.md` | Founder video script + founder personal post + thought-leader ads |
-| `references/waitlist-sequence-spec.md` | Tactic 1 — 6-email waitlist sequence + landing page |
-| `references/ambassador-program-spec.md` | Tactic 2 — micro-influencer program rules + application form + payouts |
-| `references/partner-colaunch-spec.md` | Tactic 3 — partner brief + joint announcement copy + decision tree |
-| `references/gamification-spec.md` | Tactic 6 — drip-access codes + wave structure |
-| `references/giveaway-spec.md` | Tactic 7 — team challenges + post-win amplification |
-| `references/swag-spec.md` | Tactic 8 — weird swag framework + vendor brief |
-| `references/narrative-campaign-spec.md` | Tactic 9 — multi-chapter audience-as-detective campaigns |
-| `references/named-version-spec.md` | Tactic 10 — naming theme + lock-next-5 protocol |
-| `references/grandfather-policy-spec.md` | Tactic 12 — pricing/access grandfather policy + amplification |
-| `references/teaser-video-spec.md` | Tactic 13 — pre-launch teaser script + platform mix |
-| `references/live-event-spec.md` | Tactic 14 — RSVP + 60-min event structure + day-of checklist |
-| `references/recap-cadence-spec.md` | Tactic 15 — 8-format × 7-day post-launch squeeze |
-| `references/relaunch-calendar-spec.md` | Tactic 16 — 9-angle 60-day relaunch calendar |
-| `examples/` | Worked example launches |
 
 ---
 

@@ -19,14 +19,11 @@ review_gate: 0
 inputs:
   required: []
   recommended: []
-outputs:
 - type: runbook
   feeds_into: []
 depends_on: []
-feeds_into: []
 owned_by_agent: operator
 mcps_used: []
-push_targets:
 - gdrive
 - notion
 triggers:
@@ -45,7 +42,7 @@ effort: low
 
 Search your Claude Code session history instantly. Instead of starting from zero each conversation, recall what was discussed, decided, and built in past sessions.
 
-For full mode workflows (topic / temporal / client / decisions / stats), output formats, and indexer maintenance → `references/process.md`.
+For full mode workflows (topic / temporal / client / decisions / stats), output formats, and indexer maintenance → the premium reference.
 
 ---
 
@@ -79,7 +76,7 @@ For full mode workflows (topic / temporal / client / decisions / stats), output 
 | `/recall --memory [topic]` | Tier-boosted search across durable memory pages (G13) | topic |
 | `/recall --stats` | Index health stats (now includes memory page count + orphan count) | none |
 
-For full mode workflows + output formats → `references/process.md`.
+For full mode workflows + output formats → the premium reference.
 
 ### `--memory` mode (G13 — added 2026-05-23)
 
@@ -101,12 +98,12 @@ Memory pages with ≥3 incoming `[[link]]`s get an additional +0.1x backlink boo
 
 ```bash
 # Direct CLI use
-python3 .claude/hooks/session-indexer.py --memory "em-dash"
-python3 .claude/hooks/session-indexer.py --memory "outbound discipline"
+python3.claude/hooks/session-indexer.py --memory "em-dash"
+python3.claude/hooks/session-indexer.py --memory "outbound discipline"
 
 # Memory index updates incrementally on every default indexer run.
 # To force a memory-only reindex (e.g., after editing memory files):
-python3 .claude/hooks/session-indexer.py --index-memory
+python3.claude/hooks/session-indexer.py --index-memory
 ```
 
 **Output includes** the page type, title (parsed past YAML frontmatter), slug, tier_boost actually applied, incoming-link count badge (`←N`), and BM25 snippet.
@@ -135,10 +132,10 @@ Per G13 from the 2026-05-23 gbrain /steal — see [`.claude/discovery/0526-gbrai
 If DB doesn't exist, initialize it:
 
 ```bash
-cd "$CLAUDE_CODE_ROOT" && python3 .claude/hooks/session-indexer.py
+cd "$CLAUDE_CODE_ROOT" && python3.claude/hooks/session-indexer.py
 ```
 
-For full schema queries and advanced SQL → `references/process.md`.
+For full schema queries and advanced SQL → the premium reference.
 
 ---
 
@@ -161,14 +158,6 @@ The index uses porter stemming, so "positioning" matches "positioned", "position
 2. **Don't fabricate session content.** Only return what's in the index or readable from JSONL.
 3. **Loaded context stays focused.** When deep-loading a session, summarize what's relevant to the user's current task — not a full transcript dump.
 4. **Sessions can be partial.** If FTS returns 0 results, say so — don't synthesize from nothing.
-
----
-
-## Reference Files
-
-| File | Purpose |
-|------|---------|
-| `references/process.md` | Full mode workflows, output format examples, deep-load protocol, advanced SQL queries, indexer maintenance, LLM summaries |
 
 ---
 

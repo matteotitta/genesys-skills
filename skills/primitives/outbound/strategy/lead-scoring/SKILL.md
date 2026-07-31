@@ -21,7 +21,6 @@ inputs:
   recommended:
   - icp-research
   - company-context
-outputs:
 - type: lead-assessment
   feeds_into:
   - outreach-emails
@@ -29,7 +28,6 @@ outputs:
   - sales-enablement
   - client-discovery
 depends_on: []
-feeds_into:
 - abm-campaign
 - client-discovery
 - outreach-emails
@@ -38,7 +36,6 @@ owned_by_agent: operator
 mcps_used:
 - gdrive
 - notion
-push_targets:
 - gdrive
 - notion
 triggers:
@@ -72,23 +69,23 @@ Skip when: user wants full research without assessment angle (`/company-context`
 
 **Recommended (lift quality):** client ICP doc (`/icp-research`), CRM engagement history, competitor list, prior `/company-context` output.
 
-**Mode detection:** single account → deep assessment. Batch (5+ accounts) → lightweight pass + priority matrix. >15 accounts → calibration round + parallel waves (see `references/batch-workflow.md`).
+**Mode detection:** single account → deep assessment. Batch (5+ accounts) → lightweight pass + priority matrix. >15 accounts → calibration round + parallel waves (see the premium reference).
 
 If ICP doc missing: proceed with generic B2B SaaS criteria, flag as "generic ICP" in output, suggest `/icp-research` upstream.
 
 ## Steps
 
 1. **Validate input** — confirm company identifier(s), determine mode (single/batch), identify ICP reference.
-2. **Fit assessment (Phase 1)** — score firmographic, technographic, use case, negative-fit dimensions per `references/scoring-rubric.md` § Phase 1. Output verdict: STRONG_FIT | MODERATE_FIT | WEAK_FIT | NO_FIT with evidence + confidence per dimension.
-3. **Signal detection (Phase 2)** — catalog leadership, growth, intent, operational, engagement signals per `references/scoring-rubric.md` § Phase 2. Tag each with category, recency (strong/moderate/weak/expired per decay table), source URL, confidence level.
-4. **Apply recency decay** — drop expired signals from active inventory; weak-recency signals provide background only, don't drive routing. Decay table in `references/scoring-rubric.md` § Signal recency decay model.
+2. **Fit assessment (Phase 1)** — score firmographic, technographic, use case, negative-fit dimensions per the premium reference. Output verdict: STRONG_FIT | MODERATE_FIT | WEAK_FIT | NO_FIT with evidence + confidence per dimension.
+3. **Signal detection (Phase 2)** — catalog leadership, growth, intent, operational, engagement signals per the premium reference. Tag each with category, recency (strong/moderate/weak/expired per decay table), source URL, confidence level.
+4. **Apply recency decay** — drop expired signals from active inventory; weak-recency signals provide background only, don't drive routing. Decay table in the premium reference.
 5. **Interpret signal clusters (Phase 3)** — identify reinforcement, contradictions, dominant story. Write 2-4 sentence situation hypothesis: "Based on [cluster], [company] appears to be [situation]. This suggests [implication]. The window is [timeframe] because [decay reasoning]."
 6. **Confidence assessment** — rate HIGH (dense + fresh + diverse) | MODERATE (2 of 3) | LOW (sparse or stale).
-7. **Routing recommendation (Phase 4)** — apply fit × signals matrix in `references/scoring-rubric.md` § Phase 4. Output: SALES | MARKETING | MONITOR | EVALUATE | DEPRIORITIZE | DISQUALIFY + 2-3 sentence rationale + 1-3 specific next actions.
-8. **Optional — activation score** — if client wants auditable math: `signal_activation = strength × recency × fit × tier_weight`, sum top-3 per account, bucket into Hot/Warm/Nurture/Cold. Formula in `references/scoring-rubric.md` § Activation score formula.
-9. **Optional — tier mode (numeric)** — if client CRM needs a `lead_score` field or sales ops wants a single-column sort: compute weighted tier_score (0-5) and bucket Tier 1 / 2 / 3 / Disqualify. Formula + alignment-with-routing check in `references/scoring-rubric.md` § Tier scoring.
+7. **Routing recommendation (Phase 4)** — apply fit × signals matrix in the premium reference. Output: SALES | MARKETING | MONITOR | EVALUATE | DEPRIORITIZE | DISQUALIFY + 2-3 sentence rationale + 1-3 specific next actions.
+8. **Optional — activation score** — if client wants auditable math: `signal_activation = strength × recency × fit × tier_weight`, sum top-3 per account, bucket into Hot/Warm/Nurture/Cold. Formula in the premium reference.
+9. **Optional — tier mode (numeric)** — if client CRM needs a `lead_score` field or sales ops wants a single-column sort: compute weighted tier_score (0-5) and bucket Tier 1 / 2 / 3 / Disqualify. Formula + alignment-with-routing check in the premium reference.
 10. **Self-evaluation gate** — every signal has source + recency tag, fit dimensions have evidence (not assumption), interpretation reads as narrative not list, routing follows fit×signals matrix, gaps marked [UNAVAILABLE], confidence levels per ontology.
-11. **Format output** — single account: full template in `references/output-templates.md` § Single account. Batch: priority matrix template § Batch mode.
+11. **Format output** — single account: full template in the premium reference. Batch: priority matrix template.
 12. **Review gate (Level 1)** — present fit verdict, signal summary, situation hypothesis, routing recommendation. Actions: [Approve] [Challenge fit] [Add signals] [Change routing].
 13. **Suggest chain** — if SALES routing → `/outreach-emails`. If batch → `/abm-campaign`. If fit uncertain → `/company-context`. If no ICP → `/icp-research`.
 
@@ -98,10 +95,6 @@ When the fit rubric or ICP rules are **derived from a client's own customers** (
 
 ## What good looks like
 
-**References (read in order):**
-- `references/scoring-rubric.md` — full taxonomy (fit dimensions, signal categories, recency decay, routing matrix, activation formula, tier scoring formula, research sources)
-- `references/output-templates.md` — single account + batch mode templates
-- `references/batch-workflow.md` — 5–15 standard batch, >15 calibration + parallel waves, inputs/triggers, upstream/downstream skill relationships, gotchas
 - `projects/research/taste-library/resources/0626-sales-qualification-frameworks/health-rubrics.md` — deal-health (10-dim) + account-health (9-dim) rubrics; bolt onto fit+signal scoring when the account is an open opportunity, not just a prospect (re-weight per client motion)
 
 **Examples:** none baked into skill (every assessment is account-specific). Pull patterns from `projects/consulting/{client}/sales/` lead-assessment outputs when present.
@@ -121,18 +114,6 @@ When the fit rubric or ICP rules are **derived from a client's own customers** (
 - Score with no routing recommendation
 - Months-old signals treated as fresh
 - Employee count as primary fit indicator (revenue model, tech stack, growth trajectory often matter more)
-
-## Push
-
-- File path: `projects/consulting/{client}/sales/MMYY-{company-or-batch-name}-lead-assessment.md`
-- Frontmatter: `status: review` until approved → `status: locked` after team review (per `.claude/rules/orchestration-patterns.md` § Orchestration mechanics → Lock-down state)
-- Append entry to `projects/consulting/{client}/history.md` with date + accounts scored + routing tier counts
-- For sales-handoff batches: also push to client GDoc via `node .claude/mcp/gdrive/create-doc-unified.mjs {file} "{Client}" --client {slug}` — routes to `client_folder/sales/`
-- Notion (if Pipeline Database active for client): push individual rows via `mcp__claude_ai_Notion__notion-create-pages`
-- If routing → SALES: chain to `/outreach-emails` with situation hypothesis as personalization input
-- If batch tiers ready: chain to `/abm-campaign` with batch routing matrix as tier mapping
-
----
 
 ## Final ship gate
 

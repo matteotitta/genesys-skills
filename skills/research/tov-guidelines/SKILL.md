@@ -22,7 +22,6 @@ inputs:
   required: []
   recommended:
   - company-context
-outputs:
 - type: tov-analysis
   feeds_into: []
 - type: tov-guidelines
@@ -33,7 +32,6 @@ outputs:
   - sales-enablement
   - outreach-emails
 depends_on: []
-feeds_into:
 - website-copy
 - linkedin-weekly-content
 - outreach-emails
@@ -43,7 +41,6 @@ owned_by_agent: researcher
 mcps_used:
 - exa
 - firecrawl
-push_targets:
 - gdrive
 - notion
 triggers:
@@ -101,41 +98,21 @@ Two phases. Phase 1 outputs `tov-analysis.md`. User reviews. Phase 2 outputs `to
 9. **Generate voice-in-action examples** — generic → on-brand transformations, drawn from actual scraped text (never invented).
 10. **Identify inconsistencies** — flag conflicts (e.g., homepage uses "I", pricing uses "we") for Phase 2 resolution.
 11. **Document gaps** — what couldn't be determined; suggest founder interview questions.
-12. **Write `tov-analysis.md`** using `references/analysis-template.md` (44-section canonical scaffold; compact alternative in same file).
+12. **Write `tov-analysis.md`** using the premium reference (44-section canonical scaffold; compact alternative in same file).
 13. **Present to user — Review gate.** User must confirm patterns, correct misidentifications, and answer gap questions before Phase 2.
 
 ### Phase 2 — Generation
 
 14. **Incorporate user feedback** — apply corrections, resolve inconsistencies, fill gaps with founder answers.
-15. **Generate `tov-guidelines.md`** using `references/tov-template.md` — primary reader, tone attributes with before/after, pattern library with LLM guidance, vocabulary lists, structure templates, anti-patterns. **Always include an AI-speak anti-patterns section — select ≥5 relevant rows per `references/ai-speak-anti-patterns.md` and embed them inline with the client's own examples, stripping row numbers and internal paths so the client's doc stands alone.**
-15a. **Append the 'We Are / We Are Not' table** per `references/we-are-templates.md` Template 1. Source every row from Phase 1 evidence; mark confidence per row; overall confidence is the worst of any row. Minimum 5 rows, maximum 8.
+15. **Generate `tov-guidelines.md`** using the premium reference — primary reader, tone attributes with before/after, pattern library with LLM guidance, vocabulary lists, structure templates, anti-patterns. **Always include an AI-speak anti-patterns section — select ≥5 relevant rows per the premium reference and embed them inline with the client's own examples, stripping row numbers and internal paths so the client's doc stands alone.**
+15a. **Append the 'We Are / We Are Not' table** per the premium reference Template 1. Source every row from Phase 1 evidence; mark confidence per row; overall confidence is the worst of any row. Minimum 5 rows, maximum 8.
 15b. **Append the tone-by-context matrix** per Template 2. Cover the 7 default contexts (cold outbound, nurture, objection-handling, sales-call follow-up, support reply, case study, social post). Add or split rows for client-specific contexts.
 15c. **Append the open-questions list** per Template 3. Minimum 3 questions, each with a "Why it matters" line naming the downstream unblock.
 16. **Add source attribution** — every guideline traces to a source URL; frequency scores carried forward; unresolved gaps marked "TBD — requires founder input".
-17. **Self-evaluate** per `references/self-evaluation.md` (completeness, evidence, guardrails, self-roast). Surface improvement prompts to user when checks fail.
-18. **Save approved output as reference example** if user explicitly approves — see `references/auto-update-protocol.md`.
+17. **Self-evaluate** per the premium reference (completeness, evidence, guardrails, self-roast). Surface improvement prompts to user when checks fail.
+18. **Save approved output as reference example** if user explicitly approves — see the premium reference.
 
 ## What good looks like
-
-### References
-
-- `references/process-flowchart.md` — full two-phase visual flowchart with review gate
-- `references/content-analysis-guide.md` — pattern extraction framework (site discovery, scraping, scoring)
-- `references/analysis-template.md` — Phase 1 output structure (44-section canonical + compact alternative scaffold)
-- `references/tov-template.md` — Phase 2 output structure (canonical + compact alternative scaffold)
-- `references/founder-interview-questions.md` — questions to fill gaps from scraping
-- `references/quality-checklist.md` — pre-delivery verification (Phase 1 + Phase 2)
-- `references/ai-speak-anti-patterns.md` — how to select ≥5 AI-speak rows from the catalog and embed them inline in every TOV output
-- `references/we-are-templates.md` — three Phase 2 output templates: We Are / We Are Not table + tone-by-context matrix + open-questions list. Source: 2026-05-17 MCP Market /steal Item B.
-- `references/self-evaluation.md` — completeness + evidence + guardrail checks, self-roast questions, improvement prompts
-- `references/auto-update-protocol.md` — feedback signal detection, save-as-reference flow, pattern detection rules
-- `references/integration-map.md` — feeds-into / receives-from skill graph + chain sequences
-
-### Examples
-
-- `examples/genesys-growth-analysis-example.md` — complete Phase 1 worked example (includes inline "what good looks like" excerpt)
-- `examples/genesys-growth-guidelines-example.md` — complete Phase 2 worked example
-- `references/examples/` — user-approved TOV outputs from prior runs (auto-populated by approval flow)
 
 ### Evaluations
 
@@ -146,24 +123,6 @@ A TOV output passes when:
 - [ ] Every guideline traces to a source URL.
 - [ ] All examples are from actual scraped text (no invented illustrative examples).
 - [ ] Inconsistencies explicitly flagged, not papered over; gaps documented with founder questions.
-- [ ] Phase 2 carries an AI-speak anti-patterns section: ≥5 rows selected from the catalog per `references/ai-speak-anti-patterns.md`, each embedded with an example from this client's own material, no row numbers or internal paths left in.
 - [ ] No adjective-only descriptions ("friendly", "professional"); no vague guidelines ("use conversational language").
 - [ ] All 6 critical questions answered: who reads / what tone sounds like / patterns repeat vs vary / words used / structure / what to refuse.
 
-## Push
-
-After delivery, offer downstream chains:
-
-- "Want me to apply this TOV to landing-page-copy?"
-- "Ready to generate linkedin-content with this voice?"
-- "Should I run product-messaging with these guidelines as voice contract?"
-- "Should I analyze competitor voice for differentiation contrast?"
-
-If user signals approval ("great guidelines", "this captures our voice"): offer to save as reference example per `references/auto-update-protocol.md`.
-
-If user corrects patterns: log the correction. After 3+ similar corrections across runs, propose a SKILL.md update.
-
-**Reads from upstream:** `company-context` (positioning), `win-loss-analysis` (how team actually speaks), `competitor-research` (differentiation contrast).
-**Feeds into:** landing-page-copy, linkedin-content, product-messaging, sales-enablement, outreach-emails, aeo-content, thought-leadership, newsletter. Full graph: `references/integration-map.md`.
-
-**MCP substrate:** Firecrawl (`firecrawl_scrape`) for page content; YouTube `get_transcript` for founder spoken voice if videos exist; Exa `web_search_exa` for external brand content. Fallbacks: WebFetch, manual transcript analysis, WebSearch (flag as data gap).

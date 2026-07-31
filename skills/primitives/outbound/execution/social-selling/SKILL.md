@@ -19,17 +19,14 @@ inputs:
   required:
   - linkedin-content-guide
   recommended: []
-outputs:
 - type: outreach-sequence
   feeds_into: []
 depends_on:
 - linkedin-content-guide
-feeds_into: []
 owned_by_agent: content
 mcps_used:
 - apollo-io
 - exa
-push_targets:
 - gdrive
 - notion
 triggers:
@@ -100,14 +97,14 @@ Output complies with:
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│   1. POST CONTENT         2. TRACK SIGNALS        3. OUTREACH   │
-│   Content attracts  ───►  Who engages?     ───►   Reach out     │
-│   ICP attention           Profile views           with context  │
-│                           Post likes/comments                   │
-│                           Website visits                        │
-│                                                                 │
-│                    4. CONVERT TO PIPELINE                       │
-│                    DM → Call → Deal                             │
+│ 1. POST CONTENT 2. TRACK SIGNALS 3. OUTREACH │
+│ Content attracts ───► Who engages? ───► Reach out │
+│ ICP attention Profile views with context │
+│ Post likes/comments │
+│ Website visits │
+│ │
+│ 4. CONVERT TO PIPELINE │
+│ DM → Call → Deal │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
@@ -196,9 +193,9 @@ Minimum TWE total: 4 (out of 7) before automating.
 
 ## Process
 
-**Five-phase flow:** Account health check → Signal identification & prioritization → Play selection & message crafting → Self-evaluation → Review gate. Full step-by-step + tool stack details + MCP integration in `references/process.md`.
+**Five-phase flow:** Account health check → Signal identification & prioritization → Play selection & message crafting → Self-evaluation → Review gate. Full step-by-step + tool stack details + MCP integration in the premium reference.
 
-**12 warm plays + 4 cold-start plays (with Phase 0 connection protocol) + voice notes + no-brainer offer + technographic + multi-channel amplification** in `references/plays.md`. Cold-start plays consume [`linkedin-cold-dm-doctrine.md`](../../../../../rules/linkedin-cold-dm-doctrine.md).
+**12 warm plays + 4 cold-start plays (with Phase 0 connection protocol) + voice notes + no-brainer offer + technographic + multi-channel amplification** in the premium reference. Cold-start plays consume [`linkedin-cold-dm-doctrine.md`](../../../../../rules/linkedin-cold-dm-doctrine.md).
 
 ---
 
@@ -212,15 +209,9 @@ Minimum TWE total: 4 (out of 7) before automating.
 
 ---
 
-## Output Format
-
-Outreach sequences include signal context, account safety pre-check, customized templates per play, multi-channel handoff plan, and tracking fields. Full template + iteration prompts + variant guide in `references/output-format.md`.
-
----
-
 ## Quality
 
-Pre-outreach checks cover message quality (under 75 words, signal reference, no pitch), account safety (limits, single automation tool), targeting (ICP fit verified separately), and TWE pre-qualification. Worked example (picking play for pricing-page signal) + anti-examples (generic cold-DM, pitch in first message, multi-tool stacking, ignoring 2026 InMail caps) + post-launch failure-mode triage in `references/quality.md`.
+Pre-outreach checks cover message quality (under 75 words, signal reference, no pitch), account safety (limits, single automation tool), targeting (ICP fit verified separately), and TWE pre-qualification. Worked example (picking play for pricing-page signal) + anti-examples (generic cold-DM, pitch in first message, multi-tool stacking, ignoring 2026 InMail caps) + post-launch failure-mode triage in the premium reference.
 
 ---
 
@@ -233,18 +224,6 @@ Pre-outreach checks cover message quality (under 75 words, signal reference, no 
 | **linkedin-content-guide-founders** | Parent program | Social selling is Phase 4 of the founder program |
 | **outreach-emails** | Downstream | Add engaged prospects to email sequences |
 | **company-context** | Research | Prospect's company before outreach |
-
----
-
-## Reference Files
-
-| File | Purpose |
-|------|---------|
-| `references/process.md` | Five-phase flowchart + LinkedIn Automation Tool Stack + MCP integration |
-| `references/plays.md` | 12 warm plays + 4 cold-start plays (signal-zero) + Phase 0 connection protocol + voice notes + no-brainer offer + technographic + multi-channel amplification |
-| `references/output-format.md` | Outreach sequence template + iteration prompts + common variants |
-| `references/quality.md` | Pre-outreach checklist + worked example (pricing-page signal) + anti-examples + failure-mode triage |
-| `references/auto-update.md` | Self-evaluation protocol + feedback signals (LinkedIn policy changes drive updates) |
 
 ---
 

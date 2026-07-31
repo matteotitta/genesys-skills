@@ -20,13 +20,11 @@ review_gate: 2
 inputs:
   required: []
   recommended: []
-outputs:
 - type: client-engagement
   feeds_into:
   - client-proposals
   - client-onboarding
 depends_on: []
-feeds_into:
 - client-proposals
 - client-onboarding
 owned_by_agent: b2b-consultant
@@ -34,7 +32,6 @@ mcps_used:
 - apollo-io
 - exa
 - firecrawl
-push_targets:
 - gdrive
 - notion
 triggers:
@@ -96,7 +93,7 @@ Three steps:
 2. Generate tailored questions across 8 categories
 3. Add listening cues + qualification criteria
 
-Full flowchart, step-by-step runbook, and self-evaluation gate live in `references/process.md`.
+Full flowchart, step-by-step runbook, and self-evaluation gate live in the premium reference.
 
 ---
 
@@ -150,7 +147,7 @@ Full flowchart, step-by-step runbook, and self-evaluation gate live in `referenc
 | **Resources and constraints** | Budget, team, decision-makers | "What's the budget range you're working with?" | 3-5 min |
 | **Timeline and next steps** | Urgency, process | "When do you need to see results?" | 3-5 min |
 
-Full question bank by category in `references/discovery-framework.md`.
+Full question bank by category in the premium reference.
 
 ---
 
@@ -160,26 +157,6 @@ Full question bank by category in `references/discovery-framework.md`.
 2. **Tailor questions to findings.** Reference specific things you observed.
 3. **Mark assumptions.** If inferring from limited data, note explicitly.
 4. **No invented details.** If you can't find funding info, don't make it up.
-
----
-
-## Output
-
-Output template, iteration prompts, and the post-call action list live in `references/output-format.md`.
-
-Pre-delivery checklist + worked example + anti-examples in `references/quality.md`.
-
----
-
-## Reference files
-
-| File | Purpose |
-|------|---------|
-| `references/discovery-framework.md` | Full question bank by category |
-| `references/process.md` | Detailed flowchart + step-by-step runbook |
-| `references/output-format.md` | Output template + iteration prompts |
-| `references/quality.md` | Pre-delivery checklist + worked example + anti-examples |
-| `references/auto-update.md` | Feedback signals + pattern detection rules |
 
 ---
 

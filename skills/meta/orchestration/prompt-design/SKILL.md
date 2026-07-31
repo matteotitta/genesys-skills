@@ -20,14 +20,11 @@ review_gate: 0
 inputs:
   required: []
   recommended: []
-outputs:
 - type: runbook
   feeds_into: []
 depends_on: []
-feeds_into: []
 owned_by_agent: operator
 mcps_used: []
-push_targets:
 - gdrive
 - notion
 triggers:
@@ -45,7 +42,7 @@ effort: medium
 
 Generate reusable prompts using the 7-section architecture for B2B SaaS marketing deliverables.
 
-For full process flowchart and step-by-step → `references/process.md`.
+For full process flowchart and step-by-step → the premium reference.
 
 ---
 
@@ -145,16 +142,16 @@ Match the user's request to the appropriate reference file:
 
 | Category | Use cases | Reference file |
 |----------|-----------|----------------|
-| Research | Competitor, persona, win/loss | `references/research-prompts.md` |
-| Social | LinkedIn, X, carousels | `references/social-prompts.md` |
-| Long-form | Blog, articles | `references/long-form-prompts.md` |
-| Landing pages | Homepage, persona, use case | `references/landing-page-prompts.md` |
-| Launch | Product announcements | `references/launch-prompts.md` |
-| Sales | Decks, battlecards | `references/sales-prompts.md` |
-| Positioning | Frameworks, canvases | `references/positioning-workflow-prompts.md` |
-| Founder content | Thought leadership | `references/founder-content-prompts.md` |
-| AEO | Comparison, definition, how-to | `references/aeo-content-prompts.md` |
-| Distribution | Channel distribution | `references/distribution-prompts.md` |
+| Research | Competitor, persona, win/loss | the premium reference |
+| Social | LinkedIn, X, carousels | the premium reference |
+| Long-form | Blog, articles | the premium reference |
+| Landing pages | Homepage, persona, use case | the premium reference |
+| Launch | Product announcements | the premium reference |
+| Sales | Decks, battlecards | the premium reference |
+| Positioning | Frameworks, canvases | the premium reference |
+| Founder content | Thought leadership | the premium reference |
+| AEO | Comparison, definition, how-to | the premium reference |
+| Distribution | Channel distribution | the premium reference |
 
 ---
 
@@ -165,38 +162,6 @@ Match the user's request to the appropriate reference file:
 3. **Include quality gates.** Every prompt needs verification criteria.
 4. **Reference existing patterns.** Check reference files before creating new.
 5. **Test variable completeness.** Ensure all needed inputs are captured.
-
----
-
-## Output, Quality, and Auto-Update
-
-| Topic | Reference |
-|-------|-----------|
-| Output template + iteration prompts + downstream handoff | `references/output-format.md` |
-| Pre-delivery checklist + worked example + anti-examples + quality gate | `references/quality.md` |
-| Feedback signals + pattern detection + skill update format + iteration cadence | `references/auto-update.md` |
-
----
-
-## Reference Files
-
-| File | Purpose |
-|------|---------|
-| `references/process.md` | Full process flowchart, step-by-step, self-review protocol |
-| `references/output-format.md` | Single-prompt output template, iteration prompts, handoff |
-| `references/quality.md` | Pre-delivery checklist, worked example, anti-examples |
-| `references/auto-update.md` | Feedback detection, pattern triggers, update format |
-| `references/prompt-architecture.md` | Full 7-section template canonical spec |
-| `references/research-prompts.md` | Competitor, persona, win/loss prompts |
-| `references/social-prompts.md` | LinkedIn, X, carousel prompts |
-| `references/long-form-prompts.md` | Blog, article prompts |
-| `references/landing-page-prompts.md` | Homepage, persona page prompts |
-| `references/launch-prompts.md` | Product launch prompts |
-| `references/sales-prompts.md` | Deck, battlecard prompts |
-| `references/positioning-workflow-prompts.md` | Positioning workflow |
-| `references/founder-content-prompts.md` | Thought leadership prompts |
-| `references/aeo-content-prompts.md` | SEO/AEO content prompts |
-| `references/distribution-prompts.md` | Distribution prompts |
 
 ---
 

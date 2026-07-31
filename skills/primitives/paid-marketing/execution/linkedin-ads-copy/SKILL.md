@@ -25,17 +25,14 @@ inputs:
   - product-messaging
   - icp-behavioural
   - competitor-research
-outputs:
 - type: linkedin-ads-copy
   feeds_into:
   - ad-creative-brief
 depends_on:
 - paid-campaign-strategy
-feeds_into:
 - ad-creative-brief
 owned_by_agent: content
 mcps_used: []
-push_targets:
 - gdrive
 triggers:
   slash_commands: []
@@ -139,7 +136,7 @@ Hooks must be genuinely distinct across the three variants — *different angles
 
 ## Process
 
-**Four-phase flow:** Funnel-stage selection → Copy generation (3 variants per ad, character verification) → Targeting + budget mapping → Verification + structured output. Full flowchart, ad-format spec table, hook patterns per stage, targeting AND/OR logic, and competitive displacement playbook in `references/process.md`.
+**Four-phase flow:** Funnel-stage selection → Copy generation (3 variants per ad, character verification) → Targeting + budget mapping → Verification + structured output. Full flowchart, ad-format spec table, hook patterns per stage, targeting AND/OR logic, and competitive displacement playbook in the premium reference.
 
 ---
 
@@ -153,15 +150,9 @@ Hooks must be genuinely distinct across the three variants — *different angles
 
 ---
 
-## Output Format
-
-Per-campaign markdown table with three variants (intro / headline / description / CTA), targeting spec, audience size, daily budget. Per-card carousel format. Conversation Ad message-flow format. Iteration prompts + downstream handoff in `references/output-format.md`.
-
----
-
 ## Quality
 
-Self-evaluation checklist (character compliance, variant distinctiveness, funnel logic, voice rules), anti-examples (close-enough char counts, paraphrase variants, TOFU with hard CTA, title-AND-skill targeting), failure-mode triage (low CTR / CPC spikes / under-performing carousels) in `references/quality.md`.
+Self-evaluation checklist (character compliance, variant distinctiveness, funnel logic, voice rules), anti-examples (close-enough char counts, paraphrase variants, TOFU with hard CTA, title-AND-skill targeting), failure-mode triage (low CTR / CPC spikes / under-performing carousels) in the premium reference.
 
 ---
 
@@ -183,17 +174,6 @@ Self-evaluation checklist (character compliance, variant distinctiveness, funnel
 | `ad-creative-brief` | Visual direction per format (image/video/carousel) |
 | `paid-ads-audit` | Baseline copy reference for performance review |
 | `landing-page-copy` | Headline alignment for ad → page consistency |
-
----
-
-## Reference Files
-
-| File | Purpose |
-|------|---------|
-| `references/process.md` | Four-phase flowchart + ad-format spec table + funnel-stage hook patterns + targeting AND/OR logic + competitive displacement |
-| `references/output-format.md` | Standard / Carousel / Conversation Ad output schemas + iteration prompts + downstream handoff |
-| `references/quality.md` | Self-evaluation checklist + anti-examples + quality gate + failure-mode triage |
-| `references/auto-update.md` | Self-evaluation protocol + feedback signals + format-spec drift check + targeting evidence refresh |
 
 ---
 

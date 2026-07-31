@@ -16,21 +16,11 @@ inputs:
   recommended:
     - paid-campaign-strategy
     - brand-kit
-outputs:
-  - type: experiment-log
-    feeds_into:
-      - paid-ads-audit
-      - paid-campaign-strategy
 depends_on: []
-feeds_into:
-  - paid-ads-audit
-  - paid-campaign-strategy
 owned_by_agent: paid
 mcps_used:
   - google-ads
   - google-ads-write
-push_targets:
-  - gdrive
 triggers:
   slash_commands:
     - /google-ads-weekly
@@ -54,10 +44,8 @@ Reads a Google Ads search account, proposes a ranked change list, applies what i
 ## Doctrine inherited
 
 - **[`google-ads-spend.md`](../../../../rules/google-ads-spend.md)** gates every write. Preview before mutate, confirm before spend, deletes refused, 200-mutation batch cap, read back after writing. Non-negotiable.
-- **[`quantitative-evidence-floors.md`](../../../../rules/quantitative-evidence-floors.md)** governs whether the data supports a call at all. This is the load-bearing rule for a small account: at £1,500/mo a single week is a few hundred pounds and a handful of conversions, which is below the floor for any kill decision. The weekly/28-day lever split in `references/levers.md` exists entirely because of this.
 - **[`pii-redaction.md`](../../../../rules/pii-redaction.md)** applies to search-terms data, which is free text people typed into a search box and routinely carries names, employers and phone numbers.
 - **[`output-simplicity.md`](../../../../rules/output-simplicity.md)** caps the Slack update. It is a skim artifact for senior readers, so one screen, not a metrics dump.
-- **[`persuasion-and-stickiness.md`](../../../../rules/persuasion-and-stickiness.md)** binds only where lever 9 touches RSA assets. This skill does not generate ad copy: it flags which assets are underperforming and hands off to `/google-ads-copy`, which owns the Cialdini + SUCCESs pass. Where a replacement asset is proposed inline, that rule's pre-ship gate applies to it, and the client's banned-claim list applies first. Lever 9 scores *which* text angle to refresh via the [angle matrix](../ad-creative-brief/references/angle-matrix.md) before the handoff.
 
 ## When to use
 
@@ -88,13 +76,13 @@ Read the client workflow file, the paid strategy doc, and `goals/` for targets. 
 
 ### Phase 1 — Pull
 
-Run the queries in `references/queries.md` against the **read** server, or parse the pasted export. Persist the raw pull to the client's `paid/execution/` and keep only a summary in context, per `context-management.md`.
+Run the queries in the premium reference against the **read** server, or parse the pasted export. Persist the raw pull to the client's `paid/execution/` and keep only a summary in context, per `context-management.md`.
 
 Redact PII from search terms before the data is stored or shared.
 
 ### Phase 2 — Propose
 
-Run the ten levers in `references/levers.md`. For each finding, produce: the lever, the evidence, the proposed change, the tier it falls in under `google-ads-spend.md`, and **the volume behind it**. Rank by expected impact on cost per conversion.
+Run the ten levers in the premium reference. For each finding, produce: the lever, the evidence, the proposed change, the tier it falls in under `google-ads-spend.md`, and **the volume behind it**. Rank by expected impact on cost per conversion.
 
 State the floor next to every verdict. A keyword with 4 clicks and no conversions is not a loser, it is unmeasured. Say that rather than proposing a pause.
 
@@ -144,11 +132,4 @@ State these rather than working around them:
 Run `/premortem --output` before ship. See `.claude/skills/meta/orchestration/premortem/SKILL.md` for the 5 execution domains and output template.
 
 For the Slack update specifically, also run the `output-simplicity.md` §10 pre-ship check: right length for a senior reader, no robot tells, sources placed correctly for a client-team artifact.
-
-## References
-
-- `references/levers.md` — the ten levers, their thresholds, and the weekly / 28-day split
-- `references/queries.md` — the GAQL queries behind each lever
-- `references/output-format.md` — Slack update and cycle record formats
-- `references/sample-payload.json` — synthetic payload for testing before credentials land
 

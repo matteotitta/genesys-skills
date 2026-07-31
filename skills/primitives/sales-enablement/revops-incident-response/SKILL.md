@@ -25,20 +25,17 @@ inputs:
   - revops
   - funnel-strategy
   - icp-research
-outputs:
 - type: revops-incident-report
   feeds_into:
   - email-nurture
   - funnel-strategy
 depends_on: []
-feeds_into:
 - email-nurture
 - funnel-strategy
 - lifecycle
 owned_by_agent: sales
 mcps_used:
 - hubspot
-push_targets:
 - gdrive
 triggers:
   slash_commands:
@@ -88,7 +85,7 @@ This exists because it already went wrong. ClientCo's [`0226-funnel-analysis.md`
 
 That is this phase, written by the client's own analysis, in advance.
 
-**Check five things** (detail + thresholds → `references/process.md`):
+**Check five things** (detail + thresholds → the premium reference):
 
 1. **Unassigned deals** — what share have no owner? Is that real self-serve or missing automation?
 2. **Defunct stages** — is any stage still in the schema but dead in practice? (ClientCo: *"the MQL stage is effectively defunct since the HubSpot migration"*.)
@@ -122,7 +119,7 @@ Redact before you reason: end-client names, emails, phones, account numbers → 
 
 For each stalled lead, trace across systems and answer *why this one*.
 
-**Sources:** CRM stage history (what moved, when, and what didn't) + call transcripts. Parse transcripts with the existing adapter spec at `research/win-loss/references/transcript-adapters.md` — WebVTT / SRT / **Gong** / Fireflies / Otter / Grain / generic JSON / plaintext. Don't rebuild it. (Granola arrives via MCP as a delivery source, not a sniffed format.)
+**Sources:** CRM stage history (what moved, when, and what didn't) + call transcripts. Parse transcripts with the existing adapter spec at `research/win-loss/the premium reference — WebVTT / SRT / **Gong** / Fireflies / Otter / Grain / generic JSON / plaintext. Don't rebuild it. (Granola arrives via MCP as a delivery source, not a sniffed format.)
 
 **Every root cause cites a verbatim quote + speaker**, per [`evidence-bound-outputs.md`](../../../../rules/evidence-bound-outputs.md). No quote → mark `[INFERRED: from X + Y]` or drop the claim. Never invent the reason a deal stalled.
 
@@ -138,7 +135,7 @@ Root cause: pricing, not fit — "we'd need sign-off above 20k and I can't get t
 
 ## Phase 3 — Triage (branch → fix-time → Day-0/1/14)
 
-Aggregate the per-lead causes, then decide. Five branches — full trees, thresholds, and fix-time estimates → `references/triage-tree.md`:
+Aggregate the per-lead causes, then decide. Five branches — full trees, thresholds, and fix-time estimates → the premium reference:
 
 | Branch | Fires when the per-lead causes cluster on… | First action |
 |---|---|---|
@@ -187,7 +184,7 @@ Hand off by branch: nurture gap → `/email-nurture` or `/lifecycle` · qualific
 
 ## Quality checks (pre-output)
 
-Full gate → `references/quality.md`. The load-bearing five:
+Full gate → the premium reference. The load-bearing five:
 
 - [ ] Phase 0 emitted an explicit verdict **before** any leak claim. A HALT emitted no leak verdict at all.
 - [ ] Detection names actual leads. If the output is a percentage, it's an audit — start over.
@@ -201,22 +198,9 @@ Full gate → `references/quality.md`. The load-bearing five:
 
 Run `/premortem --output` before ship. See [`/premortem` skill](../../../meta/orchestration/premortem/SKILL.md) for the 5 execution domains and output template.
 
-Then run `/scope-guardian-reviewer` — the client-deliverable ship gate: scope-creep check on proposals/SOWs (pm-loop.md § lens-reviewer). Live-CRM findings invite scope sprawl; this is the gate that catches "while we're in here…".
+Then run `/scope-guardian-reviewer` — the client-deliverable ship gate: scope-creep check on proposals/SOWs (pm-loop.md). Live-CRM findings invite scope sprawl; this is the gate that catches "while we're in here…".
 
 Trivial-case escape: `## Premortem\nNo failure modes — trivial change` satisfies the contract for genuinely trivial outputs.
-
----
-
-## Reference files
-
-| File | Purpose |
-|---|---|
-| `references/process.md` | Five phases in detail — Phase 0 checks + thresholds, SLA table, HubSpot query patterns, redaction pass |
-| `references/triage-tree.md` | The 5 branches — symptoms, first action, fix-time estimates, Day-0/1/14 sequences, hand-offs |
-| `references/quality.md` | Full pre-output gate + anti-examples |
-| [`../revops/SKILL.md`](../revops/SKILL.md) | The audit half this skill pairs with |
-| [`../../../../rules/audit-triage-pairing.md`](../../../../rules/audit-triage-pairing.md) | The contract this skill satisfies |
-| `../../../research/win-loss/references/transcript-adapters.md` | Transcript parsing — reused, not rebuilt |
 
 ---
 

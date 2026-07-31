@@ -19,16 +19,13 @@ review_gate: 0
 inputs:
   required: []
   recommended: []
-outputs:
 - type: runbook
   feeds_into:
   - quickstart-onboarding
 depends_on: []
-feeds_into:
 - quickstart-onboarding
 owned_by_agent: operator
 mcps_used: []
-push_targets: []
 triggers:
   slash_commands:
   - /level
@@ -49,12 +46,12 @@ disable-model-invocation: false
 
 **Situation.** Most people using Claude Code have no idea how much of it they're actually using — they type prompts into a terminal and stop there, or they've built a deep system and can't see the gaps. **Complication.** There's no honest, repeatable way to answer "how good is my setup, really, and what's the single next thing to build?" Generic "10 levels of AI" lists don't measure Claude Code specifically, and self-assessment drifts. **Question.** Where are you on the Claude Code mastery curve, and what's the one move that levels you up? **Answer.** This skill scores you 0-10 on a ladder calibrated to the 4 systems pillars, benchmarked against the most advanced documented setup + the latest Anthropic features, then hands you a focused roadmap and a shareable dashboard.
 
-This is NOT the generic "10 levels of Claude" (browser, desktop, projects). It's specifically Claude Code mastery. Level 0 is "just installed it." Level 10 is genuinely rare — it's the documented ceiling in `references/benchmark.md`.
+This is NOT the generic "10 levels of Claude" (browser, desktop, projects). It's specifically Claude Code mastery. Level 0 is "just installed it." Level 10 is genuinely rare — it's the documented ceiling in the premium reference.
 
 ```
 Pick a front door → Score it → Show the roadmap → Render dashboard → Build first step
-       ↓                ↓             ↓                ↓                  ↓
-   quiz or scan    0-10 + 4 pillars  next level only  HTML (shareable)  optional
+       ↓ ↓ ↓ ↓ ↓
+   quiz or scan 0-10 + 4 pillars next level only HTML (shareable) optional
 ```
 
 Designed to be re-run. Every time you level up, the score updates.
@@ -81,11 +78,11 @@ If no flag: use `--mode beginner` and offer both front doors ("Want the quick **
 
 ## Phase 1 — pick a front door, then score
 
-Both doors converge on the same result: a level (0-10) + a 0-4 sub-score per pillar. Read `references/levels.md` for the ladder, the 4-pillar mapping, and the scoring rules ("highest level meeting ALL criteria"). It is the source of truth for both doors.
+Both doors converge on the same result: a level (0-10) + a 0-4 sub-score per pillar. Read the premium reference for the ladder, the 4-pillar mapping, and the scoring rules ("highest level meeting ALL criteria"). It is the source of truth for both doors.
 
 ### Phase 1a — Quiz (default in beginner mode)
 
-Read `references/quiz.md` for the question bank + the answer→(level band + pillar) scoring map.
+Read the premium reference for the question bank + the answer→(level band + pillar) scoring map.
 
 1. Ask the ~8 questions using `AskUserQuestion` (one tool call, multiple questions, clean clickable options). Keep it fast and fun.
 2. Map each answer to its pillar + level band per the scoring map.
@@ -94,7 +91,7 @@ Read `references/quiz.md` for the question bank + the answer→(level band + pil
 
 ### Phase 1b — Scan (default in internal mode)
 
-Silently inspect the environment — do NOT ask permission per check, just read what's available. Use the scan checklist in `references/levels.md`. Cover: CLAUDE.md (all locations + depth), `.claude/skills` + `.claude/commands` (count + complexity), MCP config (`.mcp.json` + user config + plugins — count + categories), memory/rules/ontology depth, hooks + agents (quality-gate + orchestration signals), headless/SDK + plugin signals, browser MCPs, worktrees + `/workflows`, scheduled/background agents.
+Silently inspect the environment — do NOT ask permission per check, just read what's available. Use the scan checklist in the premium reference. Cover: CLAUDE.md (all locations + depth), `.claude/skills` + `.claude/commands` (count + complexity), MCP config (`.mcp.json` + user config + plugins — count + categories), memory/rules/ontology depth, hooks + agents (quality-gate + orchestration signals), headless/SDK + plugin signals, browser MCPs, worktrees + `/workflows`, scheduled/background agents.
 
 Then ask the 3 context questions:
 1. What do you mainly use Claude Code for?
@@ -105,7 +102,7 @@ Determine the level via the calibrated scoring table in `levels.md`. **Quantity 
 
 ### Converge — present the assessment
 
-Anchor the ceiling using `references/benchmark.md`: Level 10 = the documented most-advanced setup + every current Anthropic-native feature. Present, in the mode's voice:
+Anchor the ceiling using the premium reference: Level 10 = the documented most-advanced setup + every current Anthropic-native feature. Present, in the mode's voice:
 
 - The level number + its fun name + one-line vibe.
 - The dual lens: a quick per-pillar read (which of Context / Skills / Integrations / Orchestration is strong, which is the gap).
@@ -122,7 +119,7 @@ If `--assess`, stop here. Otherwise continue.
 
 ## Phase 2 — the roadmap (next level only)
 
-Show ONLY the next-level transition — focus is everything, don't dump all 10. Read the matching section in `references/roadmaps.md` for the assessed level and present its 3-4 steps with time estimates, recalibrated to current Anthropic-native features (plugins, `/workflows`, subagents, hooks, scheduled agents, the Agent SDK, output styles, worktrees, the memory tool).
+Show ONLY the next-level transition — focus is everything, don't dump all 10. Read the matching section in the premium reference for the assessed level and present its 3-4 steps with time estimates, recalibrated to current Anthropic-native features (plugins, `/workflows`, subagents, hooks, scheduled agents, the Agent SDK, output styles, worktrees, the memory tool).
 
 ---
 
@@ -132,7 +129,7 @@ Always produce output after Phase 1 (+ Phase 2 unless `--assess`). Pick the shap
 
 ### HTML dashboard (`--format html`, default — or `both`)
 
-1. Read `references/dashboard-template.html`.
+1. Read the premium reference.
 2. **Resolve the brand.** Pick the brand kit (a DESIGN.md with token frontmatter):
    - `--brand-kit <path>` given → read that file. `--brand-kit none` → skip to the template's dark defaults.
    - else `--mode internal` → `projects/genesys/brand/0626-brand-kit.md` (the latest `*-brand-kit.md` under `projects/genesys/brand/`).
@@ -165,7 +162,7 @@ echo '{"level":N,"name":"<level name>","vibe":"<vibe line>",
 "pillars":{"Context":c,"Skills":s,"Integrations":i,"Orchestration":o},
 "takeaway":["short line 1 (≤48 chars)","line 2","line 3"],
 "brand_name":"<from brand kit name>","brand_url":"<from brand kit domain>"}' \
-  | python3 references/ascii-card.py
+  | python3 the premium reference
 ```
 
 It prints the card and saves `~/Desktop/claude-code-level.txt`. Then **also paste the card inline in a fenced code block** so the user can copy it straight from chat. `brand_name`/`brand_url` come from the resolved brand kit's `name` + domain (ASCII is monochrome — brand presence is the wordmark, not colour). Keep `takeaway` to 2-3 lines ≤48 chars each.
@@ -174,7 +171,7 @@ It prints the card and saves `~/Desktop/claude-code-level.txt`. Then **also past
 
 ## Phase 3 — build it now (optional)
 
-Ask: "Want me to build the first step of your roadmap right now?" If yes, execute the matching build step in `references/build-steps.md` for the assessed level (create the CLAUDE.md, wire the first MCP, write the first skill, scaffold memory, upgrade a skill to multi-phase, write the first headless script, etc.). Adapt to the person — don't paste templates verbatim. If no, end on the roadmap summary.
+Ask: "Want me to build the first step of your roadmap right now?" If yes, execute the matching build step in the premium reference for the assessed level (create the CLAUDE.md, wire the first MCP, write the first skill, scaffold memory, upgrade a skill to multi-phase, write the first headless script, etc.). Adapt to the person — don't paste templates verbatim. If no, end on the roadmap summary.
 
 If the person scores 0-2 and wants a guided ramp, point them at `/quickstart` — it onboards them onto the marketing-quickstart framework and gets them to Level 2-3 fast.
 

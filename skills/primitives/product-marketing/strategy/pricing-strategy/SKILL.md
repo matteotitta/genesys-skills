@@ -21,14 +21,12 @@ inputs:
   - product-messaging
   - icp-behavioural
   - competitor-research
-outputs:
 - type: pricing-strategy-document
   feeds_into:
   - website-copy
   - sales-enablement
   - product-messaging
 depends_on: []
-feeds_into:
 - website-copy
 - product-messaging
 - sales-enablement
@@ -37,7 +35,6 @@ mcps_used:
 - exa
 - gdrive
 - notion
-push_targets:
 - gdrive
 - notion
 triggers:
@@ -55,13 +52,13 @@ effort: high
 
 # Pricing strategy
 
-Develop a data-informed B2B SaaS pricing strategy through customer research, competitive analysis, and structured framework application. Output guides pricing decisions, tier structure, value metric selection, and pricing page optimization. Knowledge type: `pricing-strategy` (per `.claude/rules/ontology.md`); maturity: emergent → validated after team review → canonical when locked. Visual phase map + triggers + input checklist → `references/process-flowchart.md`.
+Develop a data-informed B2B SaaS pricing strategy through customer research, competitive analysis, and structured framework application. Output guides pricing decisions, tier structure, value metric selection, and pricing page optimization. Knowledge type: `pricing-strategy` (per `.claude/rules/ontology.md`); maturity: emergent → validated after team review → canonical when locked. Visual phase map + triggers + input checklist → the premium reference.
 
 ## When to run
 
-Invoke when the user asks for: `pricing strategy for [product/company]`, `help me figure out pricing for [product]`, `how should I price [product]?`, `Van Westendorp analysis for [product]`, `MaxDiff for feature prioritization`, `design pricing tiers for [product]`, `what's the right value metric for [product]?`, `pricing page optimization for [company]`, `compare competitor pricing in [category]`. Do **NOT** invoke for: pricing page copy only (use `/landing-page-copy` — run this first if strategy needed), competitor research only (use `/competitor-research`), product messaging only (use `/product-messaging`), or quick single-element questions (answer directly without full framework). Full trigger + invocation rules → `references/process-flowchart.md`.
+Invoke when the user asks for: `pricing strategy for [product/company]`, `help me figure out pricing for [product]`, `how should I price [product]?`, `Van Westendorp analysis for [product]`, `MaxDiff for feature prioritization`, `design pricing tiers for [product]`, `what's the right value metric for [product]?`, `pricing page optimization for [company]`, `compare competitor pricing in [category]`. Do **NOT** invoke for: pricing page copy only (use `/landing-page-copy` — run this first if strategy needed), competitor research only (use `/competitor-research`), product messaging only (use `/product-messaging`), or quick single-element questions (answer directly without full framework). Full trigger + invocation rules → the premium reference.
 
-**The Iron Law:** no pricing recommendation without source verification. Every competitor price cites URL + access date. Price points are ranges, never single points of false precision. Customer willingness data is collected (Van Westendorp / MaxDiff) or explicitly marked as `[Customer research required]` — never invented. Full guardrails → `references/quality-gates.md`.
+**The Iron Law:** no pricing recommendation without source verification. Every competitor price cites URL + access date. Price points are ranges, never single points of false precision. Customer willingness data is collected (Van Westendorp / MaxDiff) or explicitly marked as `[Customer research required]` — never invented. Full guardrails → the premium reference.
 
 ## Inputs
 
@@ -88,37 +85,21 @@ If product name is missing, ask. If current pricing status is ambiguous (new pro
 
 ## Steps
 
-1. **Validate inputs** → confirm product name + current pricing status + research mode. Pull upstream skill outputs (competitor-research, icp-behavioural, product-messaging, positioning) into context if available. Skip Exa/Firecrawl pulls if competitor-research already covers pricing depth (per `references/iteration-prompts.md` MCP table).
+1. **Validate inputs** → confirm product name + current pricing status + research mode. Pull upstream skill outputs (competitor-research, icp-behavioural, product-messaging, positioning) into context if available. Skip Exa/Firecrawl pulls if competitor-research already covers pricing depth (per the premium reference MCP table).
 2. **Phase 1.1 — Competitive pricing analysis** → research 3-5 direct competitors' pricing pages via `web_fetch_exa` (per `.claude/rules/exa-protocol.md`). Document pricing model, tiers, price points, value metrics. Flag public pricing vs. "contact sales". Output: competitive pricing matrix with URLs + access dates.
-3. **Phase 1.2 — Value metric analysis** → identify what competitors charge for (seats / usage / features / flat / hybrid). Score options against Value Metric Selection framework (`references/frameworks.md`): alignment, predictability, growth-friendly, measurable, competitive. Output: ranked options with pros/cons.
-4. **Phase 1.3 — Customer willingness research design** → design Van Westendorp survey (4 questions: too cheap / cheap / expensive / too expensive). Identify target segments + sample size (100+). Methodology details → `references/van-westendorp-guide.md` (and `references/frameworks.md` summary). Output: survey ready for deployment.
-5. **Phase 1.4 — Feature value ranking design** → design MaxDiff study (4-5 features per set, MOST/LEAST important rotation). Identify features to test (50+ respondents minimum). Methodology → `references/maxdiff-guide.md`. Output: study ready for deployment.
-6. **Phase 2.1 — Tier structure design** → apply Good-Better-Best framework (`references/frameworks.md`). Define feature fencing per tier across usage / access / feature gates / support levels. Establish upgrade triggers (usage 80%, team growth, feature request, success/maturity). Output: tier structure with rationale.
+3. **Phase 1.2 — Value metric analysis** → identify what competitors charge for (seats / usage / features / flat / hybrid). Score options against Value Metric Selection framework (the premium reference): alignment, predictability, growth-friendly, measurable, competitive. Output: ranked options with pros/cons.
+4. **Phase 1.3 — Customer willingness research design** → design Van Westendorp survey (4 questions: too cheap / cheap / expensive / too expensive). Identify target segments + sample size (100+). Methodology details → the premium reference (and the premium reference summary). Output: survey ready for deployment.
+5. **Phase 1.4 — Feature value ranking design** → design MaxDiff study (4-5 features per set, MOST/LEAST important rotation). Identify features to test (50+ respondents minimum). Methodology → the premium reference. Output: study ready for deployment.
+6. **Phase 2.1 — Tier structure design** → apply Good-Better-Best framework (the premium reference). Define feature fencing per tier across usage / access / feature gates / support levels. Establish upgrade triggers (usage 80%, team growth, feature request, success/maturity). Output: tier structure with rationale.
 7. **Phase 2.2 — Price point recommendations** → develop ranges per tier (never single points). Document confidence level + rationale per range. Anchor against competitive prices and (if available) Van Westendorp PMC-PME range. Output: price recommendations with ranges.
-8. **Phase 2.3 — Pricing page optimization** → select 3-5 experiments from canonical library (`references/frameworks.md` — annual default, savings %, tier count, enterprise visibility, comparison table, social proof, "most popular" badge, price ending, free trial CTA, per-seat framing). Define A/B hypotheses + success metrics + copy recommendations.
+8. **Phase 2.3 — Pricing page optimization** → select 3-5 experiments from canonical library (the premium reference — annual default, savings %, tier count, enterprise visibility, comparison table, social proof, "most popular" badge, price ending, free trial CTA, per-seat framing). Define A/B hypotheses + success metrics + copy recommendations.
 9. **Apply attribution standards** → per `.claude/rules/ontology.md`: `[VERIFIED: exa_search, {url}, accessed {YYYY-MM-DD}]`, `[INFERRED: from X + Y]`, `[ESTIMATED: reasoning]`, `[UNAVAILABLE]`. Quality threshold for client-deliverable strategy outputs: ≥60% verified, ≤10% estimated.
-10. **Self-evaluate against quality gates** → `references/quality-gates.md`. Run completeness, evidence-quality, and guardrail checks. Answer self-roast questions honestly. If invented WTP data found → strip and replace with `[Customer research required]`.
-11. **Write to client folder** per output template → `references/output-template.md`. File path: `{client}/pricing/MMYY-pricing-strategy.md` (or per client CLAUDE.md folder map). Header includes skill name, generated date, font (Inter), version. Include data gaps section + recommended next steps.
+10. **Self-evaluate against quality gates** → the premium reference. Run completeness, evidence-quality, and guardrail checks. Answer self-roast questions honestly. If invented WTP data found → strip and replace with `[Customer research required]`.
+11. **Write to client folder** per output template → the premium reference. File path: `{client}/pricing/MMYY-pricing-strategy.md` (or per client CLAUDE.md folder map). Header includes skill name, generated date, font (Inter), version. Include data gaps section + recommended next steps.
 12. **Push** to Notion (Pricing Strategy Database) and Google Docs (`client_folder/strategy/`) per push targets in frontmatter. Refresh runs UPDATE existing pages — don't duplicate.
-13. **Offer iteration prompts** post-delivery → `references/iteration-prompts.md`. Surface refinement / expansion / quality offers based on data gaps detected in step 10.
+13. **Offer iteration prompts** post-delivery → the premium reference. Surface refinement / expansion / quality offers based on data gaps detected in step 10.
 
 ## What good looks like
-
-### References
-
-- **Process flowchart + triggers + inputs** → `references/process-flowchart.md` — ASCII visual of full execution path (input validation → research → strategy → self-eval → review gate → chain suggestions), per-phase walkthroughs, trigger phrases, do-not-invoke rules, input validation checklist.
-- **Frameworks** → `references/frameworks.md` — Van Westendorp PSM (4 questions, PMC/PME/IPP/OPP intersections, acceptable range), MaxDiff Best-Worst Scaling (rotation logic, 0-100 importance scoring), Good-Better-Best tier framework (feature fencing principles, upgrade triggers), Value Metric Selection (5-dimension scoring), 10-experiment Pricing Page library.
-- **Van Westendorp full methodology** → `references/van-westendorp-guide.md` — question phrasing, cumulative distribution analysis, sample size guidance, segment cuts.
-- **MaxDiff full methodology** → `references/maxdiff-guide.md` — set design, rotation algorithms, importance score calculation, sample size + feature count guidance.
-- **Output template** → `references/output-template.md` — full markdown template with executive summary, 6 sections (competitive analysis → value metric → research design → tier structure → pricing page → data gaps), iteration prompts, skill improvement notes.
-- **Quality gates** → `references/quality-gates.md` — Iron Law, 6 anti-hallucination guardrails, pre-delivery checklist (research/strategy/format), self-evaluation protocol with completeness/evidence/guardrail checks, 5 self-roast questions, improvement-suggestion templates.
-- **Iteration prompts + integration + MCP + changelog** → `references/iteration-prompts.md` — post-delivery refinement/expansion/quality offers, feeds-into / receives-from tables, recommended workflow sequences (new product / optimization), MCP data integration (Exa + Firecrawl conditional pulls), Exa research protocol, changelog.
-
-### Examples
-
-- **DataPulse SaaS analytics** → `references/examples.md` — pre-launch product-analytics platform vs. Amplitude / Mixpanel / Heap; demonstrates range-based pricing ($49-79/mo Starter), feature-fencing rationale (10K events as natural expansion moment), and competitive anchoring discipline.
-- **Anti-patterns table** → `references/examples.md` — false precision ($99/mo single point), invented WTP data, no competitive context, arbitrary tier fencing, ignored value metric. Each paired with the correct approach.
-- **User-approved client outputs** → `references/examples/` — capture positively-reviewed pricing strategies as templates for future runs.
 
 ### Evaluations (binary pass/fail before declaring "done")
 
@@ -135,16 +116,9 @@ If product name is missing, ask. If current pricing status is ambiguous (new pro
 - No invented willingness-to-pay numbers — every WTP claim either cites primary research or is marked `[Customer research required]`.
 - Output title is `# Pricing strategy: [Product Name]` exactly — no aliases.
 
-## Push
-
-- **Google Docs** → `client_folder/strategy/` (per-client GDrive folder via `.claude/mcp/gdrive/create-doc-unified.mjs --client {slug}`). Branded doc; refresh runs UPDATE the existing doc rather than duplicating.
-- **Notion** → `Pricing Strategy Database` (per-client). Refresh runs UPDATE the existing page (`mcp__claude_ai_Notion__notion-update-page`) — don't duplicate.
-
-Integration map (feeds-into / receives-from / recommended chains) + MCP integration table + Exa research protocol + changelog → `references/iteration-prompts.md`.
-
 ## Pre-slim original
 
-Pre-slim SKILL.md (774 lines, v1.0) archived at `.claude/skills/_archive/pricing-strategy/SKILL-pre-slim-20260429.md`. See `references/iteration-prompts.md` ("Changelog") for the v1.1 entry documenting the slim.
+Pre-slim SKILL.md (774 lines, v1.0) archived at `.claude/skills/_archive/pricing-strategy/SKILL-pre-slim-20260429.md`. See the premium reference ("Changelog") for the v1.1 entry documenting the slim.
 
 ---
 

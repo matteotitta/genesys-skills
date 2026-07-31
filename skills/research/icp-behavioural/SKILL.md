@@ -21,7 +21,6 @@ inputs:
   required: []
   recommended:
   - company-context
-outputs:
 - type: icp-behavioural
   feeds_into:
   - positioning
@@ -32,7 +31,6 @@ outputs:
   - sales-enablement
   - competitor-research
 depends_on: []
-feeds_into:
 - aeo-content
 - competitor-research
 - website-copy
@@ -43,7 +41,6 @@ feeds_into:
 owned_by_agent: researcher
 mcps_used:
 - exa
-push_targets:
 - gdrive
 - notion
 triggers:
@@ -69,7 +66,7 @@ Build behavioral buyer personas from website data, sales calls, and review signa
 
 ## When to run
 
-**Two modes** (full diagram → `references/process-flowchart.md`):
+**Two modes** (full diagram → the premium reference):
 
 - **Mode 1 — Build:** First run for a new company. Produces persona cards saved as artifacts. Phases 1, 2, 3, 5, 6.
 - **Mode 2 — Simulate:** Independent re-runs against any URL (different page, competitor site, post-redesign). Reuses saved persona cards. Phase 4 only.
@@ -91,7 +88,7 @@ Build behavioral buyer personas from website data, sales calls, and review signa
 | **Website URL** (Mode 1) | Primary company website to research | User specification |
 | **Target URL + persona cards** (Mode 2) | Page to simulate + previously saved personas | User + Mode 1 output |
 
-### Optional (improve enrichment tier — see `references/enrichment-tiers.md`)
+### Optional (improve enrichment tier — see the premium reference)
 
 | Input | Enrichment Impact | Accepted Formats |
 |-------|-------------------|------------------|
@@ -119,55 +116,29 @@ If inputs are missing, ask for the website URL. State the enrichment tier and co
 
 ## Steps
 
-1. **Phase 1 — Input + tier assessment.** Validate URL, fetch source pages (`/customers`, `/case-studies`, `/pricing`, `/integrations`, G2, LinkedIn hiring), assess Tier 1-4, declare confidence ceiling, extract raw data, normalize attributes, process transcripts. Full procedure → `references/steps/phase-1-input.md`.
-2. **Phase 2 — ICP foundation.** Define core use case, build firmographics + technographics, calculate TAM/SAM/SOM/ICP, define segments + negative ICP, identify intent signals. Full procedure → `references/steps/phase-2-icp-foundation.md`.
-3. **Phase 3 — Synthetic persona construction.** For each key persona (3-5 total — Champion + Economic Buyer per segment): build the 14-field card (Identity / Behavioral / Friction layers + Evidence), apply sales call enrichment, assign skepticism scores + friction attributes, map DMU for enterprise deals. Full procedure → `references/steps/phase-3-persona-construction.md`. Field schema → `references/persona-card-schema.md`. Bias mitigation → `references/bias-mitigation.md`.
-4. **Phase 5 — Prompt bank (AEO bridge).** Generate 15-30 prompts per persona across awareness / consideration / decision intent levels using persona vocabulary; deduplicate, prioritize, map top 10 to content pieces. Full procedure → `references/steps/phase-5-prompt-bank.md`. Templates → `references/prompt-bank-templates.md`.
-5. **Phase 6 — Self-evaluation.** Run completeness, evidence quality, behavioral specificity checks; run self-roast questions; flag weak areas before delivery. Full procedure → `references/steps/phase-6-self-evaluation.md`.
+1. **Phase 1 — Input + tier assessment.** Validate URL, fetch source pages (`/customers`, `/case-studies`, `/pricing`, `/integrations`, G2, LinkedIn hiring), assess Tier 1-4, declare confidence ceiling, extract raw data, normalize attributes, process transcripts. Full procedure → the premium reference.
+2. **Phase 2 — ICP foundation.** Define core use case, build firmographics + technographics, calculate TAM/SAM/SOM/ICP, define segments + negative ICP, identify intent signals. Full procedure → the premium reference.
+3. **Phase 3 — Synthetic persona construction.** For each key persona (3-5 total — Champion + Economic Buyer per segment): build the 14-field card (Identity / Behavioral / Friction layers + Evidence), apply sales call enrichment, assign skepticism scores + friction attributes, map DMU for enterprise deals. Full procedure → the premium reference. Field schema → the premium reference. Bias mitigation → the premium reference.
+4. **Phase 5 — Prompt bank (AEO bridge).** Generate 15-30 prompts per persona across awareness / consideration / decision intent levels using persona vocabulary; deduplicate, prioritize, map top 10 to content pieces. Full procedure → the premium reference. Templates → the premium reference.
+5. **Phase 6 — Self-evaluation.** Run completeness, evidence quality, behavioral specificity checks; run self-roast questions; flag weak areas before delivery. Full procedure → the premium reference.
 6. **Review gate (Level 2).** Present summary, enrichment tier, key personas, top gaps. Actions: Approve / Request changes / Run simulation now.
-7. **Phase 4 — Website simulation (Mode 2).** Each persona evaluates target URL through 7 lenses (Clarity, Relevance, Proof, Objection handling, Language match, Next step clarity, Trust signals); run skeptical mode; generate per-persona conversion likelihood + ranked friction + recommendations. Full procedure → `references/steps/phase-4-website-simulation.md`. Scoring rubric → `references/simulation-framework.md`.
+7. **Phase 4 — Website simulation (Mode 2).** Each persona evaluates target URL through 7 lenses (Clarity, Relevance, Proof, Objection handling, Language match, Next step clarity, Trust signals); run skeptical mode; generate per-persona conversion likelihood + ranked friction + recommendations. Full procedure → the premium reference. Scoring rubric → the premium reference.
 8. **Save persona cards** to client folder as artifacts. Offer immediate Mode 2 simulation or chain forward.
-9. **Assemble output** using `references/output-template.md` (Mode 1 = full template; Mode 2 = sections 4 + 5 only).
+9. **Assemble output** using the premium reference (Mode 1 = full template; Mode 2 = sections 4 + 5 only).
 
-**Research substrate:** Exa per `.claude/rules/exa-protocol.md`. Primary tool: `web_search_exa` with `site:reddit.com` / `site:g2.com` filters for voice samples. Citation: `[VERIFIED: exa_search, {url}, accessed {YYYY-MM-DD}]`. Quality gate: ≥3 sources per major claim, ≥50% verified, date filter on "recent / latest" claims. Full integration map → `references/integrations.md`.
+**Research substrate:** Exa per `.claude/rules/exa-protocol.md`. Primary tool: `web_search_exa` with `site:reddit.com` / `site:g2.com` filters for voice samples. Citation: `[VERIFIED: exa_search, {url}, accessed {YYYY-MM-DD}]`. Quality gate: ≥3 sources per major claim, ≥50% verified, date filter on "recent / latest" claims. Full integration map → the premium reference.
 
-**Search patterns** (research queries inherited + new behavioral queries) → `references/search-patterns.md`.
+**Search patterns** (research queries inherited + new behavioral queries) → the premium reference.
 
-**Dimension schemas** (TAM methodology, firmographics, technographics, VOC, customer proof points, segments, sorting rules, intent signals) → `references/dimension-schemas.md`.
+**Dimension schemas** (TAM methodology, firmographics, technographics, VOC, customer proof points, segments, sorting rules, intent signals) → the premium reference.
 
-**Skeptical buyer simulator** (merged 2026-04-29 protocol) → `references/skeptical-buyer-simulator-merged-2026-04-29.md`.
+**Skeptical buyer simulator** (merged 2026-04-29 protocol) → the premium reference.
 
 ## What good looks like
 
-### References
-
-- `references/persona-card-schema.md` — 14-field persona card definitions and normalization rules
-- `references/simulation-framework.md` — 7-lens scoring rubric and skeptical mode protocol
-- `references/search-patterns.md` — Research queries (inherited from ICP + new behavioral queries)
-- `references/enrichment-tiers.md` — Tier definitions, confidence ceilings, upgrade paths
-- `references/bias-mitigation.md` — Anti-sycophancy protocols, friction modeling
-- `references/prompt-bank-templates.md` — Prompt generation patterns per intent level
-- `references/dimension-schemas.md` — TAM methodology, firmographics, technographics, VOC, customer proof points, segments, sorting rules, intent signals
-- `references/skeptical-buyer-simulator-merged-2026-04-29.md` — Merged skeptical buyer protocol
-- `references/process-flowchart.md` — Full two-mode + phase flow diagram
-- `references/output-template.md` — Mode 1 + Mode 2 output structure
-- `references/quality-gates.md` — Pre-delivery checklist + anti-hallucination guardrails + core frameworks
-- `references/integrations.md` — Upstream/downstream skill chain + MCP data sources + Exa substrate
-- `references/chain-suggestions.md` — Post-output prompts for Mode 1 / Mode 2
-- `references/skill-auto-update.md` — Feedback signal capture
-- `references/gotchas-changelog.md` — Common failure modes + version history
-- `references/steps/phase-{1,2,3,4,5,6}-*.md` — Per-phase procedural detail
-
-### Examples
-
-- `references/examples/example-champion-cdp.md` — Reference Growth Engineer persona (Segment CDP, Tier 3) + anti-examples
-- `references/examples/example-strapi.md` — Strapi worked example
-- `references/examples/example-airbyte.md` — Airbyte worked example
-- `references/examples/example-genesys-growth.md` — Genesys Growth worked example
-
 ### Evaluations
 
-Quality gates (full checklist → `references/quality-gates.md`):
+Quality gates (full checklist → the premium reference):
 
 - [ ] All persona cards have 14 fields complete with source provenance + confidence levels
 - [ ] Skepticism scores assigned per persona; vocabulary fields contain specific terms (not common words)
@@ -178,17 +149,3 @@ Quality gates (full checklist → `references/quality-gates.md`):
 - [ ] Source appendix has all URLs + access dates; enrichment tier accurately declared; inferred fields labeled; data gaps documented with how-to-fill suggestions
 - [ ] ≥50% verified claims, ≤20% estimated per ontology
 
-## Push
-
-| Destination | When | Why |
-|-------------|------|-----|
-| `client_folder/context/` (Google Docs) | Mode 1 complete + approved | Canonical persona cards; team-readable artifact for downstream skills |
-| Notion "Client Database" | Mode 1 complete + approved | Stakeholder-visible persona reference |
-| `references/examples/[date]-[client-slug].md` | User signals "this is great" / "perfect" | Reinforce skill quality library; surface as anti-example template |
-
-**Chain suggestions** (full list → `references/chain-suggestions.md`):
-
-- After Mode 1: simulate website (Mode 2), run positioning, feed prompt bank into AEO content, simulate competitor.
-- After Mode 2: simulate another page, generate landing page copy from gaps, re-simulate post-changes, simulate competitor.
-
-**Skill auto-update** (feedback signal → action) → `references/skill-auto-update.md`. **Gotchas + changelog** → `references/gotchas-changelog.md`.

@@ -16,19 +16,16 @@ inputs:
   - content-strategy
   - icp-research
   - aeo-strategy
-outputs:
 - type: content-strategy
   feeds_into:
   - website-pm-score
 depends_on: []
-feeds_into:
 - website-pm-score
 - landing-page-wireframe
 owned_by_agent: growth
 mcps_used:
 - exa
 - firecrawl
-push_targets:
 - gdrive
 triggers:
   slash_commands:
@@ -134,17 +131,17 @@ The skill outputs four artifacts for the developer:
 ```
 /
 ├── /product/
-│   ├── /product/report-generator
-│   └── /product/meeting-prep
+│ ├── /product/report-generator
+│ └── /product/meeting-prep
 ├── /pricing
 ├── /resources/
-│   ├── /resources/guides/{slug}
-│   ├── /resources/templates/{slug}
-│   └── /resources/calculators/{slug}
+│ ├── /resources/guides/{slug}
+│ ├── /resources/templates/{slug}
+│ └── /resources/calculators/{slug}
 ├── /compare/
-│   └── /compare/ClientCo-vs-{competitor}
+│ └── /compare/ClientCo-vs-{competitor}
 ├── /alternatives/
-│   └── /alternatives/{tool}
+│ └── /alternatives/{tool}
 ├── /blog/{slug}
 ├── /about
 └── /contact
@@ -178,12 +175,12 @@ graph TD
 ```
 /
 ├── /product/
-│   ├── /product/{product-A}
-│   └── /product/{product-B}
+│ ├── /product/{product-A}
+│ └── /product/{product-B}
 ├── /pricing
 ├── /resources/
-│   ├── /resources/guides/{slug}
-│   └── /resources/case-studies/{slug}
+│ ├── /resources/guides/{slug}
+│ └── /resources/case-studies/{slug}
 ├── /compare/ClientCo-vs-{competitor}
 ├── /alternatives/{competitor}
 ├── /about

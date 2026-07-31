@@ -21,16 +21,13 @@ inputs:
   recommended:
   - product-messaging
   - sales-call-playbook
-outputs:
 - type: call-coaching-report
   feeds_into:
   - sales-tracks
 depends_on: []
-feeds_into:
 - sales-tracks
 owned_by_agent: sales
 mcps_used: []
-push_targets:
 - gdrive
 - notion
 triggers:
@@ -96,7 +93,7 @@ If no transcript: ask for one. A coaching report needs a real call — never fab
 
 ### Intake — normalize, then redact
 
-1. **Normalize any recorder format** (Gong / Fireflies / Otter / Grain / VTT / SRT / JSON / plaintext) to speaker-attributed turns. Reuse the adapter spec at `research/win-loss/references/transcript-adapters.md`. (Transcripts may come from Granola via MCP, or pasted directly.)
+1. **Normalize any recorder format** (Gong / Fireflies / Otter / Grain / VTT / SRT / JSON / plaintext) to speaker-attributed turns. Reuse the adapter spec at `research/win-loss/the premium reference. (Transcripts may come from Granola via MCP, or pasted directly.)
 2. **Redact PII first** — `.claude/rules/pii-redaction.md`. Mask end-client names, emails, account numbers; keep the rep's name+role, company, deal context, and the words. Load-bearing for ClientCo (FCA-regulated).
 3. **Infer roles** — label each speaker rep / buyer / champion / economic-buyer. Roles drive both scoring and evidence attribution.
 
@@ -110,7 +107,7 @@ If no transcript: ask for one. A coaching report needs a real call — never fab
 
 3. **Flag deal-health movement (optional).** Note which deal-health dimensions the call advanced vs. left untouched, per [`health-rubrics.md`](../../../../projects/research/taste-library/resources/0626-sales-qualification-frameworks/health-rubrics.md). A single call rarely moves all ten — name the one or two it should have and didn't.
 
-4. **Write the coaching report.** Follow the 8 principles below and the template at `references/report-template.md`. Lead with the headline signal, order improvements high → low impact, give concrete better-move examples in a human voice. Keep it skimmable — a manager reads it in two minutes.
+4. **Write the coaching report.** Follow the 8 principles below and the template at the premium reference. Lead with the headline signal, order improvements high → low impact, give concrete better-move examples in a human voice. Keep it skimmable — a manager reads it in two minutes.
 
 ---
 
@@ -130,21 +127,6 @@ Adapted from the gtm-superintelligence coaching operating frame (Apache-2.0). Th
 **Tone:** direct, supportive, concrete — like a strong 1:1 manager. Praise genuine strengths; be honest about gaps.
 
 **Better-move style:** sound human, not automated. No em-dashes, no corporate openings ("I hope this finds you well"), no hype words ("leverage", "synergy", "unlock"). Lead with the point and one clear ask. (Aligns with `.claude/rules/ai-speak-anti-patterns.md` — the better-move examples are model copy, so they pass the same bar as any shipped content.)
-
----
-
-## Output
-
-A one-page coaching report — see `references/report-template.md` for the full shape. In brief:
-
-- **Header** — call type, framework used, rep, overall calibrated score + band.
-- **Headline** — the single most important takeaway, first.
-- **Strengths** — 2–3, each with a quote.
-- **Gaps + better moves** — ordered high → low, each: what was missed (element + quote), and the concrete better move.
-- **Per-element scorecard** — the framework's elements with sub-scores + one-line evidence each.
-- **Next-call focus** — the one thing to fix next time.
-
-Push targets: GDoc / Notion (redacted form only, per the PII rule — the report is the share gate).
 
 ---
 

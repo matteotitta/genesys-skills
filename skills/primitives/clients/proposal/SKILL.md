@@ -20,7 +20,6 @@ inputs:
   - client-discovery
   recommended:
   - company-context
-outputs:
 - type: proposal
   feeds_into:
   - icp-behavioural
@@ -30,7 +29,6 @@ outputs:
   - client-onboarding
 depends_on:
 - client-discovery
-feeds_into:
 - competitor-research
 - icp-behavioural
 - positioning
@@ -39,7 +37,6 @@ feeds_into:
 owned_by_agent: b2b-consultant
 mcps_used:
 - gdrive
-push_targets:
 - gdrive
 - notion
 triggers:
@@ -63,7 +60,7 @@ Generate scope-of-work proposals for B2B SaaS GTM consulting engagements. Map di
 
 Output complies with [`output-tenets.md`](../../../../rules/output-tenets.md), [`output-simplicity.md`](../../../../rules/output-simplicity.md), [`doc-output-structure.md`](../../../../rules/doc-output-structure.md). Step 6 calibration: see [[feedback_execution_doctrine_refinements_step6]].
 
-**Refinements applied:** R1 (proposal is client-team review surface — cleaned `[VERIFIED: ...]` tags in appendix toggle, never inline in face doc), R2 (multi-phase proposal ships as one doc with toggles per phase), R3 (engagement framing operator-direct, never "thrilled to propose"), R5 (proposal opener mirrors discovery-call insight verbatim), R6 (close → signed proposal primary, kickoff scheduling as fallback), R9 (verb-led phase + deliverable names).
+**Refinements applied:** R1 (proposal is client-team review surface — cleaned `[VERIFIED:...]` tags in appendix toggle, never inline in face doc), R2 (multi-phase proposal ships as one doc with toggles per phase), R3 (engagement framing operator-direct, never "thrilled to propose"), R5 (proposal opener mirrors discovery-call insight verbatim), R6 (close → signed proposal primary, kickoff scheduling as fallback), R9 (verb-led phase + deliverable names).
 
 ## When to run
 
@@ -90,31 +87,18 @@ If discovery insights are missing → ask for notes or run `discovery` first. Do
 ## Steps
 
 1. Pull upstream context — read `discovery` output and (if available) `company-context` output for the prospect. Pull Slack history (`slack_search_public`) and Granola meeting notes (`search_meetings`) for fresh context.
-2. Map signals → deliverables — review pain points and goals; match against the six categories in `references/playbook.md` (foundational, website, content/distribution, launch support, sales enablement, customer marketing). Every line item must trace to a discovery signal.
-3. Set pricing band — pick a scope type from the pricing table in `references/playbook.md`; adjust for stage, scope breadth, budget signals, complexity. Apply standard terms (3-month commitment, 30-day notice, auto-renewal).
+2. Map signals → deliverables — review pain points and goals; match against the six categories in the premium reference (foundational, website, content/distribution, launch support, sales enablement, customer marketing). Every line item must trace to a discovery signal.
+3. Set pricing band — pick a scope type from the pricing table in the premium reference; adjust for stage, scope breadth, budget signals, complexity. Apply standard terms (3-month commitment, 30-day notice, auto-renewal).
 4. Draft the context paragraph using the canonical formula: `[Company] is [1-sentence description]. The platform serves [ICP] who need to [primary use case]. [Value prop]. Fresh off [milestone/trigger], the team needs [deliverable] to [outcome].` Two to three paragraphs total — company overview, current situation, goals from discovery.
 5. Phase the deliverables — Month 1 = foundation (research, audits); Month 2-3 = strategy + execution; Month 4+ = optional future scope. Foundation always precedes execution. Reflect client urgency (launch dates, board meetings, seasonal windows) in the timeline, not generic 4-week blocks.
-6. Assemble the document using the markdown template in `references/playbook.md` — title, [Month Year] subtitle, Context, Deliverables (with the standard tentative-scope disclaimer), Terms, Collaboration. Use `- [ ]` for all deliverable items (Google Docs checklist conversion). Keep checklist items flat per workstream.
-7. Run the self-evaluation in `references/playbook.md` — completeness, evidence quality, guardrails, self-roast. If anything fails, fix or flag before delivery.
+6. Assemble the document using the markdown template in the premium reference — title, [Month Year] subtitle, Context, Deliverables (with the standard tentative-scope disclaimer), Terms, Collaboration. Use `- [ ]` for all deliverable items (Google Docs checklist conversion). Keep checklist items flat per workstream.
+7. Run the self-evaluation in the premium reference — completeness, evidence quality, guardrails, self-roast. If anything fails, fix or flag before delivery.
 8. Pause for Gate 4 collaborative review — multi-round co-creation. Review scope accuracy, pricing, phasing, terms with the user before finalizing.
 9. After approval, offer the post-output options (adjust scope/pricing, push to Google Docs in `PJ - Proposals`, add/remove deliverables).
 
 ## What good looks like
 
-**References:** signal-to-deliverable mapping, pricing bands, Google Docs formatting rules, full markdown template, anti-hallucination guardrails, self-evaluation protocol, Google Docs export command, skill auto-update / feedback loop, MCP integration, changelog → `references/playbook.md`.
-
 **Examples (10 closed engagement proposals):**
-
-- `references/talli-ai-proposal.md` — full GTM, $8K/mo. Why it worked: specific funding/ICP context, deliverables map 1:1 to discovery, foundation before execution.
-- `references/lmg-proposal.md` — multi-brand positioning + content strategy.
-- `references/forward-future-proposal.md` — media company growth ops + automation.
-- `references/integrateio-proposal.md` — long-term engagement with renewals.
-- `references/pivot-proposal.md` — positioning + content engine + US expansion.
-- `references/obin-ai-proposal.md` — dual-motion positioning + content engine, compressed timeline.
-- `references/gtm-strategist-proposal.md` — content + design execution.
-- `references/strapi-proposal.md` — AI tooling focus.
-- `references/alphastream-proposal.md` — LinkedIn + website.
-- `references/wonderly-proposal.md` — proposal pattern reference.
 
 **Evaluations (pre-delivery checklist):**
 
@@ -128,26 +112,7 @@ If discovery insights are missing → ask for notes or run `discovery` first. Do
 - Standard tentative-scope disclaimer included.
 - No invented company details, metrics, or testimonials.
 
-Full self-evaluation protocol (completeness, evidence quality, guardrails, five self-roast questions, improvement suggestion format) → `references/playbook.md`.
-
-## Push
-
-Push to Google Docs (`PJ - Proposals` folder, branded, auto-routed):
-
-```bash
-cd .claude/mcp/gdrive
-node create-doc-unified.mjs proposal.md "Company Name" --client {slug}
-```
-
-File naming: `[INITIALS] - Scope of work` (e.g., "LMG - Scope of work"). The script clears and rebuilds existing docs (no duplicates), applies the Inter typography spec, converts `- [ ]` to Google Docs checklists, justifies the document, and prevents page breaks within paragraphs. Per `.claude/rules/gdrive-protocol.md` and the playbook for full Google Docs formatting rules and the legacy `~/.config/gdrive-mcp-server/create-doc.mjs` path.
-
-Notion fallback: manual copy into Client Database.
-
-After signature, trigger the downstream chain in parallel: `icp-behavioural`, `competitor-research`, `tov-guidelines`. Then sequential: `positioning` → `messaging`. Full chain diagram → `references/playbook.md`.
-
-Capture feedback signals (signed at $X, scope gaps, pricing pushback, length preference) per the auto-update protocol in `references/playbook.md`. After 3+ recurrences of the same signal, surface a proposed SKILL.md update.
-
----
+Full self-evaluation protocol (completeness, evidence quality, guardrails, five self-roast questions, improvement suggestion format) → the premium reference.
 
 ## Final ship gate
 

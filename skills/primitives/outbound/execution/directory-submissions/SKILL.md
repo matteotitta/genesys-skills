@@ -17,18 +17,15 @@ inputs:
   - positioning
   - company-context
   - aeo-content
-outputs:
 - type: launch-plan
   feeds_into:
   - product-launch
 depends_on: []
-feeds_into:
 - product-launch
 owned_by_agent: growth
 mcps_used:
 - exa
 - firecrawl
-push_targets:
 - gdrive
 triggers:
   slash_commands:
@@ -166,9 +163,6 @@ AI engines (Perplexity, ChatGPT, Claude, Google AI Overviews) cite domains they 
 
 ---
 
-## Output format
-
-```markdown
 ## {Product / Client} directory submissions — phase 1
 
 ### Readiness check

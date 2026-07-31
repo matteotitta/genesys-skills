@@ -19,11 +19,7 @@ inputs:
     - expert-pov
     - icp-research
     - brand-kit
-outputs:
-  - type: client-engagement
-    feeds_into: []
 depends_on: []
-feeds_into: []
 owned_by_agent: b2b-consultant
 mcps_used:
   - exa
@@ -31,9 +27,6 @@ mcps_used:
   - gdrive
   - notion-api
   - granola
-push_targets:
-  - gdrive
-  - notion
 triggers:
   slash_commands:
     - /team-hiring
@@ -100,7 +93,7 @@ Don't run when the user wants: organisational design (headcount planning, org ch
 - **Step 2 (scorecard):** Granola meeting ID (or transcript) + the role's interview hub (for the canonical scorecard table) + user-stated pre-verdict (advance-clean / advance-with-caveat / reject).
 - **Step 3 (comms):** the candidate's scorecard verdict + any caveats (office availability / comp recalibration / availability timing / format choice) for advance variants.
 
-**Recommended for both modes (pulled from client artefacts):** voice rules (brand-name convention, em-dash policy, English variant, banned buzzwords, externally-safe vs internal-only proof), positioning + traction, ICP / buyer, team structure, mission + values. Source: client CLAUDE.md § Voice Guidelines, `positioning/`, `messaging/`, `icp/`.
+**Recommended for both modes (pulled from client artefacts):** voice rules (brand-name convention, em-dash policy, English variant, banned buzzwords, externally-safe vs internal-only proof), positioning + traction, ICP / buyer, team structure, mission + values. Source: client CLAUDE.md, `positioning/`, `messaging/`, `icp/`.
 
 If any required input is missing, ask the user. Don't fabricate role specifics or candidate context.
 
@@ -110,20 +103,20 @@ If any required input is missing, ask the user. Don't fabricate role specifics o
 
 1. **Resolve context.** Read client CLAUDE.md, latest.md, canonical references. Pull voice rules, externally-safe proof points, team-member list, existing team-hiring/ precedents.
 2. **Confirm scope.** Role title + reporting line + comp band (with role-family defaults). Artifact scope (3-pack or 4-pack).
-3. **Route to role-family patterns.** Per `references/playbook.md` § "Role-family research patterns", identify 3-5 category-leading companies whose JDs and careers pages inform this hire.
-4. **Draft the JD.** Use the 10-section template in `references/playbook.md` § "JD template". Length 1,500-2,200 words.
-5. **Draft the interview process.** Use the 3-stage template in `references/playbook.md` § "Interview process template". Calibrate Stage 2 to role family. Length 1,200-1,500 words.
-6. **Draft the LinkedIn hiring post.** Use one of the 4 hook archetypes from `references/playbook.md` (Challenge / Contrarian-Craft / Mission-Led / Story). Length 350-500 words.
+3. **Route to role-family patterns.** Per the premium reference, identify 3-5 category-leading companies whose JDs and careers pages inform this hire.
+4. **Draft the JD.** Use the 10-section template in the premium reference. Length 1,500-2,200 words.
+5. **Draft the interview process.** Use the 3-stage template in the premium reference. Calibrate Stage 2 to role family. Length 1,200-1,500 words.
+6. **Draft the LinkedIn hiring post.** Use one of the 4 hook archetypes from the premium reference (Challenge / Contrarian-Craft / Mission-Led / Story). Length 350-500 words.
 7. **(If 4-pack) Draft the careers page.** WebFetch live About page first. Synthesise 5-7 operating principles from About + brand kit + voice + expert-pov. Length 1,200-1,800 words.
-8. **Voice-rule self-review + Gate 3 pause + push handoff.** Per `references/playbook.md` voice-rule grep + push protocol.
+8. **Voice-rule self-review + Gate 3 pause + push handoff.** Per the premium reference voice-rule grep + push protocol.
 
 ### Mode B — Batch operations (Steps B1-B3)
 
-1. **Build the interview hub** (per role per sprint). Per `references/playbook-interview-hub.md`: this-week's-candidates table + Stage-1 screening script (60-min outline with per-section timing) + live exercise template (per role family) + scorecard template (7 dims for SDR, 10 for GM, role-family adaptations for PMM / engineer / CS) + per-candidate prep appendices (snapshot + three-risks-to-verify + customised opening hook + two probe questions + comp framing + Stage-2 handoff template) + canonical 3-stage process reference. Output: `MMYY-{role}-interview-hub.md` in client's `team-hiring/` folder. Notion-publish as a child page; manifest line wired per `.claude/rules/notion-protocol.md`.
+1. **Build the interview hub** (per role per sprint). Per the premium reference: this-week's-candidates table + Stage-1 screening script (60-min outline with per-section timing) + live exercise template (per role family) + scorecard template (7 dims for SDR, 10 for GM, role-family adaptations for PMM / engineer / CS) + per-candidate prep appendices (snapshot + three-risks-to-verify + customised opening hook + two probe questions + comp framing + Stage-2 handoff template) + canonical 3-stage process reference. Output: `MMYY-{role}-interview-hub.md` in client's `team-hiring/` folder. Notion-publish as a child page; manifest line wired per `.claude/rules/notion-protocol.md`.
 
-2. **Score the candidate** (per candidate per Stage-1 interview). Per `references/playbook-stage1-scorecard.md`: pull Granola transcript via `mcp__granola__get_meeting_transcript`. Map transcript evidence to the role's canonical scorecard table (from the hub). Apply hiring bar ("no dimension below 3, at least 3 dimensions at 4+"). Verdict-up-top, verbatim transcript quotes per dimension, Stage-2 handoff template (or rejection rationale), "next move" footer. Three verdict shapes: advance-clean, advance-with-caveat (sub-variants per `references/playbook-stage1-scorecard.md`), reject (rubric-anchored). Output: `MMYY-{firstname-lastname}-stage1-scorecard.md`. Notion-publish as child of the hub page (parent inheritance via the hub's `pageId`).
+2. **Score the candidate** (per candidate per Stage-1 interview). Per the premium reference: pull Granola transcript via `mcp__granola__get_meeting_transcript`. Map transcript evidence to the role's canonical scorecard table (from the hub). Apply hiring bar ("no dimension below 3, at least 3 dimensions at 4+"). Verdict-up-top, verbatim transcript quotes per dimension, Stage-2 handoff template (or rejection rationale), "next move" footer. Three verdict shapes: advance-clean, advance-with-caveat (sub-variants per the premium reference), reject (rubric-anchored). Output: `MMYY-{firstname-lastname}-stage1-scorecard.md`. Notion-publish as child of the hub page (parent inheritance via the hub's `pageId`).
 
-3. **Draft candidate-facing comms** (per candidate post-verdict). Per `references/playbook-candidate-comms.md`: advance email (positive signal → next-stage framing → any-caveat-conversation framing → close) OR decline note (shape-of-role framing, not performance → named specific strength → genuine stay-in-touch close). Tone gate: "would I be comfortable if the candidate posted this on LinkedIn?" Output: `MMYY-{firstname-lastname}-stage1-{advance-email|decline-note}.md`. Local-only (operational draft, not stakeholder artefact). Voice rules per client CLAUDE.md.
+3. **Draft candidate-facing comms** (per candidate post-verdict). Per the premium reference: advance email (positive signal → next-stage framing → any-caveat-conversation framing → close) OR decline note (shape-of-role framing, not performance → named specific strength → genuine stay-in-touch close). Tone gate: "would I be comfortable if the candidate posted this on LinkedIn?" Output: `MMYY-{firstname-lastname}-stage1-{advance-email|decline-note}.md`. Local-only (operational draft, not stakeholder artefact). Voice rules per client CLAUDE.md.
 
 ## What good looks like
 
@@ -142,15 +135,6 @@ If any required input is missing, ask the user. Don't fabricate role specifics o
 - **Comms:** advance email frames any caveat (office / comp / availability) honestly without making the candidate feel they're on probation. Decline note frames on shape-of-role, not performance; names a specific strength; warm but unambiguous.
 - **Voice rules per client:** no em dashes if banned (e.g., ClientCo), brand-name spelling correct, no affirmative use of internally-banned metrics.
 
-**References:**
-
-- Mode A playbook → `references/playbook.md` (JD template + interview template + LinkedIn hooks + careers page template + role-family patterns + voice-grep checklist + push protocol)
-- Mode A worked example → `references/example-ClientCo-sdr-jd.md` (ClientCo SDR 3-pack + careers page, May 2026)
-- Mode B Step 1 playbook → `references/playbook-interview-hub.md` (hub structure + per-role-family adaptations)
-- Mode B Step 2 playbook → `references/playbook-stage1-scorecard.md` (scorecard structure + hiring-bar logic + verdict shapes)
-- Mode B Step 3 playbook → `references/playbook-candidate-comms.md` (advance / decline templates + tone gates)
-- Mode B worked example → `references/example-ClientCo-stage1-batch-may2026.md` (3-candidate batch, May 26-27 2026)
-
 **Self-evaluation (pre-delivery checklist):**
 
 Mode A (unchanged): voice match, KPIs quantified, team members named, comp band specific, brand-name convention, em-dash policy, English variant, no banned buzzwords, no internal-only proof, application format, interview Stage 2 role-appropriate, (if 4-pack) careers page operating principles client-specific + works at openings = 0.
@@ -160,38 +144,6 @@ Mode B (new):
 - [ ] **Scorecard:** verdict at line 1, every dimension backed by verbatim quote, hiring bar applied, Stage-2 handoff populated, "next move" footer specific.
 - [ ] **Comms:** advance email caveat framed cleanly, decline note shape-of-role + named strength + warm close.
 - [ ] **Voice rules:** pulled from active client's CLAUDE.md, applied per-output.
-
-## Output routing
-
-Files land at `projects/consulting/active/{client}/team-hiring/` (or `projects/genesys/team-hiring/` for Genesys-internal).
-
-**Mode A filenames:**
-
-- `MMYY-{role}-jd.md`
-- `MMYY-{role}-interview-process.md`
-- `MMYY-{role}-linkedin-hiring-post.md`
-- `MMYY-careers-page.md` (if 4-pack)
-
-**Mode B filenames:**
-
-- `MMYY-{role}-interview-hub.md`
-- `MMYY-{firstname-lastname}-stage1-scorecard.md`
-- `MMYY-{firstname-lastname}-stage1-advance-email.md`
-- `MMYY-{firstname-lastname}-stage1-decline-note.md`
-
-The `team-hiring/` folder is client-specific (not part of the canonical PMM folder set). If the folder doesn't exist for the client, create it.
-
-## Push
-
-**Mode A push targets** (all post-Gate-3): GDoc for JD (optional, client review), Notion publish handoff for careers page (manifest-line wiring), LinkedIn handoff to Matteo (visual recommendation + post body code-block).
-
-**Mode B push targets:**
-
-- **Hub (Step 1):** Notion publish via `mcp__notion-api__notion-create-pages` as a top-level page under the client's `Clients work → {Client}` hierarchy. Hub becomes the parent for scorecards in Step 2.
-- **Scorecards (Step 2):** Notion publish via `mcp__notion-api__notion-create-pages` as children of the Step-1 hub page (use the hub's returned `pageId` as the parent). Manifest line written into each local md per `.claude/rules/notion-protocol.md`.
-- **Comms (Step 3):** local-only. Operational drafts, not stakeholder artefacts. Matteo sends from Gmail / LinkedIn DM directly.
-
-Full push protocol → `references/playbook.md` (Mode A) + each Mode B playbook reference.
 
 ## Final ship gate
 

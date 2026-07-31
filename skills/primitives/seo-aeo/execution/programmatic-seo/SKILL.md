@@ -23,20 +23,17 @@ inputs:
   - icp-behavioural
   - competitor-research
   - aeo-content
-outputs:
 - type: pseo-strategy
   feeds_into:
   - website-copy
   - aeo-content
 depends_on: []
-feeds_into:
 - aeo-content
 - website-copy
 owned_by_agent: operator
 mcps_used:
 - exa
 - gdrive
-push_targets:
 - gdrive
 - notion
 triggers:
@@ -78,7 +75,7 @@ Output complies with:
 
 **Do NOT run when:** single landing page (use `/landing-page-copy`), broad content strategy (use `/aeo-content`), competitor research only (use `/competitor-research`).
 
-Full trigger list + flowchart: `references/process-flowchart.md`.
+Full trigger list + flowchart: the premium reference.
 
 ## Inputs
 
@@ -89,41 +86,29 @@ Full trigger list + flowchart: `references/process-flowchart.md`.
 | Business model | What the company does | User provides |
 | Data assets | What structured data exists or can be created | User provides or discover |
 
-**Recommended (improves quality):** competitor pSEO examples, search demand data, ICP research, existing content audit. Optional input table + validation checklist: `references/process-flowchart.md`.
+**Recommended (improves quality):** competitor pSEO examples, search demand data, ICP research, existing content audit. Optional input table + validation checklist: the premium reference.
 
 **Upstream skills:** `icp-behavioural`, `competitor-research`, `aeo-content` (recommended, not required).
 
 ## Steps
 
 1. **Asset audit (Phase 1).** Inventory existing or creatable structured data. Confirm business model + goal (traffic / conversions / authority). If inputs missing, ask before proceeding.
-2. **Match data to playbooks (Phase 2.1).** Use the 12-playbook matrix in `references/12-playbooks.md` (Templates, Curation, Conversions, Comparisons, Examples, Locations, Personas, Integrations, Glossary, Translations, Directory, Profiles).
+2. **Match data to playbooks (Phase 2.1).** Use the 12-playbook matrix in the premium reference (Templates, Curation, Conversions, Comparisons, Examples, Locations, Personas, Integrations, Glossary, Translations, Directory, Profiles).
 3. **Evaluate search demand (Phase 2.2).** Research keyword patterns, estimate volume, assess difficulty. Never invent volume — flag as "estimated, validate with keyword research" if no data.
 4. **Assess competitive landscape (Phase 2.3).** Saturation, quality, authority, differentiation. Use `find_similar_links_exa` against client URL to surface competitor pSEO.
-5. **Select 1-2 playbooks (Phase 2.4).** Use the prioritization matrix (data readiness × demand × competition) in `references/architecture-design.md`. Recommend starting with one playbook before expanding.
-6. **Design data schema (Phase 3.1).** YAML schema for the entities powering pages. Example schemas per playbook: `references/architecture-design.md`.
-7. **Define URL structure (Phase 3.2).** Hyphenated, keyword-bearing, predictable. Pattern table per playbook in `references/architecture-design.md`.
+5. **Select 1-2 playbooks (Phase 2.4).** Use the prioritization matrix (data readiness × demand × competition) in the premium reference. Recommend starting with one playbook before expanding.
+6. **Design data schema (Phase 3.1).** YAML schema for the entities powering pages. Example schemas per playbook: the premium reference.
+7. **Define URL structure (Phase 3.2).** Hyphenated, keyword-bearing, predictable. Pattern table per playbook in the premium reference.
 8. **Specify template sections (Phase 3.3).** Hero, quick answer, dynamic comparison/data block, use-case guidance, FAQ (with FAQ schema), CTA. Every page needs unique value, dynamic content, static framework, internal links, conversion path.
 9. **Map internal linking (Phase 3.4).** Hub-and-spoke — every page → category hub, related pages cross-link, footer/sidebar navigation.
-10. **Specify schema markup (Phase 3.5).** Pick primary + additional schema per playbook. JSON-LD templates: `references/schema-templates.md`. Schema-by-playbook table: `references/architecture-design.md`.
-11. **Define quality controls (Phase 4).** Word-count thresholds (Comparison ≥1,000 / Template ≥500 / Glossary ≥300 / Directory ≥400), differentiation requirements, maintenance schedule. Full thresholds + checks: `references/architecture-design.md`.
-12. **Run self-evaluation.** Completeness, evidence quality, guardrails, self-roast questions. Full protocol: `references/output-format.md`.
-13. **Format output.** Use the standard 7-section structure (Executive Summary → Asset Inventory → Playbook Recommendation → Architecture → Schema Plan → Quality Controls → Roadmap → Success Metrics). Full template: `references/output-format.md`.
+10. **Specify schema markup (Phase 3.5).** Pick primary + additional schema per playbook. JSON-LD templates: the premium reference. Schema-by-playbook table: the premium reference.
+11. **Define quality controls (Phase 4).** Word-count thresholds (Comparison ≥1,000 / Template ≥500 / Glossary ≥300 / Directory ≥400), differentiation requirements, maintenance schedule. Full thresholds + checks: the premium reference.
+12. **Run self-evaluation.** Completeness, evidence quality, guardrails, self-roast questions. Full protocol: the premium reference.
+13. **Format output.** Use the standard 7-section structure (Executive Summary → Asset Inventory → Playbook Recommendation → Architecture → Schema Plan → Quality Controls → Roadmap → Success Metrics). Full template: the premium reference.
 14. **Present at Review Gate 2 (Standard).** Actions: Approve / Validate demand / Pilot first. Recommend 10-page pilot before scaling to 100+.
 15. **Suggest chain.** "Ready to write template copy with `/landing-page-copy`?" / "Want to detail the data schema?" / "Audit competitor pSEO with `/competitor-research`?"
 
 ## What good looks like
-
-### References
-
-- `references/12-playbooks.md` — full guide to all 12 playbooks (definitions, data needs, examples, page volumes, when to use)
-- `references/schema-templates.md` — JSON-LD templates by page type
-- `references/architecture-design.md` — playbook selection framework, data schema, URL structure, template design, internal linking, schema markup, quality controls, MCP integration
-- `references/process-flowchart.md` — full process diagram, triggers, input validation
-- `references/output-format.md` — standard output template, worked example, anti-patterns, anti-hallucination guardrails, quality checklist, self-evaluation, integration with other skills
-
-### Examples
-
-**B2B Analytics Platform (DataPulse):** Primary playbook — Integrations (50 pages at launch, 10/month ongoing). Secondary — Comparisons (10 competitor pages). Strong rationale: data asset, search intent, competitive gap quantified. Full worked example: `references/output-format.md`.
 
 ### Evaluations (binary)
 
@@ -139,14 +124,6 @@ Full trigger list + flowchart: `references/process-flowchart.md`.
 - [ ] Maintenance schedule named with triggers
 - [ ] No guaranteed rankings; thin-content risk flagged
 - [ ] Pilot of 10 pages recommended before scaling
-
-## Push
-
-Output goes to `client_folder/strategy/` as `MMYY-pseo-strategy.md`. Optional GDoc export: `cd .claude/mcp/gdrive && node create-doc-unified.mjs {file} "{Company}" --client {slug}`. Optional Notion: SEO Strategy Database.
-
-Chain forward: `/landing-page-copy` (template copy per playbook) or `/aeo-content` (article-level execution against the cluster).
-
----
 
 ## Final ship gate
 

@@ -9,7 +9,7 @@ description: 'Reads a book or long PDF and extracts structured, reusable notes �
   to the taste-library. Four modes: notes (default, chapter-by-chapter), summary (whole-book
   TL;DR + takeaways), quotes (pull-quotes only), study (notes + Q&A spaced-rep). Triggers:
   "read book", "book notes", "summarize PDF", "summarize this ebook", "extract frameworks
-  from", "pull quotes from", "what''s in this book". Handles PDF, markdown, .txt, pasted
+  from", "pull quotes from", "what''s in this book". Handles PDF, markdown,.txt, pasted
   text, and URL natively; EPUB/MOBI convert-to-PDF first. Upstream: none. Downstream:
   feeds content-strategy and thought-leadership.'
 goal: Extract structured, reusable notes from a book or long PDF into a dated taste-library clip.
@@ -22,19 +22,16 @@ review_gate: 1
 inputs:
   required: []
   recommended: []
-outputs:
 - type: source-notes
   feeds_into:
   - content-strategy
   - thought-leadership
 depends_on: []
-feeds_into:
 - content-strategy
 - thought-leadership
 owned_by_agent: researcher
 mcps_used:
 - firecrawl
-push_targets: []
 status: draft
 locked_by: null
 locked_date: null
@@ -55,7 +52,7 @@ Turn a book or long PDF into structured, grep-able notes. Same content-consumpti
 | Input | How it's read |
 |---|---|
 | **PDF** | The `Read` tool reads PDFs natively (~10 pages per call — chunk longer books). The `pdf` skill handles extraction edge cases. |
-| **Markdown / .txt** | `Read` directly. No conversion. |
+| **Markdown /.txt** | `Read` directly. No conversion. |
 | **Pasted text** | Use what was pasted. Treat a short paste as one chunk. |
 | **URL** (public-domain text) | `WebFetch` first (free). Firecrawl (`firecrawl_scrape`) only if the page is JS-heavy or blocked. Project Gutenberg / archive.org `.txt` URLs are cleanest. |
 | **EPUB / MOBI** | Convert to PDF or markdown first (`ebook-convert`, calibre), then read as PDF. If no converter is installed, deferred — give the user the one-line install. |
@@ -71,7 +68,7 @@ Detect type from the file extension or URL. If ambiguous, ask.
 | `read-book <input> quotes` | quotes | Pull-quote highlights only, with chapter + page refs |
 | `read-book <input> study` | study | Notes + 10–20 spaced-repetition Q&A cards |
 
-Full per-mode templates: `references/output-modes.md`. A long book (>200 pages) with no mode given defaults to notes — warn it'll take many read passes.
+Full per-mode templates: the premium reference. A long book (>200 pages) with no mode given defaults to notes — warn it'll take many read passes.
 
 ## Process
 
@@ -81,7 +78,7 @@ Detect the format (table above) and the mode (default notes). Confirm the target
 
 ### Step 2 — Get the text and plan the chunks
 
-Per-source ingestion: `references/sources.md`. Chunk in priority order:
+Per-source ingestion: the premium reference. Chunk in priority order:
 
 1. **By chapter** when a TOC exists (PDF bookmarks, or converted EPUB chapter headers).
 2. **By 50-page block** for PDFs with no TOC.
@@ -91,7 +88,7 @@ Keep a short chunking plan (source, title, author, type, total pages, strategy, 
 
 ### Step 3 — Read each chunk and extract
 
-Loop: read chunk N → extract per the chosen mode (`references/output-modes.md`) → append the partial to the scratchpad. For PDFs, read chunks individually — never the whole book in one call (the PDF Read cap is ~10 pages). If a chunk is front-matter or diagrams with nothing to extract, log the skip and continue.
+Loop: read chunk N → extract per the chosen mode (the premium reference) → append the partial to the scratchpad. For PDFs, read chunks individually — never the whole book in one call (the PDF Read cap is ~10 pages). If a chunk is front-matter or diagrams with nothing to extract, log the skip and continue.
 
 ### Step 4 — Aggregate into the full notes
 
@@ -110,29 +107,6 @@ projects/research/taste-library/resources/{MMYY}-{slug}.md
 ### Step 6 — Report
 
 In chat: one-line headline (`<title> · <author> · <pages or words> · <mode> · <chunks>`), the clip path, the TL;DR, and the top 3 takeaways (top 3 quotes for quotes mode).
-
-## Output — taste-library clip
-
-Frontmatter matches the `resources/` convention (see `projects/research/taste-library/CLAUDE.md`):
-
-```yaml
----
-type: resource
-source: <file path or URL>
-book_title: <title>
-author: <author>
-site: <publisher / Project Gutenberg / etc.>   # optional
-date_published: <book year>                      # optional
-date_clipped: <YYYY-MM-DD>
-tags: [<2–3 blessed tags: ai-gtm, positioning, content, copywriting, pricing, ...>]
-why: <1 sentence — why this book earns a clip>
-taste_signal: <methodology | framework | founder voice | ...>
-mode: <notes | summary | quotes | study>
-imported_via: /read-book
----
-```
-
-The body shape per mode lives in `references/output-modes.md`. Every clip opens with a TL;DR and closes with a "Cross-references (suggested)" footer of `[[wikilink]]`-style pointers to related taste-library topics — advisory, not auto-applied.
 
 ## Evidence discipline
 
@@ -167,13 +141,6 @@ Bound by [`.claude/rules/evidence-bound-outputs.md`](../../../rules/evidence-bou
 - **`/thought-leadership`** — quotes, frameworks, and pushback become evidence and counterpoints in long-form.
 - **`/deep-research`** — when a research question surfaces a book, this is the next step; notes feed back into the brief.
 - **`/storytelling`** and **`/gtme-pulse`** — book stories and stats become narrative and newsletter material.
-
-## Reference files
-
-| File | Purpose |
-|---|---|
-| `references/output-modes.md` | Per-mode templates (notes / summary / quotes / study) for chunk partials + full-book aggregation |
-| `references/sources.md` | Per-source ingestion — PDF (native Read + helpers), markdown/txt, pasted text, URL (WebFetch / Firecrawl), EPUB/MOBI conversion |
 
 ## Attribution
 

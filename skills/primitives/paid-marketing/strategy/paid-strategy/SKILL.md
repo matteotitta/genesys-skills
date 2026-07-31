@@ -25,7 +25,6 @@ inputs:
   - competitor-research
   - funnel-strategy
   - company-context
-outputs:
 - type: paid-campaign-strategy
   feeds_into:
   - google-ads-copy
@@ -34,13 +33,11 @@ outputs:
 depends_on:
 - product-messaging
 - icp-behavioural
-feeds_into:
 - ad-creative-brief
 - google-ads-copy
 - linkedin-ads-copy
 owned_by_agent: paid
 mcps_used: []
-push_targets:
 - gdrive
 triggers:
   slash_commands: []
@@ -66,71 +63,71 @@ Design paid advertising campaign architecture for B2B SaaS. Determines which cam
 
 ```
 ┌──────────────────────────────────────────────────────────────┐
-│                 PAID CAMPAIGN STRATEGY PROCESS                │
+│ PAID CAMPAIGN STRATEGY PROCESS │
 └──────────────────────────────────────────────────────────────┘
                               │
                               ▼
 ┌──────────────────────────────────────────────────────────────┐
-│ INPUT VALIDATION                                              │
-│ Required:                                                     │
-│ □ product-messaging (value props, differentiators)           │
-│ □ icp-behavioural (personas, firmographics, pain points)     │
+│ INPUT VALIDATION │
+│ Required: │
+│ □ product-messaging (value props, differentiators) │
+│ □ icp-behavioural (personas, firmographics, pain points) │
 │ Optional: competitor-research, funnel-strategy, company-context│
-│ □ Monthly budget range                                        │
-│ □ Campaign objective (awareness / leads / demos / trials)     │
-│ → If missing: Suggest upstream skills first                  │
+│ □ Monthly budget range │
+│ □ Campaign objective (awareness / leads / demos / trials) │
+│ → If missing: Suggest upstream skills first │
 └──────────────────────────────────────────────────────────────┘
                               │
                               ▼
 ┌──────────────────────────────────────────────────────────────┐
-│ PHASE 1: PLATFORM SELECTION                                   │
-│ Step 1.1: Apply platform selection matrix                    │
-│ Step 1.2: Determine primary vs support platform              │
-│ Step 1.3: Allocate budget split across platforms             │
-│ → Output: Platform recommendation with rationale             │
-│ ✓ Checkpoint: Platform(s) selected with budget split         │
+│ PHASE 1: PLATFORM SELECTION │
+│ Step 1.1: Apply platform selection matrix │
+│ Step 1.2: Determine primary vs support platform │
+│ Step 1.3: Allocate budget split across platforms │
+│ → Output: Platform recommendation with rationale │
+│ ✓ Checkpoint: Platform(s) selected with budget split │
 └──────────────────────────────────────────────────────────────┘
                               │
                               ▼
 ┌──────────────────────────────────────────────────────────────┐
-│ PHASE 2: CAMPAIGN ARCHITECTURE                                │
-│ Step 2.1: Google Ads — select from 5-pillar model            │
-│ Step 2.2: LinkedIn Ads — select funnel stages                │
-│ Step 2.3: Map campaigns to objectives and budget tiers       │
-│ Step 2.4: Define ad group structure per campaign             │
-│ → Output: Campaign list with objectives and budget           │
-│ ✓ Checkpoint: Every campaign has objective + budget + KPI    │
+│ PHASE 2: CAMPAIGN ARCHITECTURE │
+│ Step 2.1: Google Ads — select from 5-pillar model │
+│ Step 2.2: LinkedIn Ads — select funnel stages │
+│ Step 2.3: Map campaigns to objectives and budget tiers │
+│ Step 2.4: Define ad group structure per campaign │
+│ → Output: Campaign list with objectives and budget │
+│ ✓ Checkpoint: Every campaign has objective + budget + KPI │
 └──────────────────────────────────────────────────────────────┘
                               │
                               ▼
 ┌──────────────────────────────────────────────────────────────┐
-│ PHASE 3: TARGETING + TRACKING                                 │
-│ Step 3.1: Map ICP → Google keyword strategy                  │
-│ Step 3.2: Map ICP → LinkedIn audience filters                │
-│ Step 3.3: Define UTM taxonomy                                │
-│ Step 3.4: Define negative keyword seed list (Google)         │
-│ Step 3.5: Set KPI targets per campaign                       │
-│ → Output: Targeting specs + UTM structure + KPI targets      │
+│ PHASE 3: TARGETING + TRACKING │
+│ Step 3.1: Map ICP → Google keyword strategy │
+│ Step 3.2: Map ICP → LinkedIn audience filters │
+│ Step 3.3: Define UTM taxonomy │
+│ Step 3.4: Define negative keyword seed list (Google) │
+│ Step 3.5: Set KPI targets per campaign │
+│ → Output: Targeting specs + UTM structure + KPI targets │
 │ ✓ Checkpoint: Every campaign has targeting + tracking defined │
 └──────────────────────────────────────────────────────────────┘
                               │
                               ▼
 ┌──────────────────────────────────────────────────────────────┐
-│ SELF-EVALUATION                                               │
-│ □ Budget allocation totals to 100%                           │
-│ □ Every campaign has objective, budget, targeting, KPI       │
-│ □ Platform selection justified by ICP signals                │
-│ □ Negative keywords included for Google                      │
-│ □ UTM taxonomy defined and consistent                        │
-│ □ Timeline accounts for 60-90 day B2B learning window        │
+│ SELF-EVALUATION │
+│ □ Budget allocation totals to 100% │
+│ □ Every campaign has objective, budget, targeting, KPI │
+│ □ Platform selection justified by ICP signals │
+│ □ Negative keywords included for Google │
+│ □ UTM taxonomy defined and consistent │
+│ □ Timeline accounts for 60-90 day B2B learning window │
 └──────────────────────────────────────────────────────────────┘
                               │
                               ▼
 ┌──────────────────────────────────────────────────────────────┐
-│ CHAIN SUGGESTIONS                                            │
-│ → google-ads-copy (generate RSA copy per campaign)           │
-│ → linkedin-ads-copy (generate ad copy per funnel stage)      │
-│ → ad-creative-brief (visual direction for designers)         │
+│ CHAIN SUGGESTIONS │
+│ → google-ads-copy (generate RSA copy per campaign) │
+│ → linkedin-ads-copy (generate ad copy per funnel stage) │
+│ → ad-creative-brief (visual direction for designers) │
 └──────────────────────────────────────────────────────────────┘
 ```
 
@@ -231,11 +228,11 @@ Campaign strategy requires product-messaging and icp-behavioural. Targeting must
 ## UTM Taxonomy
 
 ```
-utm_source={channel}       // linkedin, google
-utm_medium={type}          // cpc, display, social
+utm_source={channel} // linkedin, google
+utm_medium={type} // cpc, display, social
 utm_campaign={campaign-id} // q1-2026-google-competitor-saturn
-utm_content={variant}      // ad-variant-a
-utm_term={keyword}         // [Google only]
+utm_content={variant} // ad-variant-a
+utm_term={keyword} // [Google only]
 ```
 
 **Naming convention for campaigns:**
@@ -248,9 +245,6 @@ Examples:
 
 ---
 
-## Output Template
-
-```
 ## Paid Campaign Strategy — [Client Name] — [Date]
 
 ### Platform selection
@@ -260,7 +254,7 @@ Examples:
 
 | Campaign | Platform | Type | Objective | Monthly budget | KPI target |
 |----------|----------|------|-----------|---------------|------------|
-| ... | ... | ... | ... | $X | CPL $X |
+|... |... |... |... | $X | CPL $X |
 
 ### Budget allocation
 | Platform | Amount | % of total |

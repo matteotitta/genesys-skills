@@ -20,17 +20,14 @@ review_gate: 0
 inputs:
   required: []
   recommended: []
-outputs:
 - type: runbook
   feeds_into: []
 depends_on: []
-feeds_into: []
 owned_by_agent: operator
 mcps_used:
 - gmail
 - google-calendar
 - slack
-push_targets:
 - gdrive
 - notion
 triggers:
@@ -112,7 +109,7 @@ Pull from all 4 sources simultaneously using parallel tool calls. Do NOT run the
 
 **1e. Recent decisions** — Pull from session recall index
 ```bash
-python3 .claude/hooks/session-indexer.py --decisions --days 1
+python3.claude/hooks/session-indexer.py --decisions --days 1
 ```
 - Morning mode: last 24h of decisions
 - Wrap mode: today's decisions only
@@ -145,95 +142,6 @@ Process raw data into a structured briefing. Apply these rules:
 ### Phase 3: Output
 
 Format as a structured briefing following the template below.
-
----
-
-## Output Template
-
-### Morning Briefing (`/today`)
-
-```
-DAILY BRIEFING — [Day, Date]
-═══════════════════════════════════════
-
-CALENDAR (X events today)
-─────────────────────────
-[Time] — [Event name] with [attendees]
-         [Prep note if applicable]
-[Time] — [Event name] with [attendees]
-...
-
-PRIORITY ACTIONS (top 3-5)
-─────────────────────────
-1. [Action] — [Source: email/linear/slack] — [Urgency: now/today/this week]
-2. [Action] — [Source] — [Urgency]
-3. [Action] — [Source] — [Urgency]
-
-EMAIL SUMMARY (X new in last 12h)
-─────────────────────────────────
-Action required:
-  → [Sender]: [Subject] — [What's needed]
-  → [Sender]: [Subject] — [What's needed]
-
-FYI:
-  → [Sender]: [Subject] — [1-line summary]
-
-LINEAR (X active issues)
-────────────────────────
-In Progress:
-  → [GEN-XX] [Title] — [Project] — [Priority]
-  → [GEN-XX] [Title] — [Project] — [Priority]
-
-Next Up:
-  → [GEN-XX] [Title] — [Project] — [Priority]
-
-SLACK
-─────
-  → [#channel or @person]: [Summary of what needs attention]
-  → [#channel or @person]: [Summary]
-
-RECENT DECISIONS (last 24h)
-───────────────────────────
-  → [Client]: [Decision made] — from [session slug]
-  → [Client]: [Decision made] — from [session slug]
-
-═══════════════════════════════════════
-```
-
-### End-of-Day Wrap (`/today wrap`)
-
-```
-END-OF-DAY WRAP — [Day, Date]
-═══════════════════════════════════════
-
-COMPLETED TODAY
-───────────────
-  ☑ [What was done] — [Source]
-  ☑ [What was done] — [Source]
-
-STILL PENDING
-─────────────
-  → [What's left] — [Why / blocker if any]
-  → [What's left] — [Why]
-
-TOMORROW PREP
-─────────────
-  → [First meeting]: [Time] — [Prep needed]
-  → [Key task]: [What to tackle first]
-
-═══════════════════════════════════════
-```
-
-### Quick Focus (`/today focus`)
-
-```
-FOCUS — [Time]
-═══════════════
-1. [Most important thing right now]
-2. [Second priority]
-3. [Third priority]
-═══════════════
-```
 
 ---
 

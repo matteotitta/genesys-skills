@@ -17,14 +17,12 @@ inputs:
   - positioning
   - content-strategy
   - expert-pov
-outputs:
 - type: content-strategy
   feeds_into:
   - thought-leadership
   - aeo-content
   - linkedin-content-guide
 depends_on: []
-feeds_into:
 - thought-leadership
 - aeo-content
 - linkedin-content-guide
@@ -32,7 +30,6 @@ feeds_into:
 owned_by_agent: content
 mcps_used:
 - exa
-push_targets:
 - gdrive
 triggers:
   slash_commands:
@@ -105,31 +102,28 @@ For each of the top 3:
 
 ---
 
-## Output format
-
-```markdown
 ## {Client / Genesys} ideation — {date}
 
 ### Brief
-- Audience: ...
-- Goal: ...
-- Constraints: ...
-- Context: ...
+- Audience:...
+- Goal:...
+- Constraints:...
+- Context:...
 
 ### Candidate ideas (8–12)
 | # | Mode | Idea (1 sentence) | Pain match (0-40) | Proof (0-30) | Whitespace (0-30) | Total |
 |---|---|---|---|---|---|---|
-| 1 | Campaign | ... | 35 | 25 | 25 | 85 |
-| 2 | Content | ... | 30 | 30 | 20 | 80 |
-| ... |
+| 1 | Campaign |... | 35 | 25 | 25 | 85 |
+| 2 | Content |... | 30 | 30 | 20 | 80 |
+|... |
 
 ### Recommended next-3
 1. **{Idea}** — handoff to `/thought-leadership` with brief: {target keyword, hook, proof asset, format}.
-2. **{Idea}** — handoff to `/aeo-content` with brief: ...
-3. **{Idea}** — handoff to `/lead-magnets` with brief: ...
+2. **{Idea}** — handoff to `/aeo-content` with brief:...
+3. **{Idea}** — handoff to `/lead-magnets` with brief:...
 
 ### Backlog (rank 4–8)
-- ...
+-...
 ```
 
 ---

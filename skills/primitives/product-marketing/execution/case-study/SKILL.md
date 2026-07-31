@@ -20,16 +20,13 @@ inputs:
   - win-loss-analysis
   - product-messaging
   recommended: []
-outputs:
 - type: case-study
   feeds_into: []
 depends_on:
 - win-loss-analysis
 - product-messaging
-feeds_into: []
 owned_by_agent: growth
 mcps_used: []
-push_targets:
 - gdrive
 - notion
 triggers:
@@ -63,7 +60,7 @@ Output complies with:
 
 | Code | Refinement | How it lands in case-study |
 |---|---|---|
-| **R1** | Source placement (three layers) | Published case study is **end-customer-facing** (website / PDF). **No sources block.** Customer quotes appear inline with named attribution (job title + company), but no `[VERIFIED: ...]` tags. Source dataset (interviews, transcripts, metrics) lives in working doc for QA only. |
+| **R1** | Source placement (three layers) | Published case study is **end-customer-facing** (website / PDF). **No sources block.** Customer quotes appear inline with named attribution (job title + company), but no `[VERIFIED:...]` tags. Source dataset (interviews, transcripts, metrics) lives in working doc for QA only. |
 | **R3** | Product-update tone | Capability framing — "Customer ships X with Y" not "Customer is thrilled to announce." Even when the metric is huge. |
 | **R6** | CTA hierarchy | Closing CTA names sign-up or trial as primary; "talk to sales" as fallback for enterprise. Never "read more on our blog" — case study IS the blog. |
 | **R8** | Entity-name headings | Section headings repeat the customer name — "How [Customer] used [Product]," "Why [Customer] chose [Product]" — not pronoun headings ("How they used it"). |
@@ -120,13 +117,13 @@ Output complies with:
 
 Before proceeding: customer name + industry known; ≥1 quantified result available; challenge clearly articulated; solution approach understood.
 
-If inputs are missing: ask for customer name, primary challenge, and at least one measurable outcome. Offer to structure interview questions if no transcript — see `references/interview-questions.md`.
+If inputs are missing: ask for customer name, primary challenge, and at least one measurable outcome. Offer to structure interview questions if no transcript — see the premium reference.
 
 ---
 
 ## Process
 
-The case study runs in 3 phases. Read `references/process.md` for the full step-by-step (4 extraction steps, 4 structure steps, 3 output steps, plus per-phase checkpoints and the process flowchart).
+The case study runs in 3 phases. Read the premium reference for the full step-by-step (4 extraction steps, 4 structure steps, 3 output steps, plus per-phase checkpoints and the process flowchart).
 
 Phase summary:
 
@@ -153,11 +150,11 @@ Phase summary:
 ### Metrics bar format
 
 ```
-┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐
-│      3-5x       │  │    40-60        │  │    20-40%       │
-│  More creator   │  │  Hours saved    │  │   Stronger      │
-│  content/month  │  │   per month     │  │   performance   │
-└─────────────────┘  └─────────────────┘  └─────────────────┘
+┌─────────────────┐ ┌─────────────────┐ ┌─────────────────┐
+│ 3-5x │ │ 40-60 │ │ 20-40% │
+│ More creator │ │ Hours saved │ │ Stronger │
+│ content/month │ │ per month │ │ performance │
+└─────────────────┘ └─────────────────┘ └─────────────────┘
 ```
 
 ### Quote format
@@ -167,12 +164,6 @@ Phase summary:
 
 — Kristen Klochko, Project Manager, Brand Relations & Ecommerce, POPFLEX
 ```
-
----
-
-## Output
-
-Produce a single case study markdown file plus optional derivative assets. Template + derivative formats: `references/output-format.md`.
 
 ---
 
@@ -245,18 +236,6 @@ Full worked example: `examples/archive-popflex.md`.
 | **sales-enablement** | Uses output | Case study slides for sales deck |
 | **landing-page-copy** | Uses output | Social proof snippets |
 | **storytelling** | Uses output | Customer videos in campaigns |
-
----
-
-## Reference files
-
-| File | Purpose |
-|------|---------|
-| `references/process.md` | Full 3-phase step-by-step + flowchart |
-| `references/output-format.md` | Case study template + derivative assets |
-| `references/auto-update.md` | Feedback signal detection + pattern rules |
-| `references/interview-questions.md` | Customer interview guide |
-| `examples/archive-popflex.md` | Worked example: web case study |
 
 ---
 

@@ -16,20 +16,10 @@ inputs:
   recommended:
     - paid-campaign-strategy
     - brand-kit
-outputs:
-  - type: experiment-log
-    feeds_into:
-      - paid-ads-audit
-      - paid-campaign-strategy
 depends_on: []
-feeds_into:
-  - paid-ads-audit
-  - paid-campaign-strategy
 owned_by_agent: paid
 mcps_used:
   - linkedin-ads
-push_targets:
-  - gdrive
 triggers:
   slash_commands:
     - /linkedin-ads-weekly
@@ -53,10 +43,8 @@ Reads a LinkedIn Ads account, proposes a ranked change list, applies what is app
 ## Doctrine inherited
 
 - **`linkedin-ads-spend.md`** gates every write. Preview before mutate, confirm before spend or delete, never auto-confirm in batch, default to DRAFT/PAUSE. Where LinkedIn Ads writes are not yet enabled (pending Advertising-API / Developer-Portal approval), Phase 3 emits an operator-applies-manually change list and the gate activates once writes land. Non-negotiable when they do.
-- **`quantitative-evidence-floors.md`** is the load-bearing rule here, more than on Search. LinkedIn CPMs are high and B2B audiences are small, so a £1,500/mo account buys thin weekly volume — a single week is a handful of leads. The weekly/28-day lever split in `references/levers.md` exists entirely because of this.
 - **`pii-redaction.md`** applies to lead-gen form data, which carries names, work emails and job titles people submitted directly.
 - **`output-simplicity.md`** caps the Slack update. One screen for a senior reader, not a metrics dump.
-- **`persuasion-and-stickiness.md`** binds only where lever 9 (angle refresh) touches creative. This skill does not write ad copy: it flags which creative is fatigued, scores replacement angles via the [angle matrix](../ad-creative-brief/references/angle-matrix.md), and hands off to `/ad-creative-brief` → `/linkedin-ads-copy`, which own the copy pass. The client's banned-claim list applies first.
 
 ## When to use
 
@@ -88,13 +76,13 @@ Read the client workflow file, the paid strategy doc, and `goals/` for targets. 
 
 ### Phase 1 — Pull
 
-Run the read tools in `references/queries.md` against the `linkedin-ads` MCP, or parse the pasted export. Persist the raw pull to the client's `paid/execution/` and keep only a summary in context, per `context-management.md`.
+Run the read tools in the premium reference against the `linkedin-ads` MCP, or parse the pasted export. Persist the raw pull to the client's `paid/execution/` and keep only a summary in context, per `context-management.md`.
 
 Redact PII from lead-gen form data before it is stored or shared.
 
 ### Phase 2 — Propose
 
-Run the ten levers in `references/levers.md`. For each finding, produce: the lever, the evidence, the proposed change, the tier it falls in under `linkedin-ads-spend.md`, and **the volume behind it**. Rank by expected impact on cost per result.
+Run the ten levers in the premium reference. For each finding, produce: the lever, the evidence, the proposed change, the tier it falls in under `linkedin-ads-spend.md`, and **the volume behind it**. Rank by expected impact on cost per result.
 
 State the floor next to every verdict. A creative with 300 impressions and no conversion is not a loser, it is unmeasured. Say that rather than proposing a pause.
 
@@ -149,9 +137,3 @@ Run `/premortem --output` before ship. See [`/premortem` skill](../../../../meta
 
 For the Slack update specifically, also run the `output-simplicity.md` §10 pre-ship check: right length for a senior reader, no robot tells, sources placed correctly for a client-team artifact.
 
-## References
-
-- `references/levers.md` — the ten levers, their thresholds, and the weekly / 28-day split
-- `references/queries.md` — the `linkedin-ads` MCP read tools behind each lever
-- `references/output-format.md` — change list and cycle record formats (dashboard + journal come from the invoked skills)
-- `references/sample-payload.json` — synthetic payload for testing before a live account / live writes

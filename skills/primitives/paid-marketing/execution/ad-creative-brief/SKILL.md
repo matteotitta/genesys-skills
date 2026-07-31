@@ -26,18 +26,15 @@ inputs:
   - tov-guidelines
   - brand-kit
   - product-messaging
-outputs:
 - type: ad-creative-brief
   feeds_into:
   - ad-creative
 depends_on:
 - product-messaging
 - paid-campaign-strategy
-feeds_into:
 - ad-creative
 owned_by_agent: paid
 mcps_used: []
-push_targets:
 - gdrive
 triggers:
   slash_commands: []
@@ -67,7 +64,7 @@ Output complies with:
 
 | Code | Refinement | How it lands in ad-creative-brief |
 |---|---|---|
-| **R1** | Source placement | Brief is **client-team review surface** (designer hand-off). Cleaned `[VERIFIED: ...]` tags in a collapsed appendix. No tags on the per-platform spec sheets. |
+| **R1** | Source placement | Brief is **client-team review surface** (designer hand-off). Cleaned `[VERIFIED:...]` tags in a collapsed appendix. No tags on the per-platform spec sheets. |
 | **R2** | Single-doc-with-toggles | Multi-platform brief ships as one doc with toggle per platform (LinkedIn 1.91:1, LinkedIn 1:1, Meta 1:1, Meta 4:5, Meta 9:16) — not 5 sub-docs. |
 | **R3** | Product-update tone | Ad copy directions frame as "[Product] does X" not "thrilled to introduce." |
 | **R5** | Blog as voice anchor | When the campaign has an anchor blog, the brief specifies the blog's opening line as the hero headline across all formats. |
@@ -139,7 +136,7 @@ Test in order. Each level has diminishing returns compared to the one above:
 
 Never test color before concept. Concept gets the largest delta in performance; color almost never moves the needle when the angle is wrong.
 
-**Which concept to test first is the angle matrix's job** ([`references/angle-matrix.md`](references/angle-matrix.md)) — it scores the candidate angles by evidence so the mandatory first test starts from the highest-opportunity cell, not a guess.
+**Which concept to test first is the angle matrix's job** ([the premium reference](the premium reference)) — it scores the candidate angles by evidence so the mandatory first test starts from the highest-opportunity cell, not a guess.
 
 ---
 
@@ -158,7 +155,7 @@ Never test color before concept. Concept gets the largest delta in performance; 
 
 ## Process
 
-**Six-phase flow:** Platform/format identification → **the angle matrix** (score angle × persona × awareness on evidence, brief the top band) → Visual direction per angle → Format specs per platform → A/B test plan → Structured brief output. Full flowchart, image specs per platform (Google Display + LinkedIn), test rules, and brief quality standards in `references/process.md`; the scored-matrix method in [`references/angle-matrix.md`](references/angle-matrix.md).
+**Six-phase flow:** Platform/format identification → **the angle matrix** (score angle × persona × awareness on evidence, brief the top band) → Visual direction per angle → Format specs per platform → A/B test plan → Structured brief output. Full flowchart, image specs per platform (Google Display + LinkedIn), test rules, and brief quality standards in the premium reference; the scored-matrix method in [the premium reference](the premium reference).
 
 ---
 
@@ -172,15 +169,9 @@ Never test color before concept. Concept gets the largest delta in performance; 
 
 ---
 
-## Output Format
-
-Per-campaign brief with 3+ angles (each: key message, visual concept, image style, hero overlay, color/type/component tokens, CTA, platform, formats), variants list, and 3-round test plan. Full template + iteration prompts + downstream handoff in `references/output-format.md`.
-
----
-
 ## Quality
 
-Self-evaluation checklist (token coverage, distinct angles, spec accuracy, test ordering), worked example (suitability-report time-savings), anti-examples (orphan hex, pixel art direction, paraphrase angles), failure-mode triage in `references/quality.md`.
+Self-evaluation checklist (token coverage, distinct angles, spec accuracy, test ordering), worked example (suitability-report time-savings), anti-examples (orphan hex, pixel art direction, paraphrase angles), failure-mode triage in the premium reference.
 
 ---
 
@@ -199,18 +190,6 @@ Self-evaluation checklist (token coverage, distinct angles, spec accuracy, test 
 ### Downstream
 
 Terminal deliverable — output goes directly to a designer or video producer. No Genesys-internal downstream skill consumes this output.
-
----
-
-## Reference Files
-
-| File | Purpose |
-|------|---------|
-| `references/process.md` | Six-phase flowchart + creative-angle framework + image specs per platform + A/B test hierarchy + brief quality standards |
-| `references/angle-matrix.md` | The scored angle × persona × awareness engine — Phase 2's selection method (evidence-scored, floored, banned-claim-blocked) |
-| `references/output-format.md` | Brief template (token-cited per angle) + iteration prompts + designer/video handoff |
-| `references/quality.md` | Self-evaluation checklist + worked example + anti-examples + quality gate + failure-mode triage |
-| `references/auto-update.md` | Self-evaluation + feedback signals + spec-table drift check + token-fluency improvement |
 
 ---
 

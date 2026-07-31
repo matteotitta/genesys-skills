@@ -18,12 +18,10 @@ review_gate: 0
 inputs:
   required: []
   recommended: []
-outputs:
 - type: discovery-report
   feeds_into:
   - skill-catalog
 depends_on: []
-feeds_into:
 - skill-catalog
 owned_by_agent: operator
 mcps_used:
@@ -31,7 +29,6 @@ mcps_used:
 - granola
 - linear
 - slack
-push_targets:
 - gdrive
 - notion
 triggers:
@@ -49,7 +46,7 @@ effort: medium
 
 Proactively identifies repeatable work patterns across your tools and recommends what to automate.
 
-For full process (subcommands, 6 phases, scoring, persistence) → `references/process.md`.
+For full process (subcommands, 6 phases, scoring, persistence) → the premium reference.
 
 ---
 
@@ -82,7 +79,7 @@ For full process (subcommands, 6 phases, scoring, persistence) → `references/p
 
 Parse `$ARGUMENTS` to determine subcommand. Default (no args) = full scan.
 
-For full SQL queries per subcommand → `references/process.md`.
+For full SQL queries per subcommand → the premium reference.
 
 ---
 
@@ -120,7 +117,7 @@ For full SQL queries per subcommand → `references/process.md`.
 
 If a pattern's `occurrence_count >= 3` in the database and it was previously DEFER, set `recurrence: 1` which may push to BUILD.
 
-For full classification guide and per-pattern JSON schema → `references/process.md`.
+For full classification guide and per-pattern JSON schema → the premium reference.
 
 ---
 
@@ -133,7 +130,7 @@ For full classification guide and per-pattern JSON schema → `references/proces
 5. Granola (last 7 days)
 6. Google Calendar (last 14 days, catches biweekly patterns)
 
-Full SQL queries + MCP calls per source live in `references/process.md`.
+Full SQL queries + MCP calls per source live in the premium reference.
 
 ---
 
@@ -143,17 +140,6 @@ Full SQL queries + MCP calls per source live in `references/process.md`.
 2. **Use real evidence.** Each pattern needs source-cited snippets — no invented examples.
 3. **Update existing patterns.** Set `is_existing: true` if the pattern already exists in the DB; don't create duplicates.
 4. **MCP failures don't block scan.** Log the failure, continue with available sources.
-
----
-
-## Output and Reporting
-
-| Topic | Reference |
-|-------|-----------|
-| Markdown report structure + Slack notification format + iteration prompts | `references/output-format.md` |
-| 6-phase process + SQL queries + scoring + persistence | `references/process.md` |
-
-Save markdown report to `.claude/discovery/MMYY-week-NN.md`. Slack notification only fires on scheduled-agent runs (not manual `/discover`).
 
 ---
 

@@ -20,18 +20,15 @@ inputs:
   required:
   - product-messaging
   recommended: []
-outputs:
 - type: landing-page-copy
   feeds_into:
   - website-copy
 depends_on:
 - product-messaging
-feeds_into:
 - website-copy
 owned_by_agent: growth
 mcps_used:
 - a1
-push_targets:
 - gdrive
 - notion
 triggers:
@@ -61,7 +58,7 @@ Output complies with [`output-tenets.md`](../../../../../rules/output-tenets.md)
 
 ## Process Flowchart
 
-Input validation → Phase 1 strategic foundation → Phase 2 section architecture → Phase 3 component output → self-evaluation → Gate 2 spot check → chain suggestions. Full ASCII flowchart in `references/process-flowchart.md`.
+Input validation → Phase 1 strategic foundation → Phase 2 section architecture → Phase 3 component output → self-evaluation → Gate 2 spot check → chain suggestions. Full ASCII flowchart in the premium reference.
 
 ---
 
@@ -144,7 +141,7 @@ Before proceeding, verify:
 
 **If no DESIGN.md exists:** pause and recommend running `/brand-kit` first. Do not invent tokens.
 
-**Visual-direction anchor (variant mode).** When generating variants (formerly the `/landing-page-playground` skill, merged into this skill 2026-04-29), accept a `direction=` parameter from the 5 named directions in `../../../../meta/catalog/design-reviewer/references/visual-directions.md`: Editorial / Modern Minimal / Tech Utility / Brutalist / Soft Warm. Each direction maps to default dial settings per `positive-controls.md` (variance / motion / density / decoration / contrast) + 2–4 anchor brands in the 149-brand library at `projects/research/taste-library/resources/0526-open-design-design-md-library/`. Variant mode holds 4 dials constant and varies 1 to produce comparable wireframes within a direction.
+**Visual-direction anchor (variant mode).** When generating variants (formerly the `/landing-page-playground` skill, merged into this skill 2026-04-29), accept a `direction=` parameter from the 5 named directions in `../../../../meta/catalog/design-reviewer/the premium reference: Editorial / Modern Minimal / Tech Utility / Brutalist / Soft Warm. Each direction maps to default dial settings per `positive-controls.md` (variance / motion / density / decoration / contrast) + 2–4 anchor brands in the 149-brand library at `projects/research/taste-library/resources/0526-open-design-design-md-library/`. Variant mode holds 4 dials constant and varies 1 to produce comparable wireframes within a direction.
 
 ---
 
@@ -157,7 +154,7 @@ Before proceeding, verify:
 **Primary tool:** `mcp__a1__browse_websites` with these inputs:
 - `typeSlug='landing'` (or `'one-page'` for single-screen builds)
 - `categorySlug={resolved from client vertical — e.g. 'finance', 'ai', 'software', 'design'}`
-- `styleSlugs=[...]` from the direction-to-slug mapping in `a1-gallery-protocol.md` § "Visual-direction → a1 slug mapping":
+- `styleSlugs=[...]` from the direction-to-slug mapping in `a1-gallery-protocol.md`→ a1 slug mapping":
   - Editorial → `['serif','big-type','typographic','pattern']`
   - Modern Minimal → `['minimal','clean','sans-serif','light']`
   - Tech Utility → `['techy','monospaced','dark','bento','lines']`
@@ -184,21 +181,15 @@ Before proceeding, verify:
 
 **Phase 3 — Component Output:** choose format (HTML/Tailwind, React/JSX, Markdown), generate code section-by-section with responsive + placeholder discipline, write implementation notes.
 
-Full step-by-step methodology with checkpoints per phase in `references/methodology.md`.
+Full step-by-step methodology with checkpoints per phase in the premium reference.
 
 ---
 
 ## Section Library
 
-3 page-type catalogs: **Homepage** (10 sections, hero → footer with required/recommended/optional flags), **Feature page** (7 sections focused on specific benefit), **Campaign landing** (6 sections optimized for single conversion). Full tables in `references/section-library.md`.
+3 page-type catalogs: **Homepage** (10 sections, hero → footer with required/recommended/optional flags), **Feature page** (7 sections focused on specific benefit), **Campaign landing** (6 sections optimized for single conversion). Full tables in the premium reference.
 
 ---
-
-## Output Format
-
-Wireframe deliverables follow a canonical structure: page metadata header, page structure overview table, per-section ASCII wireframe + copy zones + visual requirements, implementation guide (design tokens + asset requirements + responsive breakpoints), code output (HTML/Tailwind + optional React/JSX), iteration prompts.
-
-Complete output template with hero-section ASCII example + all spec tables in `references/output-format.md`.
 
 ## Iteration Prompts
 
@@ -212,7 +203,7 @@ After reviewing the wireframe, ask:
 
 ## Quality discipline
 
-Before Gate 2 review: run the full pre-delivery quality checklist (structure + copy zones + implementation), apply Iron Law anti-hallucination guardrails (no invented logos, no fabricated metrics, all placeholders marked, copy from approved sources, asset requirements explicit). Worked example (B2B SaaS hero) + full checklist + guardrails in `references/quality-checklist.md`.
+Before Gate 2 review: run the full pre-delivery quality checklist (structure + copy zones + implementation), apply Iron Law anti-hallucination guardrails (no invented logos, no fabricated metrics, all placeholders marked, copy from approved sources, asset requirements explicit). Worked example (B2B SaaS hero) + full checklist + guardrails in the premium reference.
 
 ---
 
@@ -242,13 +233,13 @@ When Framer MCP is connected, this skill can:
 
 ## Skill Auto-Update Protocol
 
-This skill learns from feedback and proposes its own improvements. Feedback signal detection table + reference-example capture + improvement tracking + pattern detection rules (3+ occurrence trigger) + proposed skill update format → all in `references/skill-auto-update.md`.
+This skill learns from feedback and proposes its own improvements. Feedback signal detection table + reference-example capture + improvement tracking + pattern detection rules (3+ occurrence trigger) + proposed skill update format → all in the premium reference.
 
 ---
 
 ## Design cycle (post-authoring phases)
 
-Wireframes are early-stage — only Layout / Distill / limited Typeset apply. Polish, Harden, Delight, Onboarding, Cognitive-load all happen post-wireframe in downstream skills (vibe-coding, dashboard, website-build). Each reference lives at `../../../meta/catalog/design-reviewer/references/`.
+Wireframes are early-stage — only Layout / Distill / limited Typeset apply. Polish, Harden, Delight, Onboarding, Cognitive-load all happen post-wireframe in downstream skills (vibe-coding, dashboard, website-build). Each reference lives at `../../../meta/catalog/design-reviewer/the premium reference.
 
 - **Layout** — `layout-tenets.md` (alignment grid, density budget appropriate to wireframe stage)
 - **Distill** — `distill-principles.md` (every section earns its place; if a section feels speculative, mark it for the wireframe-second pass)

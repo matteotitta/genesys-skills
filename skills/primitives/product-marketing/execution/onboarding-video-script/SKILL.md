@@ -26,18 +26,15 @@ inputs:
   - product-messaging
   - icp-behavioural
   - tov-guidelines
-outputs:
 - type: onboarding-video-script
   feeds_into: []
 depends_on:
 - transcript-analysis
 - positioning
-feeds_into: []
 owned_by_agent: pmm
 mcps_used:
 - exa
 - firecrawl
-push_targets:
 - notion
 triggers:
   slash_commands:
@@ -62,7 +59,7 @@ Writes the script a founder or PM reads aloud to record a product onboarding vid
 
 Output is a two-column markdown deliverable — talk track on the left, on-screen action / click path on the right, with timing markers and production notes. Modeled on the demo-script two-column pattern; differs by being founder-owned (not sales-owned), single-aha (not feature-tour), and habit-CTA-terminated (not "next steps").
 
-The body of this file holds decision-grade context (when to invoke, inputs, duration tables, the single-aha and TTV rules, anti-hallucination guardrails, integration). Step-by-step process, two-column output template, the aha-moment framework, founder narration craft library, duration templates, quality gates, and the feedback loop live in `references/`.
+The body of this file holds decision-grade context (when to invoke, inputs, duration tables, the single-aha and TTV rules, anti-hallucination guardrails, integration). Step-by-step process, two-column output template, the aha-moment framework, founder narration craft library, duration templates, quality gates, and the feedback loop live in the premium reference.
 
 ---
 
@@ -150,7 +147,7 @@ If any required input is missing or positioning is not locked, ask before genera
 | 3. Script | Write hook → setup → aha walkthrough → reinforce → habit CTA in two-column format | Draft script |
 | 4. Polish | Apply founder-narration craft rules; chunk for re-recordability; add B-roll cues | Polished script + production notes |
 
-Full step-by-step (with checkpoints, flowchart, review gate) in `references/process.md`.
+Full step-by-step (with checkpoints, flowchart, review gate) in the premium reference.
 
 ---
 
@@ -163,7 +160,7 @@ Full step-by-step (with checkpoints, flowchart, review gate) in `references/proc
 | **5min walkthrough** | Mid-funnel conversion video, product page | 0:00–0:15 | 2:30 | Hook → Setup → Aha → 2nd use case → Reinforce → Habit CTA |
 | **10min full tour** | Deep walkthrough for evaluators, sales-assist | 0:00–0:20 | 4:00 | Hook → Setup → Aha → 3 use cases → Reinforce → Habit CTA |
 
-Full templates with section-by-section talk-track/click-path/timing in `references/duration-templates.md`.
+Full templates with section-by-section talk-track/click-path/timing in the premium reference.
 
 ---
 
@@ -178,7 +175,7 @@ The differentiator vs. generic video script generators. Six rules govern the scr
 5. **Persona-specific aha** — same product, different aha per persona. Multi-persona = multi-script.
 6. **Habit ladder CTA** — the CTA attaches the product action to an existing daily trigger ("tomorrow at standup, do X").
 
-Full framework with worked decision tables in `references/aha-moment-framework.md`.
+Full framework with worked decision tables in the premium reference.
 
 ---
 
@@ -194,7 +191,7 @@ Seven hard rules that distinguish founder-recorded onboarding videos from polish
 6. **Length discipline** — if the script overruns, cut features, never the aha.
 7. **One CTA** — single habit-forming action. Not three CTAs, not "and follow us on LinkedIn".
 
-Full craft library with anti-examples in `references/founder-narration-craft.md`.
+Full craft library with anti-examples in the premium reference.
 
 ---
 
@@ -228,35 +225,6 @@ Full craft library with anti-examples in `references/founder-narration-craft.md`
 
 ---
 
-## Reference files
-
-| File | Purpose |
-|------|---------|
-| `references/process.md` | 4-phase runbook + flowchart + checkpoint criteria |
-| `references/output-format.md` | Two-column talk-track ↔ click-path template, production notes, header schema |
-| `references/aha-moment-framework.md` | Hook model, TTV ceilings, activation metric mapping, persona-specific aha, habit ladder |
-| `references/founder-narration-craft.md` | Read-aloud test, re-recordability, screen pacing, single-take feasibility, anti-examples |
-| `references/duration-templates.md` | 60s / 3min / 5min / 10min variants with section breakdowns |
-| `references/quality.md` | Pre-delivery checklist, worked example, anti-examples, quality gate |
-| `references/auto-update.md` | Feedback signals, pattern detection, suggested skill update format |
-
-### Examples
-
-- `examples/0526-saas-product-walkthrough.md` — anonymised 3-min onboarding video script for a synthetic B2B SaaS product (single aha at 1:20, "tomorrow morning" habit CTA)
-
----
-
-## Output routing
-
-Output destination by scope:
-
-- **Client-scoped:** `projects/consulting/active/{client}/content/execution/MMYY-{topic}-onboarding-video-script.md` per `.claude/rules/consulting-clients.md` auto-routing rule. The artifact is a content asset for the client (script + production notes), even though produced by PMM.
-- **Genesys-internal:** `projects/genesys/content/execution/MMYY-{topic}-onboarding-video-script.md`.
-
-Filename convention: `MMYY-{topic-slug}-onboarding-video-script.md` per `.claude/CLAUDE.md` File Naming Convention.
-
----
-
 ## MCP data integration
 
 **Level:** 2 — PM Execution
@@ -268,19 +236,6 @@ Filename convention: `MMYY-{topic-slug}-onboarding-video-script.md` per `.claude
 | **Transcript** | Aha candidates, quotes, persona pain markers | `transcript-analysis` upstream skill | Always |
 
 **Fallback (no MCP):** Founder-provided narration outline + manual product walkthrough notes.
-
----
-
-## Push
-
-Auto-route to Notion via the Notion sync protocol per `.claude/rules/notion-protocol.md`. Founders collaborate on the script in Notion before recording — Notion's stronger fork-detection (vs. gdrive's drift model) suits collaborative script editing where the script genuinely evolves between revisions.
-
-Optional: push to GDoc on demand via `.claude/mcp/gdrive/create-doc-unified.mjs --client {slug}` if the founder prefers reading from a Doc while recording.
-
-Chain suggestions after delivery:
-- `email-nurture` (emails around the video — pre-watch nudge, post-watch reinforcement)
-- `lifecycle` (embed the video in a multi-channel onboarding flow)
-- `transcript-analysis` (analyze performance of the recorded video to feed v2 of the script)
 
 ---
 

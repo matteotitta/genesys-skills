@@ -24,7 +24,6 @@ inputs:
   - clay-search
   - icp-research
   - company-context
-outputs:
 - type: enriched-prospect-list
   feeds_into:
   - outreach-emails
@@ -35,7 +34,6 @@ outputs:
   feeds_into:
   - outreach-emails
 depends_on: []
-feeds_into:
 - abm-campaign
 - linkedin-social-selling
 - niche-signal-discovery
@@ -45,7 +43,6 @@ mcps_used:
 - apollo-io
 - clay
 - deepline
-push_targets:
 - gdrive
 - notion
 triggers:
@@ -103,10 +100,10 @@ ALWAYS run before any enrichment over 5 contacts. This is the load-bearing safet
 ### Pre-execution checklist
 
 ```
-1. ESTIMATE cost:    deepline enrich --input file.csv --dry-run
-2. CHECK balance:    deepline billing --balance
+1. ESTIMATE cost: deepline enrich --input file.csv --dry-run
+2. CHECK balance: deepline billing --balance
 3. CONFIRM with user: "This will cost ~$X for N contacts. Proceed?"
-4. SET spending cap:  deepline billing --set-monthly-limit [amount]
+4. SET spending cap: deepline billing --set-monthly-limit [amount]
 ```
 
 ### Gate rules
@@ -174,27 +171,21 @@ Apollo-side credit gate also applies per `.claude/rules/apollo-credits.md`. Apif
 
 ## Process
 
-**Standard waterfall flow:** dry-run → pilot (2 rows) → full batch → email validation → filter to `valid`. Multi-stakeholder play (~30% win rate vs ~5% single-threaded) and quarterly CRM hygiene play (30% job-change rate per year) follow the same gate discipline. Full commands + workflows + provider configuration in `references/process.md`.
+**Standard waterfall flow:** dry-run → pilot (2 rows) → full batch → email validation → filter to `valid`. Multi-stakeholder play (~30% win rate vs ~5% single-threaded) and quarterly CRM hygiene play (30% job-change rate per year) follow the same gate discipline. Full commands + workflows + provider configuration in the premium reference.
 
-**Apify waterfall slot** for LinkedIn-URL-only inputs (`dev_fusion/Linkedin-Profile-Scraper` $10/1k or `apimaestro/.../no-cookies` $5/1k) also documented in `references/process.md`.
+**Apify waterfall slot** for LinkedIn-URL-only inputs (`dev_fusion/Linkedin-Profile-Scraper` $10/1k or `apimaestro/.../no-cookies` $5/1k) also documented in the premium reference.
 
 ---
 
 ## Plays
 
-22 pre-built enrichment plays organized by input type: Email Finding (6), People Finding (6), Validation & Scoring (3), CRM Hygiene & Job Changes (4), Outbound Integration (3). Decision tree + per-play input/output/cost in `references/plays.md`.
-
----
-
-## Output Format
-
-Enriched CSV adds `email`, `email_status`, `phone`, `linkedin_url`, `company_data`, `qualification_score`, `provider_used`, `cost_attributed` columns. Filter to `email_status = valid` for outbound. Full schema + iteration prompts + downstream-skill handoff format in `references/output-format.md`.
+22 pre-built enrichment plays organized by input type: Email Finding (6), People Finding (6), Validation & Scoring (3), CRM Hygiene & Job Changes (4), Outbound Integration (3). Decision tree + per-play input/output/cost in the premium reference.
 
 ---
 
 ## Quality
 
-Pre-execution checks cover cost discipline (dry-run + cap + user confirmation), pilot discipline (2-row test before full batch), input quality (column normalization, dedupe), and output quality (validation step ran, valid/catch-all/invalid segmented). Common-mistakes table (no dry-run, skipped validation, using Deepline for discovery) + worked example (250-row $38 estimate) + anti-examples + quality gate (≥75% find rate, ≥80% valid, ≤$0.20/validated, ≤2% bounce) in `references/quality.md`.
+Pre-execution checks cover cost discipline (dry-run + cap + user confirmation), pilot discipline (2-row test before full batch), input quality (column normalization, dedupe), and output quality (validation step ran, valid/catch-all/invalid segmented). Common-mistakes table (no dry-run, skipped validation, using Deepline for discovery) + worked example (250-row $38 estimate) + anti-examples + quality gate (≥75% find rate, ≥80% valid, ≤$0.20/validated, ≤2% bounce) in the premium reference.
 
 **Hit-rate gate (proceed/stop) — added 2026-05-05 via /steal from Andytoizer/agentoperator-outbound-engine:**
 - **`valid` + `catch_all` together = hit.** Most deliverable catch-all domains accept real emails even when the provider can't verify the exact mailbox. Treating catch_all as a miss undercounts deliverable coverage by ~15-25% in B2B SaaS lists.
@@ -222,18 +213,6 @@ Assigned to the **Researcher** role-agent. Slots into:
 - **Sales pipeline:** "discovery prep" — auto-enrich prospects before discovery calls
 - **New-client onboarding:** No direct role (research phase uses company-context, not contact enrichment)
 - **Outbound:** Core enrichment step after target list build
-
----
-
-## Reference Files
-
-| File | Purpose |
-|------|---------|
-| `references/process.md` | Apify waterfall slot + core CLI commands + workflows + provider configuration + future MCP migration |
-| `references/plays.md` | 22 plays + decision tree + per-play cost matrix |
-| `references/output-format.md` | Output CSV schema + filtering + iteration prompts + downstream handoff format |
-| `references/quality.md` | Pre-execution checklist + common mistakes + worked example + anti-examples + quality gate |
-| `references/auto-update.md` | Self-evaluation + feedback signals (provider price changes, MCP migration trigger) |
 
 ---
 

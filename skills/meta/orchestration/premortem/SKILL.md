@@ -13,14 +13,11 @@ review_gate: 1
 inputs:
   required: []
   recommended: []
-outputs:
 - type: runbook
   feeds_into: []
 depends_on: []
-feeds_into: []
 owned_by_agent: operator
 mcps_used: []
-push_targets: []
 triggers:
   slash_commands:
   - /premortem
@@ -103,7 +100,7 @@ This satisfies both the hook (plan mode) and the convention (output mode). Use s
 | **Execution-velocity** | Timeline slip, capacity gap, dependency miss, integration risk |
 | **Market-regulatory** | Regulatory change (e.g., FCA), competitor move, ICP shift, macro shift |
 
-Full worked examples in `references/domains-plan.md`.
+Full worked examples in the premium reference.
 
 ### `--output` mode — 5 Genesys execution domains
 
@@ -117,13 +114,10 @@ Full worked examples in `references/domains-plan.md`.
 
 If 3 of 5 domains don't apply to a specific output type, explicitly note "Not applicable — [reason]" and proceed with the relevant 2. Forcing weak coverage on misfitting domains produces noise, not signal.
 
-Full worked examples in `references/domains-output.md`. Output template (both modes) in `references/output-template.md`.
+Full worked examples in the premium reference. Output template (both modes) in the premium reference.
 
 ---
 
-## Output template (skeleton)
-
-```markdown
 ## Premortem
 
 ### Success state ({horizon})
@@ -131,21 +125,21 @@ Full worked examples in `references/domains-output.md`. Output template (both mo
 
 ### Failure modes (across {mode-specific domains})
 - **{Domain}:** {failure mode} — *Likelihood: {L|M|H}.*
-- ...
+-...
 
 ### Mitigations (effort, owner)
 - **{Failure mode}:** {mitigation OR explicit accept-risk}. (Effort {S|M|L}, owner: {who})
-- ...
+-...
 
 ### Carried-forward opportunities (mitigations that double as new ideas)
 - {Opportunity 1}
-- ...
+-...
 
 ### Premortem confidence
 **{L|M|H}.** {One-sentence rationale.}
 ```
 
-Full template with both --plan and --output worked examples in `references/output-template.md`.
+Full template with both --plan and --output worked examples in the premium reference.
 
 ---
 
@@ -154,16 +148,6 @@ Full template with both --plan and --output worked examples in `references/outpu
 - **Upstream:** This is upstream of almost everything. /premortem --plan fires during plan mode; /premortem --output fires as the final step in every output skill body.
 - **Downstream:** Plan mode feeds the ExitPlanMode hook. Output mode feeds whichever lens-reviewer applies (voice-reviewer for content; design-reviewer for visual; product-lens-reviewer for strategy; scope-guardian-reviewer for proposals).
 - **Sister skills:** [`/steal`](../../learning/steal/SKILL.md) imports patterns including this one; [`/workflow-design`](../workflow-design/SKILL.md) designs multi-step prompts where premortem fits as a stage.
-
----
-
-## Reference files
-
-| File | Purpose |
-|---|---|
-| `references/domains-plan.md` | 5 Genesys strategic domains with worked examples from ClientCo, ClientCo, Pulse |
-| `references/domains-output.md` | 5 Genesys execution domains with worked examples per output type |
-| `references/output-template.md` | Canonical Premortem section template, both modes, with filled examples |
 
 ---
 

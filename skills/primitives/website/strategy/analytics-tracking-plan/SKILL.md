@@ -16,13 +16,11 @@ inputs:
   - icp-research
   - funnel-strategy
   - product-messaging
-outputs:
 - type: content-strategy
   feeds_into:
   - ab-testing
   - dashboard
 depends_on: []
-feeds_into:
 - ab-testing
 - dashboard
 - experiment
@@ -31,7 +29,6 @@ feeds_into:
 owned_by_agent: growth
 mcps_used:
 - exa
-push_targets:
 - gdrive
 triggers:
   slash_commands:

@@ -21,14 +21,11 @@ inputs:
   recommended:
   - tov-guidelines
   - brand-context
-outputs:
 - type: voice-review-report
   feeds_into: []
 depends_on: []
-feeds_into: []
 owned_by_agent: operator
 mcps_used: []
-push_targets:
 - gdrive
 - notion
 triggers:
@@ -50,7 +47,7 @@ Review any content output for voice quality, brand compliance, and authenticity.
 
 Use this when you want an explicit, detailed voice review — not just a pass/fail.
 
-For the full 8-dimension rule set → `references/dimensions.md`. For the 3-phase process + output format → `references/process.md`.
+For the full 8-dimension rule set → the premium reference. For the 3-phase process + output format → the premium reference.
 
 ---
 
@@ -99,10 +96,10 @@ If content is not a deliverable (code, plan, conversation), tell the user this s
 | 4 | **Title/header case** | Sentence case (not Title Case) |
 | 5 | **Client-specific voice rules** | Conditional — only if client context loaded |
 | 6 | **100 Posts Test** | Authentic across a feed of 100 from this author? |
-| 7 | **Anti-AI-speak** | Structural patterns (false contrast, wrapped bow, AI transitions) + 45-row pattern→replacement table per `references/anti-ai-patterns.md` |
+| 7 | **Anti-AI-speak** | Structural patterns (false contrast, wrapped bow, AI transitions) + 45-row pattern→replacement table per the premium reference |
 | 8 | **LinkedIn readability** | LinkedIn-only — mobile breaks, one story per post, ecosystem CTAs |
 
-For full rules per dimension → `references/dimensions.md`.
+For full rules per dimension → the premium reference.
 
 ---
 
@@ -141,16 +138,6 @@ For full rules per dimension → `references/dimensions.md`.
 ### Completeness
 - [ ] Client context correctly identified (or noted as "global only")
 - [ ] Summary mentions both strengths and issues
-
----
-
-## Reference Files
-
-| File | Purpose |
-|------|---------|
-| `references/dimensions.md` | Full rule set for all 8 dimensions with CLEAN/WARN/FAIL criteria, examples, source attribution |
-| `references/process.md` | 3-phase workflow (load context / evaluate / report) + output format template |
-| `references/anti-ai-patterns.md` | 45-row pattern→replacement table for D7 (anti-AI-speak). Cites Wikipedia AI Cleanup project as upstream source; refresh quarterly during the brand-research refresh. |
 
 ---
 

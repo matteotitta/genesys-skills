@@ -13,14 +13,11 @@ review_gate: 3
 inputs:
   required: []
   recommended: []
-outputs:
 - type: financial-report
 depends_on: []
-feeds_into: []
 owned_by_agent: operator
 mcps_used:
 - xero
-push_targets:
 - gdrive
 status: draft
 locked_by: null
@@ -88,17 +85,17 @@ For the target month:
 | **Category / P&L view** | `list-profit-and-loss` for the month | — |
 | **Receivables ageing** | `list-aged-receivables-by-contact` (who owes, how old) | — |
 
-Wise CSVs live at `projects/genesys/goals/0226-wise-source-data/FY-*.csv` (FY-25-26 = current). The export schema is a Wise Business transfers file: `ID, Status, Direction, Created on, Finished on, Source name, Source amount (after fees), Source currency, Target name, Target amount (after fees), Target currency, ..., Category, Note`. Use **GBP base-currency** amounts for all cash analysis (see the currency-mismatch trap).
+Wise CSVs live at `projects/genesys/goals/0226-wise-source-data/FY-*.csv` (FY-25-26 = current). The export schema is a Wise Business transfers file: `ID, Status, Direction, Created on, Finished on, Source name, Source amount (after fees), Source currency, Target name, Target amount (after fees), Target currency,..., Category, Note`. Use **GBP base-currency** amounts for all cash analysis (see the currency-mismatch trap).
 
 **If Xero is unreachable** (401 / expired token): do not proceed on Wise alone silently — flag it, refresh Xero per `reference_xero_mcp_refresh.md`, and note in the report which figures are Wise-only vs Xero-reconciled. If both are unavailable → STOP and ask.
 
 ### Phase 2 — Categorize and reconcile
 
-Bucket all cash outflows into the locked Genesys category set (see `references/categorization.md` for the full set + fiscal-year lock discipline). The core categories:
+Bucket all cash outflows into the locked Genesys category set (see the premium reference for the full set + fiscal-year lock discipline). The core categories:
 
 `revenue` (client fees, net of fees/FX) · `director-remuneration` (PAYE salary + dividends) · `team` (contractors/VAs + any payroll) · `software` (SaaS subscriptions — the tool stack) · `professional-services` (accountant, legal) · `taxes` (Corporation Tax, VAT, PAYE/NIC) · `other`.
 
-Run the universal traps every month (full list in `references/traps.md`):
+Run the universal traps every month (full list in the premium reference):
 
 - **Currency mismatch** — Wise multi-currency: clients pay in USD/EUR/GBP. Always use the **base-currency (GBP)** amount, never the counterparty-currency amount. Xero revalues foreign balances to GBP at period end (unrealized FX) — the FX revaluation line is a known reconciliation item, not a real cash flow.
 - **Cash-vs-credit double-count** — do not count both a card autopay outflow AND the individual card charges. Pick cash accounts as the source of truth; treat the card as a debt account.
@@ -110,29 +107,29 @@ Cross-checks before writing: payments received in Xero ≈ Wise + bank inflows (
 
 ### Phase 3 — Compute EOM cash (transaction-sum method)
 
-**Non-negotiable.** Full recipe in `references/eom-cash-methodology.md`. The discipline: never trust a single balance number — compute EOM two independent ways and reconcile to the penny.
+**Non-negotiable.** Full recipe in the premium reference. The discipline: never trust a single balance number — compute EOM two independent ways and reconcile to the penny.
 
 ```
 # 1. From opening balance at period start (Xero balance-sheet as-at the start date),
-#    sum all signed bank movements (list-bank-transactions + list-payments applied to
-#    bank) for each cash account through date T:
-#        balance_at_T = opening_balance + sum(movements where date <= T)
+# sum all signed bank movements (list-bank-transactions + list-payments applied to
+# bank) for each cash account through date T:
+# balance_at_T = opening_balance + sum(movements where date <= T)
 # 2. Sanity check: balance_at_T must equal Xero's reconciled cash-at-bank on the
-#    balance sheet as at T (list-report-balance-sheet, date=T) — Xero's ledger is the
-#    authoritative reconciled figure, the role the bank API's available_balance plays
-#    in the source method. They must agree to the penny (allowing the flagged FX
-#    revaluation line for multi-currency Wise balances).
+# balance sheet as at T (list-report-balance-sheet, date=T) — Xero's ledger is the
+# authoritative reconciled figure, the role the bank API's available_balance plays
+# in the source method. They must agree to the penny (allowing the flagged FX
+# revaluation line for multi-currency Wise balances).
 # 3. Independent cross-reference: sum Wise CSV rows (Finished on <= T, base-currency
-#    amount) for the Wise-held accounts. Must reconcile within known timing lag.
+# amount) for the Wise-held accounts. Must reconcile within known timing lag.
 # 4. Month-over-month: prior-month EOM + this month's net cash change == this-month EOM,
-#    to the pound.
+# to the pound.
 ```
 
 If the two computations do not reconcile, **STOP — do not ship**. Investigate: an unreconciled bank line in Xero, a missing account, FX revaluation, a paging/timeout on the transaction pull, a Wise transfer not yet in Xero. A silent reconciliation gap propagates into every downstream chart and forecast. (A ~$42K walkback error once ran for weeks in a production CFO workflow before a month-over-month check caught it — hence this method.)
 
 ### Phase 4 — Update the scenario projector
 
-Update the forward projector that projects EOM cash N months out under adjustable assumptions (revenue growth, contractor hire, spend changes). Structure + reference implementation in `references/scenario-projector.md`: trailing 3 closed months (HISTORICAL) → TODAY (actual cash) → Mo 1 (current month, partial) → Mo 2–7 (scenario settings apply). Each month: `starting + revenue − expenses = profit → ending`.
+Update the forward projector that projects EOM cash N months out under adjustable assumptions (revenue growth, contractor hire, spend changes). Structure + reference implementation in the premium reference: trailing 3 closed months (HISTORICAL) → TODAY (actual cash) → Mo 1 (current month, partial) → Mo 2–7 (scenario settings apply). Each month: `starting + revenue − expenses = profit → ending`.
 
 Update each run: append the just-closed month to HISTORICAL (drop the oldest); set `startingCash` to today's actual reconciled balance; refresh category baselines to **actuals, not safe estimates**; set `baselineRevenue` net of Wise/processor fees; verify presets still hold.
 
@@ -170,7 +167,7 @@ Ad-hoc — "what if I bring on a £4K/mo contractor in September" or "what if a 
 
 ## Pickup mode
 
-Resume the prior run. Surface: most recent monthly report + weekly pulse, the reported month's open items (§ Open items), current-narrative from `latest.md`. Re-read the source before continuing — never assume continuity.
+Resume the prior run. Surface: most recent monthly report + weekly pulse, the reported month's open items (), current-narrative from `latest.md`. Re-read the source before continuing — never assume continuity.
 
 ## Reconciliation self-roast (run before the report ships)
 
@@ -186,9 +183,6 @@ Resume the prior run. Surface: most recent monthly report + weekly pulse, the re
 
 If any check fails, fix or STOP before the report ships. These data-integrity gates are the review gate for this skill.
 
-## Output format
-
-```markdown
 # Genesys CFO snapshot — {Month YYYY}
 
 ## TL;DR
@@ -219,13 +213,6 @@ If any check fails, fix or STOP before the report ships. These data-integrity ga
 - **Revenue is net of Wise/processor fees + FX**, not gross.
 - **Cash floor applies to the intramonth LOW**, not the EOM high — consulting collections are lumpy; cash dips between invoice runs.
 - **When numbers don't reconcile, stop.** Don't ship a report with an unexplained gap.
-
-## References
-
-- `references/eom-cash-methodology.md` — the transaction-sum EOM method, Xero + Wise adapted, GBP base, FX revaluation handling.
-- `references/scenario-projector.md` — forward cash projector: structure, per-month math, Genesys categories, monthly update checklist.
-- `references/categorization.md` — the locked Genesys category set + fiscal-year discipline + cross-checks.
-- `references/traps.md` — recurring categorization + reconciliation traps (multi-currency Wise, cash-vs-credit, internal transfers, UK tax timing, director drawing).
 
 ## Attribution
 

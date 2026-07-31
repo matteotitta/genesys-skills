@@ -19,14 +19,11 @@ review_gate: 0
 inputs:
   required: []
   recommended: []
-outputs:
 - type: runbook
   feeds_into: []
 depends_on: []
-feeds_into: []
 owned_by_agent: operator
 mcps_used: []
-push_targets:
 - gdrive
 - notion
 triggers:
@@ -117,7 +114,7 @@ Before proceeding, verify:
 
 ## Process pointer
 
-Step-by-step phases, flowchart, and pre-built workflow chains live in `references/process.md`.
+Step-by-step phases, flowchart, and pre-built workflow chains live in the premium reference.
 
 Summary: validate inputs → map workflow → generate stage prompts (each using 7-section architecture) → create variable registry → write execution guide → compile single markdown document.
 
@@ -133,17 +130,9 @@ Summary: validate inputs → map workflow → generate stage prompts (each using
 
 ---
 
-## Output Format
-
-Full workflow document template, iteration prompts, and post-output expansion offers live in `references/output-format.md`.
-
-The output is a single markdown file containing: overview, workflow diagram, variable registry, per-stage 7-section prompts with quality gates, execution guide with trigger messages, and troubleshooting table.
-
----
-
 ## Quality
 
-Pre-delivery checklist, worked example (Transcript-to-LinkedIn workflow), and anti-examples live in `references/quality.md`.
+Pre-delivery checklist, worked example (Transcript-to-LinkedIn workflow), and anti-examples live in the premium reference.
 
 Minimum bar: diagram complete, variable registry covers every variable, all stages carry a 7-section prompt, quality gates defined between stages, execution guide present.
 
@@ -151,7 +140,7 @@ Minimum bar: diagram complete, variable registry covers every variable, all stag
 
 ## Skill Auto-Update Protocol
 
-Feedback signal detection, pattern triggers, and self-update format live in `references/auto-update.md`.
+Feedback signal detection, pattern triggers, and self-update format live in the premium reference.
 
 ---
 
@@ -165,18 +154,6 @@ Each stage uses the 7-section prompt architecture from the `prompt-design` skill
 | **All content skills** | Uses output | Workflows feed into skill execution |
 | **vibe-coding** | Related | For building tools that use workflows |
 | **transcript-analysis** | Provides input | Interview workflows |
-
----
-
-## Reference Files
-
-| File | Purpose |
-|------|---------|
-| `references/process.md` | Process flowchart + step-by-step + pre-built chains |
-| `references/output-format.md` | Workflow document template + iteration prompts |
-| `references/quality.md` | Pre-delivery checklist + worked example + anti-examples |
-| `references/auto-update.md` | Self-evaluation + feedback signals + pattern triggers |
-| `references/workflow-design.md` | Legacy workflow design patterns + variable chaining |
 
 ---
 

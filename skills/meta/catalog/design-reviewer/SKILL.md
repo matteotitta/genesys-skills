@@ -20,14 +20,11 @@ inputs:
   required: []
   recommended:
   - brand-kit
-outputs:
 - type: runbook
   feeds_into: []
 depends_on: []
-feeds_into: []
 owned_by_agent: operator
 mcps_used: []
-push_targets:
 - gdrive
 - notion
 triggers:
@@ -54,7 +51,7 @@ disable-model-invocation: true
 
 Review any visual deliverable for design quality across 5 dimensions, scored 0–4 each (Nielsen-style rubric, 20 points max). Produces a P0–P3 severity-tagged report with token-cited findings and prioritized remediation. Mirrors voice-reviewer's role for content — but for visual output.
 
-This skill also hosts the **shared design-quality library** at `references/`. Output skills (vibe-coding, dashboard, figma-prototype, website-build, website-wireframe, product-ui-frames) relative-link into these references for their internal design-cycle phases. Reference-only consumption does not require invoking this skill.
+This skill also hosts the **shared design-quality library** at the premium reference. Output skills (vibe-coding, dashboard, figma-prototype, website-build, website-wireframe, product-ui-frames) relative-link into these references for their internal design-cycle phases. Reference-only consumption does not require invoking this skill.
 
 ---
 
@@ -107,7 +104,7 @@ Before proceeding, verify:
 
 1. **Step 1.1: Load global doctrine** — read `.claude/rules/design-production.md` (always applicable). Pull the banned-patterns list, quantitative rule patterns, and the doctrine's Do's/Don'ts.
 2. **Step 1.2: Load client tokens** — if working in a client folder, read the client's brand-kit DESIGN.md. Extract the token contract (colors, typography, rounded, spacing, components). If no client context: proceed with global rules only.
-3. **Step 1.3: Load shared design-quality library** — keep `references/anti-patterns.md`, `references/scoring-rubric.md`, and `references/motion-craft.md` available for reference during scoring.
+3. **Step 1.3: Load shared design-quality library** — keep the premium reference, the premium reference, and the premium reference available for reference during scoring.
 
 **Phase 1 checkpoint:**
 - [ ] Doctrine loaded
@@ -116,18 +113,17 @@ Before proceeding, verify:
 
 ### Phase 2: Score 5 dimensions (0–4 each)
 
-Use the Nielsen-style 0–4 scale per dimension. See `references/scoring-rubric.md` for full anchors. Quick form below.
+Use the Nielsen-style 0–4 scale per dimension. See the premium reference for full anchors. Quick form below.
 
-1. **Dimension 1: Anti-patterns (slop catalog)** — see `references/anti-patterns.md` for the full 25-rule catalog. Top tells: gradient text (`background-clip: text`), side-stripe borders >1px, generic drop shadows on rounded rectangles ("AI output fingerprint"), hero-metric template, icon-tile-above-heading template, glassmorphism, "gray on color" (a11y), bounce easing, overused fonts (Inter, Geist, Plus Jakarta, Fraunces, Mona Sans, Space Grotesk, Recoleta, Instrument Sans).
+1. **Dimension 1: Anti-patterns (slop catalog)** — see the premium reference for the full 25-rule catalog. Top tells: gradient text (`background-clip: text`), side-stripe borders >1px, generic drop shadows on rounded rectangles ("AI output fingerprint"), hero-metric template, icon-tile-above-heading template, glassmorphism, "gray on color" (a11y), bounce easing, overused fonts (Inter, Geist, Plus Jakarta, Fraunces, Mona Sans, Space Grotesk, Recoleta, Instrument Sans).
    - **4:** Zero anti-patterns. **3:** 1 minor tell. **2:** 2–3 tells. **1:** 4+ tells. **0:** Anti-pattern is structural (entire layout is a banned template).
 
 2. **Dimension 2: DESIGN.md token compliance** — does the implementation cite tokens by reference, or are values hardcoded? Check for raw hex codes in component code, fonts referenced by name (not via token), radii as magic numbers.
    - **4:** All values via token references. **3:** 1–2 minor hardcodes. **2:** Several hardcodes; some tokens unused. **1:** Most values hardcoded. **0:** Component bypasses the token system entirely.
 
-3. **Dimension 3: Motion craft** — see `references/motion-craft.md`. Check easing curves (no bounce/elastic for state transitions), duration (≤200ms for state, longer only with reason), `prefers-reduced-motion` respect, namespace conventions, transform-origin awareness.
+3. **Dimension 3: Motion craft** — see the premium reference. Check easing curves (no bounce/elastic for state transitions), duration (≤200ms for state, longer only with reason), `prefers-reduced-motion` respect, namespace conventions, transform-origin awareness.
    - **4:** Motion is crafted (spring physics where appropriate, reduced-motion guard, origin-aware). **3:** Generic but tasteful (linear/ease-out, ≤200ms). **2:** One issue (e.g., no reduced-motion guard). **1:** Bounce easing or generic decoration. **0:** Motion is the AI tell (animated everywhere, no purpose).
    - **N/A:** Static deliverable (wireframe, slide).
-   - Score against the **10 non-negotiable motion standards + escalation triggers** in the "Motion craft — Dimension 3 in depth" section below; when a fix is needed, propose it in the remedial preference order (delete first). Pull exact curves, durations, and spring configs from `references/motion-craft.md` rather than approximating.
 
 4. **Dimension 4: Accessibility essentials** — contrast ratios meet WCAG AA (4.5:1 normal, 3:1 large), semantic HTML, alt text, focus-visible states, keyboard navigation. Not a full a11y audit — just the essentials that affect ship-readiness.
    - **4:** All essentials pass. **3:** 1 minor (missing alt on decorative img). **2:** 1 contrast violation or 1 keyboard trap. **1:** Multiple essentials failing. **0:** Inaccessible (no semantic structure, no alt text, contrast violations everywhere).
@@ -158,7 +154,7 @@ Use the output format below. For each finding, quote the specific evidence (code
 
 ## Motion craft — Dimension 3 in depth
 
-Score Dimension 3 as a senior design engineer with a brutal eye for craft. The bias is toward motion that feels right, not motion that merely runs — a transition that "works" but lands from the wrong origin, fires too often, or drops frames is a regression, not a pass. Default to flagging; approval is earned. Pull the exact curves, durations, spring configs, and citations from `references/motion-craft.md` rather than approximating.
+Score Dimension 3 as a senior design engineer with a brutal eye for craft. The bias is toward motion that feels right, not motion that merely runs — a transition that "works" but lands from the wrong origin, fires too often, or drops frames is a regression, not a pass. Default to flagging; approval is earned. Pull the exact curves, durations, spring configs, and citations from the premium reference rather than approximating.
 
 ### The 10 non-negotiable motion standards
 
@@ -167,7 +163,7 @@ Every animation in the deliverable is measured against these — a violation is 
 1. **Justified motion** — every animation answers "why does this move?" (spatial continuity, state indication, feedback, explanation, or softening a jarring change). "It looks cool" on a frequently-seen element is a block.
 2. **Frequency-appropriate** — match motion to how often it's seen. Keyboard-initiated and 100+/day actions get no animation; tens/day gets reduced motion; occasional gets standard; rare or first-time can earn delight.
 3. **Responsive easing** — entering and exiting elements use `ease-out` or a strong custom curve. `ease-in` on UI is a block — it delays the moment the user watches most. Built-in easings are too weak; expect custom cubic-beziers.
-4. **Sub-300ms UI** — UI animations stay under 300ms; anything slower on a UI element needs a stated reason. Per-element budgets live in `references/motion-craft.md`.
+4. **Sub-300ms UI** — UI animations stay under 300ms; anything slower on a UI element needs a stated reason. Per-element budgets live in the premium reference.
 5. **Origin and physical correctness** — popovers, dropdowns, and tooltips scale from their trigger (`transform-origin`), never from center. Never animate from `scale(0)` — start from `scale(0.9–0.97)` + opacity. Modals are exempt — they stay centered.
 6. **Interruptibility** — rapidly-triggered or gesture-driven motion (toasts, toggles, drags) must retarget from its current state — CSS transitions or springs, not keyframes that restart from zero.
 7. **GPU-only properties** — animate `transform` and `opacity` only. Animating `width`/`height`/`margin`/`padding`/`top`/`left` (or Framer Motion `x`/`y` shorthands under load) is a performance finding.
@@ -210,9 +206,6 @@ The 10 standards, escalation triggers, and remedial order are adapted from Emil 
 
 ---
 
-## Output Format
-
-```markdown
 # Design Review
 
 **Verdict:** [Ship it | Minor fixes | Fix before ship | Block]
@@ -242,9 +235,6 @@ Fix: [specific replacement or referenced library file]
 ## Recommended next phases
 
 [Pointer to relevant design-quality library files based on findings:]
-- If hardening gaps surfaced → walk `references/harden-checklist.md`
-- If polish gaps → `references/polish-principles.md`
-- If decision-density issues → `references/cognitive-load-tenets.md`
 - (etc.)
 
 ## Positive callouts
@@ -268,7 +258,7 @@ Before delivering the review, ask:
 
 ## Shared design-quality library
 
-The 16 files inside `references/` serve dual purpose: (a) source for design-reviewer's own scoring, (b) canonical library output skills consume via relative paths for their post-authoring phase walks.
+The 16 files inside the premium reference serve dual purpose: (a) source for design-reviewer's own scoring, (b) canonical library output skills consume via relative paths for their post-authoring phase walks.
 
 - anti-patterns.md — 25-rule slop catalog (Apache-2.0 from impeccable)
 - scoring-rubric.md — Nielsen 0–4 + P0–P3 severity
@@ -293,14 +283,14 @@ The 16 files inside `references/` serve dual purpose: (a) source for design-revi
 
 1. **Quote actual evidence:** Every finding cites the specific code line, hex value, or screenshot location. No paraphrase.
 2. **Score against tokens that exist:** If the client has no DESIGN.md, score Dimension 2 as "global rules only" and don't invent client tokens.
-3. **Don't flag style preferences as violations:** Only flag rules documented in `references/anti-patterns.md` or the client's DESIGN.md Do's/Don'ts.
+3. **Don't flag style preferences as violations:** Only flag rules documented in the premium reference or the client's DESIGN.md Do's/Don'ts.
 4. **Be specific about fixes:** "Use a better color" is not a fix. "Replace `bg-purple-600` with `bg-primary` (resolves to the client's `colors.primary` token)" is a fix.
 
 ---
 
 ## Skill onboarding pass — for new design-output skills
 
-When a new design-output skill is created (or significantly refactored), run this pass to verify it conforms to `.claude/rules/design-production.md` § Skill authorship contract. This is the propagation hook — it ensures every future design skill (Hyperframes derivatives, dashboard variants, slide tools, etc.) inherits the design-quality discipline.
+When a new design-output skill is created (or significantly refactored), run this pass to verify it conforms to `.claude/rules/design-production.md`. This is the propagation hook — it ensures every future design skill (Hyperframes derivatives, dashboard variants, slide tools, etc.) inherits the design-quality discipline.
 
 **How to invoke:** `/design-reviewer` against the new SKILL.md path. Reviewer detects target is a SKILL.md (not implemented UI) and switches to the onboarding pass.
 
@@ -309,9 +299,9 @@ When a new design-output skill is created (or significantly refactored), run thi
 1. **Brand-kit dependency** — `inputs.recommended` (or `inputs.required`) includes `brand-kit`. Severity: P1 if missing.
 2. **Token-cite discipline** — body includes guidance that produced output cites DESIGN.md tokens, not hardcoded values. P2 if missing.
 3. **Design cycle section present** — body has a `## Design cycle (post-authoring phases)` section walking the relevant phases per output type. P1 if missing.
-4. **Cheat-sheet row added** — `.claude/rules/design-production.md` § "Skill integration cheat sheet" includes a row for this skill. P2 if missing.
+4. **Cheat-sheet row added** — `.claude/rules/design-production.md` includes a row for this skill. P2 if missing.
 5. **Final review gate** — body explicitly says "Run `/design-reviewer` as the final ship-ready gate". P1 if missing.
-6. **Apache-2.0 attribution (if applicable)** — if the skill imports content from `design-reviewer/references/` (impeccable-sourced), NOTICE.md or inline attribution exists. P2 if missing.
+6. **Apache-2.0 attribution (if applicable)** — if the skill imports content from `design-reviewer/the premium reference (impeccable-sourced), NOTICE.md or inline attribution exists. P2 if missing.
 
 **Runtime check:** the soft-warn version is wired into `_schema/validate-frontmatter.py` and runs on every commit. The full onboarding pass (with cheat-sheet row check + Apache attribution check) requires manual review here.
 

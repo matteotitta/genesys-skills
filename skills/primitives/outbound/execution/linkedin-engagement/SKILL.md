@@ -23,7 +23,6 @@ inputs:
   - deepline-enrich
   - icp-research
   - lead-scoring
-outputs:
 - type: signal-enriched-account-list
   feeds_into:
   - lead-scoring
@@ -31,7 +30,6 @@ outputs:
   - abm-campaign
   - niche-signal-discovery
 depends_on: []
-feeds_into:
 - abm-campaign
 - lead-scoring
 - niche-signal-discovery
@@ -40,7 +38,6 @@ owned_by_agent: content
 mcps_used:
 - apify
 - deepline
-push_targets:
 - gdrive
 - notion
 triggers:
@@ -110,7 +107,6 @@ What this skill is NOT:
 
 - The post has fewer than 20 engagements → manual review is faster
 - The post is off-topic for your category → engagement quality will be low, signal is weak
-- You want to scrape *posts about* a topic → use Mode 2 (topic search) in `references/modes.md`
 - You want to scrape LinkedIn profiles more broadly → use `/build-tam`
 - You want to understand *what people said in comments* semantically → that's analysis, not prospecting
 
@@ -130,7 +126,7 @@ What this skill is NOT:
 
 ## Process
 
-**Six-phase flow:** Input validation → Apify scrape → Dedupe (LinkedIn URL > name+company) → ICP filter (with reasons logged) → Handoff to `/deepline-enrich` → Output CSV with engagement context. Step-by-step + MCP integration in `references/process.md`.
+**Six-phase flow:** Input validation → Apify scrape → Dedupe (LinkedIn URL > name+company) → ICP filter (with reasons logged) → Handoff to `/deepline-enrich` → Output CSV with engagement context. Step-by-step + MCP integration in the premium reference.
 
 ---
 
@@ -145,7 +141,7 @@ The skill now supports four modes (added 2026-05-01 via `/steal`):
 | **Mode 3 — Profile feed** | Pull all posts from a target profile in date range | `harvestapi/linkedin-profile-posts` ($1.50/1k) |
 | **Mode 4 — Company feed** | Pull all posts from a target company page in date range | `harvestapi/linkedin-company-posts` ($1.50/1k) |
 
-Full actor matrix + budget alts + vendor-family risk note in `references/modes.md`.
+Full actor matrix + budget alts + vendor-family risk note in the premium reference.
 
 ---
 
@@ -159,15 +155,9 @@ Full actor matrix + budget alts + vendor-family risk note in `references/modes.m
 
 ---
 
-## Output Format
-
-Output document includes summary (raw → dedupe → filter → enriched counts), top-10 engagement signals table, CSV file path, and suggested next steps. Per-engagement-type outreach angles + recency-tier rules in `references/output-format.md`.
-
----
-
 ## Quality
 
-Pre-delivery checks cover coverage (all phases ran, filtered-engagers logged), quality (multi-post counts preserved, recency captured, no inflated reaction sentiment), and cost discipline (Apify + Deepline gates respected). Common-mistakes table (treating likes as MQLs, skipping ICP filter, vendor-family swap) + worked example (3-post AI compliance harvest, 287 unique → 158 ICP-fit → 102 valid emails) + anti-examples + quality gate (Apify success rate, dedupe accuracy, email find rate ≥40%) in `references/quality.md`.
+Pre-delivery checks cover coverage (all phases ran, filtered-engagers logged), quality (multi-post counts preserved, recency captured, no inflated reaction sentiment), and cost discipline (Apify + Deepline gates respected). Common-mistakes table (treating likes as MQLs, skipping ICP filter, vendor-family swap) + worked example (3-post AI compliance harvest, 287 unique → 158 ICP-fit → 102 valid emails) + anti-examples + quality gate (Apify success rate, dedupe accuracy, email find rate ≥40%) in the premium reference.
 
 ---
 
@@ -213,18 +203,6 @@ In the engagement workflow: slots into **content operations** as an optional pos
 | `outreach-emails` | Uses engagement as personalization hook |
 | `abm-campaign` | Tier 1 ABM pool from highest-signal engagers |
 | `niche-signal-discovery` | Engagement is one of the signal categories |
-
----
-
-## Reference Files
-
-| File | Purpose |
-|------|---------|
-| `references/process.md` | Six-phase flow (validate → scrape → dedupe → filter → enrich → output) + MCP integration |
-| `references/modes.md` | Modes 1-4 (engagement, topic search, profile feed, company feed) — actor matrix + vendor-family risk note |
-| `references/output-format.md` | Output document template + per-engagement outreach angles + recency tiers + iteration prompts |
-| `references/quality.md` | Pre-delivery checks + common mistakes + worked example + anti-examples + quality gate |
-| `references/auto-update.md` | Self-evaluation + feedback signals (Apify actor health, harvestapi vendor-family risk) |
 
 ---
 

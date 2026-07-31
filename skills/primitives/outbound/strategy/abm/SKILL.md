@@ -25,19 +25,16 @@ inputs:
   - icp-research
   - company-context
   - product-messaging
-outputs:
 - type: launch-plan
   feeds_into:
   - outreach-emails
 depends_on:
 - lead-scoring
 - company-context
-feeds_into:
 - outreach-emails
 owned_by_agent: sales
 mcps_used:
 - exa
-push_targets:
 - gdrive
 - notion
 triggers:
@@ -135,9 +132,9 @@ ABM isn't one-size-fits-all. The tier determines how much time, research, and pe
 
 ## Process
 
-**Six-phase flow:** Account selection & tiering → Account intel → Play design → Content creation → Execution → Measurement. Each phase has tier-specific outputs. Full step-by-step + fit scoring + cadence templates + MCP integration in `references/process.md`.
+**Six-phase flow:** Account selection & tiering → Account intel → Play design → Content creation → Execution → Measurement. Each phase has tier-specific outputs. Full step-by-step + fit scoring + cadence templates + MCP integration in the premium reference.
 
-**Reactivation play** (sub-workflow for cold/churned/dormant accounts) also documented in `references/process.md`.
+**Reactivation play** (sub-workflow for cold/churned/dormant accounts) also documented in the premium reference.
 
 ---
 
@@ -154,15 +151,9 @@ Per Apollo credit gate (`.claude/rules/apollo-credits.md`): search is free; enri
 
 ---
 
-## Output Format
-
-Campaign briefs include goal, target segment, scored account list with tier assignments, per-tier plays (Tier 1 bespoke, Tier 2 segment, Tier 3 programmatic), cadence schedule, success metrics, and next actions. Full template + iteration prompts in `references/output-format.md`.
-
----
-
 ## Quality
 
-Pre-delivery checks cover campaign structure (tiering rationale, cadence realism), content quality (Tier 1 hand-written feel, "would they forward?" test), and data quality (no invented stakeholders or engagement history). Worked example + anti-examples (over-tiering, generic Tier 1, Tier 3 cadence pretending to be Tier 2) + post-launch failure-mode triage in `references/quality.md`.
+Pre-delivery checks cover campaign structure (tiering rationale, cadence realism), content quality (Tier 1 hand-written feel, "would they forward?" test), and data quality (no invented stakeholders or engagement history). Worked example + anti-examples (over-tiering, generic Tier 1, Tier 3 cadence pretending to be Tier 2) + post-launch failure-mode triage in the premium reference.
 
 ---
 
@@ -178,19 +169,6 @@ Pre-delivery checks cover campaign structure (tiering rationale, cadence realism
 | **lifecycle-marketing** | `feeds_into` | Post-conversion nurture for won ABM accounts |
 | **sales-enablement** | `feeds_into` | Handoff materials when accounts hit engagement threshold |
 | **competitor-research** | `enhances` | Competitive context for Tier 1 displacement plays |
-
----
-
-## Reference Files
-
-| File | Purpose |
-|------|---------|
-| `references/process.md` | Six phases (selection → measurement) + fit scoring + cadence templates per tier + reactivation play + MCP integration |
-| `references/output-format.md` | Campaign brief template + iteration prompts + variant guidance (new pipeline / reactivation / expansion) |
-| `references/quality.md` | Pre-delivery checks + worked fit-scoring example + anti-examples + post-launch failure-mode triage |
-| `references/auto-update.md` | Self-evaluation protocol + feedback signals (tier reply-rate drift, channel mix gaps) |
-| `references/linkedin-ads.md` | Skills-based targeting + budget guidance + audience expansion + competitive displacement (incident.io 2026 data) |
-| `projects/research/taste-library/resources/0626-sales-qualification-frameworks/health-rubrics.md` | Deal-health (10-dim) + account-health (9-dim) rubrics — dimension sets + weights for prioritizing and sequencing named accounts already in motion |
 
 ---
 

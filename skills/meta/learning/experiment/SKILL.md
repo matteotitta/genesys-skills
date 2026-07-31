@@ -19,14 +19,11 @@ review_gate: 0
 inputs:
   required: []
   recommended: []
-outputs:
 - type: experiment-log
   feeds_into: []
 depends_on: []
-feeds_into: []
 owned_by_agent: operator
 mcps_used: []
-push_targets:
 - gdrive
 - notion
 triggers:
@@ -45,7 +42,7 @@ effort: medium
 
 Stop re-testing what already failed. Stop forgetting what worked. This skill gives you a structured experiment tracking system that compounds knowledge across sessions — every test informs the next one.
 
-For full schema, modes (new/log/review/suggest), and messaging-mode scoring → `references/process.md`.
+For full schema, modes (new/log/review/suggest), and messaging-mode scoring → the premium reference.
 
 ---
 
@@ -77,7 +74,7 @@ For full schema, modes (new/log/review/suggest), and messaging-mode scoring → 
 | `/experiment review [domain]` | Browse past experiments | domain (optional) |
 | `/experiment suggest [domain]` | Recommend next test | domain |
 
-For full mode workflows + output formats → `references/process.md`.
+For full mode workflows + output formats → the premium reference.
 
 ---
 
@@ -98,7 +95,7 @@ For full mode workflows + output formats → `references/process.md`.
 **Location:** `.claude/experiments/experiments.db`
 **Tables:** `experiments`, `variants`, `learnings`, `experiments_fts` (FTS5 index)
 
-For full SQL schema + init script → `references/process.md`.
+For full SQL schema + init script → the premium reference.
 
 ---
 
@@ -120,15 +117,6 @@ When a learning proves durable (validated by 2+ experiments), promote it:
 2. **To CLAUDE.md** — If it's a formatting, voice, or workflow pattern
 3. **To client CLAUDE.md** — If client-specific
 4. Mark as `promoted = 1` in the learnings table
-
----
-
-## Reference Files
-
-| File | Purpose |
-|------|---------|
-| `references/process.md` | Full SQL schema, init script, 4 modes with workflows + output formats, messaging-mode scoring framework, notes |
-| `references/outbound-experiments.md` | Outbound-domain framework: 3 experiment types (list-only / copy-only / combined), sample-size table, 21-day measurement, 1% rule baseline check, prioritization order. Use for `/experiment new domain=outreach`. Stolen via /steal Phase 5–6 ADAPT #1. |
 
 ---
 

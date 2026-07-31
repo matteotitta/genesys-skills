@@ -20,16 +20,13 @@ inputs:
   recommended:
   - linkedin-content-guide
   - tov-guidelines
-outputs:
 - type: linkedin-post
   feeds_into:
   - linkedin-comment
 depends_on: []
-feeds_into:
 - linkedin-comment
 owned_by_agent: content
 mcps_used: []
-push_targets:
 - notion
 triggers:
   slash_commands: []
@@ -66,44 +63,44 @@ Every post follows this exact structure:
 
 ```
 ┌─────────────────────────────────────────┐
-│ 1. PAINS ICP (OR PEERS)                 │
-│    Hook with a mutual pain              │
-│    → Start with a shared struggle       │
-│    → Use words your audience uses       │
-│    → Use real examples so it resonates  │
-│    → Address real emotions/frustrations │
-│    → Make the story relatable & sincere │
+│ 1. PAINS ICP (OR PEERS) │
+│ Hook with a mutual pain │
+│ → Start with a shared struggle │
+│ → Use words your audience uses │
+│ → Use real examples so it resonates │
+│ → Address real emotions/frustrations │
+│ → Make the story relatable & sincere │
 ├─────────────────────────────────────────┤
-│ 2. BREAK                                │
-│    Let the post breathe                 │
-│    → Breaks (re)gain attention          │
-│    → Breaks allow for "plot twists"     │
-│    → Breaks prevent boring writing      │
-│    → 1-3 short lines that shift energy  │
+│ 2. BREAK │
+│ Let the post breathe │
+│ → Breaks (re)gain attention │
+│ → Breaks allow for "plot twists" │
+│ → Breaks prevent boring writing │
+│ → 1-3 short lines that shift energy │
 ├─────────────────────────────────────────┤
-│ 3. SOLUTION                             │
-│    Present the problem you solved       │
-│    → Describe the results of inaction   │
-│    → Show how tough it was for you      │
-│    → Show how you mastered this         │
-│    → Build credibility with evidence    │
+│ 3. SOLUTION │
+│ Present the problem you solved │
+│ → Describe the results of inaction │
+│ → Show how tough it was for you │
+│ → Show how you mastered this │
+│ → Build credibility with evidence │
 ├─────────────────────────────────────────┤
-│ 4. ICP'S IDEAL SITUATION                │
-│    Paint the outcome your ICP desires   │
-│    → Describe the solution's outcome    │
-│    → Paint a picture your ICP desires   │
-│    → Or: your peer's desire             │
-│    → Present the outcome as a solution  │
-│    → Make it exciting for your audience │
+│ 4. ICP'S IDEAL SITUATION │
+│ Paint the outcome your ICP desires │
+│ → Describe the solution's outcome │
+│ → Paint a picture your ICP desires │
+│ → Or: your peer's desire │
+│ → Present the outcome as a solution │
+│ → Make it exciting for your audience │
 ├─────────────────────────────────────────┤
-│ 5. MOTIVATIONAL ENDING                  │
-│    Close with purpose                   │
-│    → Personal story = helping people    │
-│    → Personal story = attracting people │
-│    → Personal story = encouraging people│
-│    → Personal story = about what you do │
-│    → ...while building credibility +    │
-│      attracting simultaneously          │
+│ 5. MOTIVATIONAL ENDING │
+│ Close with purpose │
+│ → Personal story = helping people │
+│ → Personal story = attracting people │
+│ → Personal story = encouraging people│
+│ → Personal story = about what you do │
+│ →...while building credibility + │
+│ attracting simultaneously │
 └─────────────────────────────────────────┘
 ```
 
@@ -146,7 +143,7 @@ Every post follows this exact structure:
 | **Proof points** | Real metrics, client names, outcomes to include |
 | **Author's existing content** | Reference posts to match their style |
 
-**If inputs are missing:** Ask for ICP context and personal stories. Use the story mining questions from `references/story-mining-guide.md` to extract story seeds from the author.
+**If inputs are missing:** Ask for ICP context and personal stories. Use the story mining questions from the premium reference to extract story seeds from the author.
 
 ### Validation Checklist
 
@@ -159,7 +156,7 @@ Every post follows this exact structure:
 
 ## Process
 
-3-phase flow: Story Mining → Series Generation → Quality & Variation Check. Each phase has explicit checkpoints and references the 5-section template above. Full step-by-step in `references/process.md`.
+3-phase flow: Story Mining → Series Generation → Quality & Variation Check. Each phase has explicit checkpoints and references the 5-section template above. Full step-by-step in the premium reference.
 
 ---
 
@@ -205,29 +202,9 @@ Check at minimum the hook, every reflection beat, every transition, and the clos
 
 ---
 
-## Output Format
-
-Series output includes story angle menu, per-post body with character counts, posting recommendations, and a series-level quality check. Each post is also delivered as a clean code block ready to copy/paste (no labels, no markdown, no metadata). Full template + iteration prompts in `references/output-format.md`.
-
----
-
 ## Quality
 
-Pre-delivery checklist covers template adherence, voice quality, format quality, series variety, coach's quality gates, and the 5-dimension refine rubric (hook strength, clarity, engagement potential, platform fit, authenticity — score per post; iterate any dimension ≤ 6). Gold standard worked example + full checklist in `references/quality.md`.
-
----
-
-## Reference Files
-
-| File | Purpose |
-|------|---------|
-| `references/process.md` | 3-phase workflow + integration with upstream/downstream skills |
-| `references/output-format.md` | Series output template + clean per-post format + iteration prompts |
-| `references/quality.md` | Gold standard example + pre-delivery checklist + 5-dim refine rubric |
-| `references/auto-update.md` | Self-evaluation protocol + feedback signals that trigger SKILL.md updates |
-| `references/personal-story-templates.md` | 5-section template variations + structural guidance |
-| `references/story-mining-guide.md` | Story extraction questions + archetype mapping |
-| `../linkedin-hooks/` | Hook formulas (personal story hooks) |
+Pre-delivery checklist covers template adherence, voice quality, format quality, series variety, coach's quality gates, and the 5-dimension refine rubric (hook strength, clarity, engagement potential, platform fit, authenticity — score per post; iterate any dimension ≤ 6). Gold standard worked example + full checklist in the premium reference.
 
 ---
 

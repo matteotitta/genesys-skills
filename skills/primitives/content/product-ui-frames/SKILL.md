@@ -20,25 +20,10 @@ inputs:
     - thought-leadership
     - expert-pov
     - tov-guidelines
-outputs:
-  - type: video-composition
-    feeds_into:
-      - linkedin-weekly-content
-      - gtme-pulse
-      - sales-enablement
-      - youtube-scripts
 depends_on:
   - brand-kit
-feeds_into:
-  - linkedin-weekly-content
-  - gtme-pulse
-  - sales-enablement
-  - youtube-scripts
 owned_by_agent: content
 mcps_used: []
-push_targets:
-  - gdrive
-  - framer
 triggers:
   slash_commands:
     - /product-ui-frames
@@ -129,7 +114,7 @@ For specific briefs ("add a yt-lower-third with the guest name"), skip discovery
    - `projects/courses/gtme-school/...` → GTM-E brand-kit
 2. Read DESIGN.md tokens (colors, typography, rounded, spacing, components).
 3. Read the "Do's and Don'ts" prose section to derive house-style constraints (e.g., ClientCo → no em-dashes anywhere — including TTS narration).
-4. Synthesize a Hyperframes palette per `references/brand-kit-mapper.md`.
+4. Synthesize a Hyperframes palette per the premium reference.
 
 ### Step 3 — Scaffold
 
@@ -152,7 +137,7 @@ The template includes brand-kit token slots — fill them from Step 2's synthesi
 npx hyperframes add {block-name}
 ```
 
-See `references/catalog/_index.md` for the block taxonomy. The 5 priority blocks documented in Phase 5a:
+See the premium reference for the block taxonomy. The 5 priority blocks documented in Phase 5a:
 
 - `data-chart` — animated bar + line chart (data-viz category)
 - `instagram-follow` — social-platform overlay (social-overlay category)
@@ -160,24 +145,23 @@ See `references/catalog/_index.md` for the block taxonomy. The 5 priority blocks
 - `cinematic-zoom` — slow zoom effect (cinematic category)
 - `yt-lower-third` — YouTube-style lower-third (utility category)
 
-The remaining 38 catalog blocks are deferred to Phase 5b. They're available via `npx hyperframes add` even without our docs — see `references/hyperframes-registry.md` for discovery commands.
+The remaining 38 catalog blocks are deferred to Phase 5b. They're available via `npx hyperframes add` even without our docs — see the premium reference for discovery commands.
 
 ### Step 5 — Author
 
 Edit `index.html`. The composition root is a `<div id="stage" data-composition-id="{id}" data-width data-height>` containing:
 - `<video>`, `<img>`, `<audio>` clips with `data-start`, `data-duration`, `data-track-index`
-- A registered GSAP timeline on `window.__timelines["{id}"]` per `references/animation-gsap.md`
 - Block sub-compositions via `<div data-composition-src="compositions/{block}.html">`
 - CSS variables bound to the synthesized palette (NEVER hardcoded hex)
 
-Heavy authoring guidance lives in `references/composition-authoring.md`.
+Heavy authoring guidance lives in the premium reference.
 
 ### Step 6 — Lint, inspect, preview
 
 ```bash
-npx hyperframes lint      # missing data-composition-id, overlapping tracks, unregistered timelines
-npx hyperframes inspect   # text overflow, off-canvas elements
-npx hyperframes preview   # browser preview with live reload
+npx hyperframes lint # missing data-composition-id, overlapping tracks, unregistered timelines
+npx hyperframes inspect # text overflow, off-canvas elements
+npx hyperframes preview # browser preview with live reload
 ```
 
 Fix everything `lint` and `inspect` surface before rendering. Rendering is expensive; previewing is cheap.
@@ -202,15 +186,15 @@ When the brief asks for multi-aspect output (same content as 9:16 + 1:1 + 16:9),
 
 ## Website-to-video sub-workflow
 
-When `source_url` is set, follow the 7-step capture pipeline in `references/website-to-video.md`. The brand-kit binding still applies — the captured site is rendered through the consumer's brand-kit, not the source site's brand.
+When `source_url` is set, follow the 7-step capture pipeline in the premium reference. The brand-kit binding still applies — the captured site is rendered through the consumer's brand-kit, not the source site's brand.
 
 ## Remotion translation (deferred)
 
-If the user provides Remotion `.tsx` source, follow `references/remotion-translation.md`. The translation skill ships an SSIM-graded test corpus; do not skip it — a translation that "looks right" but renders 0.05 SSIM lower than the validated baseline is silently wrong.
+If the user provides Remotion `.tsx` source, follow the premium reference. The translation skill ships an SSIM-graded test corpus; do not skip it — a translation that "looks right" but renders 0.05 SSIM lower than the validated baseline is silently wrong.
 
 ## House-style derivation per brand-kit
 
-Per `references/house-style-derivation.md`, the brand-kit's "Do's and Don'ts" section maps to motion choices:
+Per the premium reference, the brand-kit's "Do's and Don'ts" section maps to motion choices:
 
 - "no em dashes" → applies to TTS narration script and any visible text in the composition
 - "operator-first, no buzzwords" → applies to narration, captions, on-screen copy
@@ -223,7 +207,6 @@ Per `references/house-style-derivation.md`, the brand-kit's "Do's and Don'ts" se
 Before declaring the output locked:
 - `npx hyperframes lint` clean
 - `npx hyperframes inspect` no overflow warnings
-- Visual QA: synthesized palette visibly matches brand-kit (compare to the 9 `references/palette-reference/` mood-board references)
 - Narration text passes the brand-kit's "Don'ts" check
 - Output MP4 plays cleanly; duration matches `duration_seconds` ± 1 frame
 
@@ -239,7 +222,6 @@ Before declaring the output locked:
 Video motion is structurally different from UI motion (different durations, triggers, rendering context). Two reference layers apply:
 
 - **Video-specific patterns** — see animation-patterns.md for brand-bound easing, stagger reveals, the 6/15/30 duration rule, and Hyperframes engine compatibility constraints.
-- **Universal motion tenets** — easing-curve discipline, anti-bounce-easing on routine reveals, `prefers-reduced-motion` respect — see `design-reviewer/references/motion-craft.md`. These principles are universal across UI and video; this file references them rather than duplicating.
 
 For brand-bound easing tokens specifically, consult the client's DESIGN.md.
 

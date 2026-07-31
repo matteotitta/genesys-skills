@@ -22,7 +22,6 @@ inputs:
   required:
   - product-messaging
   recommended: []
-outputs:
 - type: content-strategy
   feeds_into:
   - linkedin-weekly-content
@@ -31,14 +30,12 @@ outputs:
   - content-operations
 depends_on:
 - product-messaging
-feeds_into:
 - linkedin-weekly-content
 - aeo-content
 - youtube-scripts
 - content-operations
 owned_by_agent: pmm
 mcps_used: []
-push_targets:
 - gdrive
 - notion
 triggers:
@@ -104,7 +101,7 @@ If inputs are thin: flag missing dimensions and their impact, offer to chain `ic
 
 ## Steps
 
-The skill executes 6 phases. Detailed sub-steps + checkpoints in `references/steps/phase-walkthroughs.md`. Visual flowchart in `references/process-flowchart.md`. Frameworks (service-based pillars, TOFU/MOFU/BOFU, pillar × funnel matrix, content flow, channel hierarchy, content cascade) in `references/frameworks.md`. Pillar-design depth in `references/content-pillars-guide.md`. Channel-specific guidance in `references/channel-playbooks.md`. Narrative architecture mental models in `references/mental-models-for-content.md`.
+The skill executes 6 phases. Detailed sub-steps + checkpoints in the premium reference. Visual flowchart in the premium reference. Frameworks (service-based pillars, TOFU/MOFU/BOFU, pillar × funnel matrix, content flow, channel hierarchy, content cascade) in the premium reference. Pillar-design depth in the premium reference. Channel-specific guidance in the premium reference. Narrative architecture mental models in the premium reference.
 
 1. **Validate inputs.** Check minimum viable input present. If thin, chain prerequisite skills or proceed with assumptions explicitly flagged.
 2. **Phase 1 — Foundations.** Define 2-4 prioritised content goals (revenue / awareness / employer brand / customer success), 4-6 core topics from ICP+messaging, 3-5 differentiators, audience segment matrix.
@@ -113,26 +110,13 @@ The skill executes 6 phases. Detailed sub-steps + checkpoints in `references/ste
 5. **Phase 4 — Planning + execution.** Calculate volume targets (total + per-channel + per-pillar). Define weekly cadence (production vs publishing). Design 90 days: Month 1 Launch & Foundation → Month 2 Education & Nurturing → Month 3 Proof & Conversion. List recurring series (weekly/monthly/quarterly). Build sample example week.
 6. **Phase 5 — Metrics + governance.** Define metrics by channel (primary + secondary + targets). Document approval workflow + quality checklist + archive/refresh policy. Inventory gaps + assumptions + follow-up research.
 7. **Phase 6 (optional) — Operationalisation bridge.** When 2+ team members, 8+ pieces/month, multiple active channels, or series-based content planned, chain into `content-operations` for series architecture, cross-channel sequencing, production pipeline, channel optimisation.
-8. **Self-evaluation.** Verify: topics derived from inputs (not invented), pillars are service-based, mixes sum to 100% on both dimensions, volume realistic for capacity. Apply the anti-hallucination guardrails in `references/quality-and-governance.md`.
-9. **Assemble output.** Use the standard structure in `references/output-template.md`: 1. Strategy foundations → 2. Pillars + funnel → 3. Channel strategy → 4. Planning + execution → 5. Metrics + governance → 6. Gaps + recommendations.
-10. **Pre-delivery quality gate.** Run the four-block checklist (strategy / pillars+funnel / channel / execution) in `references/quality-and-governance.md`. If any check fails, fix or explicitly flag.
+8. **Self-evaluation.** Verify: topics derived from inputs (not invented), pillars are service-based, mixes sum to 100% on both dimensions, volume realistic for capacity. Apply the anti-hallucination guardrails in the premium reference.
+9. **Assemble output.** Use the standard structure in the premium reference: 1. Strategy foundations → 2. Pillars + funnel → 3. Channel strategy → 4. Planning + execution → 5. Metrics + governance → 6. Gaps + recommendations.
+10. **Pre-delivery quality gate.** Run the four-block checklist (strategy / pillars+funnel / channel / execution) in the premium reference. If any check fails, fix or explicitly flag.
 11. **Review gate (Level 2 — Spot Check).** Present foundations, pillars, channels, 90-day plan, volume targets. Actions: [Approve] [Adjust mix] [Refine].
-12. **Iteration prompts.** Offer refinement / expansion / quality prompts (full menu in `references/quality-and-governance.md`).
+12. **Iteration prompts.** Offer refinement / expansion / quality prompts (full menu in the premium reference).
 
 ## What good looks like
-
-### References
-- `references/process-flowchart.md` — visual end-to-end flowchart
-- `references/steps/phase-walkthroughs.md` — Phase 1-6 detailed steps + checkpoints
-- `references/frameworks.md` — service-based pillars, TOFU/MOFU/BOFU, pillar × funnel matrix, content flow, channel hierarchy, content cascade
-- `references/content-pillars-guide.md` — pillar definitions and formats (in-depth)
-- `references/channel-playbooks.md` — channel-specific guidance
-- `references/mental-models-for-content.md` — narrative architecture mental models
-- `references/output-template.md` — full output template (deliverable structure)
-- `references/quality-and-governance.md` — anti-hallucination guardrails, pre-delivery checklist, iteration prompts, integration map, gotchas, auto-update protocol, MCP integration, Exa research substrate, changelog
-
-### Examples
-- `examples/example-integrateio.md` — Integrate.io worked example (Data Delivery Platform category creation) + appended fragments showing goals, service-based pillars with funnel mapping, and the 90-day plan + an anti-examples table
 
 ### Evaluations
 
@@ -162,20 +146,6 @@ Execution:
 - [ ] Weekly cadence is actionable
 - [ ] 90-day themes build logically (Launch → Educate → Prove)
 - [ ] Recurring series are repeatable
-
-## Push
-
-| Push to | Why |
-|---------|-----|
-| `aeo-strategy` | Add SEO/AEO research layer, keyword gaps, and the article queue for website/blog |
-| `content-operations` | Operationalise the strategy with serialisation, production pipeline, calendar |
-| `linkedin-content` | Execute the LinkedIn pillar of the strategy |
-| `youtube-scripts` | Execute the video pillar of the strategy |
-| `product-launch` | Slot launches into the strategy timeline |
-
-Save the artifact in the client's `content/strategy/MMYY-content-strategy.md` per the auto-routing rule (verbs of "plan / decide / map" → `{lane}/strategy/`).
-
----
 
 ## Final ship gate
 

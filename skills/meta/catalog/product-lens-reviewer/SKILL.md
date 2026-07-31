@@ -16,14 +16,11 @@ inputs:
   - strategy-doc
   - positioning
   - icp-research
-outputs:
 - type: product-review-report
   feeds_into: []
 depends_on: []
-feeds_into: []
 owned_by_agent: operator
 mcps_used: []
-push_targets:
 - gdrive
 - notion
 triggers:
@@ -89,7 +86,7 @@ Each dimension scores PASS / WARN / FAIL with quoted evidence.
 | 5 | **Scope discipline** | Does the doc stay in its lane? Strategy doesn't include requirements (K6); spec doesn't include strategy; proposal doesn't blur with positioning |
 | 6 | **Shipping-as-experiment framing** | Is the ship treated as data generation (K1)? Hypothesis stated? Falsifiable? |
 
-For full rule set with examples → `references/dimensions.md` (deferred — created on first real run).
+For full rule set with examples → the premium reference (deferred — created on first real run).
 
 ## Verdict logic
 
@@ -114,9 +111,6 @@ For full rule set with examples → `references/dimensions.md` (deferred — cre
 - [ ] Composition checked — voice/design issues routed to the right reviewer (don't report style issues here)
 - [ ] At least one cross-reference to upstream artifact (strategy-doc / positioning / icp-research) when available
 
-## Output format
-
-```markdown
 # Product-lens review: {doc name} ({YYYY-MM-DD})
 
 **Verdict:** Ship it | Minor fixes | Fix before shipping
@@ -124,8 +118,8 @@ For full rule set with examples → `references/dimensions.md` (deferred — cre
 ## Score table
 | Dimension | Verdict | Notes |
 |---|---|---|
-| 1. Target-problem clarity | PASS/WARN/FAIL | ... |
-| ... | ... | ... |
+| 1. Target-problem clarity | PASS/WARN/FAIL |... |
+|... |... |... |
 
 ## Findings
 **§{N} {Dimension}** — {verdict}

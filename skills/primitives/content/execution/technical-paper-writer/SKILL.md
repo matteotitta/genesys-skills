@@ -26,16 +26,13 @@ inputs:
   - icp-research
   - win-loss
   - product-pulse
-outputs:
 - type: technical-paper
   feeds_into: []
 depends_on:
 - expert-pov
-feeds_into: []
 owned_by_agent: content
 mcps_used:
 - exa
-push_targets: []
 triggers:
   slash_commands:
   - /technical-paper-writer
@@ -88,7 +85,7 @@ Unsourced or unsound claims get replaced or cut. Never rendered.
 
 ### 3. Structure
 
-Follow `references/paper-template.tex`. Required elements, in order:
+Follow the premium reference. Required elements, in order:
 
 | Element | Rule |
 |---|---|
@@ -112,7 +109,7 @@ Follow `references/paper-template.tex`. Required elements, in order:
 
 ### 4. Build
 
-Copy `references/paper-template.tex` into a dedicated working folder as `main.tex` — **never edit the file in `references/`** (it is the reusable template). Then `tectonic main.tex`.
+Copy the premium reference into a dedicated working folder as `main.tex` — **never edit the file in the premium reference** (it is the reusable template). Then `tectonic main.tex`.
 
 Notes: the first-ever run downloads tectonic's package bundle over the network (slow, fails offline — not a hang); `\bibitem` optional args must keep the `Source(Year)` shape or natbib errors.
 
@@ -125,8 +122,6 @@ Fix every error **and every overfull hbox** (wide tables: `\footnotesize` + tigh
 - A re-rendering of earlier work must declare what changed and what didn't.
 
 ## What good looks like
-
-**References** — `references/paper-template.tex` (the known-good preamble; compiles clean under tectonic with all placeholders filled).
 
 **Evaluations** — Every statistic maps to a `\bibitem`. Every market-sizing claim passed the denominator test. Limitations section present and specific (not "further research is needed"). Provenance footnote names sponsor + partners where they exist. Sample sizes and confounds stated in Methods per `quantitative-evidence-floors.md`. The compiled PDF was read, not just compiled. No claim in the paper is softer or harder than its evidence.
 
@@ -144,7 +139,7 @@ Fix every error **and every overfull hbox** (wide tables: `\footnotesize` + tigh
 
 Run `/premortem --output` before ship. See [`/premortem` skill](../../../../meta/orchestration/premortem/SKILL.md) for the 5 execution domains (will-it-resonate / will-it-convert / will-it-stay-on-brand / will-stakeholder-push-back / will-it-degrade-over-time) and output template.
 
-Then run `/voice-reviewer` — the content ship gate: voice + brand quality (pm-loop.md § lens-reviewer).
+Then run `/voice-reviewer` — the content ship gate: voice + brand quality (pm-loop.md).
 
 Trivial-case escape: `## Premortem\nNo failure modes — trivial change` satisfies the contract for genuinely trivial outputs.
 

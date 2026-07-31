@@ -25,17 +25,14 @@ inputs:
   - competitor-research
   - product-messaging
   - icp-behavioural
-outputs:
 - type: google-ads-copy
   feeds_into:
   - ad-creative-brief
 depends_on:
 - paid-campaign-strategy
-feeds_into:
 - ad-creative-brief
 owned_by_agent: paid
 mcps_used: []
-push_targets:
 - gdrive
 triggers:
   slash_commands: []
@@ -144,7 +141,7 @@ Google Ads will reject any headline over 30 characters or description over 90 ch
 
 ## Process
 
-**Four-phase flow:** Campaign-type selection → Headline generation (15 per ad group, 4 categories) → Description generation (4 per ad group, D1-D4 framework) → Verification + TSV output. Full flowchart, 5-pillar campaign types, headline strategy, description framework, pinning rules, negative keyword seed list, and budget guidance in `references/process.md`.
+**Four-phase flow:** Campaign-type selection → Headline generation (15 per ad group, 4 categories) → Description generation (4 per ad group, D1-D4 framework) → Verification + TSV output. Full flowchart, 5-pillar campaign types, headline strategy, description framework, pinning rules, negative keyword seed list, and budget guidance in the premium reference.
 
 ---
 
@@ -158,15 +155,9 @@ Google Ads will reject any headline over 30 characters or description over 90 ch
 
 ---
 
-## Output Format
-
-TSV with `Label | Ad copy | Chars | Pinned positions` columns. Single-campaign + multi-competitor side-by-side templates. Iteration prompts + downstream handoff in `references/output-format.md`.
-
----
-
 ## Quality
 
-Self-evaluation checklist (char compliance, no DKI on competitor, headline independence, diversity, no invented proof), worked example (ClientCo vs Saturn campaign), anti-examples (31-char headlines, mixed competitor ad groups, paraphrased attacks, generic verbs), failure-mode triage in `references/quality.md`.
+Self-evaluation checklist (char compliance, no DKI on competitor, headline independence, diversity, no invented proof), worked example (ClientCo vs Saturn campaign), anti-examples (31-char headlines, mixed competitor ad groups, paraphrased attacks, generic verbs), failure-mode triage in the premium reference.
 
 ---
 
@@ -187,17 +178,6 @@ Self-evaluation checklist (char compliance, no DKI on competitor, headline indep
 |-------|-------------------|
 | `ad-creative-brief` | Source headlines + descriptions for visual brief |
 | `paid-ads-audit` | Baseline reference for RSA Ad Strength + CTR review |
-
----
-
-## Reference Files
-
-| File | Purpose |
-|------|---------|
-| `references/process.md` | Four-phase flowchart + 5-pillar campaign types + headline strategy + description framework + pinning + negative seed list + budget |
-| `references/output-format.md` | TSV templates (single + multi-competitor) + iteration prompts + downstream handoff |
-| `references/quality.md` | Self-evaluation checklist + worked example + anti-examples + quality gate + failure-mode triage |
-| `references/auto-update.md` | Self-evaluation + feedback signals + RSA Ad Strength loop + char-limit drift check |
 
 ---
 

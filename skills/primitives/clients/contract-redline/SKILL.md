@@ -8,14 +8,14 @@ description: |
   client contract (DOCX), producing a properly-marked review document for the
   counterparty's legal team. Translates an objection email into per-clause
   redlines with proposed counter-language and rationale comments authored as
-  Matteo Tittarelli. Saves the redlined .docx to Downloads, uploads to the
+  Matteo Tittarelli. Saves the redlined.docx to Downloads, uploads to the
   client's Drive folder, and drafts a Gmail reply. Used pre-signature in
   client engagements when the counterparty sends standard boilerplate that
   needs amendments before signing. Triggers: "redline this contract",
   "add comments to the contract as redlines", "redline the agreement and
   send back", "track-changes on the contract".
 goal: Produce a properly-marked tracked-changes redline of a counterparty contract with margin comments per clause.
-outcome: Redlined .docx in Downloads, Google Doc copy in the client's Drive folder, Gmail draft reply to the counterparty.
+outcome: Redlined.docx in Downloads, Google Doc copy in the client's Drive folder, Gmail draft reply to the counterparty.
 
 primitive: clients
 sub_primitive: null
@@ -26,20 +26,12 @@ inputs:
   required: []
   recommended:
     - client-proposals
-outputs:
-  - type: client-engagement
-    feeds_into:
-      - client-onboarding
 
 depends_on: []
-feeds_into:
-  - client-onboarding
 
 owned_by_agent: b2b-consultant
 mcps_used:
   - gmail
-  - gdrive
-push_targets:
   - gdrive
 triggers:
   slash_commands:
@@ -120,7 +112,7 @@ After each batch, `doc.save()` and verify via Python that the expected redline s
 1. Run `python ooxml/scripts/pack.py /tmp/contract-work/unpacked <output.docx>` to produce the final DOCX.
 2. Write the output to `~/Downloads/{original-name} - REDLINED MMYY.docx`.
 3. Verify via Python:
-   - Open the .docx as a zip
+   - Open the.docx as a zip
    - Confirm `word/comments.xml`, `word/commentsExtended.xml`, `word/people.xml` all present
    - Count `<w:ins>` / `<w:del>` / `<w:commentReference>` — should roughly match expected counts
    - Confirm all comment authors are "Matteo Tittarelli"
@@ -128,9 +120,9 @@ After each batch, `doc.save()` and verify via Python that the expected redline s
 
 ### Phase 5 — Ship through three surfaces
 
-1. **Local Downloads** — the .docx is already there from Phase 4. Done.
-2. **Google Drive** — `node .claude/mcp/gdrive/upload-file.mjs <path> --client <slug>`. Use `upload-file.mjs` (preserves DOCX with tracked changes) **NOT** `create-doc-unified.mjs` (which flattens tracked changes during MD→GDoc conversion). The Google Doc preview will render tracked changes natively in Suggesting mode.
-3. **Gmail draft** — search for the counterparty's thread via `mcp__gmail__search_threads`, then `mcp__gmail__create_draft` with `replyToMessageId` set to the latest counterparty message. Include the GDoc URL in the body so they can review either format. Note: Gmail MCP `create_draft` does not auto-attach the local .docx — the user attaches it manually before sending.
+1. **Local Downloads** — the.docx is already there from Phase 4. Done.
+2. **Google Drive** — `node.claude/mcp/gdrive/upload-file.mjs <path> --client <slug>`. Use `upload-file.mjs` (preserves DOCX with tracked changes) **NOT** `create-doc-unified.mjs` (which flattens tracked changes during MD→GDoc conversion). The Google Doc preview will render tracked changes natively in Suggesting mode.
+3. **Gmail draft** — search for the counterparty's thread via `mcp__gmail__search_threads`, then `mcp__gmail__create_draft` with `replyToMessageId` set to the latest counterparty message. Include the GDoc URL in the body so they can review either format. Note: Gmail MCP `create_draft` does not auto-attach the local.docx — the user attaches it manually before sending.
 
 ## Critical patterns
 
@@ -144,7 +136,7 @@ doc = Document('/tmp/contract-work/unpacked',
 
 **Preserve run properties on every replacement:**
 ```python
-rpr = tags[0].toxml() if (tags := node.getElementsByTagName("w:rPr")) else ""
+rpr = tags[0].toxml() if (tags:= node.getElementsByTagName("w:rPr")) else ""
 replacement = f'<w:del><w:r>{rpr}<w:delText xml:space="preserve">{old}</w:delText></w:r></w:del>...'
 ```
 
@@ -164,20 +156,14 @@ replacement = f'<w:del><w:r>{rpr}<w:delText xml:space="preserve">{old}</w:delTex
 - ❌ Modifying text inside another author's `<w:ins>` or `<w:del>` tags — use nested-deletion pattern per `document-skills:docx` ooxml.md guidance.
 - ❌ Drafting wholesale-replacement clauses when surgical edits would suffice — the user's email tells you which edits are dealbreakers (full rewrite OK) vs. nuance tweaks (preserve as much original text as possible for review).
 - ❌ Skipping the verification pass — extracting "accept-mode" text catches grammar errors from multi-run replacements that would otherwise reach the counterparty.
-- ❌ Attaching the .docx to the Gmail draft via the MCP — `create_draft` doesn't reliably attach local files. Note in the response that the user attaches manually before sending.
+- ❌ Attaching the.docx to the Gmail draft via the MCP — `create_draft` doesn't reliably attach local files. Note in the response that the user attaches manually before sending.
 - ❌ Auto-sending the Gmail reply — this is review_gate 3. The user reviews the redlines + the email body before send.
 
 ## Inputs required
 
-- **Original contract .docx** — typically in `~/Downloads/` from the counterparty's email.
+- **Original contract.docx** — typically in `~/Downloads/` from the counterparty's email.
 - **User's objection email or asks list** — typically inline in the conversation. Contains the per-clause rationale that becomes the comment text.
 - **Client slug** in `gdrive-config.json` — controls the Drive folder routing. Add if missing (mirror an existing entry, set `name`, `code`, `domain`, `folderId`, `brand`).
-
-## Outputs
-
-- **`~/Downloads/{original-name} - REDLINED MMYY.docx`** — the canonical artifact. Opens cleanly in Word, Pages, and Google Docs.
-- **Google Drive copy** — in the client's folder per `gdrive-config.json`. URL printed to terminal.
-- **Gmail draft** — reply to the latest counterparty message, with body lifted from the user's objection email + Google Doc URL in opener.
 
 ## Quality gate (review_gate 3)
 
@@ -188,14 +174,7 @@ Before claiming done:
 - [ ] Accept-mode text reads cleanly for the top 3-5 most-edited clauses (no broken grammar)
 - [ ] Drive upload succeeded (URL printed)
 - [ ] Gmail draft created in the correct thread (verify by thread ID match)
-- [ ] User-facing summary clearly states: open Gmail, attach .docx, send
-
-## References
-
-- `references/batch1-example.py` — worked example from the 2026-05-28 ClientCo engagement: 6 dealbreaker redlines (IP, indemnification, termination, confidentiality, payment offset, assignment) with comments.
-- `references/batch2-example.py` — same engagement, 6 material-risk redlines (payment terms, service period, NEW liability cap, publicity, expense reimbursement, supplier warranties).
-- `document-skills:docx/ooxml.md` — the canonical reference for tracked-changes XML patterns.
-- `.claude/rules/storage-policy.md` — explains why the .docx goes to Downloads (and iCloud cold-archive if archived later), never the main repo.
+- [ ] User-facing summary clearly states: open Gmail, attach.docx, send
 
 ## Composition with other skills
 

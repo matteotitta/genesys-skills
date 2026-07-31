@@ -20,16 +20,13 @@ inputs:
   - battlecards
   - product-messaging
   recommended: []
-outputs:
 - type: sales-enablement-asset
   feeds_into: []
 depends_on:
 - battlecards
 - product-messaging
-feeds_into: []
 owned_by_agent: sales
 mcps_used: []
-push_targets:
 - gdrive
 - notion
 triggers:
@@ -47,7 +44,7 @@ effort: medium
 
 Create structured product demo scripts that translate positioning and messaging into compelling live demonstrations. Output includes talk tracks, click paths, timing guides, and objection handlers for sales demos, marketing webinars, and video recordings.
 
-The body of this file holds decision-grade context (when to invoke, inputs, demo-length structure tables, anti-hallucination guardrails, integration). Step-by-step process, output template + craft library, quality gates, and feedback loops live in `references/`.
+The body of this file holds decision-grade context (when to invoke, inputs, demo-length structure tables, anti-hallucination guardrails, integration). Step-by-step process, output template + craft library, quality gates, and feedback loops live in the premium reference.
 
 ---
 
@@ -134,7 +131,7 @@ Before proceeding, verify:
 | 2. Script development | Write hook, sections (talk track + click path), objections, close | Draft script |
 | 3. Demo polish | Add engagement checkpoints, backup paths, one-pager | Polished script + one-pager |
 
-Full step-by-step (with checkpoints, flowchart, review gate) in `references/process.md`.
+Full step-by-step (with checkpoints, flowchart, review gate) in the premium reference.
 
 ---
 
@@ -191,18 +188,6 @@ Full step-by-step (with checkpoints, flowchart, review gate) in `references/proc
 | **sales-deck** | Sibling skill | Deck presentations from same context |
 | **battlecards** | Sibling skill | Competitive intel feeds objection handlers |
 | **webinar-brief** | Related output | Demo can be core of webinar |
-
----
-
-## Reference files
-
-| File | Purpose |
-|------|---------|
-| `references/process.md` | 3-phase runbook + flowchart + checkpoint criteria |
-| `references/output-format.md` | Output template + iteration prompts + craft library (hooks, transitions, checkpoints) |
-| `references/quality.md` | Pre-delivery checklist + worked example + anti-examples |
-| `references/auto-update.md` | Feedback signals, improvement tracking, pattern detection |
-| `projects/research/taste-library/resources/0626-sales-qualification-frameworks/` | Command of the Message + Gap Selling (in the framework library) — value-narrative structure for the demo (Before Scenario → Required Capabilities → Metrics → Differentiated Value → Proof → PBO) |
 
 ---
 

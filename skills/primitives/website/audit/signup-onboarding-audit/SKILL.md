@@ -16,19 +16,16 @@ inputs:
   - product-messaging
   - icp-behavioural
   - analytics-tracking-plan
-outputs:
 - type: content-audit
   feeds_into:
   - ab-testing
 depends_on: []
-feeds_into:
 - ab-testing
 - in-app-popups
 owned_by_agent: growth
 mcps_used:
 - exa
 - firecrawl
-push_targets:
 - gdrive
 triggers:
   slash_commands:
@@ -143,9 +140,6 @@ Hand off the formatted hypotheses to `/ab-testing` for sample-size calculation a
 
 ---
 
-## Output format
-
-```markdown
 ## {Product / Client} signup + onboarding audit
 
 ### Activation metric
@@ -156,15 +150,15 @@ Hand off the formatted hypotheses to `/ab-testing` for sample-size calculation a
 |---|---|---|
 | email | Essential | Keep |
 | company | Deferrable | Move to post-signup |
-| ...
+|...
 
 ### Onboarding flow audit
 - Step 1: {description} — {time-to-value contribution: high/med/low} — {friction: high/med/low} — {keep/cut/reorder}
-- ...
+-...
 
 ### Multi-channel coordination findings
-- Email Day 0: ...
-- In-product trigger Day 1: ...
+- Email Day 0:...
+- In-product trigger Day 1:...
 - Coordination misalignment: {if any}
 
 ### Priority-ranked recommendations
@@ -173,8 +167,8 @@ Hand off the formatted hypotheses to `/ab-testing` for sample-size calculation a
 - Backlog: {rest}
 
 ### A/B hypotheses (formatted for /ab-testing)
-- H1: Because ..., we believe ..., measured by ..., within ...
-- H2: ...
+- H1: Because..., we believe..., measured by..., within...
+- H2:...
 ```
 
 ---

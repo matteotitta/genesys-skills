@@ -20,15 +20,12 @@ review_gate: 0
 inputs:
   required: []
   recommended: []
-outputs:
 - type: runbook
   feeds_into: []
 depends_on: []
-feeds_into: []
 owned_by_agent: operator
 mcps_used:
 - gdrive
-push_targets:
 - gdrive
 - notion
 triggers:
@@ -89,7 +86,7 @@ Read all provided source documents. If a folder is given, scan for relevant file
 If only a topic is given (no paths), search the codebase for relevant files:
 ```
 Glob for: **/*{topic}*
-Grep for: relevant terms in .claude/ and project files
+Grep for: relevant terms in.claude/ and project files
 ```
 
 ### Step 2: Identify runbook type
@@ -127,14 +124,11 @@ Save the runbook as markdown in the appropriate location:
 
 Optionally export to Google Docs for client delivery:
 ```bash
-cd .claude/mcp/gdrive && node create-doc-unified.mjs "/path/to/runbook.md" "Title" --client {slug}
+cd.claude/mcp/gdrive && node create-doc-unified.mjs "/path/to/runbook.md" "Title" --client {slug}
 ```
 
 ---
 
-## Output Format
-
-```markdown
 # {Title} — Runbook
 
 > **Type:** {setup|troubleshooting|onboarding|workflow|reference}

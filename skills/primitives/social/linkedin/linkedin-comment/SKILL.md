@@ -19,15 +19,12 @@ inputs:
   required:
   - linkedin-content-guide
   recommended: []
-outputs:
 - type: linkedin-post
   feeds_into: []
 depends_on:
 - linkedin-content-guide
-feeds_into: []
 owned_by_agent: content
 mcps_used: []
-push_targets: []
 triggers:
   slash_commands:
   - /linkedin-comment
@@ -71,7 +68,7 @@ Also runs for thread-style replies on non-LinkedIn surfaces — LMS / cohort fee
 
 Do NOT run when: user wants a LinkedIn post (`/linkedin-content`), a LinkedIn DM (`/outreach-emails` adapted), or general broadcast social content.
 
-Full trigger list and input checklist: `references/triggers-and-process.md`.
+Full trigger list and input checklist: the premium reference.
 
 ## Inputs
 
@@ -94,49 +91,25 @@ If only partial post content provided (e.g., screenshot truncation), ask for ful
 
 ## Steps
 
-1. **Phase 1 — Post analysis.** Extract thesis (1-sentence), identify 2-3 quotable elements, select value-add angle (support / extend / answer / nuanced agreement / parallel story). → `references/triggers-and-process.md` Phase 1.
-2. **Phase 2 — 3-Sentence Framework draft.** Sentence 1 VALIDATE (reference specific phrase from their post), Sentence 2 EXPAND (operator-perspective experience/data/insight), Sentence 3 HOOK (question or bold take). → `references/why-strategic-commenting.md` for framework, `references/comment-frameworks.md` for templates per type.
-3. **Select comment type.** Value-add / Contrarian / Story drop / Bridge / Question-first / Insight drop. Pick by what genuinely fits the post and your expertise. → `references/comment-frameworks.md`.
+1. **Phase 1 — Post analysis.** Extract thesis (1-sentence), identify 2-3 quotable elements, select value-add angle (support / extend / answer / nuanced agreement / parallel story). → the premium reference Phase 1.
+2. **Phase 2 — 3-Sentence Framework draft.** Sentence 1 VALIDATE (reference specific phrase from their post), Sentence 2 EXPAND (operator-perspective experience/data/insight), Sentence 3 HOOK (question or bold take). → the premium reference for framework, the premium reference for templates per type.
+3. **Select comment type.** Value-add / Contrarian / Story drop / Bridge / Question-first / Insight drop. Pick by what genuinely fits the post and your expertise. → the premium reference.
 4. **Apply voice rules.** Operator-first ("I've tested..." not "One could argue..."), direct (no throat-clearing), warm (first-person, genuine), proof-backed (numbers, results, specific examples). Skip corporate speak, hedging, passive voice.
-5. **Phase 3 — Quality gates.** Run 100 Posts Test (could this apply to 100 other posts? → if yes, rewrite); verify no AI-detection phrases ("Great insights!", "This resonated"); confirm no pitching ("DM me", "I can help", "Book a call"); check word count 50-150 (max 200). → `references/anti-patterns.md` for full list.
-6. **Self-evaluation.** Comment references specific element from their post? Includes first-person operator experience? Stands out vs "Great post!"? No invented experiences/numbers/credentials? → `references/quality-guardrails.md`.
+5. **Phase 3 — Quality gates.** Run 100 Posts Test (could this apply to 100 other posts? → if yes, rewrite); verify no AI-detection phrases ("Great insights!", "This resonated"); confirm no pitching ("DM me", "I can help", "Book a call"); check word count 50-150 (max 200). → the premium reference for full list.
+6. **Self-evaluation.** Comment references specific element from their post? Includes first-person operator experience? Stands out vs "Great post!"? No invented experiences/numbers/credentials? → the premium reference.
 7. **Generate alternative version** (different angle/type) so user can compare and pick.
-8. **Suggest thread continuation** (2-3 reply options if the poster responds) and DM follow-up plan after 3-4 exchanges. → `references/thread-to-dm.md` for signal prioritization, micro-commitment CTAs, voice notes.
-9. **Format output** per canonical template (post analysis → comment → quality checks → alternative → reply suggestions). → `references/output-format.md`.
-10. **Review gate Level 1 (Quick Review).** Present comment + word count + quality checks + alternative. Actions: [Approve] / [Different angle] / [Shorter]. On approval with positive engagement signal ("they replied!", "got a DM"), offer to save as reference example. → `references/skill-auto-update.md`.
+8. **Suggest thread continuation** (2-3 reply options if the poster responds) and DM follow-up plan after 3-4 exchanges. → the premium reference for signal prioritization, micro-commitment CTAs, voice notes.
+9. **Format output** per canonical template (post analysis → comment → quality checks → alternative → reply suggestions). → the premium reference.
+10. **Review gate Level 1 (Quick Review).** Present comment + word count + quality checks + alternative. Actions: [Approve] / [Different angle] / [Shorter]. On approval with positive engagement signal ("they replied!", "got a DM"), offer to save as reference example. → the premium reference.
 11. **Suggest chains:** post-publish engagement routine for poster's content, `linkedin-social-selling` for signal-based outreach conversion, `outreach-emails` for thread → DM → email sequences.
 
-Visual flowchart of the full process: `references/process-flowchart.md`. Algorithm rationale (why strategic commenting compounds, GPU-RAR + 5.2x amplification + member embedding): `references/why-strategic-commenting.md`. 60-min post-publish engagement routine and weekly cadence: `references/post-publish-routine.md`.
+Visual flowchart of the full process: the premium reference. Algorithm rationale (why strategic commenting compounds, GPU-RAR + 5.2x amplification + member embedding): the premium reference. 60-min post-publish engagement routine and weekly cadence: the premium reference.
 
 ## What good looks like
 
-### References
-
-- `references/comment-frameworks.md` — detailed templates for each of the 6 comment types (value-add, contrarian, story drop, bridge, question-first, insight drop) with variations and quick-reference openings
-- `references/anti-patterns.md` — generic praise, AI detection signals, salesy phrases, thread hijacking, engagement bait, empty controversy, formatting fails, length extremes, voice violations, the 100 Posts Test
-- `references/triggers-and-process.md` — full Claude Code trigger list, input requirements, 3-phase process walk-through with checkpoints
-- `references/why-strategic-commenting.md` — algorithm rationale, 3-Sentence Framework, comment types table, 100 Posts Test
-- `references/process-flowchart.md` — visual flow of the full skill
-- `references/output-format.md` — canonical output template with Inter font header, post analysis, character count, quality checks
-- `references/thread-to-dm.md` — signal prioritization, micro-commitment CTAs, multi-channel amplification, voice notes (when and when not to use)
-- `references/quality-guardrails.md` — anti-hallucination rules, pre-delivery checklist, refinement / expansion / quality iteration prompts
-- `references/skill-auto-update.md` — feedback signal detection, output-as-reference-example workflow, pattern detection rules
-- `references/post-publish-routine.md` — 60-min post-publish checklist, weekly cadence, integration with other skills, changelog
-
-### Examples
-
-- `examples/high-performing-comments.md` — 7 annotated real-world comments (value-add, contrarian, story, bridge, question, insight, hot-take reply) with element-by-element function tables
-- `examples/walkthrough-examples.md` — 3 framework-driven walkthroughs (value-add, contrarian, hot-take reply) with "why this is good" rationale and anti-examples table
-
 ### Evaluations
 
-The output passes when: comment references a specific phrase or data point from the post (not "great post"); includes first-person operator experience ("I've found...", "I tested...", with concrete numbers or timeframes); ends with a hook (question that invites response, or bold take that sparks discussion); passes the 100 Posts Test (could not be copy-pasted to 100 other posts); contains no forbidden AI phrases ("Great insights!", "This resonated", "Thanks for sharing"); contains no pitching ("DM me", "I can help", "Book a call"); word count is 50-150 (max 200); no invented experiences, fabricated numbers, or fake credentials. Full pre-delivery checklist: `references/quality-guardrails.md`.
-
-## Push
-
-Output is presented inline (ready to copy into LinkedIn). No client folder write — comments are ephemeral engagement assets, not canonical artifacts. If user signals high engagement post-publish ("they replied!", "got a DM"), offer to save the approved comment to `examples/MMYY-{topic-slug}.md` per `references/skill-auto-update.md`. Review gate Level 1 (Quick Review): user approves comment, requests different angle, or asks for shorter version before posting. After publish, run the 60-min post-publish engagement routine (`references/post-publish-routine.md`) for any of Matteo's own posts.
-
----
+The output passes when: comment references a specific phrase or data point from the post (not "great post"); includes first-person operator experience ("I've found...", "I tested...", with concrete numbers or timeframes); ends with a hook (question that invites response, or bold take that sparks discussion); passes the 100 Posts Test (could not be copy-pasted to 100 other posts); contains no forbidden AI phrases ("Great insights!", "This resonated", "Thanks for sharing"); contains no pitching ("DM me", "I can help", "Book a call"); word count is 50-150 (max 200); no invented experiences, fabricated numbers, or fake credentials. Full pre-delivery checklist: the premium reference.
 
 ## Final ship gate
 

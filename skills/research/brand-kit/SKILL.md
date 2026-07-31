@@ -25,7 +25,6 @@ inputs:
   required: []
   recommended:
   - company-context
-outputs:
 - type: brand-kit
   feeds_into:
   - landing-page-wireframe
@@ -42,7 +41,6 @@ outputs:
   - ad-creative-brief
   - pptx
 depends_on: []
-feeds_into:
 - ad-creative-brief
 - dashboard
 - figma-to-prototype
@@ -61,7 +59,6 @@ mcps_used:
 - exa
 - figma
 - firecrawl
-push_targets:
 - gdrive
 triggers:
   slash_commands: []
@@ -91,21 +88,6 @@ Extract visual identity from screenshots and compile into a **DESIGN.md-format**
 **Scope:** Visual identity only. Voice, copy, and messaging live in TOV guidelines and client CLAUDE.md — not in the brand kit. Use `/brand-context` for voice sync.
 
 **Authority:** This skill produces the canonical input for every downstream visual-production skill. The integration contract (how DESIGN.md flows to shadcn primitives, Figma variables, and non-web tools) is defined in `.claude/rules/design-production.md` — that file auto-loads when working on visual production. Read it before invoking this skill.
-
----
-
-## Output format — DESIGN.md + HTML preview sibling
-
-The skill emits **two files atomically** (never one without the other):
-
-1. **Canonical `.md`** at `projects/consulting/{client}/brand/{MMYY}-brand-kit.md` — machine-authoritative YAML frontmatter (colors, typography, rounded, spacing, components, optional logo with `{path.to.token}` cross-refs) + up to 9 ordered prose sections (Overview → Logo → Colors → Typography → Layout → Elevation & Depth → Shapes → Components → Do's and Don'ts; Logo omitted when no logo files exist).
-2. **HTML preview** at `projects/consulting/{client}/brand/{MMYY}-brand-kit.html` — single self-contained page rendering the YAML tokens as visual swatches, type ramp, button states, and spacing scale. Inline CSS, no external assets. Built for stakeholder visual sign-off, not for skill consumption.
-
-**The `.md` is canonical; the `.html` is a deterministic preview.** When prose names a color "Boston Clay" and the token is `tertiary: "#B8422E"`, the token is what renders into the HTML. The HTML can be regenerated from the `.md` at any time; the reverse is not true.
-
-Full spec — YAML schema + all 8 section definitions: `references/output-format.md`. HTML template: `references/preview-template.html`.
-
-**Sync between the two files is enforced by four mechanisms** (see "HTML preview sync" section below): atomic emission in this skill, pre-commit hook, stale-banner in the HTML itself, and a no-clobber guard that preserves hand-authored previews.
 
 ---
 
@@ -188,17 +170,17 @@ Skip prompting if all inputs are already clear from context.
 
 ### Validation
 
-Before proceeding: at least one source available (screenshots, URL, or brand PDF); client project folder exists at `projects/consulting/{slug}/` (or will be created); template file exists at `references/BRAND-KIT-TEMPLATE.md`.
+Before proceeding: at least one source available (screenshots, URL, or brand PDF); client project folder exists at `projects/consulting/{slug}/` (or will be created); template file exists at the premium reference.
 
 ---
 
 ## Process
 
-The brand kit runs in 4 phases. Read `references/process.md` for the full step-by-step.
+The brand kit runs in 4 phases. Read the premium reference for the full step-by-step.
 
 Phase summary:
 
-0. **8-dim brief parse (preprocessing).** Before any of the phases below, run the closed-vocab parser at `references/8-dim-brief-parser.md` on the client's brief. Resolves 8 dimensions (palette / accent / typography / display / layout / mood / density / constraints) + Genesys 9th dimension (evidence_weight) into closed-vocab values. Default-resolves missing dimensions transparently. Forces decision on ambiguous brief language ("professional" / "minimal" / "premium") BEFORE the open-ended interview runs.
+0. **8-dim brief parse (preprocessing).** Before any of the phases below, run the closed-vocab parser at the premium reference on the client's brief. Resolves 8 dimensions (palette / accent / typography / display / layout / mood / density / constraints) + Genesys 9th dimension (evidence_weight) into closed-vocab values. Default-resolves missing dimensions transparently. Forces decision on ambiguous brief language ("professional" / "minimal" / "premium") BEFORE the open-ended interview runs.
 1. **Capture & analyze** — collect screenshots, visual analysis (colors / typography / spacing / components / effects / layout), optional CSS extraction with platform detection, cross-reference and score confidence (0-5).
 2. **Visual description** — mood, metaphor, color story, typography personality, spatial rhythm, signature elements, texture, motion, component character, prompt for reproduction.
 3. **Compile DESIGN.md** — YAML tokens FIRST (Step 3.0), then 8 prose sections in canonical order. Tokens are machine-authoritative; prose explains.
@@ -219,7 +201,7 @@ Phase summary:
 
 ## Quality
 
-Pre-delivery checklist + confidence scoring + worked example (Linear.app) + anti-examples + iteration prompts library: `references/quality.md`.
+Pre-delivery checklist + confidence scoring + worked example (Linear.app) + anti-examples + iteration prompts library: the premium reference.
 
 ---
 
@@ -274,7 +256,7 @@ The DESIGN.md output is the canonical input for every visual-production skill. T
 The `.html` preview is, by default, regenerated *from* the `.md` tokens — not edited directly. A client can opt into a richer hand-authored preview instead (see layer 4). Drift is prevented by:
 
 1. **Atomic emission in this skill.** The Phase 3 compile step always writes *both* `.md` and `.html` in the same run. Both files carry a shared `sync_version` integer (frontmatter field on the `.md`; meta tag in the `.html`) that increments on every run.
-2. **Pre-commit hook.** `.claude/hooks/pre-commit.sh` (step 6) fires on any commit touching `**/brand/MMYY-brand-kit.md`. It pipes the changed paths to `scripts/regenerate-preview.py --changed`, which reads the YAML token frontmatter, regenerates the sibling `.html` from `references/preview-template.html`, and re-stages both files. Mirrors the `skill-catalog` auto-sync pattern.
+2. **Pre-commit hook.** `.claude/hooks/pre-commit.sh` (step 6) fires on any commit touching `**/brand/MMYY-brand-kit.md`. It pipes the changed paths to `scripts/regenerate-preview.py --changed`, which reads the YAML token frontmatter, regenerates the sibling `.html` from the premium reference, and re-stages both files. Mirrors the `skill-catalog` auto-sync pattern.
 3. **Stale banner inside the HTML.** The HTML's inline script fetches its sibling `.md` on load. If the `.md` `sync_version` exceeds the HTML's embedded `sync_version`, the page renders a red banner: *"⚠ This preview is stale. Source DESIGN.md has been updated. Re-run /brand-kit to refresh."*
 4. **No-clobber guard for hand-authored previews.** The regenerator never overwrites a preview a human authored. The template stamps a `brand-kit:autogen` marker into every generated file; a preview lacking that marker (or carrying an explicit `brand-kit:no-regen` comment) is treated as hand-authored and left untouched. On a source change the regenerator still bumps `sync_version` so layer 3 fires — the hand-authored preview shows the stale banner, prompting a manual refresh — but it is never clobbered. Escape hatches: delete the `.html` to get a fresh autogen preview on the next commit, or run `scripts/regenerate-preview.py <md> --force`.
 
@@ -284,7 +266,7 @@ Combined: drift is structurally prevented (layer 1), automatically corrected for
 
 ### What's in the preview
 
-The `references/preview-template.html` renders:
+The the premium reference renders:
 - **Logo grid** — the brand's logo variants (horizontal / stacked / icon) in full-colour and reversed, each on its approved background, plus clear-space + min-size rules. Rendered from the `logo:` tokens; the regenerator drops the whole section automatically when the kit has no `logo:` group
 - **Color swatches** — one tile per palette color with hex label, named role (primary / secondary / tertiary / neutral / surface / on-surface / error)
 - **Typography ramp** — display-lg / headline-lg / body-md / label-sm with sample text in the brand's font family
@@ -293,21 +275,6 @@ The `references/preview-template.html` renders:
 - **Do's and Don'ts call-outs** — text excerpts from the prose body, surfaced visually
 
 Stakeholder workflow: client opens HTML in browser → sees the actual palette in context → approves visually or sends back specific token-level feedback.
-
----
-
-## Reference files
-
-| File | Purpose |
-|------|---------|
-| `references/process.md` | Full 4-phase step-by-step (capture / describe / compile / lint) |
-| `references/output-format.md` | DESIGN.md spec — YAML schema + 8 section definitions |
-| `references/preview-template.html` | HTML preview template — sibling output to canonical `.md` |
-| `references/quality.md` | Pre-delivery checklist + Linear.app worked example + iteration prompts |
-| `references/BRAND-KIT-TEMPLATE.md` | Template with placeholder sections |
-| `references/example-genesys-growth.md` | Reference implementation: Genesys Growth |
-| `references/example-cursor.md` | Reference implementation: Cursor |
-| `references/visual-artifact-template.md` | React component for interactive design system preview |
 
 ---
 

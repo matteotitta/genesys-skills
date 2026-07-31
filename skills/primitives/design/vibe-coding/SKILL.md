@@ -20,17 +20,14 @@ inputs:
   - brand-kit
   - product-messaging
   recommended: []
-outputs:
 - type: landing-page-copy
   feeds_into: []
 depends_on:
 - brand-kit
 - product-messaging
-feeds_into: []
 owned_by_agent: content
 mcps_used:
 - a1
-push_targets:
 - gdrive
 - notion
 triggers:
@@ -78,7 +75,7 @@ This skill is **guided planning + iterative prompting**, not direct code writing
 - `brand hub / DESIGN.md` — design tokens (colors, type, components, spacing) for on-brand builds.
 - `MVP scope` — must-have v1 vs. nice-to-have v2+.
 
-If inputs are missing, run interactive planning mode (see `references/project-planning.md`) — don't guess, ask.
+If inputs are missing, run interactive planning mode (see the premium reference) — don't guess, ask.
 
 ## A1 Gallery reference (anchor-gathering)
 
@@ -102,40 +99,21 @@ If inputs are missing, run interactive planning mode (see `references/project-pl
 
 ## Steps
 
-1. **Confirm scope and tool fit** — verify project idea is buildable; pick tool (Lovable for web/UI-heavy, Claude Code for local/CLI). Tool selection matrix → `references/frameworks.md` ("Tool Selection Matrix").
-2. **Run the Four Definitions** → `references/frameworks.md` ("The Four Definitions"). Object, Mood, Purpose, Anchors. If user can't answer anchors, stop and gather references first.
-3. **Define MVP scope** — core features for v1, nice-to-haves for v2+, technical requirements (auth, DB, integrations, AI). Interactive planning playbook → `references/project-planning.md`.
-4. **Read DESIGN.md tokens** (if client has one at `projects/consulting/{client}/brand/{MMYY}-brand-kit.md`) — translate to CSS variables → Tailwind config → shadcn primitives. Pipeline contract → `references/design-pipeline.md`. Authority: `.claude/rules/design-production.md`. If no DESIGN.md, recommend `/brand-kit` first; do not invent tokens.
+1. **Confirm scope and tool fit** — verify project idea is buildable; pick tool (Lovable for web/UI-heavy, Claude Code for local/CLI). Tool selection matrix → the premium reference ("Tool Selection Matrix").
+2. **Run the Four Definitions** → the premium reference ("The Four Definitions"). Object, Mood, Purpose, Anchors. If user can't answer anchors, stop and gather references first.
+3. **Define MVP scope** — core features for v1, nice-to-haves for v2+, technical requirements (auth, DB, integrations, AI). Interactive planning playbook → the premium reference.
+4. **Read DESIGN.md tokens** (if client has one at `projects/consulting/{client}/brand/{MMYY}-brand-kit.md`) — translate to CSS variables → Tailwind config → shadcn primitives. Pipeline contract → the premium reference. Authority: `.claude/rules/design-production.md`. If no DESIGN.md, recommend `/brand-kit` first; do not invent tokens.
 5. **Apply The Flip** — ask the AI / user "what info do you need from me to build this?" before generating the seed prompt. Surfaces gaps before they become problems.
-6. **Generate seed prompt** — Lovable: component-based with style buzzwords; Claude Code: project setup + first-feature prompt. Library of 100+ copy-paste prompts → `references/prompt-library.md`. Project starters → `references/project-templates.md`. Lead-magnet-specific prompt template → `references/output-template.md` ("Lead magnet prompt template"). Lead-magnet pattern guide → `references/lead-magnets.md`. Named tool recipes (9 paste-ready builds — grader / calculator / generator / quiz / game + internal utilities) → `references/tool-recipes.md`. Lovable-specific prompting → `references/lovable-guide.md`. Claude Code terminal setup → `references/claude-code-setup.md`.
-7. **Coach the iteration loop** → `references/frameworks.md` ("The Iteration Loop"). The Spread (3–10 variations) → The Articulation (one variable, named gap) → The Chisel (combine + lock) → The Re-Anchor (if circling). Bad-vs-good articulation examples in the same file.
+6. **Generate seed prompt** — Lovable: component-based with style buzzwords; Claude Code: project setup + first-feature prompt. Library of 100+ copy-paste prompts → the premium reference. Project starters → the premium reference. Lead-magnet-specific prompt template → the premium reference ("Lead magnet prompt template"). Lead-magnet pattern guide → the premium reference. Named tool recipes (9 paste-ready builds — grader / calculator / generator / quiz / game + internal utilities) → the premium reference. Lovable-specific prompting → the premium reference. Claude Code terminal setup → the premium reference.
+7. **Coach the iteration loop** → the premium reference ("The Iteration Loop"). The Spread (3–10 variations) → The Articulation (one variable, named gap) → The Chisel (combine + lock) → The Re-Anchor (if circling). Bad-vs-good articulation examples in the same file.
 8. **Plan deployment** — Lovable: automatic hosting (optional custom domain); Claude Code: GitHub → Vercel. Backend: Supabase for auth/DB/storage; API keys for AI features. Expect 1–5 error cycles on first deployment; copy entire error log → paste to AI → let it fix.
-9. **Apply guardrails + verification loop** (for autonomous builds) → `references/frameworks.md` ("Anti-hallucination guardrails", "Verification loop"). Write → Build → Test → Lint → Fix → Repeat; stop after 3 failed attempts and ask the user.
-10. **Self-evaluate against quality checklist** → `references/frameworks.md` ("Quality checklist"). Planning, prompt, execution gates.
-11. **Deliver project plan** per output template → `references/output-template.md` (Project plan: tool recommendation, Four Definitions, MVP, seed prompt, execution roadmap, questions, iteration prompts, skill improvement notes).
+9. **Apply guardrails + verification loop** (for autonomous builds) → the premium reference ("Anti-hallucination guardrails", "Verification loop"). Write → Build → Test → Lint → Fix → Repeat; stop after 3 failed attempts and ask the user.
+10. **Self-evaluate against quality checklist** → the premium reference ("Quality checklist"). Planning, prompt, execution gates.
+11. **Deliver project plan** per output template → the premium reference (Project plan: tool recommendation, Four Definitions, MVP, seed prompt, execution roadmap, questions, iteration prompts, skill improvement notes).
 12. **Push** — save plan inline in chat or as a markdown doc; if part of a client engagement, route to the client's `apps/{appname}/` folder per CLAUDE.md "App Repos — Push Routing Rules".
-13. **Offer iteration prompts** post-delivery → `references/output-template.md` ("Post-output iteration prompts"). On positive signal ("deployed successfully", "prompt worked great"), capture as reference example and update the prompt library — auto-update protocol in `references/frameworks.md` ("Auto-update").
+13. **Offer iteration prompts** post-delivery → the premium reference ("Post-output iteration prompts"). On positive signal ("deployed successfully", "prompt worked great"), capture as reference example and update the prompt library — auto-update protocol in the premium reference ("Auto-update").
 
 ## What good looks like
-
-### References
-
-- **Core frameworks** → `references/frameworks.md` — Four Definitions, Iteration Loop (Flip / Spread / Articulation / Chisel / Re-Anchor), Tool Selection Matrix, Lead Magnet Types by Virality, anti-patterns, anti-hallucination guardrails, verification loop, auto-update protocol, quality checklist.
-- **DESIGN.md → CSS → shadcn pipeline** → `references/design-pipeline.md` — token translation contract, forbidden / required patterns, integration with `.claude/rules/design-production.md`.
-- **Output template + worked example** → `references/output-template.md` — full project plan template, lead magnet prompt template, GTM readiness quiz worked example, post-output iteration prompts.
-- **Interactive planning framework** → `references/project-planning.md` — full guided session for gathering inputs when user shows up under-briefed.
-- **Prompt library** → `references/prompt-library.md` — 100+ copy-paste prompts categorized by use case (Lovable + Claude Code).
-- **Project templates** → `references/project-templates.md` — starter prompts for common project types (quizzes, calculators, generators, microsites).
-- **Lead magnets** → `references/lead-magnets.md` — quiz / calculator / generator / analyzer / simulator patterns, virality features, email capture flows (the *strategy* layer: types, gating theory, virality, metrics).
-- **Tool recipes** → `references/tool-recipes.md` — 9 named, paste-ready builds (grader, cost calculator, generator, quiz, game + UTM builder, content repurposer, subject-line previewer, brief generator), each with its build prompt, capture mechanic, and distribution play (the *recipe* layer — canonical for the concrete build).
-- **Lovable guide** → `references/lovable-guide.md` — Lovable-specific prompting style, style buzzwords, component-based structure, common Lovable patterns.
-- **Claude Code setup** → `references/claude-code-setup.md` — terminal setup, project scaffolding, common commands, GitHub → Vercel deployment.
-- **Use cases** → `references/use-cases.md` — 50+ real examples of vibe-coded outputs from the workspace.
-- **Troubleshooting** → `references/troubleshooting.md` — common errors and fixes (build failures, deploy failures, integration breakage).
-
-### Examples
-
-Successful vibe-coded outputs are captured under `references/examples/{date}-{project-type}.md` when the user signals approval ("deployed successfully", "prompt worked great"). See the auto-update protocol in `references/frameworks.md`.
 
 ### Evaluations (binary pass/fail before declaring "done")
 
@@ -148,13 +126,6 @@ Successful vibe-coded outputs are captured under `references/examples/{date}-{pr
 - Deployment path is concrete (Lovable: hosting + domain; Claude Code: GitHub → Vercel).
 - Anti-hallucination guardrails applied: no promised features that the chosen tool can't deliver.
 - DESIGN.md tokens translated through CSS variables → Tailwind → shadcn (web stack only); no hardcoded hex / font / radius values in component code.
-- Quality checklist gates passed (`references/frameworks.md` "Quality checklist").
-
-## Push
-
-- **Inline output** — project plan rendered in chat for immediate use.
-- **Client app folder** (when part of engagement) — route to `projects/consulting/active/{client}/apps/{appname}/` per CLAUDE.md "App Repos — Push Routing Rules". Each app has its own GitHub remote; never push the app folder to the master claude-code repo.
-- **Reference example capture** — on positive signal, save approved prompt + approach to `references/examples/{date}-{project-type}.md`.
 
 ## Integration with other skills
 
@@ -172,11 +143,11 @@ Successful vibe-coded outputs are captured under `references/examples/{date}-{pr
 - Interactive prototype: `/figma-to-prototype → /vibe-coding` (designer hands off; vibe-coding ships the React app).
 - Internal dashboard: `/dashboard → /vibe-coding` (spec → build).
 
-**Build-shape seam:** full hosted apps (Next.js/Vercel, backend, auth) live here. Single-file, single-purpose utilities with an export button — a UTM builder, a subject-line previewer — are better as throwaway HTML tools; see [`throwaway-editor-pattern.md`](../../../../rules/throwaway-editor-pattern.md). The recipe library (`references/tool-recipes.md`) tags each of the 9 builds with its shape.
+**Build-shape seam:** full hosted apps (Next.js/Vercel, backend, auth) live here. Single-file, single-purpose utilities with an export button — a UTM builder, a subject-line previewer — are better as throwaway HTML tools; see [`throwaway-editor-pattern.md`](../../../../rules/throwaway-editor-pattern.md). The recipe library (the premium reference) tags each of the 9 builds with its shape.
 
 ## Design cycle (post-authoring phases)
 
-After producing the happy-path output, walk these phases before ship. Each references the shared design-quality library at `../../meta/catalog/design-reviewer/references/`. Run `/design-reviewer` as the final ship-ready gate.
+After producing the happy-path output, walk these phases before ship. Each references the shared design-quality library at `../../meta/catalog/design-reviewer/the premium reference. Run `/design-reviewer` as the final ship-ready gate.
 
 - **Layout** — `layout-tenets.md` (rhythm, alignment, density)
 - **Distill** — `distill-principles.md` (strip-to-essence)
@@ -190,7 +161,7 @@ After producing the happy-path output, walk these phases before ship. Each refer
 
 ## Pre-slim original
 
-Pre-slim SKILL.md (788 lines, v2.0) archived at `.claude/skills/_archive/vibe-coding/SKILL-pre-slim-20260429.md`. Phase 3 lossless slim hoisted Four Definitions / Iteration Loop / Tool Matrix / guardrails / verification loop / auto-update protocol → `references/frameworks.md`; DESIGN.md → CSS → shadcn pipeline → `references/design-pipeline.md`; project plan template + lead magnet template + worked example → `references/output-template.md`. Existing references (project-planning, prompt-library, project-templates, lead-magnets, lovable-guide, claude-code-setup, use-cases, troubleshooting) untouched.
+Pre-slim SKILL.md (788 lines, v2.0) archived at `.claude/skills/_archive/vibe-coding/SKILL-pre-slim-20260429.md`. Phase 3 lossless slim hoisted Four Definitions / Iteration Loop / Tool Matrix / guardrails / verification loop / auto-update protocol → the premium reference; DESIGN.md → CSS → shadcn pipeline → the premium reference; project plan template + lead magnet template + worked example → the premium reference. Existing references (project-planning, prompt-library, project-templates, lead-magnets, lovable-guide, claude-code-setup, use-cases, troubleshooting) untouched.
 
 ## Final ship gate
 

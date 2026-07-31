@@ -15,17 +15,14 @@ inputs:
   - strategy-doc
   recommended:
   - product-pulse
-outputs:
 - type: ship-learnings
   feeds_into:
   - strategy-doc
 depends_on:
 - strategy-doc
-feeds_into:
 - strategy-doc
 owned_by_agent: product-manager
 mcps_used: []
-push_targets:
 - gdrive
 - notion
 triggers:
@@ -84,29 +81,6 @@ A ship may span 5 sessions; one ship-learnings record captures all of them.
 - User feedback / quotes / support tickets from the ship period
 - Original strategy track this ship belongs to
 
-## Output structure
-
-### 1. Ship summary
-1-2 lines: what shipped, when, which strategy track it belonged to.
-
-### 2. Hypothesis (from strategy-doc)
-The strategy hypothesis this ship was meant to test. Quote the relevant section of the strategy doc.
-
-### 3. Result: validated / partially validated / invalidated
-Verdict + one paragraph of evidence (metric movement from pulse, user quotes, etc.).
-
-### 4. What worked
-What we'd repeat. 3-5 bullets, concrete.
-
-### 5. What didn't work
-What we'd change. 3-5 bullets, concrete.
-
-### 6. What to do differently next time
-Action items for the next ship. Each one named, with owner.
-
-### 7. Follow-on experiments
-What this ship surfaced as worth testing next. Feeds into the next strategy refresh.
-
 ## Steps
 
 1. **Phase 1 — Load context.** Read locked `strategy-doc` + latest `product-pulse`. Identify which strategy track this ship belonged to.
@@ -127,9 +101,6 @@ What this ship surfaced as worth testing next. Feeds into the next strategy refr
 - [ ] Total word count ≤ 600 (compounding-learnings should be easy to skim across many ships)
 - [ ] Framing K1 applied: "shipping is an experiment" — verdict is data, not judgment
 
-## Output format
-
-```markdown
 # Ship-learnings: {feature name} ({YYYY-MM-DD})
 
 **Strategy track:** {track name from strategy-doc} · **Pulse ref:** {latest pulse path}
@@ -144,23 +115,17 @@ What this ship surfaced as worth testing next. Feeds into the next strategy refr
 {paragraph with evidence}
 
 ## What worked
-- ...
+-...
 
 ## What didn't work
-- ...
+-...
 
 ## What to do differently next time
 - **{action}** — owner: {name}
 
 ## Follow-on experiments
-- ...
+-...
 ```
-
-## Push
-
-- `~/ship-learnings/{ship-slug}.md` (Genesys-internal default)
-- Or `client_folder/ship-learnings/MMYY-{ship-slug}.md` (client work)
-- Append summary to next quarterly `strategy-doc` refresh review
 
 ## Composition rule reference
 

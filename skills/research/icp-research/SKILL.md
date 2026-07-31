@@ -21,7 +21,6 @@ inputs:
   required: []
   recommended:
   - company-context
-outputs:
 - type: icp-profile
   feeds_into:
   - positioning
@@ -32,7 +31,6 @@ outputs:
   - sales-enablement
   - competitor-research
 depends_on: []
-feeds_into:
 - aeo-content
 - competitor-research
 - website-copy
@@ -42,7 +40,6 @@ feeds_into:
 - sales-enablement
 owned_by_agent: researcher
 mcps_used: []
-push_targets:
 - gdrive
 - notion
 triggers:
@@ -86,27 +83,6 @@ The final ICP report follows this numbered section order:
 
 ---
 
-## Output dimensions
-
-Research produces structured outputs across these dimensions. **Full field schemas + table structures + persona deep-dive templates: `references/dimensions.md`.**
-
-| Dimension | What it covers |
-|-----------|----------------|
-| **TAM analysis** | TAM/SAM/SOM/ICP table with targeting strategy per layer + assumptions |
-| **Firmographics** | Geography, industry, company segments + segment deep-dives + technographics + adjacent stack |
-| **Technographics** | Required vs preferred tools by category (CRM, CDP, Analytics, etc.) with evidence |
-| **Personas** | Champion (12 fields) + Economic Buyer (13 fields) + Users + buying journey + core use case |
-| **Negative ICP** | Disqualification criteria + red flags from churn + objections that signal poor fit |
-| **Customer proof points** | Named customers + outcome patterns with URL + date |
-| **Voice of customer** | Terminology / pain / outcome / objection patterns with verbatim quotes |
-| **Segments** | Scoring matrix (TAM × Ease of win × Strategic fit) + per-segment deep-dive + positioning |
-| **Beachhead selection** (optional) | Pick ONE segment to dominate first using weighted scoring rubric |
-| **Intent signals** | Company-level + persona-level signals with detection sources |
-
-Each persona deep-dive includes a verbatim Channels & Influences map (communities, content, events, influencers) and a sourced testimonial. Each segment deep-dive includes Priorities, ICP-fit, Budget & sales cycle, Unique approach, and Proof points.
-
----
-
 ## Sorting rules
 
 Apply consistently across all tables:
@@ -125,7 +101,7 @@ Apply consistently across all tables:
 
 ## Workflow
 
-The research runs in 3 phases. Read `references/workflow.md` for the full step-by-step.
+The research runs in 3 phases. Read the premium reference for the full step-by-step.
 
 Phase summary:
 
@@ -170,21 +146,7 @@ Phase summary:
 
 ## Quality
 
-Pre-delivery checklist (coverage / personas / segments / evidence): `references/quality.md`.
-
----
-
-## Reference files
-
-| File | Purpose |
-|------|---------|
-| `references/dimensions.md` | Full field schemas + persona deep-dive templates + segment structures + intent signals |
-| `references/workflow.md` | 3-phase step-by-step (extraction → synthesis → structured output) |
-| `references/quality.md` | Pre-delivery checklist |
-| `references/dimension-schemas.md` | Legacy field definitions (granular) |
-| `references/icp-output-template.md` | Full report template with numbered sections |
-| `references/search-patterns.md` | Detailed search queries per data type |
-| `references/examples/example-strapi.md` | Worked example: Strapi (headless CMS) |
+Pre-delivery checklist (coverage / personas / segments / evidence): the premium reference.
 
 ---
 

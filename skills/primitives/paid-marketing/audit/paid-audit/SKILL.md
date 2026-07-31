@@ -22,20 +22,17 @@ inputs:
   required: []
   recommended:
   - paid-campaign-strategy
-outputs:
 - type: paid-ads-audit
   feeds_into:
   - paid-campaign-strategy
   - google-ads-copy
   - linkedin-ads-copy
 depends_on: []
-feeds_into:
 - google-ads-copy
 - linkedin-ads-copy
 - paid-campaign-strategy
 owned_by_agent: paid
 mcps_used: []
-push_targets:
 - gdrive
 triggers:
   slash_commands: []
@@ -130,13 +127,13 @@ Each check is pass (1), warning (0.5), or fail (0). Category score = points earn
 
 ## Process
 
-**Five-phase flow:** Platform identification → Google Ads audit (6 categories, 45 checks) → LinkedIn Ads audit (5 categories, 25 checks) → Cross-platform checks → Scoring + 30/60/90 day recommendations. Full flowchart, scoring methodology, and B2B SaaS benchmarks in `references/process.md`. The full check library lives in `references/audit-checklist.md`.
+**Five-phase flow:** Platform identification → Google Ads audit (6 categories, 45 checks) → LinkedIn Ads audit (5 categories, 25 checks) → Cross-platform checks → Scoring + 30/60/90 day recommendations. Full flowchart, scoring methodology, and B2B SaaS benchmarks in the premium reference. The full check library lives in the premium reference.
 
 ---
 
 ## Performance frameworks
 
-The 75-check library finds configuration gaps; three diagnostic lenses read the numbers on top of it — the **KPI ladder** (Delivery → Engagement → Outcome, to localize where the leak is), **spend concentration + wasted spend** (the dollars sitting on ads with 0 conversions past the attribution window), and **ad bucketing** (drivers / promising / non-converters / too-early, with dollars attached). Every call obeys [`quantitative-evidence-floors.md`](../../../../rules/quantitative-evidence-floors.md) — no "top performer" or "pause" verdict below the volume floor; state the count, name the lag. Full frameworks in `references/performance-frameworks.md`.
+The 75-check library finds configuration gaps; three diagnostic lenses read the numbers on top of it — the **KPI ladder** (Delivery → Engagement → Outcome, to localize where the leak is), **spend concentration + wasted spend** (the dollars sitting on ads with 0 conversions past the attribution window), and **ad bucketing** (drivers / promising / non-converters / too-early, with dollars attached). Every call obeys [`quantitative-evidence-floors.md`](../../../../rules/quantitative-evidence-floors.md) — no "top performer" or "pause" verdict below the volume floor; state the count, name the lag. Full frameworks in the premium reference.
 
 ---
 
@@ -151,15 +148,9 @@ The 75-check library finds configuration gaps; three diagnostic lenses read the 
 
 ---
 
-## Output Format
-
-Single audit report with overall + per-platform scores, priority fixes, detailed findings per category, cross-platform findings, 30/60/90 day roadmap, and data gaps. Full template + iteration prompts + downstream handoff in `references/output-format.md`.
-
----
-
 ## Quality
 
-Pre-delivery checklist (categories scored, fixes ordered, recommendations actionable, benchmarks cited, gaps flagged), worked example, anti-examples (vague CPL, skipped tracking, generic creative recs, wrong fix order), and failure-mode triage in `references/quality.md`.
+Pre-delivery checklist (categories scored, fixes ordered, recommendations actionable, benchmarks cited, gaps flagged), worked example, anti-examples (vague CPL, skipped tracking, generic creative recs, wrong fix order), and failure-mode triage in the premium reference.
 
 ---
 
@@ -179,19 +170,6 @@ Pre-delivery checklist (categories scored, fixes ordered, recommendations action
 | `google-ads-copy` | Copy refresh when Ad Copy Quality category < 75% |
 | `linkedin-ads-copy` | Creative refresh when Creative Health category < 75% |
 | `landing-page-audit` | Page audit when Landing Pages category < 75% |
-
----
-
-## Reference Files
-
-| File | Purpose |
-|------|---------|
-| `references/process.md` | Five-phase flowchart + scoring methodology + B2B SaaS benchmarks |
-| `references/performance-frameworks.md` | KPI ladder (Delivery→Engagement→Outcome) + spend concentration + ad bucketing; binds the significance-floor rule (Liam-derived) |
-| `references/audit-checklist.md` | Full 75-check library: Google Ads (6 cat / 45 checks), LinkedIn Ads (5 cat / 25 checks), Cross-platform (5 checks) |
-| `references/output-format.md` | Audit report template + iteration prompts + downstream handoff |
-| `references/quality.md` | Pre-delivery checklist + worked example + anti-examples + failure-mode triage |
-| `references/auto-update.md` | Self-evaluation + feedback signals + benchmark recalibration + checklist drift |
 
 ---
 

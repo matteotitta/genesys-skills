@@ -19,16 +19,13 @@ inputs:
   required:
   - youtube-strategy
   recommended: []
-outputs:
 - type: youtube-script
   feeds_into: []
 depends_on:
 - youtube-strategy
-feeds_into: []
 owned_by_agent: content
 mcps_used:
 - exa
-push_targets: []
 triggers:
   slash_commands:
   - /youtube-scripts
@@ -79,42 +76,26 @@ If missing, ask for the four required fields before writing anything.
 ## Steps
 
 1. **Analyze topic + angle.** Determine content type (educational, case study, contrarian, tutorial). Output: content type identified.
-2. **Select hook type.** Choose from `references/frameworks.md` (contrarian / curiosity-gap / pattern-interrupt / proof-first / problem-agitation / story). Full library: `references/hook-patterns.md`.
-3. **Select body framework.** Choose from frameworks table (problem-solution-proof / chronological / myth-busting / case-study / framework-reveal / before-after). Full library: `references/body-structures.md`.
+2. **Select hook type.** Choose from the premium reference (contrarian / curiosity-gap / pattern-interrupt / proof-first / problem-agitation / story). Full library: the premium reference.
+3. **Select body framework.** Choose from frameworks table (problem-solution-proof / chronological / myth-busting / case-study / framework-reveal / before-after). Full library: the premium reference.
 4. **Estimate duration.** Account for hook (8s) + intro (45s) + outro (60s); add body sections sized to depth. Output: target duration.
 5. **Generate 2-3 hook options.** Each under 8 seconds read aloud, no filler, creates curiosity gap or pattern interrupt. Label each with hook type + timing estimate. Present for user selection.
-6. **Write intro (under 45s).** Authority + Promise + Stakes per `references/frameworks.md`. Numbered promise creates expectation.
-7. **Write body sections.** Apply selected framework. One point per section. Lead with insight, then explain. Prove every claim (data, example, analogy). Signal transitions ("Now that we've covered X, let's talk about Y"). Insert retention hook every 2-3 minutes per `references/retention-techniques.md` ("But here's where it gets interesting...", "Here's where most people go wrong...").
-8. **Write outro.** Summary under 30s + single clear CTA + specific engagement prompt + open loop teasing next video. CTA patterns: `references/cta-formulas.md`.
+6. **Write intro (under 45s).** Authority + Promise + Stakes per the premium reference. Numbered promise creates expectation.
+7. **Write body sections.** Apply selected framework. One point per section. Lead with insight, then explain. Prove every claim (data, example, analogy). Signal transitions ("Now that we've covered X, let's talk about Y"). Insert retention hook every 2-3 minutes per the premium reference ("But here's where it gets interesting...", "Here's where most people go wrong...").
+8. **Write outro.** Summary under 30s + single clear CTA + specific engagement prompt + open loop teasing next video. CTA patterns: the premium reference.
 9. **Add production notes.** Key visuals needed, B-roll suggestions, on-screen text callouts.
-10. **Generate 3 title options.** Under 60 characters each, keyword included naturally. Patterns: `references/thumbnail-title-formulas.md`.
+10. **Generate 3 title options.** Under 60 characters each, keyword included naturally. Patterns: the premium reference.
 11. **Generate 2-3 thumbnail concepts.** Visual description + text overlay + emotion/expression guidance.
 12. **Write description.** SEO-optimized opening, timestamp chapters, CTA + links, tags.
 13. **Create pinned comment.** Engagement prompt or resource link.
-14. **Self-evaluate.** Hook <8s, intro <45s, every claim has proof, no invented stats/testimonials (mark as "Example:" if illustrative or `[PLACEHOLDER]` if missing). Anti-hallucination + signal detection: `references/skill-ops.md`.
-15. **Format + present.** Use `references/output-template.md` exactly. Review gate 2 (spot check) — actions: [Approve] [Different hook] [Expand].
+14. **Self-evaluate.** Hook <8s, intro <45s, every claim has proof, no invented stats/testimonials (mark as "Example:" if illustrative or `[PLACEHOLDER]` if missing). Anti-hallucination + signal detection: the premium reference.
+15. **Format + present.** Use the premium reference exactly. Review gate 2 (spot check) — actions: [Approve] [Different hook] [Expand].
 
 ## What good looks like
 
-### References
-
-- `references/frameworks.md` — script structure / hook types / body frameworks / body rules / intro + outro components (compact decision tables)
-- `references/hook-patterns.md` — full hook library with formulas
-- `references/body-structures.md` — detailed body frameworks with worked structures
-- `references/retention-techniques.md` — mid-video engagement tactics + pattern library
-- `references/cta-formulas.md` — CTA patterns that convert
-- `references/thumbnail-title-formulas.md` — click-worthy title + thumbnail patterns
-- `references/output-template.md` — canonical markdown output structure + pre-delivery quality checklist
-- `references/skill-ops.md` — anti-hallucination guardrails, iteration prompts, auto-update protocol, MCP integration, integration with other skills, changelog
-
-### Examples
-
-- `examples/b2b-thought-leadership.md` — contrarian thought-leadership video with multiple hook options, retention hook placement, anti-example table
-- `examples/product-launches-script.md` — complete worked example: product-launch lifecycle script
-
 ### Evaluations
 
-Pre-delivery checklist (full version in `references/output-template.md`):
+Pre-delivery checklist (full version in the premium reference):
 
 **Script quality** — all sections have timing markers; hook <8s; intro <45s; each body section has one point; every claim has proof; retention hooks every 2-3 minutes.
 
@@ -128,22 +109,13 @@ Pre-delivery checklist (full version in `references/output-template.md`):
 
 **Outro check** — summary ≤30s; single clear CTA; comment prompt is specific and answerable; open loop creates anticipation.
 
-**Iteration prompts** to offer after delivery (refine / expand / quality) live in `references/skill-ops.md`.
-
-## Push
-
-Output destination: client `content/execution/MMYY-{topic-slug}.md` if client-scoped, or Genesys content workspace otherwise. Auto-update protocol (when user signals strong approval): offer to save output as a reference example in `examples/` per the capture workflow in `references/skill-ops.md`. Chain suggestions after delivery:
-- `storytelling` (story arcs for narrative videos)
-- `linkedin-content` (repurpose script as LinkedIn post / carousel)
-- `transcript-analysis` (analyze performance of past videos to feed next script)
-
----
+**Iteration prompts** to offer after delivery (refine / expand / quality) live in the premium reference.
 
 ## Final ship gate
 
 Run `/premortem --output` before ship. See [`/premortem` skill](../../../../meta/orchestration/premortem/SKILL.md) for the 5 execution domains (will-it-resonate / will-it-convert / will-it-stay-on-brand / will-stakeholder-push-back / will-it-degrade-over-time) and output template.
 
-Then run `/voice-reviewer` — the content ship gate: voice + brand quality (pm-loop.md § lens-reviewer).
+Then run `/voice-reviewer` — the content ship gate: voice + brand quality (pm-loop.md).
 
 Trivial-case escape: `## Premortem\nNo failure modes — trivial change` satisfies the contract for genuinely trivial outputs.
 

@@ -14,18 +14,15 @@ inputs:
   required: []
   recommended:
   - rubric.json (per skill being gated)
-outputs:
 - type: eval-report
   feeds_into:
   - skill-catalog
 depends_on: []
-feeds_into:
 - skill-reviewer
 - voice-reviewer
 - design-reviewer
 owned_by_agent: operator
 mcps_used: []
-push_targets: []
 triggers:
   slash_commands: []
   natural_language: []
@@ -67,13 +64,13 @@ The gate is **complementary to LLM reviewers**, not replacement. Structural rule
 
 ```
 eval-harness/
-├── SKILL.md              ← this file
-├── engine.py             ← check evaluator (stdlib, no LLM)
-├── run.py                ← walker + report renderer
-├── NOTICE.md             ← attribution to source pattern
-├── references/
-│   ├── check-types.md    ← every check type with example
-│   └── rubric-authoring.md ← how to write a rubric for a Genesys skill
+├── SKILL.md ← this file
+├── engine.py ← check evaluator (stdlib, no LLM)
+├── run.py ← walker + report renderer
+├── NOTICE.md ← attribution to source pattern
+├── the premium reference
+│ ├── check-types.md ← every check type with example
+│ └── rubric-authoring.md ← how to write a rubric for a Genesys skill
 └── rubrics/
     ├── client-proposals.json
     ├── positioning.json
@@ -143,7 +140,7 @@ Start any new rubric with mostly `warning`. Upgrade to `error` only after seeing
 
 ## Check types
 
-All check types live in [`engine.py`](engine.py) and are documented with examples in `references/check-types.md`:
+All check types live in [`engine.py`](engine.py) and are documented with examples in the premium reference:
 
 - `regex` / `regex_absent` — pattern match / anti-match
 - `section_present` — markdown heading exists
@@ -153,7 +150,7 @@ All check types live in [`engine.py`](engine.py) and are documented with example
 - `url_count` / `length_in_range` / `line_count_range` — quantitative bounds
 - `frontmatter_field_present` — YAML frontmatter validation (Genesys addition)
 - `max_heading_level` — enforce `doc-output-structure.md` H1/H2-only rule (Genesys addition)
-- `citation_present` — assert `[VERIFIED: ...]` / `[INFERRED: ...]` tags per ontology (Genesys addition)
+- `citation_present` — assert `[VERIFIED:...]` / `[INFERRED:...]` tags per ontology (Genesys addition)
 
 ## Composition with LLM reviewers
 
@@ -162,46 +159,46 @@ PR opens / artifact saved
         │
         ▼
 ┌──────────────────────────┐
-│  eval-harness (this)     │ ← deterministic, <100ms, free
-│  Structure + frontmatter │
-│  + banned-keyword check  │
+│ eval-harness (this) │ ← deterministic, <100ms, free
+│ Structure + frontmatter │
+│ + banned-keyword check │
 └────────────┬─────────────┘
              │
         ┌────┴────┐
-        ▼         ▼
-       PASS     FAIL (blocker)
-        │         │
-        ▼         └→ Fix structure, re-run
+        ▼ ▼
+       PASS FAIL (blocker)
+        │ │
+        ▼ └→ Fix structure, re-run
 ┌──────────────────────────┐
-│  voice-reviewer          │ ← LLM, ~2K tokens, qualitative
-│  Voice + brand + 100     │
-│  Posts Test              │
+│ voice-reviewer │ ← LLM, ~2K tokens, qualitative
+│ Voice + brand + 100 │
+│ Posts Test │
 └────────────┬─────────────┘
              │
         ┌────┴────┐
-        ▼         ▼
-       PASS     FAIL
-        │         │
-        ▼         └→ Rewrite, re-run from top
+        ▼ ▼
+       PASS FAIL
+        │ │
+        ▼ └→ Rewrite, re-run from top
    Ship-ready
 ```
 
 ## CI integration
 
-Sample GitHub Action stub at references/ci-integration.md. The runner emits markdown by default (PR comment friendly) or JSON (programmatic consumption).
+Sample GitHub Action stub at the premium reference The runner emits markdown by default (PR comment friendly) or JSON (programmatic consumption).
 
 ```bash
 # Local lint
-python .claude/skills/meta/catalog/eval-harness/run.py --all
+python.claude/skills/meta/catalog/eval-harness/run.py --all
 
 # Single skill
-python .claude/skills/meta/catalog/eval-harness/run.py --skill positioning
+python.claude/skills/meta/catalog/eval-harness/run.py --skill positioning
 
 # Override threshold
-python .claude/skills/meta/catalog/eval-harness/run.py --all --threshold 80
+python.claude/skills/meta/catalog/eval-harness/run.py --all --threshold 80
 
 # Strict mode (exit 1 on any blocker — CI-friendly)
-python .claude/skills/meta/catalog/eval-harness/run.py --all --strict
+python.claude/skills/meta/catalog/eval-harness/run.py --all --strict
 ```
 
 ## Anti-patterns
@@ -216,15 +213,4 @@ python .claude/skills/meta/catalog/eval-harness/run.py --all --strict
 - Per-criterion auto-fix suggestions (`suggest:` field in rubric → `engine.py` prints fix hint on failure)
 - Rubric inheritance (`extends: positioning.json` for skill variants)
 - Web UI report (currently markdown / JSON only)
-
-## Reference files
-
-| File | Purpose |
-|------|---------|
-| [`engine.py`](engine.py) | Check evaluator — 16 check types, severity model, scoring |
-| [`run.py`](run.py) | Walker + report renderer (markdown / JSON, --strict for CI) |
-| `references/check-types.md` | Every check type with example rubric snippet |
-| `references/rubric-authoring.md` | How to author a rubric for a Genesys skill |
-| [`NOTICE.md`](NOTICE.md) | Attribution to source pattern (MIT + Commons Clause) |
-| `rubrics/*.json` | Per-skill rubrics |
 

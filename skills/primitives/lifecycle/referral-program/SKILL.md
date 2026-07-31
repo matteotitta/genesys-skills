@@ -16,17 +16,14 @@ inputs:
   - icp-behavioural
   - product-messaging
   - lifecycle-marketing
-outputs:
 - type: lifecycle-campaign
   feeds_into:
   - lifecycle-marketing
 depends_on: []
-feeds_into:
 - lifecycle-marketing
 owned_by_agent: growth
 mcps_used:
 - exa
-push_targets:
 - gdrive
 triggers:
   slash_commands:
@@ -162,9 +159,6 @@ After 90 days, productize to clients with viral-loop potential (ClientCo memberâ
 
 ---
 
-## Output format
-
-```markdown
 ## {Client / Genesys} referral program design
 
 ### Trigger moment

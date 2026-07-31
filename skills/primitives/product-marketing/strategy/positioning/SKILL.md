@@ -25,20 +25,17 @@ inputs:
   - icp-behavioural
   - competitor-research
   - win-loss-analysis
-outputs:
 - type: positioning-strategy
   feeds_into:
   - product-messaging
   - website-copy
   - sales-enablement
 depends_on: []
-feeds_into:
 - website-copy
 - product-messaging
 - sales-enablement
 owned_by_agent: pmm
 mcps_used: []
-push_targets:
 - gdrive
 - notion
 triggers:
@@ -101,47 +98,27 @@ Workflow sequences:
 
 ## Steps
 
-**Mode:** Phase 3 presents the top-N anchor combinations as positioning options + a comparison canvas (the scenarios / decisions-to-make step), then collapses to the option the client picks and runs the validation steps on it. `--scenarios[=N]` emits just the options + canvas standalone (a competitor-research deck closer); default N=3. The single-committed-position outcome and the downstream contract are unchanged once a pick is made. → see `references/scenarios-framework.md`
+**Mode:** Phase 3 presents the top-N anchor combinations as positioning options + a comparison canvas (the scenarios / decisions-to-make step), then collapses to the option the client picks and runs the validation steps on it. `--scenarios[=N]` emits just the options + canvas standalone (a competitor-research deck closer); default N=3. The single-committed-position outcome and the downstream contract are unchanged once a pick is made. → see the premium reference
 
-1. **Phase 1 — Discovery & current state.** Fetch website (homepage, pricing, about, product). Apply 5-second clarity test on H1+H2. Identify founder type. Extract current category / differentiation / ICP / problem claimed. → see `references/steps.md`
-2. **Phase 2 — Anchor & alternative mapping.** Map 6 anchor types (Activity, Product Category, Use Case, Problem, Persona, Competitive Alternative). Map 5 alternative types (Manual/DIY, Legacy incumbent, Direct competitor, Adjacent tool, Status quo). Run Esner Decision Tree (Framework 13) to get a starting hypothesis. Score top combinations on Clarity / Differentiation / Relevance. Classify market maturity (emerging vs mature). → see `references/steps.md`
-3. **Phase 3 — Present scenarios, decide, commit.** Take the top-N scored anchor combinations from Step 2.4 (default 3) and expand each into a fully-worked positioning option: concrete hero H1/H2, primary + secondary anchors with type labels, value triad (category / problem / differentiation), secondary angle archetype (Framework 14: Niche / Low-Cost / Premium / Unique Attribute / Lite — max 2), thesis, and risks. Each option must shift its primary anchor or binary strategy — no two options that are the same bet reworded. Assemble the comparison canvas (one column per option; confidence dot per cell mapped to VERIFIED/INFERRED/ESTIMATED/UNAVAILABLE). Mark a recommended pick and name the trade-off each option forces. Present as decisions to make → client picks one. Then collapse to the chosen option: lock its binary strategy (category vs problem), anchors, and 2-3 defensible differentiators (delivery / guarantee / focus / proprietary); determine market focus with TAM math; pick the primary competitive alternative. → see `references/scenarios-framework.md` + `references/scenarios-output-template.md`
+1. **Phase 1 — Discovery & current state.** Fetch website (homepage, pricing, about, product). Apply 5-second clarity test on H1+H2. Identify founder type. Extract current category / differentiation / ICP / problem claimed. → see the premium reference
+2. **Phase 2 — Anchor & alternative mapping.** Map 6 anchor types (Activity, Product Category, Use Case, Problem, Persona, Competitive Alternative). Map 5 alternative types (Manual/DIY, Legacy incumbent, Direct competitor, Adjacent tool, Status quo). Run Esner Decision Tree (Framework 13) to get a starting hypothesis. Score top combinations on Clarity / Differentiation / Relevance. Classify market maturity (emerging vs mature). → see the premium reference
+3. **Phase 3 — Present scenarios, decide, commit.** Take the top-N scored anchor combinations from Step 2.4 (default 3) and expand each into a fully-worked positioning option: concrete hero H1/H2, primary + secondary anchors with type labels, value triad (category / problem / differentiation), secondary angle archetype (Framework 14: Niche / Low-Cost / Premium / Unique Attribute / Lite — max 2), thesis, and risks. Each option must shift its primary anchor or binary strategy — no two options that are the same bet reworded. Assemble the comparison canvas (one column per option; confidence dot per cell mapped to VERIFIED/INFERRED/ESTIMATED/UNAVAILABLE). Mark a recommended pick and name the trade-off each option forces. Present as decisions to make → client picks one. Then collapse to the chosen option: lock its binary strategy (category vs problem), anchors, and 2-3 defensible differentiators (delivery / guarantee / focus / proprietary); determine market focus with TAM math; pick the primary competitive alternative. → see the premium reference + the premium reference
 4. **Run clarity ladder.** (On the committed option once a scenario is picked.) Compress positioning to 1 word, 1 phrase, 1 sentence, 1 paragraph. If any level fails, revisit anchor or differentiator selection.
 5. **Run guarantee test.** For each differentiator: would you guarantee with money on the line? Verdict Pass / Fail / Partial. Cross-reference proof type per anchor (Framework 15: Activity → Before/After, Use Case → Workflow + Outcome, Category → Comparative, Competitive Alt → Switch/Upgrade).
 6. **Map strategic implications.** Document what each decision implies for messaging direction, ICP sharpening, competitive counter-positions. If competitor-research available, include voice calibration. These feed product-messaging, icp-behavioural, tov-guidelines.
-7. **Compose output.** Use template at `references/output-template.md` (scenarios mode / `--scenarios`: use `references/scenarios-output-template.md`). Anchor-specific positioning statement template:
+7. **Compose output.** Use template at the premium reference (scenarios mode / `--scenarios`: use the premium reference). Anchor-specific positioning statement template:
    - Activity: "We help [persona] [do activity] — replacing [manual process] with [product mechanism]."
    - Use Case: "We help [persona] [accomplish use case] without [key friction] — by [differentiated approach]."
    - Product Category: "We are a [category] that [key differentiator] — unlike [competitive alternative] which [weakness]."
    - Competitive Alternative: "We're a [leader]-alternative that [key upgrade] — for [persona] who [unmet need]."
 8. **Channel emphasis guidance.** Same positioning, different facet leads per channel: homepage → primary anchor; thought leadership → Activity/Use Case; comparison pages → Competitive Alternative; sales discovery → Use Case/Activity; case studies → proof type matching primary anchor.
-9. **Self-evaluation.** Run completeness, evidence, guardrail checks. Surface improvements. → see `references/evaluations.md`
+9. **Self-evaluation.** Run completeness, evidence, guardrail checks. Surface improvements. → see the premium reference
 10. **Review gate (Level 2).** Present full strategy + decisions. Approve or iterate.
 11. **Suggest chain.** If approved: "Want me to run `product-messaging` next?" Tight coupling.
 
-Frameworks reference (15 total): all detailed in `references/frameworks.md`. Anti-patterns + gotchas: `references/anti-patterns.md`. Changelog + MCP integration: `references/changelog.md`.
+Frameworks reference (15 total): all detailed in the premium reference. Anti-patterns + gotchas: the premium reference. Changelog + MCP integration: the premium reference.
 
 ## What good looks like
-
-### References
-
-- `references/frameworks.md` — All 15 positioning frameworks (Fletch 1-12, Esner 13-15)
-- `references/steps.md` — Phase 1/2/3 detailed walkthroughs + flowchart
-- `references/output-template.md` — Standard markdown output structure
-- `references/scenarios-framework.md` — Scenarios mode: options-then-decide method, option + canvas anatomy, confidence-dot↔ontology mapping
-- `references/scenarios-output-template.md` — Scenarios mode emit skeleton (N options + canvas + recommendation)
-- `references/examples.md` — Worked examples + reference example capture format
-- `references/evaluations.md` — Self-evaluation + auto-update protocol
-- `references/anti-patterns.md` — Anti-patterns + gotchas
-- `references/changelog.md` — Version history + MCP integration notes
-- `references/fletch-positioning-posts.md` — 96 synthesized Fletch posts
-- `references/esner-positioning-framework.md` — Esner 3-Step framework source
-
-### Examples
-
-- Worked contract-management example with H1/H2 fail → pass → see `references/examples.md`
-- Scenarios worked example (3 options + canvas + recommended pick) → see `references/examples/0626-freckle-scenarios.md`
-- User-approved outputs saved to `references/examples/[date]-[client-slug].md`
 
 ### Evaluations
 
@@ -160,15 +137,6 @@ Frameworks reference (15 total): all detailed in `references/frameworks.md`. Ant
 - Scenarios mode: every option has a concrete hero H1+H2 (not a placeholder), a thesis, and a risks list
 - Scenarios mode: canvas present, one column per option, a confidence dot on every cell mapped to VERIFIED/INFERRED/ESTIMATED/UNAVAILABLE (no all-green canvas)
 - Scenarios mode: recommendation framed as decisions to make with the trade-off per option named — not a forced single answer
-
-## Push
-
-- `client_folder/strategy/` (Google Docs) — strategic foundation for client review
-- Notion "Positioning Database" — searchable record across engagements
-- Output filename: `MMYY-positioning.md` per CLAUDE.md naming convention
-- Feeds into: `product-messaging` (description + core blocks), `landing-page-copy` (hero formula), `sales-enablement` (battlecard positioning), `competitor-research` (focuses analysis on selected primary alternative), `tov-guidelines` (voice calibration if produced)
-
----
 
 ## Final ship gate
 

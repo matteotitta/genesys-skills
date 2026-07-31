@@ -20,17 +20,14 @@ inputs:
   required:
   - skill-catalog
   recommended: []
-outputs:
 - type: batch-execution-report
   feeds_into:
   - orchestrator
 depends_on:
 - skill-catalog
-feeds_into:
 - orchestrator
 owned_by_agent: operator
 mcps_used: []
-push_targets:
 - gdrive
 - notion
 triggers:
@@ -42,7 +39,7 @@ locked_date: null
 lock_version: null
 sources_count: 0
 effort: medium
-paths: .claude/skills/**
+paths:.claude/skills/**
 ---
 
 # /batch-run — Fan Out Any Skill Across N Entities

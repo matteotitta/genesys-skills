@@ -19,19 +19,16 @@ inputs:
   - linkedin-engagement-prospects
   - linkedin-social-selling
   - abm-campaign
-outputs:
 - type: outreach-sequence
   feeds_into: []
 depends_on:
 - icp-research
-feeds_into: []
 owned_by_agent: growth
 mcps_used:
 - apify
 - apollo-io
 - extrovert
 - exa
-push_targets:
 - gdrive
 - notion
 triggers:
@@ -91,18 +88,18 @@ Output complies with:
 
 ```
 ICP ─► [0] Health + load ─► [1] Find + signal ─► [2] Qualify ─► [3] Personalize ─► [4] Sequence ─► [5] Multi-channel
-              │                   │ GATE              │ GATE          │ GATE             │               │ GATE
-              └─ Extrovert        └─ Apify/Apollo     └─ lead-scoring └─ cold-DM +       └─ Day 0/4/9/30 └─ abm-campaign
-                 safety caps         + 7 signals         0–10 route      Extrovert voice    + Rule of 7      + channel switch
+              │ │ GATE │ GATE │ GATE │ │ GATE
+              └─ Extrovert └─ Apify/Apollo └─ lead-scoring └─ cold-DM + └─ Day 0/4/9/30 └─ abm-campaign
+                 safety caps + 7 signals 0–10 route Extrovert voice + Rule of 7 + channel switch
 ```
 
 Every gate is human approval. The loop **drafts and queues — it never auto-sends.** Sends route through Extrovert under its own LinkedIn safety caps.
 
 ### Phase 0 — Account health + ICP load
-Read the locked ICP (`icp-research`). Verify LinkedIn account safety before any sends — reuse the SSI / pending-request / acceptance-rate caps in [`linkedin-social-selling`](../social-selling/SKILL.md) § "Account Safety & Limits (2026)". Stop here if the account is over caps.
+Read the locked ICP (`icp-research`). Verify LinkedIn account safety before any sends — reuse the SSI / pending-request / acceptance-rate caps in [`linkedin-social-selling`](../social-selling/SKILL.md)& Limits (2026)". Stop here if the account is over caps.
 
 ### Phase 1 — Find + signal scan → GATE
-Pull prospects matching the ICP via `linkedin-engagement-prospects` (Apify modes), `apollo-io` enrichment, and the signal skills (`jobs-signal`, `niche-signal-discovery`). Score each prospect against the 7-signal taxonomy and flag the active-intent signals (see `references/0626-linkedin-intent-signals.md`). **Gate:** present the signal-ranked shortlist; user keeps the contact-now set.
+Pull prospects matching the ICP via `linkedin-engagement-prospects` (Apify modes), `apollo-io` enrichment, and the signal skills (`jobs-signal`, `niche-signal-discovery`). Score each prospect against the 7-signal taxonomy and flag the active-intent signals (see the premium reference). **Gate:** present the signal-ranked shortlist; user keeps the contact-now set.
 
 ### Phase 2 — Qualify → GATE
 Run `lead-scoring` (0–10 on fit / intent / accessibility → route: contact now / nurture / discard) on the kept set. **Gate:** user confirms the contact-now routing.
@@ -111,10 +108,10 @@ Run `lead-scoring` (0–10 on fit / intent / accessibility → route: contact no
 Draft per-prospect openers using [`linkedin-cold-dm-doctrine.md`](../../../../../rules/linkedin-cold-dm-doctrine.md) (notification-preview opener, feel-chosen, weightless ask, soft exit) and the warm plays in `linkedin-social-selling`. Voice via the Extrovert MCP. Every message passes the `ai-speak-anti-patterns.md` gate. **Gate:** user approves messages one by one (or in batches once the ICP is trusted).
 
 ### Phase 4 — Sequence
-Build the Day 0 / 4 / 9 / 30 cadence with signal-reset (see `references/0626-cadence.md`), respecting Rule of 7 touch counts. Queue, do not send.
+Build the Day 0 / 4 / 9 / 30 cadence with signal-reset (see the premium reference), respecting Rule of 7 touch counts. Queue, do not send.
 
 ### Phase 5 — Multi-channel → GATE
-Apply the LinkedIn↔email channel-switch heuristic (in `references/0626-cadence.md`) and hand non-responders to `abm-campaign` / `outreach-emails`. **Gate:** user approves the channel plan.
+Apply the LinkedIn↔email channel-switch heuristic (in the premium reference) and hand non-responders to `abm-campaign` / `outreach-emails`. **Gate:** user approves the channel plan.
 
 ---
 
@@ -125,7 +122,7 @@ Apply the LinkedIn↔email channel-switch heuristic (in `references/0626-cadence
 | Find + read signals | `linkedin-engagement-prospects` (Apify) + `apollo-io` + `jobs-signal` / `niche-signal-discovery` + Exa |
 | Qualify (0–10) | `lead-scoring` |
 | Personalize | `linkedin-cold-dm-doctrine` + `linkedin-social-selling` plays; draft via Extrovert MCP |
-| Sequence | `references/0626-cadence.md` + Rule of 7 |
+| Sequence | the premium reference + Rule of 7 |
 | Multi-channel | `abm-campaign` + `outreach-emails` |
 
 No Gojiberry. Nothing here needs a new MCP — all four (Apify, Apollo, Extrovert, Exa) are already mounted.
@@ -158,15 +155,6 @@ This loop calls credit-bearing MCPs. Per [`apify-credits.md`](../../../../../rul
 | `linkedin-social-selling` | Called in Phase 3 (plays + account-safety caps) |
 | `abm-campaign` / `outreach-emails` | Called in Phase 5 (multi-channel) |
 | `extrovert-sync` | Keeps the Extrovert voice seed current for Phase 3 drafting |
-
----
-
-## Reference files
-
-| File | Purpose |
-|------|---------|
-| `references/0626-linkedin-intent-signals.md` | The 7-signal taxonomy + active/passive prioritization (extends `outbound-research-hygiene.md`) |
-| `references/0626-cadence.md` | Day 0/4/9/30 cadence + signal-reset + LinkedIn↔email channel switch (extends `linkedin-cold-dm-doctrine.md`) |
 
 ---
 

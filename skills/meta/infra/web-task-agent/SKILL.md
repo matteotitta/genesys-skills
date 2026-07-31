@@ -15,18 +15,15 @@ inputs:
   required: []
   recommended:
   - competitor-research
-outputs:
 - type: web-task-report
   feeds_into:
   - competitor-research
 depends_on: []
-feeds_into:
 - competitor-research
 owned_by_agent: operator
 mcps_used:
 - chrome-devtools
 - firecrawl
-push_targets: []
 triggers:
   slash_commands:
   - /web-task
@@ -144,7 +141,7 @@ Gated-directory harvesting, form-filling, login-walled extraction. These carry t
 
 ## The loop discipline (the stolen core)
 
-Every mode runs the same disciplined loop. Full protocol → `references/loop-protocol.md`. The four load-bearing rules:
+Every mode runs the same disciplined loop. Full protocol → the premium reference. The four load-bearing rules:
 
 1. **Pre-done verification.** Before declaring done: re-read the task, list every requirement, check each against what you actually observed, and confirm with evidence. Any unmet requirement → not done.
 2. **Ground every claim in observed content.** Each statement in the report traces to a specific capture (a scrape, a snapshot, a screenshot). No claim the page didn't show.
@@ -170,14 +167,6 @@ Every mode runs the same disciplined loop. Full protocol → `references/loop-pr
 | After monitor | `/competitor-research` | A flagged change feeds the next competitor refresh |
 | After QA | `/website-audit` | QA findings feed the broader site audit |
 | Different job | `/website-clone`, `/website-build` | Build/clone, not watch/check |
-
----
-
-## Reference Files
-
-| File | Purpose |
-|---|---|
-| `references/loop-protocol.md` | Full per-mode loop protocol + the stolen browser-use loop-discipline prompt patterns (pre-done verification, soft loop nudges, action chaining), with worked report templates |
 
 ---
 

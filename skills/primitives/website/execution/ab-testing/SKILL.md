@@ -16,18 +16,15 @@ inputs:
   - analytics-tracking-plan
   - signup-onboarding-audit
   - landing-page-audit
-outputs:
 - type: experiment-log
   feeds_into:
   - experiment
 depends_on:
 - analytics-tracking-plan
-feeds_into:
 - experiment
 owned_by_agent: growth
 mcps_used:
 - exa
-push_targets:
 - gdrive
 triggers:
   slash_commands:

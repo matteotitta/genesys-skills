@@ -16,20 +16,10 @@ inputs:
   recommended:
     - paid-campaign-strategy
     - paid-ads-audit
-outputs:
-  - type: experiment-log
-    feeds_into:
-      - paid-ads-audit
-      - paid-campaign-strategy
 depends_on: []
-feeds_into:
-  - paid-ads-audit
-  - paid-campaign-strategy
 owned_by_agent: paid
 mcps_used:
   - linkedin-ads
-push_targets:
-  - gdrive
 triggers:
   slash_commands:
     - /paid-ads-experiment-log
@@ -87,16 +77,6 @@ Baseline = the pre-change metrics over a window the *same length* as the after-w
 3. **Floor it.** Below the volume floor (`quantitative-evidence-floors.md` — <3 conversions, <~100 clicks, before a full window) → "too early, re-read at N", not a verdict.
 4. **Name the confounds.** Seasonality, other concurrent changes, audience fatigue, attribution lag, denominator swings. If one could own the delta, the read is inconclusive.
 5. **Verdict language:** *directionally validated* / *directionally invalidated* / *inconclusive (confound: X)* — never "proven."
-
----
-
-## Output format
-
-- The appended journal line(s) — echoed back so the log stays legible.
-- Per measured change, a 3-line read:
-  - **Hypothesis:** what you expected + why.
-  - **Before → after:** the hypothesis metric + guardrails, each with the count behind it (e.g. "CPL £82 → £61 on 7 → 9 conversions").
-  - **Verdict:** directional call + the one confound that would flip it (or the floor it's still under).
 
 ---
 

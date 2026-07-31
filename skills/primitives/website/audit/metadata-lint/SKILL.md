@@ -14,18 +14,15 @@ inputs:
   required: []
   recommended:
   - company-context
-outputs:
 - type: content-audit
   feeds_into:
   - website-pm-score
   - aeo-strategy
 depends_on: []
-feeds_into:
 - website-pm-score
 - aeo-strategy
 owned_by_agent: operator
 mcps_used: []
-push_targets: []
 triggers:
   slash_commands:
   - /metadata-lint
@@ -44,7 +41,7 @@ context: fork
 effort: low
 ---
 
-<!-- Sourced from ibelick/ui-skills (MIT). https://github.com/ibelick/ui-skills/blob/main/skills/fixing-metadata/SKILL.md. See ../../../meta/catalog/design-reviewer/NOTICE.md for the MIT attribution block. -->
+<!-- Sourced from ibelick/ui-skills (MIT). https://github.com/ibelick/ui-skills/blob/main/skills/fixing-metadata/SKILL.md. See../../../meta/catalog/design-reviewer/NOTICE.md for the MIT attribution block. -->
 
 # Metadata lint
 
@@ -52,7 +49,7 @@ Audits HTML head metadata against a priority-ordered rule set and proposes minim
 
 Sourced from [ibelick/ui-skills](https://github.com/ibelick/ui-skills/blob/main/skills/fixing-metadata/SKILL.md) under MIT (Julien Thibeaut, 2026). Adapted to the Genesys Phase 4 SKILL.md schema; substantive content preserved.
 
-> **Design-contract exemption note:** This skill carries `primitive: website` but is NOT a design-output skill (the `design-production.md` § "Skill authorship contract" applies to skills that produce visual deliverables — landing pages, wireframes, dashboards, decks). Metadata-lint produces a text audit report listing HTML head violations and code-level fixes; there is no DESIGN.md token consumption, no visual surface, no design-cycle phases to walk. The validator's design-contract warning is an expected false positive driven by the `primitive: website` taxonomy heuristic.
+> **Design-contract exemption note:** This skill carries `primitive: website` but is NOT a design-output skill (the `design-production.md` applies to skills that produce visual deliverables — landing pages, wireframes, dashboards, decks). Metadata-lint produces a text audit report listing HTML head violations and code-level fixes; there is no DESIGN.md token consumption, no visual surface, no design-cycle phases to walk. The validator's design-contract warning is an expected false positive driven by the `primitive: website` taxonomy heuristic.
 
 ---
 
@@ -178,7 +175,7 @@ Do NOT run for:
 ```html
 <!-- Missing title: add one with consistent format -->
 <!-- before --> <head><meta name="description" content="..." /></head>
-<!-- after -->  <head><title>Pricing — Acme</title><meta name="description" content="..." /></head>
+<!-- after --> <head><title>Pricing — Acme</title><meta name="description" content="..." /></head>
 
 <!-- og:url disagrees with canonical: align them -->
 <!-- before -->
@@ -188,11 +185,11 @@ Do NOT run for:
 
 <!-- Open Graph image is relative: must be absolute -->
 <!-- before --> <meta property="og:image" content="/og.png" />
-<!-- after -->  <meta property="og:image" content="https://acme.com/og.png" />
+<!-- after --> <meta property="og:image" content="https://acme.com/og.png" />
 
 <!-- Robots tag wrong on staging: add noindex -->
 <!-- before --> (no robots tag on staging.acme.com)
-<!-- after -->  <meta name="robots" content="noindex,nofollow" />
+<!-- after --> <meta name="robots" content="noindex,nofollow" />
 ```
 
 ```jsx
@@ -204,8 +201,8 @@ export const metadata = {
   openGraph: {
     title: "Pricing — Acme",
     description: "...",
-    url: "https://acme.com/pricing",          // matches canonical
-    images: ["https://acme.com/og.png"],       // absolute
+    url: "https://acme.com/pricing", // matches canonical
+    images: ["https://acme.com/og.png"], // absolute
     type: "website",
   },
   twitter: { card: "summary_large_image" },
@@ -214,9 +211,6 @@ export const metadata = {
 
 ---
 
-## Output format
-
-```
 # Metadata lint — {page-or-url}
 Date: 2026-05-01
 
@@ -267,7 +261,6 @@ If any answer is "no" or "didn't check", re-run that section before shipping the
 ## Cross-references
 
 - Broader page audit (perf + a11y + content + metadata) → `/website-pm-score`
-- Production-readiness perf gate (Web Vitals, lazy loading) → `meta/catalog/design-reviewer/references/harden-checklist.md` step 8
 - AI search visibility strategy + citation gap planning → `/aeo-strategy`
 - Source skill (MIT) → [ibelick/ui-skills/skills/fixing-metadata](https://github.com/ibelick/ui-skills/blob/main/skills/fixing-metadata/SKILL.md)
 

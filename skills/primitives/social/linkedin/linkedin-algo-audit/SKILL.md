@@ -20,16 +20,13 @@ inputs:
   recommended:
   - linkedin-content-guide
   - linkedin-profile-optimization
-outputs:
 - type: voice-review-report
   feeds_into:
   - linkedin-content-guide
 depends_on: []
-feeds_into:
 - linkedin-content-guide
 owned_by_agent: content
 mcps_used: []
-push_targets:
 - gdrive
 - notion
 triggers:
@@ -124,38 +121,21 @@ Voice-locked ranking — this is the load-bearing decision data. Stays in body.
 
 **Profile audit (3 phases):** Keyword-profile alignment → Content history alignment (if known) → Scoring summary.
 
-Full step-by-step + scoring criteria + reach killers list in `references/process.md`.
+Full step-by-step + scoring criteria + reach killers list in the premium reference.
 
 ---
 
 ## Anti-Hallucination Guardrails
 
-1. **Don't invent performance data.** All benchmarks must trace to Shield Analytics, AuthoredUp, or 360brew — sources cited in `references/quality.md`.
+1. **Don't invent performance data.** All benchmarks must trace to Shield Analytics, AuthoredUp, or 360brew — sources cited in the premium reference.
 2. **Don't predict exact impression counts.** Use the benchmark ranges as context, not guarantees.
 3. **Don't flag content as "will fail".** Score as WARN/FAIL/PASS with specific fixes — never predict zero performance.
 
 ---
 
-## Output Format
-
-Audit reports include score summary table, verdict (publish-as-is / minor tweaks / fix before posting), per-issue findings with specific fixes, and opportunities to increase save/comment potential. Templates for both post audits and profile audits in `references/output-format.md`.
-
----
-
 ## Quality
 
-Pre-delivery checks cover audit completeness (all sub-checks ran, fixes specific not generic), audit fairness (PASS = no blockers, not "great"), and benchmark currency. Algorithm benchmark tables (Shield, AuthoredUp, format performance, posting optimization) + anti-examples in `references/quality.md`.
-
----
-
-## Reference Files
-
-| File | Purpose |
-|------|---------|
-| `references/process.md` | Post audit + profile audit step-by-step + integration table |
-| `references/output-format.md` | Post audit and profile audit report templates |
-| `references/quality.md` | Algorithm benchmark tables + posting optimization + pre-delivery checks + anti-examples |
-| `references/auto-update.md` | Self-evaluation protocol + feedback signals (algorithm changes drive updates) |
+Pre-delivery checks cover audit completeness (all sub-checks ran, fixes specific not generic), audit fairness (PASS = no blockers, not "great"), and benchmark currency. Algorithm benchmark tables (Shield, AuthoredUp, format performance, posting optimization) + anti-examples in the premium reference.
 
 ---
 

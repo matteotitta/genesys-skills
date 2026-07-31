@@ -19,17 +19,12 @@ inputs:
     - brand-kit
     - ad-creative-brief
     - product-messaging
-outputs:
-  - type: ad-creative-asset
-    feeds_into: []
 depends_on: []
-feeds_into: []
 
 owned_by_agent: paid
 mcps_used:
   - higgsfield
   - firecrawl
-push_targets: []
 triggers:
   slash_commands:
     - /ad-creative
@@ -124,29 +119,29 @@ claude mcp add --transport http --scope user higgsfield https://mcp.higgsfield.a
 
 # 2. Verify it registered:
 claude mcp list | grep higgsfield
-#   higgsfield: https://mcp.higgsfield.ai/mcp (HTTP) - ! Needs authentication
+# higgsfield: https://mcp.higgsfield.ai/mcp (HTTP) - ! Needs authentication
 
 # 3. Authenticate via OAuth:
-#    Open a Claude Code session and run the /mcp slash command.
-#    Higgsfield will print an auth URL — open it in a browser, sign in to your
-#    Higgsfield account, copy the returned code, and paste it back in Claude.
-#    Alternatively, authentication is triggered automatically the first time
-#    any mcp__higgsfield__* tool is called.
+# Open a Claude Code session and run the /mcp slash command.
+# Higgsfield will print an auth URL — open it in a browser, sign in to your
+# Higgsfield account, copy the returned code, and paste it back in Claude.
+# Alternatively, authentication is triggered automatically the first time
+# any mcp__higgsfield__* tool is called.
 
 # 4. Confirm tools are surfaced:
-#    In a fresh Claude Code session, look for tools named
-#    mcp__higgsfield__* in the deferred-tool list.
+# In a fresh Claude Code session, look for tools named
+# mcp__higgsfield__* in the deferred-tool list.
 ```
 
 **Startup check (the skill runs this on every invocation):**
 
 The skill calls a no-op Higgsfield tool (e.g., `mcp__higgsfield__list_models` or equivalent) before stage 1. If the call returns "tool not found" or "needs authentication," the skill aborts with:
 
-> "Higgsfield MCP not detected or not authenticated. Run `claude mcp add --transport http --scope user higgsfield https://mcp.higgsfield.ai/mcp` then `/mcp` to authenticate. See SKILL.md § Prerequisites."
+> "Higgsfield MCP not detected or not authenticated. Run `claude mcp add --transport http --scope user higgsfield https://mcp.higgsfield.ai/mcp` then `/mcp` to authenticate. See SKILL.md."
 
 No partial runs — if the MCP is missing or unauthenticated, no Firecrawl credits get spent either.
 
-**Cost gate:** Higgsfield credit spend is non-trivial. The skill estimates total run cost before stage 2 (image generation) and asks the user to confirm if estimated cost > $5 USD-equivalent. See `references/process.md` § "Cost estimation."
+**Cost gate:** Higgsfield credit spend is non-trivial. The skill estimates total run cost before stage 2 (image generation) and asks the user to confirm if estimated cost > $5 USD-equivalent. See the premium reference."
 
 ---
 
@@ -166,7 +161,7 @@ No partial runs — if the MCP is missing or unauthenticated, no Firecrawl credi
 
 ## Process
 
-Seven-stage deterministic chain (Stage 7 is an optional pre-ship gate). Each stage has explicit MCP tool, model pick, prompt template, expected output, and failure mode. Full reference in `references/process.md`.
+Seven-stage deterministic chain (Stage 7 is an optional pre-ship gate). Each stage has explicit MCP tool, model pick, prompt template, expected output, and failure mode. Full reference in the premium reference.
 
 | # | Stage | MCP / Model | Output |
 |---|-------|-------------|--------|
@@ -181,30 +176,6 @@ Seven-stage deterministic chain (Stage 7 is an optional pre-ship gate). Each sta
 Mode flags skip stages: `--statics-only` runs 1→3; `--ugc-only` runs 1+5+6; `--animate-only` runs 1+2+4. `--no-virality` skips Stage 7.
 
 **Aspect-ratio honesty:** LinkedIn 1.91:1 renders as native 16:9 (no model supports 1.91:1 directly; LinkedIn auto-crops 16:9 cleanly). Meta 4:5 static is native to `marketing_studio_image` but NOT `gpt_image_2`. Meta 4:5 **video** is not native to any model; spec ships 1:1 + 9:16 for video, not 4:5.
-
----
-
-## Output
-
-Run-id folder with deterministic layout. Full schema in `references/output-format.md`.
-
-```
-{output-root}/MMYY-ai-ads/{run-id}/
-├── brief.md
-├── static/{linkedin-feed-1200x627,linkedin-square-1080x1080,meta-square-1080x1080,meta-portrait-1080x1350}.png
-├── static-with-overlay/  # parallel set with platform-tuned text
-├── video/  # animated hero per aspect ratio
-├── ugc/
-│   ├── persona-portrait.png
-│   ├── ugc-reel-1080x1920.mp4
-│   └── ugc-square-1080x1080.mp4
-└── manifest.yaml
-```
-
-Output routes per `.claude/rules/consulting-clients.md`:
-
-- With `--client {slug}` → `projects/consulting/active/{slug}/paid/execution/MMYY-ai-ads/{run-id}/`
-- Without `--client` → `projects/genesys/content/execution/ai-ads/MMYY-{run-id}/`
 
 ---
 
@@ -225,7 +196,7 @@ Every prompt to GPT Image 2 + Seedance 2.0 cites brand tokens explicitly. Same c
 
 ## Design cycle (post-authoring phases)
 
-After producing the happy-path output, walk these phases before ship. Each references the shared design-quality library at `../../../meta/catalog/design-reviewer/references/`. Run `/design-reviewer` as the final ship-ready gate.
+After producing the happy-path output, walk these phases before ship. Each references the shared design-quality library at `../../../meta/catalog/design-reviewer/the premium reference. Run `/design-reviewer` as the final ship-ready gate.
 
 - **Layout** — `layout-tenets.md` (rhythm, alignment, density across aspect ratios)
 - **Distill** — `distill-principles.md` (strip generative noise; one message per asset)
@@ -252,7 +223,7 @@ Skip Harden + Onboarding — they apply to code/app output, not ad creative.
 
 ## Quality
 
-Self-evaluation checklist (token coverage, aspect-ratio compliance, overlay character limits, caption presence, voice override compliance), worked examples (ClientCo + ClientCo), failure-mode triage, and the rerun-loop pattern in `references/quality.md`.
+Self-evaluation checklist (token coverage, aspect-ratio compliance, overlay character limits, caption presence, voice override compliance), worked examples (ClientCo + ClientCo), failure-mode triage, and the rerun-loop pattern in the premium reference.
 
 ---
 
@@ -270,17 +241,6 @@ Self-evaluation checklist (token coverage, aspect-ratio compliance, overlay char
 ### Downstream
 
 Terminal deliverable — assets upload directly to LinkedIn Campaign Manager / Meta Ads Manager. Run through `/design-reviewer` as the final gate. Track results via `/paid-audit` after spend begins.
-
----
-
-## Reference Files
-
-| File | Purpose |
-|------|---------|
-| `references/process.md` | 6-stage flowchart + platform specs (LinkedIn + Meta) + per-stage prompt templates + credit-cost estimates |
-| `references/output-format.md` | Run-id folder layout + manifest.yaml schema + per-asset metadata fields |
-| `references/prompts.md` | GPT Image 2 + Seedance 2.0 prompt templates per stage with brand-token injection points |
-| `references/quality.md` | Anti-hallucination checks + brand-bound compliance + failure-mode triage + worked examples |
 
 ---
 

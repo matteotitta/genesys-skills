@@ -21,19 +21,16 @@ inputs:
   - tov-guidelines
   - icp-behavioural
   - company-context
-outputs:
 - type: linkedin-profile-audit
   feeds_into:
   - linkedin-weekly-content
   - linkedin-infographics
 depends_on: []
-feeds_into:
 - linkedin-weekly-content
 - linkedin-infographics
 owned_by_agent: content
 mcps_used:
 - firecrawl
-push_targets: []
 triggers:
   slash_commands: []
   natural_language: []
@@ -124,7 +121,7 @@ Status flags: ✓ Good (>70%) | ⚠ Needs work (40-70%) | ✗ Critical (<40%)
 
 ## Process
 
-3-phase flow: Profile Data Gathering → Profile Audit (using the 8-section scoring table above) → Optimized Copy Generation. Full step-by-step in `references/process.md`.
+3-phase flow: Profile Data Gathering → Profile Audit (using the 8-section scoring table above) → Optimized Copy Generation. Full step-by-step in the premium reference.
 
 ---
 
@@ -193,29 +190,9 @@ If scraping fails or is unavailable:
 
 ---
 
-## Output Format
-
-Audit output includes overall score, section-by-section assessment with verbatim evidence, optimized copy for headline/about/banner/experience/featured/recommendations, profile-content alignment summary, and next-steps priority list. Full template + iteration prompts in `references/output-format.md`.
-
----
-
 ## Quality
 
-Pre-delivery checklist covers audit quality (verbatim evidence, score sums correct), copy quality (formula adherence, PAIS completeness, proof points real), voice quality (matches `tov-guidelines`), and the Profile Clarity Tenets restated for review. Worked example + anti-examples in `references/quality.md`.
-
----
-
-## Reference Files
-
-| File | Purpose |
-|------|---------|
-| `references/process.md` | 3-phase workflow + integration with upstream/downstream skills |
-| `references/output-format.md` | Audit + optimized-copy output template + iteration prompts |
-| `references/quality.md` | Pre-delivery checklist + worked example + anti-examples |
-| `references/auto-update.md` | Self-evaluation protocol + feedback signals that trigger updates |
-| `references/profile-frameworks.md` | Nick Broekema's profile optimization frameworks |
-| `references/section-formulas.md` | Fill-in-the-blank templates for each section |
-| `references/0326-linkedin-profile-audit.md` | Genesys Growth (Matteo) profile audit — canonical worked example |
+Pre-delivery checklist covers audit quality (verbatim evidence, score sums correct), copy quality (formula adherence, PAIS completeness, proof points real), voice quality (matches `tov-guidelines`), and the Profile Clarity Tenets restated for review. Worked example + anti-examples in the premium reference.
 
 ---
 

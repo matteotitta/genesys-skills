@@ -21,7 +21,6 @@ inputs:
   - linkedin-expert-posts
   - linkedin-hooks
   - voice-reviewer
-outputs:
 - type: newsletter-draft
   feeds_into:
   - gdrive-create
@@ -35,7 +34,6 @@ outputs:
   feeds_into:
   - linkedin-weekly-content
 depends_on: []
-feeds_into:
 - gdrive-create
 - linkedin-weekly-content
 owned_by_agent: operator
@@ -43,7 +41,6 @@ mcps_used:
 - notion
 - slack
 - github
-push_targets:
 - notion
 - github
 triggers:
@@ -61,7 +58,7 @@ effort: medium
 
 Write and publish the weekly "Skill of the Week" newsletter for Genesys Growth. Each edition features one Claude Code skill with a deep-dive article explaining the methodology, a before/after ASCII chart for Carbon.now.sh formatting, and a companion LinkedIn post. The featured skill publishes to the public `genesys-skills` repo BEFORE drafting, so the CTA URL is live when the article needs it.
 
-For the full process (selection / publish / draft / charts / LinkedIn / Notion / output / Substack draft) → `references/process.md`.
+For the full process (selection / publish / draft / charts / LinkedIn / Notion / output / Substack draft) → the premium reference.
 
 ## Doctrine inherited (Step 7 — 0626 rollout, locked 2026-06-04)
 
@@ -74,31 +71,31 @@ Output complies with [`output-tenets.md`](../../../../../rules/output-tenets.md)
 ## Process at a glance
 
 ```
-┌─────────────┐    ┌─────────────┐    ┌─────────────┐    ┌─────────────┐
-│  Phase 1    │───▶│  Phase 1b   │───▶│  Phase 2    │───▶│  Phase 3    │
-│  Skill      │    │  Public     │    │  Newsletter │    │  ASCII      │
-│  Selection  │    │  Repo Pub.  │    │  Draft      │    │  Charts     │
-└─────────────┘    └─────────────┘    └─────────────┘    └──────┬──────┘
+┌─────────────┐ ┌─────────────┐ ┌─────────────┐ ┌─────────────┐
+│ Phase 1 │───▶│ Phase 1b │───▶│ Phase 2 │───▶│ Phase 3 │
+│ Skill │ │ Public │ │ Newsletter │ │ ASCII │
+│ Selection │ │ Repo Pub. │ │ Draft │ │ Charts │
+└─────────────┘ └─────────────┘ └─────────────┘ └──────┬──────┘
                                                                 │
-┌─────────────┐    ┌─────────────┐    ┌─────────────┐    ┌──────▼──────┐
-│  Phase 7    │◀───│  Phase 6    │◀───│  Phase 5    │◀───│  Phase 4    │
-│  Substack   │    │  Output +   │    │  Notion     │    │  LinkedIn   │
-│  Draft ⌥    │    │  Tracker    │    │  Publish    │    │  Post       │
-└─────────────┘    └─────────────┘    └─────────────┘    └─────────────┘
+┌─────────────┐ ┌─────────────┐ ┌─────────────┐ ┌──────▼──────┐
+│ Phase 7 │◀───│ Phase 6 │◀───│ Phase 5 │◀───│ Phase 4 │
+│ Substack │ │ Output + │ │ Notion │ │ LinkedIn │
+│ Draft ⌥ │ │ Tracker │ │ Publish │ │ Post │
+└─────────────┘ └─────────────┘ └─────────────┘ └─────────────┘
                     ⌥ = post-approval only — Matteo presses send
 ```
 
 | Phase | Purpose | Output |
 |-------|---------|--------|
 | **1. Selection** | Pick skill from tracker, study its SKILL.md, identify manual process it replaces | Skill chosen, manual process mapped |
-| **1b. Public repo publish** | Clean-copy the skill to `genesys-skills` per `references/public-repo-publish.md` and push — FIRST, so the CTA URL is live | Public skill URL + `SKILL_NUMBER` |
+| **1b. Public repo publish** | Clean-copy the skill to `genesys-skills` per the premium reference and push — FIRST, so the CTA URL is live | Public skill URL + `SKILL_NUMBER` |
 | **2. Draft** | Write the deep-dive article in Matteo's voice | `newsletter.md` |
 | **3a. Speed chart** | Generate before/after chart for Carbon.now.sh | `ascii-chart.txt` (~85 chars wide) |
 | **3b. Concept chart** | Generate inline argument-anchored chart embedded in `newsletter.md` body | `concept-chart.txt` + inline fenced block (~74 chars wide) |
 | **4. LinkedIn post** | Chain to `linkedin-expert-posts` for the companion piece | `linkedin-post.md` (post + first comment + image note + self-check) |
 | **5. Notion publish** | One child page under the Genesys Growth parent (newsletter + LinkedIn + chart); manifest line written back per `notion-protocol.md` | Notion page URL |
 | **6. Output + tracker** | Save all to `CWW-skill-name/`, Slack DM Matteo, update tracker | Subfolder + Slack message |
-| **7. Substack draft** ⌥ | POST-APPROVAL: produce `substack-ready.md` + browser-create the Substack DRAFT per `references/substack-publish.md`. Never send — Matteo presses send | Substack draft URL |
+| **7. Substack draft** ⌥ | POST-APPROVAL: produce `substack-ready.md` + browser-create the Substack DRAFT per the premium reference. Never send — Matteo presses send | Substack draft URL |
 
 ---
 
@@ -146,36 +143,6 @@ Output complies with [`output-tenets.md`](../../../../../rules/output-tenets.md)
 2. **Time estimates must be realistic** — don't inflate manual-process times to make the skill look better.
 3. **GitHub URLs must resolve** — verify the SKILL.md path in `.claude/skills/[category]/[skill-name]/SKILL.md`.
 4. **No invented Slack messages** — the actual Slack notification is sent via the Slack MCP, not transcribed.
-
----
-
-## Output structure (per edition)
-
-```
-projects/genesys/newsletter/CWW-skill-name/
-├── newsletter.md          ← The full newsletter article (concept chart embedded inline)
-├── ascii-chart.txt        ← Speed/quality before-after chart (Carbon copy-paste, ~85 chars)
-├── concept-chart.txt      ← Inline argument-anchored chart (~74 chars, mirrors body block)
-├── linkedin-post.md       ← Metadata header + paste-ready post + first comment + image-asset note + voice-gate self-check
-└── substack-ready.md      ← Post-approval: article adapted for Substack paste (chart fences → image-insert placeholders)
-```
-
-Both charts are mandatory. `ascii-chart.txt` is the Carbon-ready time/quality comparison the LinkedIn audience expects. `concept-chart.txt` is the conceptual chart embedded in the newsletter body that visualizes the central argument of THAT issue (e.g., the confidence ladder for battlecards, the customer-story decay curve for case-study). See `references/ascii-chart-template.md` § "Template — conceptual chart" for the format and canonical examples.
-
-Where `CWW` = ISO calendar week number for the publication date.
-
-For full per-phase details, voice checklist, ASCII chart template selection, GDrive command, Slack notification format → `references/process.md`.
-
----
-
-## Reference Files
-
-| File | Purpose |
-|------|---------|
-| `references/process.md` | Full process with article structure, quality gates, Notion publish, Slack notification format |
-| `references/ascii-chart-template.md` | Carbon.now.sh-ready ASCII chart templates (task-based + quality-based variants) |
-| `references/public-repo-publish.md` | Copy-clean-gate protocol for publishing the featured skill to the public `genesys-skills` repo (LICENSE drop, provenance scan, frontmatter rewrite, 4-grep leak gate) |
-| `references/substack-publish.md` | Post-approval browser-assisted Substack DRAFT creation (draft-only contract — Matteo presses send) |
 
 ---
 

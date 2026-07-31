@@ -9,7 +9,7 @@ description: 'Turns a GTM Engineer School podcast transcript into four artifacts
   voice for them to publish from their profile (with a soft Cohort 4 referral CTA if the guest has a promo code), and (4)
   an outreach email from Matteo to the guest bundling all assets, links, and partnership details. Last mile is always a single
   Notion page created under the GTME School podcast parent page via mcp__notion__notion-create-pages, with a Notion sync-back
-  manifest line appended to the local bundle.md per .claude/rules/notion-protocol.md. (Changed 2026-05-25 from GDoc to Notion per
+  manifest line appended to the local bundle.md per.claude/rules/notion-protocol.md. (Changed 2026-05-25 from GDoc to Notion per
   Matteo''s standing preference; see MEMORY.md feedback_gtme_podcast_notion_default.) Triggers: "podcast episode post", "GTME
   podcast Substack", "write up episode S#E#", "/gtme-podcast". NOT for the Pulse newsletter — use gtme-pulse. NOT for generic
   transcript insights — use transcript-analysis alone.'
@@ -28,7 +28,6 @@ inputs:
   - transcript-analysis
   - linkedin-expert-posts
   - voice-reviewer
-outputs:
 - type: newsletter
   feeds_into: []
 - type: linkedin-post
@@ -38,12 +37,10 @@ outputs:
 - type: outreach-email
   feeds_into: []
 depends_on: []
-feeds_into: []
 owned_by_agent: operator
 mcps_used:
 - exa
 - notion
-push_targets:
 - notion
 triggers:
   slash_commands: []
@@ -85,7 +82,7 @@ Output complies with:
 
 | Code | Refinement | How it lands in gtme-podcast |
 |---|---|---|
-| **R1** | Source placement (three layers) | Substack post + LinkedIn posts + guest email are **end-customer-facing**. **No sources block.** Transcript quotes appear inline with attribution to the guest — but no `[VERIFIED: ...]` tags. Source transcript lives in working doc for QA only. |
+| **R1** | Source placement (three layers) | Substack post + LinkedIn posts + guest email are **end-customer-facing**. **No sources block.** Transcript quotes appear inline with attribution to the guest — but no `[VERIFIED:...]` tags. Source transcript lives in working doc for QA only. |
 | **R3** | Product-update tone | When the episode features GTME School cohort framing, frame as "Cohort 5 opens [date]" not "we are thrilled to announce Cohort 5." Per [[feedback_gtme_pulse_conventions]] cohort-naming rule. |
 | **R6** | CTA hierarchy | Substack + LinkedIn posts → soft cohort enrollment as primary CTA, podcast subscribe as fallback. Guest email → reply-to-share primary, social-share as fallback. Cohort naming pulled from current cohort in [[feedback_gtme_pulse_conventions]]. |
 | **R9** | Action-oriented section names | "Why this episode matters / What [Guest] shipped / How to take [Guest's] approach further" — verb-led + entity-named. |
@@ -143,7 +140,7 @@ Output complies with:
 
 ### Cohort-level config (auto-loaded)
 
-The skill reads references/cohort-config.md for: `cohort_name`, `cohort_url`, `student_discount`, `guest_commission`, `referral_dashboard_url`. Update once per cohort — never pass per-episode.
+The skill reads the premium reference for: `cohort_name`, `cohort_url`, `student_discount`, `guest_commission`, `referral_dashboard_url`. Update once per cohort — never pass per-episode.
 
 ### Validation
 
@@ -158,11 +155,11 @@ If any required input missing → ask, don't invent.
 ## Process flowchart
 
 ```
-┌────────┐  ┌────────┐  ┌────────┐  ┌────────┐  ┌────────┐  ┌────────┐
-│ INPUT  │─▶│ PHASE 1│─▶│ PHASE  │─▶│ PHASE 4│─▶│ PHASE 5│─▶│ PHASE 6│
-│ VALID. │  │ INSIGHT│  │ 2–3    │  │ BUNDLE │  │ NOTION │  │ SUMMARY│
-│        │  │ ANALYS.│  │ 4 ASSTS│  │ ASSEMB.│  │ PUSH   │  │ TO USER│
-└────────┘  └────────┘  └────────┘  └────────┘  └────────┘  └────────┘
+┌────────┐ ┌────────┐ ┌────────┐ ┌────────┐ ┌────────┐ ┌────────┐
+│ INPUT │─▶│ PHASE 1│─▶│ PHASE │─▶│ PHASE 4│─▶│ PHASE 5│─▶│ PHASE 6│
+│ VALID. │ │ INSIGHT│ │ 2–3 │ │ BUNDLE │ │ NOTION │ │ SUMMARY│
+│ │ │ ANALYS.│ │ 4 ASSTS│ │ ASSEMB.│ │ PUSH │ │ TO USER│
+└────────┘ └────────┘ └────────┘ └────────┘ └────────┘ └────────┘
                                                      │
                                                      ▼
                                               Notion page URL
@@ -173,7 +170,7 @@ If any required input missing → ask, don't invent.
 
 ## Process
 
-The episode kit runs in 6 phases. Read `references/process.md` for the full step-by-step.
+The episode kit runs in 6 phases. Read the premium reference for the full step-by-step.
 
 Phase summary:
 
@@ -228,7 +225,7 @@ Phase summary:
 
 ## Quality
 
-Per-artifact pre-delivery checklist (Substack / host LI / guest LI / guest email / all artifacts / bundle+GDoc): `references/quality.md`.
+Per-artifact pre-delivery checklist (Substack / host LI / guest LI / guest email / all artifacts / bundle+GDoc): the premium reference.
 
 ---
 
@@ -261,14 +258,14 @@ Per-artifact pre-delivery checklist (Substack / host LI / guest LI / guest email
 
 | File | Purpose |
 |------|---------|
-| `references/process.md` | Full 6-phase step-by-step |
-| `references/quality.md` | Per-artifact pre-delivery checklist |
-| `references/cohort-config.md` | Current cohort values — update per cohort |
-| `references/substack-template.md` | Substack post template with placeholders |
-| `references/guest-linkedin-template.md` | Guest-voice post template + voice calibration |
-| `references/guest-email-template.md` | Outreach email template + conditional rendering |
-| `references/e8-reference.md` | Gold-standard filled example (E8 — Nico Druelle, Season 1 legacy format) |
-| `references/bundle-template.md` | One-doc-all-assets layout for the Notion push (Phase 4 + 5) |
+| the premium reference | Full 6-phase step-by-step |
+| the premium reference | Per-artifact pre-delivery checklist |
+| the premium reference | Current cohort values — update per cohort |
+| the premium reference | Substack post template with placeholders |
+| the premium reference | Guest-voice post template + voice calibration |
+| the premium reference | Outreach email template + conditional rendering |
+| the premium reference | Gold-standard filled example (E8 — Nico Druelle, Season 1 legacy format) |
+| the premium reference | One-doc-all-assets layout for the Notion push (Phase 4 + 5) |
 
 ---
 

@@ -20,16 +20,13 @@ review_gate: 2
 inputs:
   required: []
   recommended: []
-outputs:
 - type: dashboard
   feeds_into: []
 depends_on: []
-feeds_into: []
 owned_by_agent: operator
 mcps_used:
 - gdrive
 - xero
-push_targets: []
 triggers:
   slash_commands:
   - /dashboard
@@ -209,14 +206,14 @@ Generate a React app structure:
 ```
 dashboard/
 ├── src/
-│   ├── App.tsx          # Main app with routing
-│   ├── data/            # Transformed data as JSON
-│   ├── components/      # Chart components
-│   ├── hooks/           # Data loading and filtering
-│   └── styles/          # Tailwind or styled-components
+│ ├── App.tsx # Main app with routing
+│ ├── data/ # Transformed data as JSON
+│ ├── components/ # Chart components
+│ ├── hooks/ # Data loading and filtering
+│ └── styles/ # Tailwind or styled-components
 ├── package.json
 ├── vite.config.ts
-└── README.md            # Data refresh instructions
+└── README.md # Data refresh instructions
 ```
 
 ### Step 3: Component selection
@@ -272,17 +269,9 @@ Apply to: chart colors, header background, accent elements, font family.
 
 ---
 
-## Output
-
-1. Working React dashboard app (in specified deploy target)
-2. `README.md` with data refresh instructions
-3. `data/` folder with transformed source data as JSON
-
----
-
 ## Design cycle (post-authoring phases)
 
-Dashboards are data-dense by definition — Cognitive load is **always-on** for this skill (not conditional). Run the full phase walk before ship. Each phase references `../../meta/catalog/design-reviewer/references/`.
+Dashboards are data-dense by definition — Cognitive load is **always-on** for this skill (not conditional). Run the full phase walk before ship. Each phase references `../../meta/catalog/design-reviewer/the premium reference.
 
 - **Layout** — `layout-tenets.md` (rhythm, density budget; dashboards push 8–15 components per viewport)
 - **Distill** — `distill-principles.md` (every chart earns its place)

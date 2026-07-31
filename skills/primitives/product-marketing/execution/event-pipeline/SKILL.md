@@ -27,7 +27,6 @@ inputs:
   - lead-scoring
   - positioning
   - company-context
-outputs:
 - type: launch-plan
   feeds_into:
   - outreach-emails
@@ -36,7 +35,6 @@ outputs:
 depends_on:
 - icp-research
 - product-messaging
-feeds_into:
 - outreach-emails
 - one-pager
 - email-nurture
@@ -46,7 +44,6 @@ mcps_used:
 - firecrawl
 - apify
 - spider
-push_targets:
 - gdrive
 - notion
 triggers:
@@ -102,7 +99,7 @@ Also binding: [`crawl-cost-discipline.md`](../../../../../rules/crawl-cost-disci
 | ICP definition | required | `icp-research` |
 | Messaging + value props | required | `product-messaging` |
 | Account scores | recommended | `lead-scoring`, or the client CRM |
-| Client CRM + sending stack | recommended | Client CLAUDE.md — never assume; see `references/hit-list-build.md` |
+| Client CRM + sending stack | recommended | Client CLAUDE.md — never assume; see the premium reference |
 | All-in event cost | recommended | User — needed for the economics model |
 
 If mode or headcount is missing, ask before anything else. Both change the arithmetic in step 2, and every later step depends on it.
@@ -111,33 +108,27 @@ If mode or headcount is missing, ask before anything else. Both change the arith
 
 ### Phase A — Pre-event
 
-1. **Qualify and set the mode.** Go/no-go against audience fit and cost. Confirm sponsor, exhibitor or attendee-only. Each yields a different day, so this is not a label — it is the branch. See `references/event-qualification.md`.
+1. **Qualify and set the mode.** Go/no-go against audience fit and cost. Confirm sponsor, exhibitor or attendee-only. Each yields a different day, so this is not a label — it is the branch. See the premium reference.
 2. **Set capacity.** Hours on site × headcount, split by mode: an exhibitor loses hours to stand duty; a sponsor gains access to private zones; attendee-only is fully mobile. Output: **N**, the number of real meeting slots. Every later number derives from N.
 3. **Build the raw list.** Participant, exhibitor and speaker lists. Free discovery first (`spider_links`, sitemap) before any metered crawl — per `crawl-cost-discipline`. Many events publish the delegate list; check before buying one.
-4. **Enrich and resolve.** Firms to named contacts, 2–3 per target account. Phone numbers acquired here go through the screening gate in `references/phone-and-channel-compliance.md` before any call.
+4. **Enrich and resolve.** Firms to named contacts, 2–3 per target account. Phone numbers acquired here go through the screening gate in the premium reference before any call.
 5. **Score and rank.** Join the list to CRM account scores. Sort descending. Each row carries its reason: adviser count, recent acquisition, headcount, whatever the ICP actually keys on.
 6. **Cut to capacity.** Take the top N from step 2, plus a reserve of roughly 50% for no-shows and chance encounters. This is the hit list. Everything below the cut is a post-event email, not a meeting target.
-7. **Build per-firm artifacts for the top tier.** A firm-specific number from public data beats a pitch. Emailed pre-event as the reason to meet, shown from an iPad in the conversation. See `references/public-data-artifact.md`.
-8. **Run the layered cadence.** Email at T-3 weeks, LinkedIn at T-2, phone or a light nudge the week of. Each touch references the event and the artifact. Timings and copy shape in `references/cadence-and-capture.md`.
+7. **Build per-firm artifacts for the top tier.** A firm-specific number from public data beats a pitch. Emailed pre-event as the reason to meet, shown from an iPad in the conversation. See the premium reference.
+8. **Run the layered cadence.** Email at T-3 weeks, LinkedIn at T-2, phone or a light nudge the week of. Each touch references the event and the artifact. Timings and copy shape in the premium reference.
 9. **Prep the booked meetings.** One short prep per confirmed meeting. Chain to `client-discovery`.
 
 ### Phase B — At-event
 
 10. **Route the day.** Map the hit list onto the venue's zones and agenda, in time order, with travel between them. Mode decides the shape: an exhibitor anchors to the stand and sends one person walking; a sponsor works sessions and private lounges; attendee-only is all floor and pre-booked slots.
-11. **Approach and capture.** Pre-read before each approach. Record where permitted. Capture the schema in `references/cadence-and-capture.md` — contact, next step, and the **anchor**: the specific thing said that follow-up will cite. No anchor, no usable follow-up.
+11. **Approach and capture.** Pre-read before each approach. Record where permitted. Capture the schema in the premium reference — contact, next step, and the **anchor**: the specific thing said that follow-up will cite. No anchor, no usable follow-up.
 12. **End-of-day batch.** Notes → CRM → tomorrow's re-prioritised list. This is the step teams skip and the reason conversations evaporate. Chain to `transcript-analysis`.
 
 ### Phase C — Post-event
 
 13. **Segment.** Met and warm / met and cool / booked-but-no-show / target-not-reached / met-but-out-of-ICP. Different segments get different sends; the last gets none.
-14. **Follow up.** Within 48 hours, each message citing its anchor. Sequences via `outreach-emails`, sent per the client's actual stack, replies triaged by `reply-scoring`. See `references/post-event-followup.md`.
+14. **Follow up.** Within 48 hours, each message citing its anchor. Sequences via `outreach-emails`, sent per the client's actual stack, replies triaged by `reply-scoring`. See the premium reference.
 15. **Measure and present at Gate 2.** Cost per qualified meeting, meetings held against N, pipeline sourced — with the volume floor stated. Feed the numbers back into the model for the re-book decision.
-
-## Output format
-
-One event brief, as a single doc with a section per phase — not a folder of fragments. Sections: go/no-go and mode · capacity arithmetic · hit list (ranked, with reason per row) · artifact plan · cadence calendar · day plan by zone and hour · capture schema · follow-up segments · measurement.
-
-Unconfirmed logistics carry `[CONFIRM: detail]`. Targets not yet benchmarked carry `[TARGET]`. Client-facing sections follow `doc-output-structure.md`; the sources appendix is collapsed per `output-simplicity.md` § three-layer placement.
 
 ## Self-roast (run before ship)
 
@@ -148,17 +139,6 @@ Unconfirmed logistics carry `[CONFIRM: detail]`. Targets not yet benchmarked car
 - **No invented delegates.** Never fabricate an attendee name, a firm's size, or an adviser count. Public register fields carry a pull date; anything else is `[UNAVAILABLE]`.
 - **Benchmarks attributed.** Any external ROI figure names whose figure it is. Ours are the client's own numbers or nothing.
 - Seven-tenet gate per [`output-tenets.md`](../../../../../rules/output-tenets.md).
-
-## References
-
-- `references/event-qualification.md` — go/no-go, the three attendance modes, cost bands, and the economics model
-- `references/hit-list-build.md` — free-first discovery, enrichment, scoring, the capacity cut, client stack mapping
-- `references/public-data-artifact.md` — public fields → the existing per-firm renderer; the firm-level boundary
-- `references/cadence-and-capture.md` — T-minus cadence, at-event capture schema, the end-of-day batch
-- `references/post-event-followup.md` — segmentation, anchor-citing copy, measurement
-- `references/phone-and-channel-compliance.md` — CTPS screening under PECR reg. 21, per-channel legality
-- `references/event-economics-model.html` — the interactive model from `event-qualification.md`
-- `references/examples/` — worked examples, filename `MMYY-{client}-{event-slug}.md`
 
 ## Final ship gate
 
@@ -171,8 +151,4 @@ Output complies with [`persuasion-and-stickiness.md`](../../../../../rules/persu
 ## MCP credit gate
 
 This skill can call Apify, Exa and Firecrawl. Per [`crawl-cost-discipline.md`](../../../../../rules/crawl-cost-discipline.md), enumerate the participant list with free discovery (`spider_links`, sitemap, or a plain fetch of a published list) before any metered crawl, and triage to the kept rows before extraction. Per [`apify-credits.md`](../../../../../rules/apify-credits.md) and [`apollo-credits.md`](../../../../../rules/apollo-credits.md), enrichment is credit-spending and needs an estimate and a confirmation first. Searching is free; enriching is not.
-
-## Output routing
-
-Output lands at `projects/consulting/active/{client}/lifecycle/execution/MMYY-{event-slug}-brief.md`, or `sales/execution/` when the motion is sales-led, per [`consulting-clients.md`](../../../../../rules/consulting-clients.md).
 

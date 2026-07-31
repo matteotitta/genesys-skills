@@ -16,19 +16,16 @@ inputs:
   recommended:
   - brand-kit
   - target_vercel_project
-outputs:
 - type: deployed-website
   feeds_into:
   - website-pm-score
 depends_on: []
-feeds_into:
 - website-pm-score
 owned_by_agent: operator
 mcps_used:
 - chrome-devtools
 - firecrawl
 - a1
-push_targets:
 - gdrive
 - notion
 triggers:
@@ -60,7 +57,7 @@ This skill is **extraction-driven, not brief-driven**. It runs **backward from a
 
 Adapted from `JCodesMore/ai-website-cloner-template` per `/steal` analysis (2026-04-30). The source skeleton template lives at `projects/apps/_templates/website-clone-skeleton/`.
 
-For full 5-phase process (Recon / Foundation / Spec & Dispatch / Assembly / Visual QA) → `references/process.md`.
+For full 5-phase process (Recon / Foundation / Spec & Dispatch / Assembly / Visual QA) → the premium reference.
 
 ---
 
@@ -154,7 +151,7 @@ When in doubt, ask the user about intended use before proceeding. Treat as a Gat
 | **4. Assembly** | Wire all sections in `src/app/page.tsx`, page-level behaviors, build verify | Sequential |
 | **5. Visual QA** | Side-by-side diff at desktop + mobile; fix specs or components | Sequential, mandatory |
 
-For full per-phase steps including mandatory extraction protocols (animation primitives, logo render-mode classification, post-click state capture) → `references/process.md`.
+For full per-phase steps including mandatory extraction protocols (animation primitives, logo render-mode classification, post-click state capture) → the premium reference.
 
 ---
 
@@ -208,17 +205,6 @@ When done, output:
 - Visual QA results — discrepancies remaining, if any
 - Vercel deploy URL (if deployed)
 - Known gaps or limitations (e.g., "auth flow not cloned — out of scope")
-
----
-
-## Reference Files
-
-| File | Purpose |
-|------|---------|
-| `references/process.md` | Full 5-phase workflow with mandatory extraction protocols (animation primitives, logo classification, post-click state capture) |
-| `references/common-mistakes.md` | Cost/fix table for the 13 most common cloning failures |
-| `references/inspection-checklist.md` | Full extraction protocol: scroll/click/hover/responsive sweeps, getComputedStyle script, asset enumeration |
-| `references/spec-template.md` | Per-section spec file template (≤150 lines target) |
 
 ---
 

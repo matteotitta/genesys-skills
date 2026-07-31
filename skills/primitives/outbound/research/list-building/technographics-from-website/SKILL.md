@@ -4,7 +4,7 @@ version: '1.0'
 last_updated: 2026-05-18
 author: genesys-growth
 description: |
-  Detects which vendor (CRM, platform, back-office system) a lead uses by analysing their public website — visual tells via screenshot vision extraction, plus optional HTTP probe verification against vendor portal subdomain patterns. Produces a per-lead technographic-signal output: detected vendor(s), confidence per vendor, verification status, visual evidence, and outbound-copy hook templates. Vendor-agnostic at the skill layer; per-vendor profiles (visual tells + optional HTTP verifiers) live in references/vendor-profiles/. Triggers: "find firms using ClientCo", "technographic qualification", "score these leads by CRM fit", "detect vendor usage from website", "which CRM does this lead use". Feeds into /lead-scoring (technographic dimension), /niche-signal-discovery (10th category), /outreach-emails (vendor-specific hooks), /abm-campaign (tier by CRM fit). NOT for company firmographics (use /company-context), NOT for tech-stack scraping of JS dependencies (use Apollo via /company-context), NOT for people discovery (use /clay-search).
+  Detects which vendor (CRM, platform, back-office system) a lead uses by analysing their public website — visual tells via screenshot vision extraction, plus optional HTTP probe verification against vendor portal subdomain patterns. Produces a per-lead technographic-signal output: detected vendor(s), confidence per vendor, verification status, visual evidence, and outbound-copy hook templates. Vendor-agnostic at the skill layer; per-vendor profiles (visual tells + optional HTTP verifiers) live in the premium reference Triggers: "find firms using ClientCo", "technographic qualification", "score these leads by CRM fit", "detect vendor usage from website", "which CRM does this lead use". Feeds into /lead-scoring (technographic dimension), /niche-signal-discovery (10th category), /outreach-emails (vendor-specific hooks), /abm-campaign (tier by CRM fit). NOT for company firmographics (use /company-context), NOT for tech-stack scraping of JS dependencies (use Apollo via /company-context), NOT for people discovery (use /clay-search).
 goal: Detect vendor usage on lead websites via screenshot vision + optional HTTP verifier; produce per-lead technographic signals with verified outbound-copy hooks.
 outcome: A per-lead technographic-signal output (detected vendor, confidence, verification status, evidence, outbound hooks) ready to feed lead-scoring as the technographic dimension or outreach-emails as personalization input.
 primitive: outbound
@@ -16,7 +16,6 @@ inputs:
   recommended:
   - icp-research
   - lead-scoring
-outputs:
 - type: technographic-signal
   feeds_into:
   - lead-scoring
@@ -24,7 +23,6 @@ outputs:
   - abm-campaign
   - outreach-emails
 depends_on: []
-feeds_into:
 - abm-campaign
 - lead-scoring
 - niche-signal-discovery
@@ -34,7 +32,6 @@ mcps_used:
 - chrome-devtools
 - exa
 - firecrawl
-push_targets:
 - gdrive
 - notion
 triggers:
@@ -59,7 +56,7 @@ effort: high
 
 Find out which back-office system, CRM, or platform a lead uses by analysing their public website. Visual extraction is the primary signal (screenshots fed to vision model identify login button labels, footer logos, embedded widget branding, "powered by" mentions). HTTP-probe verification is the optional confidence booster where the vendor has a discoverable portal subdomain pattern (e.g., `*.mypfp.co.uk` for ClientCo Personal Finance Portal).
 
-Vendor-agnostic at the skill layer. Per-vendor profiles live in `references/vendor-profiles/` and define the visual tells, optional HTTP verifier, and outbound-copy hook templates for each vendor universe.
+Vendor-agnostic at the skill layer. Per-vendor profiles live in the premium reference and define the visual tells, optional HTTP verifier, and outbound-copy hook templates for each vendor universe.
 
 **Research stack (Exa):** primary tools `web_fetch_exa`, `web_search_exa` for customer-list discovery. Chrome DevTools MCP for screenshot capture. Firecrawl as fallback. All per `.claude/rules/exa-protocol.md`.
 
@@ -88,10 +85,10 @@ Vendor-agnostic at the skill layer. Per-vendor profiles live in `references/vend
 | Input | Description | Source |
 |-------|-------------|--------|
 | **Lead URLs** | List of company website URLs to analyse | `/clay-search`, `/build-tam`, FCA register, CRM export |
-| **Vendor profile path** | Reference file defining the vendor universe to detect | `references/vendor-profiles/{universe}.md` |
+| **Vendor profile path** | Reference file defining the vendor universe to detect | the premium reference |
 | **ICP context** *(recommended)* | For filtering thin matches | `/icp-research` upstream |
 
-**Vendor profile shape** (see `references/vendor-profiles/ClientCo-uk-cra.md` for worked example):
+**Vendor profile shape** (see the premium reference for worked example):
 
 - **Vendor name + brand spellings** — "ClientCo" / "Intelligent Office" / "IO"
 - **Visual tells** — text strings, logo descriptions, button labels, footer mentions that the vision model looks for
@@ -102,7 +99,7 @@ Vendor-agnostic at the skill layer. Per-vendor profiles live in `references/vend
 
 ## 5-phase workflow
 
-Full details in `references/workflow.md`. Summary:
+Full details in the premium reference. Summary:
 
 1. **Capture** — for each lead URL, screenshot the homepage + `/clients` or `/login` sub-pages via `mcp__chrome-devtools__take_screenshot`. Firecrawl as fallback when Chrome DevTools fails.
 2. **Extract** — feed screenshot to Claude vision; ask "which of these visual tells appear?" against the vendor profile. Return per-vendor confidence (high/medium/low/none) + cited evidence (verbatim text or visual description).
@@ -112,44 +109,11 @@ Full details in `references/workflow.md`. Summary:
 
 ---
 
-## Output schema
-
-```yaml
-lead:
-  company_name: string
-  website: string
-  screenshots_captured: [list of paths/refs]
-
-detected_vendors:
-  - vendor: "ClientCo"
-    confidence: HIGH | MODERATE | WEAK | NO_SIGNAL
-    visual_evidence:
-      - "Client login button (top-right nav) — labelled 'Client login'"
-      - "Footer text: 'powered by Intelligent Office'"
-    verification:
-      attempted: true
-      url_probed: "https://tjpltd.mypfp.co.uk/"
-      http_status: 200
-      result: CONFIRMED | UNCONFIRMED | NOT_ATTEMPTED
-    outbound_hook: |
-      We integrate with ClientCo — your team can pull client data,
-      run pre-meeting prep, and generate suitability reports from your
-      back-office system without switching tools.
-
-assessment:
-  primary_vendor: "ClientCo"
-  overall_confidence: HIGH
-  signal_quality: STRONG | MODERATE | WEAK
-  recommended_action: SEND_VENDOR_SPECIFIC | SEND_GENERIC | EXCLUDE_FROM_OUTBOUND | REVIEW
-```
-
----
-
 ## Composition with `/lead-scoring` — dimension contract
 
-The technographic-signal output feeds `/lead-scoring` as input to its Phase 1 fit assessment (the "technographic" dimension already exists in `references/scoring-rubric.md` of `/lead-scoring`) AND as a Phase 2 signal category.
+The technographic-signal output feeds `/lead-scoring` as input to its Phase 1 fit assessment (the "technographic" dimension already exists in the premium reference of `/lead-scoring`) AND as a Phase 2 signal category.
 
-Mapping documented in `references/integration-with-lead-scoring.md`. Short version:
+Mapping documented in the premium reference. Short version:
 
 | Technographic-signal field | Maps to `/lead-scoring` field |
 |---|---|
@@ -180,7 +144,7 @@ This skill calls Chrome DevTools (local browser, no per-call cost), Exa (per `.c
 | 1-10 leads | No gate | Run immediately |
 | 11-50 leads | Soft gate | Show estimate (~10 sec/lead screenshot + vision), proceed unless user objects |
 | 51-200 leads | Hard gate | Show estimate (~10-30 min total), wait for explicit approval |
-| 200+ leads | Full gate | Suggest Trigger.dev wave-batch per `orchestration-patterns.md` § Orchestration mechanics → Wave-batch |
+| 200+ leads | Full gate | Suggest Trigger.dev wave-batch per `orchestration-patterns.md`→ Wave-batch |
 
 Vision calls use the standard Claude model — no Anthropic API spend (uses the user's Claude Code plan). Per `.claude/rules/approval-loop-pattern.md`, prompt-tuning rounds always use Agent tool, not paid API.
 
@@ -204,16 +168,6 @@ Vision calls use the standard Claude model — no Anthropic API spend (uses the 
 - ❌ Using this skill for generic tech-stack detection (JS libraries, analytics tools) — Apollo + BuiltWith cover that lane via `/company-context`.
 - ❌ Treating WEAK confidence as actionable. WEAK = mention vendor only in nurture; never pre-arm a cold email with it.
 - ❌ Skipping the verifier step when the vendor profile defines one. Visual-only is cheaper but verifier-confirmed signals justify aggressive outbound; skipping the verifier downgrades the signal you could have had.
-- ❌ Hardcoding vendor names in the SKILL body. Vendor universe lives in `references/vendor-profiles/`; the skill body stays vendor-agnostic.
-
----
-
-## Push
-
-- File path: `projects/consulting/active/{client}/sales/MMYY-{batch-name}-technographic-signals.md`
-- Frontmatter: `status: review` until approved → `status: locked` per `.claude/rules/orchestration-patterns.md` § Orchestration mechanics → Lock-down state
-- Append entry to `projects/consulting/active/{client}/history.md` with date + leads scored + vendor breakdown
-- If chained downstream: pass the structured output (YAML) directly to `/lead-scoring` or `/outreach-emails`; the markdown file is the human-readable artifact
 
 ---
 
@@ -223,18 +177,6 @@ Assigned to the **Operator** role-agent (specialist: gtm-engineer for the actual
 - **Context refresh:** Quarterly technographic refresh on active target accounts
 - **Outbound:** Technographic overlay step between list-building and signal-discovery
 - **Sales pipeline:** Pre-call technographic confirmation for warm prospects
-
----
-
-## Reference Files
-
-| File | Purpose |
-|---|---|
-| `references/workflow.md` | Full 5-phase pipeline — capture, extract, verify, score, output |
-| `references/vendor-profiles/ClientCo-uk-cra.md` | ClientCo, ClientCo, ClientCo, ClientCo visual tells + verifiers + outbound hooks |
-| `references/vendor-recon-playbook.md` | Methodology for building a new vendor profile from a known-customer site |
-| `references/integration-with-lead-scoring.md` | Dimension contract — how the output flows into `/lead-scoring` |
-| `references/multi-source-enumeration.md` | When input is "all UK advice firms" — FCA register + Google + Common Crawl convergence |
 
 ---
 

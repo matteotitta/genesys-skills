@@ -22,14 +22,12 @@ inputs:
   required: []
   recommended:
   - company-context
-outputs:
 - type: local-seo-audit
   feeds_into:
   - website-copy
   - content-strategy
   - aeo-content
 depends_on: []
-feeds_into:
 - aeo-content
 - content-strategy
 - website-copy
@@ -38,7 +36,6 @@ mcps_used:
 - exa
 - firecrawl
 - gdrive
-push_targets:
 - gdrive
 triggers:
   slash_commands: []
@@ -71,7 +68,6 @@ effort: high
 
 **Worked examples + tool catalog:** `.claude/skills/meta-skills/exa/`.
 
-
 # Local SEO audit
 
 Orchestrator for local SEO audits of Google Business Profile listings. Routes to 4 dedicated sub-skills covering categories, reviews, content, and listing optimization. Based on the 8-prompt local SEO playbook adapted for Claude Code's MCP stack.
@@ -96,10 +92,10 @@ Orchestrator for local SEO audits of Google Business Profile listings. Routes to
 When user requests a "full local SEO audit" or "complete GBP audit", run all 4 sub-skills in this order (matches the recommended 4-week execution cadence):
 
 ```
-Week 1: /gbp-category-audit      → Fix foundation (categories + attributes)
+Week 1: /gbp-category-audit → Fix foundation (categories + attributes)
 Week 2: /gbp-listing-optimization → Optimize listing text (services + description)
-Week 3: /gbp-review-strategy     → Build review system (teardown + templates)
-Week 4: /gbp-content-engine      → Launch content engine (posts + photos)
+Week 3: /gbp-review-strategy → Build review system (teardown + templates)
+Week 4: /gbp-content-engine → Launch content engine (posts + photos)
 ```
 
 After each sub-skill completes, present results and ask if user wants to continue to next phase.
@@ -108,7 +104,7 @@ After each sub-skill completes, present results and ask if user wants to continu
 
 ## Process Flowchart
 
-Input validation → routing decision → (single sub-skill OR sequential 4-skill run) → scoring (full audit only) → Gate 1 review → chain suggestions. Full ASCII flowchart in `references/process-flowchart.md`.
+Input validation → routing decision → (single sub-skill OR sequential 4-skill run) → scoring (full audit only) → Gate 1 review → chain suggestions. Full ASCII flowchart in the premium reference.
 
 ---
 
@@ -171,14 +167,6 @@ Before proceeding, verify:
 
 ---
 
-## Output Format
-
-Full audit deliverables follow a canonical structure: scoring table (9 categories, 100 points), score interpretation rubric (5 ranges), executive summary (3-5 sentences), Top 5 Priority Actions table (impact × effort × sub-audit), then sub-skill detailed reports concatenated.
-
-Complete output template + scoring rubric + interpretation table in `references/output-format.md`.
-
----
-
 ## Iteration Prompts
 
 1. "Want me to run a specific sub-audit in more depth?"
@@ -211,7 +199,7 @@ Complete output template + scoring rubric + interpretation table in `references/
 
 ## MCP Data Integration
 
-Primary tools: Firecrawl (GBP page scraping, default), Exa (SERP map-pack analysis), Apify (structured Google Maps data, credit-gated). Fallback: WebFetch + WebSearch + user-provided screenshots. Full integration table in `references/mcp-integration.md`.
+Primary tools: Firecrawl (GBP page scraping, default), Exa (SERP map-pack analysis), Apify (structured Google Maps data, credit-gated). Fallback: WebFetch + WebSearch + user-provided screenshots. Full integration table in the premium reference.
 
 ---
 

@@ -5,7 +5,7 @@ last_updated: 2026-04-30
 author: genesys-growth
 description: 'Routing convention that maps user intent to the correct skill or multi-skill chain. Reads the skill-catalog
   for metadata lookup, validates input/output dependencies, surfaces the right review gate. Today the orchestrator is invoked
-  manually via slash commands; tomorrow it can be dispatched automatically by the Agent / Workflow tools per .claude/rules/orchestration-patterns.md. Triggers: ambiguous
+  manually via slash commands; tomorrow it can be dispatched automatically by the Agent / Workflow tools per.claude/rules/orchestration-patterns.md. Triggers: ambiguous
   user requests that map to one or more skills, multi-step workflows, "run the chain for [client]". NOT a skill that produces
   artifacts — it coordinates other skills.'
 goal: Route user intent to the correct skill or skill chain, citing ontology.md as the chain reference.
@@ -18,15 +18,12 @@ inputs:
   required:
   - skill-catalog
   recommended: []
-outputs:
 - type: skill-execution
   feeds_into: []
 depends_on:
 - skill-catalog
-feeds_into: []
 owned_by_agent: operator
 mcps_used: []
-push_targets: []
 triggers:
   slash_commands: []
   natural_language: []
@@ -56,7 +53,7 @@ This file describes what the orchestrator IS, not what it DOES. The doing happen
 When a user request maps to multiple possible skills, the orchestrator answers three questions:
 
 1. **What is the user actually asking for?** Map intent to an ontology output type (positioning, messaging, competitor-intel, etc.).
-2. **What chain is this in?** Look up the chain in `.claude/rules/ontology.md` § Skill chain patterns. Identify which step the user is at.
+2. **What chain is this in?** Look up the chain in `.claude/rules/ontology.md`. Identify which step the user is at.
 3. **What's blocked vs ready?** Check upstream skill outputs are present + locked-down for the current client. If not, route to the upstream skill first.
 
 That's the entire decision space. Routing logic doesn't live in this file — it lives in the catalog (which lists every skill, owner, ontology type, gate) and the ontology (which lists every chain).
@@ -74,7 +71,7 @@ That's the entire decision space. Routing logic doesn't live in this file — it
 | Account prioritization (TAM scoring) | Account prioritization | `/lead-scoring` |
 | Sales enablement build | Sales enablement | `/battlecards` |
 
-For the canonical chain definitions (slugs and order), read `.claude/rules/ontology.md` § Skill chain patterns. Don't duplicate them here — chains drift, and one source of truth prevents that.
+For the canonical chain definitions (slugs and order), read `.claude/rules/ontology.md`. Don't duplicate them here — chains drift, and one source of truth prevents that.
 
 ---
 
@@ -83,9 +80,9 @@ For the canonical chain definitions (slugs and order), read `.claude/rules/ontol
 | Decision | Source of truth |
 |----------|-----------------|
 | Skill metadata (deps, gate, owner, ontology type) | `.claude/skills/meta/catalog/skill-catalog/SKILL.md` (auto-generated) |
-| Chain definitions (which skill follows which) | `.claude/rules/ontology.md` § Skill chain patterns |
+| Chain definitions (which skill follows which) | `.claude/rules/ontology.md`|
 | Locked-down state (which client outputs are canonical) | Per-client `goals/`, `latest.md`, and the `status:` field in skill outputs |
-| Role-agent dispatch + lock-down state | `.claude/rules/orchestration-patterns.md` § Orchestration mechanics |
+| Role-agent dispatch + lock-down state | `.claude/rules/orchestration-patterns.md`|
 
 Add new skills by writing a SKILL.md under the right primitive folder. The catalog regenerates on commit; chain-lint surfaces broken edges. Don't update this orchestrator file unless the routing principle itself changes.
 

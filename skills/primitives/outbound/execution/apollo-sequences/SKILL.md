@@ -22,19 +22,16 @@ inputs:
   recommended:
   - outreach-emails
   - deepline-enrich
-outputs:
 - type: sequence-audit
   feeds_into:
   - outreach-emails
 depends_on:
 - lead-scoring
-feeds_into:
 - outreach-emails
 owned_by_agent: operator
 mcps_used:
 - apollo-io
 - deepline
-push_targets:
 - gdrive
 - notion
 triggers:

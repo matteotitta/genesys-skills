@@ -22,16 +22,13 @@ inputs:
   - linkedin-content-guide
   - linkedin-hooks
   - voice-reviewer
-outputs:
 - type: linkedin-post
   feeds_into:
   - linkedin-algo-audit
 depends_on: []
-feeds_into:
 - linkedin-algo-audit
 owned_by_agent: content
 mcps_used: []
-push_targets: []
 triggers:
   slash_commands: []
   natural_language: []
@@ -114,7 +111,7 @@ Choose the format that best matches the topic and angle:
 | **Expert breakdown** | Deconstructing complexity for the ICP | Step-by-step explanation of something hard |
 | **Prediction / hot take** | Forward-looking, opinion-driven | "This GTM tactic is dying. Here's what replaces it." |
 
-Detailed structures + common mistakes per type in `references/process.md`.
+Detailed structures + common mistakes per type in the premium reference.
 
 ---
 
@@ -166,7 +163,7 @@ Check at minimum the hook, thesis line, each supporting-point transition, refram
 
 ## Process
 
-3-phase flow: Select Post Type → Write the Post (using the base structure above) → Apply Voice and Format Rules (incl. X-not-Y sweep). Per-post-type formulas, structures, and common mistakes in `references/process.md`.
+3-phase flow: Select Post Type → Write the Post (using the base structure above) → Apply Voice and Format Rules (incl. X-not-Y sweep). Per-post-type formulas, structures, and common mistakes in the premium reference.
 
 ---
 
@@ -202,28 +199,9 @@ Voice-locked rules — these stay in body.
 
 ---
 
-## Output Format
-
-Output includes post metadata (type, pillar, ICP, char count), the complete post text ready to copy/paste, the quality verification checklist, and the 5-dim rubric scores. Full template + iteration prompts in `references/output-format.md`.
-
----
-
 ## Quality
 
-Pre-delivery checklist covers content quality, voice quality, format quality, and the 5-dim refine rubric (hook strength, clarity, engagement potential, platform fit, authenticity — score each, iterate any ≤ 6). Anti-examples in `references/quality.md`.
-
----
-
-## Reference Files
-
-| File | Purpose |
-|------|---------|
-| `references/process.md` | 3-phase steps + 5 post-type guides (formulas, structures, common mistakes) + integration |
-| `references/output-format.md` | Output template + iteration prompts |
-| `references/quality.md` | Pre-delivery checklist + 5-dim refine rubric + anti-examples |
-| `references/auto-update.md` | Self-evaluation protocol + feedback signals |
-| `references/example-data-backed-founder-post.md` | Worked example — data-backed founder post (numeric spine, climax reveal, prescriptive close) + anonymization/crediting discipline |
-| `references/example-milestone-announcement-post.md` | Worked example — milestone / feature-announcement post (pain-first opener, numbered build-order how-to, one concrete use case, DIY/DWY dual close) + announcement-framing + link-placement discipline |
+Pre-delivery checklist covers content quality, voice quality, format quality, and the 5-dim refine rubric (hook strength, clarity, engagement potential, platform fit, authenticity — score each, iterate any ≤ 6). Anti-examples in the premium reference.
 
 ---
 

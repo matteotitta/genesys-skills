@@ -16,18 +16,15 @@ inputs:
   - aeo-content
   - product-messaging
   - company-context
-outputs:
 - type: aeo-content
   feeds_into:
   - aeo-content
 depends_on: []
-feeds_into:
 - aeo-content
 owned_by_agent: content
 mcps_used:
 - exa
 - firecrawl
-push_targets: []
 triggers:
   slash_commands:
   - /schema-markup
@@ -157,9 +154,6 @@ Provide the validation checklist:
 
 ---
 
-## Output format
-
-```markdown
 ## Page: {url or path}
 
 ### Page type assessment
@@ -176,7 +170,7 @@ Provide the validation checklist:
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@graph": [ ... ]
+  "@graph": [... ]
 }
 </script>
 \`\`\`

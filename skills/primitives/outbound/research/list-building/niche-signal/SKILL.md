@@ -26,7 +26,6 @@ inputs:
   - company-context
   - icp-research
   - competitor-research
-outputs:
 - type: signal-enriched-account-list
   feeds_into:
   - lead-scoring
@@ -40,7 +39,6 @@ outputs:
   feeds_into:
   - sales-enablement
 depends_on: []
-feeds_into:
 - abm-campaign
 - battlecards
 - lead-scoring
@@ -52,7 +50,6 @@ mcps_used:
 - apollo-io
 - deepline
 - exa
-push_targets:
 - gdrive
 - notion
 triggers:
@@ -95,7 +92,7 @@ Find the signals that tell you WHEN to reach out — not who. Signal-based outre
 
 Hiring · Fundraising · Competitive displacement · Champion tracking · Deal risk · Company news · Ad intelligence · Closed-lost recovery · Signal classification (custom).
 
-Each category has a Deepline play + MCP alternative + signal strength + output shape. Full catalog with commands in `references/signal-catalog.md`.
+Each category has a Deepline play + MCP alternative + signal strength + output shape. Full catalog with commands in the premium reference.
 
 ---
 
@@ -148,7 +145,7 @@ Signal discovery uses the same Deepline credit system as `/deepline-enrich`. Apo
 
 ## Process
 
-**Three primary workflows:** Signal-based outbound campaign (classify → category-specific plays → merge → score → personalize), Competitive displacement campaign (Mentions + Intel + Email waterfall + Displacement angle), Pipeline risk monitoring (CRM export → Deal Risk Combos → Champion Tracking → risk report). Step-by-step + MCP integration in `references/process.md`.
+**Three primary workflows:** Signal-based outbound campaign (classify → category-specific plays → merge → score → personalize), Competitive displacement campaign (Mentions + Intel + Email waterfall + Displacement angle), Pipeline risk monitoring (CRM export → Deal Risk Combos → Champion Tracking → risk report). Step-by-step + MCP integration in the premium reference.
 
 ---
 
@@ -162,15 +159,9 @@ Signal discovery uses the same Deepline credit system as `/deepline-enrich`. Apo
 
 ---
 
-## Output Format
-
-Three output types: `signal-enriched-account-list` (default), `competitive-displacement-opportunities`, `deal-risk-assessment`. Schemas, iteration prompts, and downstream-skill handoff format in `references/output-format.md`.
-
----
-
 ## Quality
 
-Pre-delivery checks cover coverage (≥80% classified, CONTRACTION filtered), quality (stacking applied, thin-input guard tested, citations present), and cost discipline (gates respected). Common-mistakes table (single-signal escalation, stale signal acted-on, force-fit on thin data) + worked example (3-signal Series B / hiring / competitor-engagement stack) + anti-examples + quality gate (active-signal density ≥60%, ≥20% Very High band) in `references/quality.md`.
+Pre-delivery checks cover coverage (≥80% classified, CONTRACTION filtered), quality (stacking applied, thin-input guard tested, citations present), and cost discipline (gates respected). Common-mistakes table (single-signal escalation, stale signal acted-on, force-fit on thin data) + worked example (3-signal Series B / hiring / competitor-engagement stack) + anti-examples + quality gate (active-signal density ≥60%, ≥20% Very High band) in the premium reference.
 
 ---
 
@@ -193,18 +184,6 @@ Assigned to the **Researcher** role-agent (or Operator for batch runs). Slots in
 | `/niche-signal-discovery` | `/outreach-emails` | Signal context for personalization angles |
 | `/niche-signal-discovery` | `/abm-campaign` | Tiered signal accounts for ABM tiers |
 | `/niche-signal-discovery` | `/battlecards` | Competitive displacement intelligence |
-
----
-
-## Reference Files
-
-| File | Purpose |
-|------|---------|
-| `references/signal-catalog.md` | All 9 signal categories — Deepline plays, MCP alternatives, output shapes, signal strengths |
-| `references/process.md` | Three workflows (outbound, displacement, pipeline risk) + MCP integration |
-| `references/output-format.md` | Three output schemas + iteration prompts + downstream handoff format |
-| `references/quality.md` | Pre-delivery checklist + common mistakes + worked example + anti-examples + quality gate |
-| `references/auto-update.md` | Self-evaluation + feedback signals (stack-score recalibration, recency-window drift) |
 
 ---
 

@@ -24,7 +24,6 @@ inputs:
   - tov-guidelines
   - brand-kit
   - competitor-research
-outputs:
 - type: deployed-website
   feeds_into:
   - website-pm-score
@@ -32,13 +31,11 @@ outputs:
 depends_on:
 - positioning
 - product-messaging
-feeds_into:
 - website-pm-score
 - website-pm-score
 owned_by_agent: operator
 mcps_used:
 - a1
-push_targets:
 - gdrive
 - notion
 triggers:
@@ -126,15 +123,15 @@ Output complies with [`output-tenets.md`](../../../../../rules/output-tenets.md)
 ## Pipeline Phases
 
 ```
-Phase 1: Brand Foundation     → brand-kit (DESIGN.md) + tov-guidelines
+Phase 1: Brand Foundation → brand-kit (DESIGN.md) + tov-guidelines
          ↓ [Review Gate 2 + DESIGN.md lint rules pass]
 Phase 2: Information Architecture → landing-page-wireframe (parallel per page)
          ↓ [Review Gate 3 — designer handoff]
-Phase 3: Component Scaffold   → stack-specific (ShadCN/Framer/Webflow)
+Phase 3: Component Scaffold → stack-specific (ShadCN/Framer/Webflow)
          ↓ [Review Gate 2]
-Phase 4: Copy Execution       → /website-copy (3-phase × N-pages)
+Phase 4: Copy Execution → /website-copy (3-phase × N-pages)
          ↓ [Review Gate 3]
-Phase 5: Deploy               → stack-specific deploy + website-audit
+Phase 5: Deploy → stack-specific deploy + website-audit
 ```
 
 ---
@@ -265,7 +262,7 @@ Branches by stack:
 
 ## Design cycle (post-authoring phases)
 
-After producing the build, walk these phases before ship. Each references the shared design-quality library at `../../../meta/catalog/design-reviewer/references/`. Marketing pages skip Cognitive load (single CTA, not a decision tree) and Onboarding (CTAs, not first-run flows).
+After producing the build, walk these phases before ship. Each references the shared design-quality library at `../../../meta/catalog/design-reviewer/the premium reference. Marketing pages skip Cognitive load (single CTA, not a decision tree) and Onboarding (CTAs, not first-run flows).
 
 - **Layout** — `layout-tenets.md` (generous whitespace; 64–128px section gaps)
 - **Distill** — `distill-principles.md` (one primary CTA per section; remove generic stock)

@@ -20,20 +20,17 @@ inputs:
   required: []
   recommended:
   - icp-research
-outputs:
 - type: target-account-list
   feeds_into:
   - company-context
   - apollo-sequences
 depends_on: []
-feeds_into:
 - apollo-sequences
 - company-context
 owned_by_agent: operator
 mcps_used:
 - apollo-io
 - deepline
-push_targets:
 - gdrive
 - notion
 triggers:

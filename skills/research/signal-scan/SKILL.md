@@ -24,7 +24,6 @@ inputs:
   required: []
   recommended:
   - company-context
-outputs:
 - type: temporal-signal-brief
   feeds_into:
   - competitor-research
@@ -32,7 +31,6 @@ outputs:
   - content-strategy
   - client-discovery
 depends_on: []
-feeds_into:
 - competitor-research
 - gtme-pulse
 - content-strategy
@@ -44,7 +42,6 @@ mcps_used:
 - github
 - youtube-transcript
 - apify
-push_targets: []
 triggers:
   slash_commands:
   - /signal-scan
@@ -97,28 +94,15 @@ Do **NOT** invoke for:
 
 ## The pipeline
 
-Seven steps. Full detail → `references/method.md`. Surface→tool mapping → `references/sources.md`.
+Seven steps. Full detail → the premium reference. Surface→tool mapping → the premium reference.
 
 1. **Brain-first check.** `/recall {topic}` + grep client folders (per `brain-first-lookup.md`). Use what's already known; only go external for the gap.
 2. **Resolve entities before searching.** Find the topic's X/LinkedIn handle, GitHub user/org/repo, the subreddits where its category is discussed, and its domain — *before* any keyword search. This is the step that turns a keyword dump into signal. Kills collisions (searching "42" → Jackie Robinson jerseys; "Pivot" → gymnastics).
 3. **Expand to peer communities.** If the topic is a product in a known category, add the cross-product communities where practitioners actually compare tools (not just the brand's own mentions). Annotate the brief with the peer set used.
-4. **Generate a query plan.** *You* (the model) write the plan — intent / freshness mode / cluster mode / 1–4 subqueries with per-surface weights. Schema → `references/query-plan-schema.md`. No engine plans this; Claude does.
+4. **Generate a query plan.** *You* (the model) write the plan — intent / freshness mode / cluster mode / 1–4 subqueries with per-surface weights. Schema → the premium reference. No engine plans this; Claude does.
 5. **Parallel fan-out, date-filtered.** Run the resolved surfaces concurrently, each bounded to the `--days` window. Probe one surface before fanning out (per `goal-driven-loops.md`). Free discovery before metered extraction (per `crawl-cost-discipline.md`). Gate every paid Apify call (per `apify-credits.md`).
 6. **Cluster + rank.** Merge the same story across surfaces into one item (HN + Reddit + newsletter on the same launch = one clustered signal, not three). Rank by engagement (upvotes / likes / views / stars / odds) with recency decay.
-7. **Synthesize a cited brief.** Narrative prose, inline citations with access dates, per `references/output-laws.md`. Default-on surfaces: Reddit, HN, news/funding, GitHub, G2/Trustpilot/Product Hunt, YouTube. Flag-gated: X/TikTok/IG/markets.
-
-## Output contract
-
-Default markdown brief (or `--emit=html`). Sections, in order:
-
-- **Headline** — one line: the single most important thing that happened in the window.
-- **Releases & changes** — product/version/feature/commit activity (GitHub-anchored).
-- **News & funding** — launches, raises, hires, partnerships, press.
-- **Community & sentiment** — what people are saying + how they feel (Reddit/HN/G2/YouTube), with engagement counts.
-- **Notable signals** — anything that doesn't fit above but matters (a viral thread, a market-odds move under `--markets`).
-- **Coverage footer** — per-surface item + engagement counts (which surfaces ran, which were thin, which were skipped).
-
-Every claim carries an inline citation with an access date. Source placement follows `.claude/rules/output-simplicity.md` § three-layer: a client-facing brief folds sources to an appendix; an internal-input brief keeps them inline. Voice + structure follow `output-tenets.md`, `doc-output-structure.md`, `ai-speak-anti-patterns.md`. Full output discipline (adapted from the source's "voice LAWs") → `references/output-laws.md` — **our four output rules are the authority; the LAWs defer to them.**
+7. **Synthesize a cited brief.** Narrative prose, inline citations with access dates, per the premium reference. Default-on surfaces: Reddit, HN, news/funding, GitHub, G2/Trustpilot/Product Hunt, YouTube. Flag-gated: X/TikTok/IG/markets.
 
 ## Credit gate
 
@@ -146,11 +130,4 @@ X / TikTok / Instagram run through Apify actors and are **off by default**. When
 | `goal-driven-loops.md` | Probe-one-before-fan-out on the parallel surfaces. |
 | `outbound-research-hygiene.md` | When a signal feeds outbound copy — dated, ≤12mo, current-company-only. |
 | `output-tenets.md` · `output-simplicity.md` · `doc-output-structure.md` · `ai-speak-anti-patterns.md` | Brief voice + structure + source placement. |
-
-## References
-
-- `references/method.md` — the 7-step pipeline in full (entity resolution, peer expansion, clustering, engagement ranking).
-- `references/sources.md` — every surface → MCP/tool mapping, default-on/off, credit gates, fallbacks.
-- `references/output-laws.md` — adapted output discipline (inline citations, narrative-not-dump, coverage footer); defers to our four output rules.
-- `references/query-plan-schema.md` — the JSON query-plan shape + `--compare` mode.
 

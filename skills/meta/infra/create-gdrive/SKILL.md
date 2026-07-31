@@ -21,7 +21,6 @@ inputs:
   required: []
   recommended:
   - brand-kit
-outputs:
 - type: google-doc
   feeds_into: []
 - type: google-slides
@@ -29,11 +28,9 @@ outputs:
 - type: google-sheet
   feeds_into: []
 depends_on: []
-feeds_into: []
 owned_by_agent: operator
 mcps_used:
 - gdrive
-push_targets:
 - gdrive
 - notion
 triggers:
@@ -45,7 +42,7 @@ locked_date: null
 lock_version: null
 sources_count: 0
 effort: medium
-paths: .claude/mcp/gdrive/**
+paths:.claude/mcp/gdrive/**
 ---
 
 # Google Drive document creation

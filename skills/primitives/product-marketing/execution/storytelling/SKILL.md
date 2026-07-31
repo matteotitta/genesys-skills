@@ -19,17 +19,14 @@ inputs:
   required:
   - expert-pov
   recommended: []
-outputs:
 - type: thought-leadership
   feeds_into:
   - thought-leadership
 depends_on:
 - expert-pov
-feeds_into:
 - thought-leadership
 owned_by_agent: growth
 mcps_used: []
-push_targets:
 - gdrive
 - notion
 triggers:
@@ -61,7 +58,7 @@ Output complies with:
 
 | Code | Refinement | How it lands in storytelling |
 |---|---|---|
-| **R1** | Source placement (three layers) | Narrative frameworks ship as **client-team review surfaces**. Cleaned `[VERIFIED: ...]` tags in a collapsed appendix. No tags in the narrative body. Source dataset (ICP research, win-loss themes, customer quotes that anchor the metaphor) lives in working doc only. |
+| **R1** | Source placement (three layers) | Narrative frameworks ship as **client-team review surfaces**. Cleaned `[VERIFIED:...]` tags in a collapsed appendix. No tags in the narrative body. Source dataset (ICP research, win-loss themes, customer quotes that anchor the metaphor) lives in working doc only. |
 | **R3** | Product-update tone | Anchor narratives frame as "[Customer] ships X" not "we are thrilled to launch the [grand metaphor]." Even keynote-level brand campaigns stay even-keeled. The story carries the weight, not the adjectives. |
 | **R5** | Blog as voice anchor | When the storytelling campaign has an anchor blog or whitepaper, the blog's opening line becomes the canonical voice anchor across every derivative asset. Cross-channel voice consistency is what makes the campaign read as one story. |
 | **R9** | Action-oriented section names | "Set the situation / Name the tension / Land the resolution / Stage the next chapter" — verb-led narrative beats, not status-led ("Background / Problem / Solution / Conclusion"). |
@@ -91,44 +88,38 @@ Invoke when the user asks for: storytelling/narrative/brand campaign, story arc 
 
 ### Phase 1 — Insight mining
 
-1. **Extract narrative tension.** Use the four-question framework in `references/story-arcs.md` (status quo, urgency, why current fails, transformation promise) → Output: narrative tension framework.
-2. **Map emotional payload.** Pain point → underlying emotion → story beat (table in `references/story-arcs.md`) → Output: emotional journey map.
+1. **Extract narrative tension.** Use the four-question framework in the premium reference (status quo, urgency, why current fails, transformation promise) → Output: narrative tension framework.
+2. **Map emotional payload.** Pain point → underlying emotion → story beat (table in the premium reference) → Output: emotional journey map.
 3. **Identify competitive narrative gaps.** Competitor / their story / what they miss / your angle → Output: competitive narrative positioning.
-4. **Compile narrative foundation brief.** Use template in `references/archetypes-and-metaphors.md` → Output: brief covering core tension, emotional journey, transformation promise, competitive angle, voice alignment.
+4. **Compile narrative foundation brief.** Use template in the premium reference → Output: brief covering core tension, emotional journey, transformation promise, competitive angle, voice alignment.
 
 **Checkpoint:** narrative tension identified, emotional journey mapped, competitive angle defined, foundation brief complete.
 
 ### Phase 2 — Narrative development
 
-5. **Select story arc.** Match campaign goal → arc → duration using table in `references/story-arcs.md` (6 primary literary arcs + 4 B2B-specific). Document rationale.
-6. **Map arc stages to content beats.** For Hero's Journey use the 12-stage table in `references/story-arcs.md`. For other arcs, build equivalent stage→beat→focus mapping.
-7. **Create before/after archetypes.** Use template in `references/archetypes-and-metaphors.md` (visual metaphor, behaviors, tools, frustrations/feelings, beliefs, outcome). Names must be evocative nouns.
-8. **Build metaphor system.** Select pop culture references for target demographic, map to story beats. Validate per `references/archetypes-and-metaphors.md` selection rule (age/role/geography fit).
-9. **Define narrative altitude (executive audiences only).** Use 4-altitude table in `references/archetypes-and-metaphors.md` (30k/15k/5k/ground). Produce altitude-specific narrative versions for multi-stakeholder buying committees.
+5. **Select story arc.** Match campaign goal → arc → duration using table in the premium reference (6 primary literary arcs + 4 B2B-specific). Document rationale.
+6. **Map arc stages to content beats.** For Hero's Journey use the 12-stage table in the premium reference. For other arcs, build equivalent stage→beat→focus mapping.
+7. **Create before/after archetypes.** Use template in the premium reference (visual metaphor, behaviors, tools, frustrations/feelings, beliefs, outcome). Names must be evocative nouns.
+8. **Build metaphor system.** Select pop culture references for target demographic, map to story beats. Validate per the premium reference selection rule (age/role/geography fit).
+9. **Define narrative altitude (executive audiences only).** Use 4-altitude table in the premium reference (30k/15k/5k/ground). Produce altitude-specific narrative versions for multi-stakeholder buying committees.
 
 **Checkpoint:** arc selected and mapped, archetypes documented, metaphors validated, altitude defined if applicable.
 
 ### Phase 3 — Content orchestration
 
-10. **Build campaign timeline.** Use `references/content-orchestration.md` 6-week Hero's Journey template (or proportional version for other arcs). Map weekly anchor + support assets.
-11. **Generate anchor content briefs.** Use brief template in `references/content-orchestration.md` (title, thesis, story beat, key messages, proof points, CTA) — one per anchor.
-12. **Generate derivative content briefs.** Social posts, email sequences, memes — formats per `references/content-orchestration.md`.
-13. **Define distribution plan.** Channel × content type × frequency × goal matrix per `references/content-orchestration.md`.
+10. **Build campaign timeline.** Use the premium reference 6-week Hero's Journey template (or proportional version for other arcs). Map weekly anchor + support assets.
+11. **Generate anchor content briefs.** Use brief template in the premium reference (title, thesis, story beat, key messages, proof points, CTA) — one per anchor.
+12. **Generate derivative content briefs.** Social posts, email sequences, memes — formats per the premium reference.
+13. **Define distribution plan.** Channel × content type × frequency × goal matrix per the premium reference.
 14. **Define pipeline metrics.** Awareness → engagement → conversion → pipeline. Targets from client inputs only or marked "Suggested: X" — never invent.
 
 **Checkpoint:** timeline complete, all briefs generated, distribution and metrics defined.
 
 ### Self-evaluation + review gate
 
-15. **Run self-evaluation and quality checks per `references/quality-and-evaluation.md`** (anti-hallucination guardrails, narrative/content/completeness checklists). Mark unconfirmed details with `[PLACEHOLDER: description]`. Present full campaign at **Gate 2 (standard review)** — actions: approve, adjust arc, expand scope.
+15. **Run self-evaluation and quality checks per the premium reference** (anti-hallucination guardrails, narrative/content/completeness checklists). Mark unconfirmed details with `[PLACEHOLDER: description]`. Present full campaign at **Gate 2 (standard review)** — actions: approve, adjust arc, expand scope.
 
 ## What good looks like
-
-**References:**
-- `references/story-arcs.md` — 10 arc frameworks, Hero's Journey 12 stages, narrative tension + emotional payload tables
-- `references/archetypes-and-metaphors.md` — before/after archetype template, naming conventions, metaphor system rules, narrative altitude, foundation brief template
-- `references/content-orchestration.md` — campaign timeline, anchor + derivative brief templates, distribution matrix, metrics framework, standard output structure, iteration prompts
-- `references/quality-and-evaluation.md` — guardrails, self-evaluation checks, pre-delivery checklist, anti-examples, worked examples (RevOps "Reconciler → Orchestrator"), feedback signals, pattern detection rules
 
 **Examples:**
 - `examples/octave-prompt-swamp-campaign.md` — Hero's Journey full campaign for Octave (prompt swamp narrative)
@@ -142,24 +133,6 @@ Invoke when the user asks for: storytelling/narrative/brand campaign, story arc 
 - Behaviors observable, beliefs in first-person quotes, outcome concrete
 - Metaphors verified against demographic
 - All metrics either client-sourced or marked "Suggested:"
-
-## Push
-
-After approval, route outputs into the chain:
-
-| Skill | Why |
-|-------|-----|
-| `aeo-content` | Generate anchor article pieces |
-| `linkedin-content` | Produce social calendar from derivative briefs |
-| `email-nurture` | Write email sequences per act |
-| `webinar` | Brief bi-weekly deep-dive sessions |
-| `case-study` | If campaign requires customer transformation stories |
-
-**Upstream chain (provides inputs):** `messaging` → `icp-behavioural` → `tov-guidelines` → `competitor-research` (optional) → storytelling.
-
-**MCP integration (Level 3 — conditional):** pull customer call recordings + founder interviews via Granola `search_meetings` only if `case-study` hasn't already run; otherwise inherit. Fallback: user-provided transcripts or manual story sourcing from client conversations.
-
----
 
 ## Final ship gate
 

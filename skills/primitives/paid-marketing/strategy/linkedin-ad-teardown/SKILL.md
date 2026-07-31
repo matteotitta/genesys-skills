@@ -16,23 +16,11 @@ inputs:
   recommended:
     - company-context
     - competitor-research
-outputs:
-  - type: competitor-intel
-    feeds_into:
-      - competitor-research
-      - paid-campaign-strategy
-      - linkedin-ads-copy
 depends_on: []
-feeds_into:
-  - competitor-research
-  - paid-campaign-strategy
-  - linkedin-ads-copy
 owned_by_agent: paid
 mcps_used:
   - firecrawl
   - apify
-push_targets:
-  - gdrive
 triggers:
   slash_commands:
     - /linkedin-ad-teardown
@@ -93,12 +81,6 @@ Never scrape login-gated member data — the Ad Library only. It's transparency 
 ## The floor — voice-locked
 
 **No strategy read below the floor.** Under ~5 ads, report the inventory only — not a "strategy." A competitor with 2 ads isn't a strategy you can reverse-engineer; it's two ads. State the count every time (`quantitative-evidence-floors.md`), and when the disclosure doesn't show targeting, mark it `[UNAVAILABLE]` — never infer who they're targeting from the creative alone.
-
----
-
-## Output format
-
-Per competitor: **inventory count** → themes → offers → formats → cadence → targeting → **gaps** → **"the opening for {client}"**. Floored, and cited to the Ad Library URLs + access date. Route to `{client}/competitors/MMYY-{competitor}-ad-teardown.md`. When run across a set, add a one-paragraph cross-competitor read (where they cluster, where the whitespace is).
 
 ---
 

@@ -23,13 +23,11 @@ inputs:
   recommended:
   - icp-research
   - company-context
-outputs:
 - type: prospect-list
   feeds_into:
   - outreach-emails
   - linkedin-social-selling
 depends_on: []
-feeds_into:
 - linkedin-social-selling
 - outreach-emails
 owned_by_agent: sales
@@ -37,7 +35,6 @@ mcps_used:
 - apollo-io
 - clay
 - deepline
-push_targets:
 - gdrive
 - notion
 triggers:
@@ -104,7 +101,7 @@ These lessons come from real Clay API behaviour:
 /Users/matteotittarelli/Library/Python/3.9/bin/clay
 ```
 
-Session-based auth (23-hour cookie at `~/.autoclay/session.json`). No API key — uses Clay email/password. First run: `clay setup` or `clay auth login`. Full command reference + workflows in `references/process.md`.
+Session-based auth (23-hour cookie at `~/.autoclay/session.json`). No API key — uses Clay email/password. First run: `clay setup` or `clay auth login`. Full command reference + workflows in the premium reference.
 
 ---
 
@@ -120,7 +117,7 @@ Session-based auth (23-hour cookie at `~/.autoclay/session.json`). No API key �
 
 ## Process
 
-**Standard flow:** keyword expansion (free) → preview-mode search (free, max 50) → refine filters → full-mode export (credits) → handoff to `/deepline-enrich` for emails. Apollo runs as secondary when Clay results are thin. Apify slots A (bulk employees >10k rows) and B (name-disambiguation) for cost-optimization edge cases. Full commands + Apify slots + Apollo equivalents + workflows in `references/process.md`.
+**Standard flow:** keyword expansion (free) → preview-mode search (free, max 50) → refine filters → full-mode export (credits) → handoff to `/deepline-enrich` for emails. Apollo runs as secondary when Clay results are thin. Apify slots A (bulk employees >10k rows) and B (name-disambiguation) for cost-optimization edge cases. Full commands + Apify slots + Apollo equivalents + workflows in the premium reference.
 
 ---
 
@@ -134,15 +131,9 @@ Session-based auth (23-hour cookie at `~/.autoclay/session.json`). No API key �
 
 ---
 
-## Output Format
-
-CSV (default), JSON, or SQLite — all dedupe by LinkedIn URL automatically. Standard schema includes `linkedin_url`, `full_name`, `title`, `company`, `domain`, `seniority`, `country`, `industry`, plus optional Clay-only (connection degree, activity signal) and Apollo-only (tech stack, hiring signal, funding stage) columns. Iteration prompts + downstream-skill handoff format in `references/output-format.md`.
-
----
-
 ## Quality
 
-Pre-delivery checks cover filter discipline (preview-first, title-keywords-over-functions), coverage (broad-then-narrow, Apollo for thin results, Apify for >10k seeds), and cost discipline (Apify + Apollo gates respected). Worked example (DACH PMM search) + anti-examples (full-mode without preview, function filters, over-filtering, Clay for bulk-employee runs) + quality gate (preview-first 100%, title-relevant ≥80%) in `references/quality.md`.
+Pre-delivery checks cover filter discipline (preview-first, title-keywords-over-functions), coverage (broad-then-narrow, Apollo for thin results, Apify for >10k seeds), and cost discipline (Apify + Apollo gates respected). Worked example (DACH PMM search) + anti-examples (full-mode without preview, function filters, over-filtering, Clay for bulk-employee runs) + quality gate (preview-first 100%, title-relevant ≥80%) in the premium reference.
 
 ---
 
@@ -155,17 +146,6 @@ Pre-delivery checks cover filter discipline (preview-first, title-keywords-over-
 | Apify slot A (>10k bulk employees) | Estimate before run | `.claude/rules/apify-credits.md` |
 | Apify slot B (name-disambiguation, >1k rows) | Estimate before run | `.claude/rules/apify-credits.md` |
 | Deepline waterfall handoff | Use `/deepline-enrich` gate | Per that skill's matrix |
-
----
-
-## Reference Files
-
-| File | Purpose |
-|------|---------|
-| `references/process.md` | Apify slots A/B + Apollo as secondary (filter equivalence) + core CLI commands + common workflows + auth setup |
-| `references/output-format.md` | CSV/JSON/SQLite schemas + iteration prompts + downstream handoff format |
-| `references/quality.md` | Pre-delivery checks + worked DACH PMM example + anti-examples + quality gate |
-| `references/auto-update.md` | Self-evaluation + feedback signals (function-filter reliability, harvestapi pricing changes) |
 
 ---
 

@@ -5,7 +5,7 @@ last_updated: 2026-05-04
 author: genesys-growth
 description: |
   Brand-agnostic PowerPoint renderer. Applies any client's brand kit (or
-  Genesys's own kit) to a slide outline and produces a styled .pptx. Resolves
+  Genesys's own kit) to a slide outline and produces a styled.pptx. Resolves
   brand via a 5-layer waterfall (--brand-kit-path → client kit → Genesys kit →
   gdrive-config → fallback). Reads the FULL DESIGN.md token surface — colors,
   typography, spacing, rounded, components, signature elements, presentation
@@ -21,8 +21,8 @@ description: |
   (use document-skills:pdf). Triggers: /pptx, "render this deck as PPTX",
   "make a powerpoint", "build a pptx", "branded pptx for [client]", "apply
   [client] brand to this deck", "convert this outline to slides".
-goal: Apply any resolved brand kit to a slide outline and render a consistent, design-reviewed .pptx.
-outcome: Validated, brand-applied .pptx with locked grid placement across slides, 12-type grammar consistency, banned-pattern-free composition, voice-override-clean text, and design-reviewer scoring.
+goal: Apply any resolved brand kit to a slide outline and render a consistent, design-reviewed.pptx.
+outcome: Validated, brand-applied.pptx with locked grid placement across slides, 12-type grammar consistency, banned-pattern-free composition, voice-override-clean text, and design-reviewer scoring.
 
 primitive: design
 sub_primitive: null
@@ -33,16 +33,10 @@ inputs:
   required: []
   recommended:
     - brand-kit
-outputs:
-  - type: sales-enablement-asset
-    feeds_into: []
 depends_on: []
-feeds_into: []
 
 owned_by_agent: growth
 mcps_used: []
-push_targets:
-  - gdrive
 
 triggers:
   slash_commands:
@@ -74,14 +68,11 @@ This skill is **renderer-only**, not author. The outline (titles, body, speaker 
 Renderer skill — inherits doctrine from consuming author skills (sales-deck, proposal, webinar, etc.). Applies [[feedback_execution_doctrine_refinements_step6]] R3 (template caption library defaults to product-update tone — no "thrilled" defaults), R9 (slide-title templates verb-led). R1/R2/R5/R6/R7/R8 cascade from authoring skills per slide content.
 
 The skill sits in `primitives/design/` next to `/dashboard`, `/figma-prototype`, `/vibe-coding` and inherits the design library at composition time:
-- DESIGN.md token contract via `references/brand-mapping.md`
-- Impeccable banned-pattern guards via `references/anti-patterns.md`
 - Layout / typeset / distill / polish / cognitive-load principles via the wrapper references
-- Design-reviewer 5-dimension rubric via `references/scoring-rubric.md`
 
 Adapted from Anthropic's `document-skills:pptx` example skill — see [`ATTRIBUTION.md`](ATTRIBUTION.md). Python tooling (XML pack/unpack, ECMA/ISO validators, soffice → pdf → jpg pipeline) preserved unchanged.
 
-For full brand-resolution waterfall, parser spec, and token → pptxgenjs field map → `references/brand-mapping.md`. For the 12-type slide grammar → `references/slide-grammar.md`. For the locked-zone grid → `references/grid-system.md`.
+For full brand-resolution waterfall, parser spec, and token → pptxgenjs field map → the premium reference. For the 12-type slide grammar → the premium reference. For the locked-zone grid → the premium reference.
 
 ---
 
@@ -97,7 +88,7 @@ For full brand-resolution waterfall, parser spec, and token → pptxgenjs field 
 
 **Do NOT invoke when:**
 - User wants to **write** a deck from positioning/messaging (use `/sales-deck`)
-- User wants Google Slides output (use `cd .claude/mcp/gdrive && node create-slides.mjs`)
+- User wants Google Slides output (use `cd.claude/mcp/gdrive && node create-slides.mjs`)
 - User wants a PDF (use `document-skills:pdf`)
 - User wants to read/extract text from an existing pptx without rendering (use `python -m markitdown file.pptx` directly)
 
@@ -137,11 +128,11 @@ The skill fails loud, not silent, when any of these are missing.
 | 1 | **Resolve brand** | `python3 scripts/brand_loader.py <slug> --json > /tmp/brand.json` — extracts the FULL token surface (colors, typography, spacing, rounded, components, signature elements, presentation guidance, voice overrides) | BrandConfig JSON |
 | 2 | **Plan grammar** | Read outline. Pick exactly one of 12 slide types per slide. Document picks: `slide N → type=<name> reason=<why>`. Surface picks before render. | Slide-type plan |
 | 3 | **Compose** | Instantiate each slide's grammar class with content + BrandConfig. Grammar classes enforce locked grid zones, banned-pattern guards, quantitative budgets. | pptxgenjs build script |
-| 4 | **Render** | `BRAND_JSON=/tmp/brand.json OUT=<file>.pptx NODE_PATH=$(npm root -g) node <build>.js` | Local .pptx |
-| 5 | **QA** | (a) Visual subagent jpg inspection (b) Grammar consistency audit (c) Grid-zone audit (d) Banned-pattern audit (e) Brand-agnostic audit. Loop until clean. | Audit report + clean .pptx |
-| 6 | **Push** | `cd .claude/mcp/gdrive && node upload-pptx.mjs <file> <slug> "Title"` → native Google Slides URL | Drive URL |
+| 4 | **Render** | `BRAND_JSON=/tmp/brand.json OUT=<file>.pptx NODE_PATH=$(npm root -g) node <build>.js` | Local.pptx |
+| 5 | **QA** | (a) Visual subagent jpg inspection (b) Grammar consistency audit (c) Grid-zone audit (d) Banned-pattern audit (e) Brand-agnostic audit. Loop until clean. | Audit report + clean.pptx |
+| 6 | **Push** | `cd.claude/mcp/gdrive && node upload-pptx.mjs <file> <slug> "Title"` → native Google Slides URL | Drive URL |
 
-For full per-phase detail → `references/process.md`.
+For full per-phase detail → the premium reference.
 
 ---
 
@@ -157,7 +148,7 @@ For full per-phase detail → `references/process.md`.
 
 Smoke-tested against ClientCo, ClientCo, ClientCo, Pivot, ClientCo, Genesys, ClientCo. Any new client onboarded via `/brand-kit` resolves immediately with zero `/pptx` code change.
 
-For the parser spec + DESIGN.md token mapping → `references/brand-mapping.md`.
+For the parser spec + DESIGN.md token mapping → the premium reference.
 
 ---
 
@@ -180,7 +171,7 @@ Each type is a first-class artifact named for the verb of the slide's job. One t
 | 11 | `cta` | call to action | closing slide |
 | 12 | `appendix` | back-pocket support | FAQ, methodology, deeper data |
 
-Full specs (zones + token application + banned-pattern guards) → `references/slide-grammar.md`.
+Full specs (zones + token application + banned-pattern guards) → the premium reference.
 
 ---
 
@@ -196,7 +187,7 @@ Every slide places eyebrow / title / subtitle / body / footer / wordmark in iden
 - Footer — `y=7.00, h=0.30`, 10pt body-font muted, slug left + idx/total right
 - Wordmark — top-right (content slides) or bottom-right (cover/cta)
 
-No zone wanders ±0.05" between slides of the same type. Full diagram + composition budgets → `references/grid-system.md`.
+No zone wanders ±0.05" between slides of the same type. Full diagram + composition budgets → the premium reference.
 
 ---
 
@@ -216,7 +207,7 @@ No zone wanders ±0.05" between slides of the same type. Full diagram + composit
 1. **No invented colors / logos / fonts.** Render fails loud if brand resolution falls back to defaults; never substitute "close enough" values.
 2. **No invented metrics, customer logos, or quotes** in slide content. Mark unverifiable claims `[UNVERIFIED]` per `.claude/rules/ontology.md`.
 3. **Voice overrides apply to ALL auto-text** (slide titles, eyebrows, footers, source citations). E.g., `no-em-dashes` strips " — " → ", ".
-4. **Banned visual patterns refused at composition time** (per `.claude/rules/design-production.md` § "Banned patterns" + impeccable rules in `references/anti-patterns.md`): no gradient text, no side-stripes ≥2px, no generic drop shadows on cards, no glassmorphism, no hero-metric template, no icon-tile-above-heading template, no centered prose paragraphs, no bounce easing, no **accent line under titles** (the AI tell), and 7 more.
+4. **Banned visual patterns refused at composition time** (per `.claude/rules/design-production.md` + impeccable rules in the premium reference): no gradient text, no side-stripes ≥2px, no generic drop shadows on cards, no glassmorphism, no hero-metric template, no icon-tile-above-heading template, no centered prose paragraphs, no bounce easing, no **accent line under titles** (the AI tell), and 7 more.
 5. **Quantitative budgets enforced**: ≤2 brand colors per slide, ≤2 font weights per slide, 1 primary color per slide for the most important element, ≤7±2 visible options per decision point, ≤10% accent area per slide, mono font ONLY for numerical/technical content.
 
 ---
@@ -231,7 +222,7 @@ No zone wanders ±0.05" between slides of the same type. Full diagram + composit
 | Before render | `/webinar` | Authors webinar deck outline → live-event PPTX |
 | Before render | `/brand-kit` | Run first if no `*-brand-kit.md` exists for the client |
 | Different render target | `create-slides.mjs` | Same brand source, but Google Slides output |
-| After render | `/design-reviewer` | **Final ship-ready gate** — required per `.claude/rules/design-production.md` § "Skill authorship contract" |
+| After render | `/design-reviewer` | **Final ship-ready gate** — required per `.claude/rules/design-production.md` |
 
 ---
 
@@ -239,12 +230,6 @@ No zone wanders ±0.05" between slides of the same type. Full diagram + composit
 
 After rendering, walk these phases. Run `/design-reviewer` as the final ship-ready gate.
 
-- **Layout** — `references/layout-tenets.md` (rhythm, alignment, density across slides)
-- **Distill** — `references/distill-principles.md` (kill hero-metric, kill icon-tile-above-heading)
-- **Typeset** — `references/typeset-principles.md` (≤2 weights, measure, leading)
-- **Polish** — `references/polish-principles.md` (16 details + state interactions)
-- **Cognitive load** — `references/cognitive-load-tenets.md` (6×6 rule per slide)
-- **Score** — `references/scoring-rubric.md` (5 dim × 0–4 self-score)
 - **Final review** — `/design-reviewer` (P0–P3 severity findings + remediation)
 
 ---
@@ -252,7 +237,7 @@ After rendering, walk these phases. Run `/design-reviewer` as the final ship-rea
 ## Completion report
 
 When done, output:
-- Output path of rendered .pptx
+- Output path of rendered.pptx
 - Brand source resolved (layer 1–5 + path)
 - Slide count + grammar-type breakdown (e.g., "1 cover + 3 narrative + 1 proof + 1 cta")
 - Logo / signature elements / voice overrides applied
@@ -264,33 +249,9 @@ When done, output:
 
 ---
 
-## Reference Files
-
-| File | Purpose |
-|------|---------|
-| `references/slide-grammar.md` | The 12-type catalog with per-type zone specs + banned-pattern guards |
-| `references/grid-system.md` | Locked-zone diagram + 12-col grid + quantitative budgets |
-| `references/composition-authoring.md` | Per-slide decision flow (which type when, applying signature elements + presentation guidance + voice overrides) |
-| `references/brand-mapping.md` | 5-layer waterfall + parser spec + full DESIGN.md token map (colors/fonts/spacing/rounded/components) |
-| `references/anti-patterns.md` | Wrapper around design-reviewer + design-production banned patterns + slide-specific extensions |
-| `references/layout-tenets.md` | Slide-flavoured layout tenets (rhythm, alignment, density) |
-| `references/typeset-principles.md` | Slide-flavoured typesetting (measure, leading, scale, ≤2 weights) |
-| `references/distill-principles.md` | Slide-flavoured strip-to-essence principles |
-| `references/polish-principles.md` | Slide-flavoured polish + state interactions |
-| `references/cognitive-load-tenets.md` | Slide-flavoured cognitive-load + 6×6 rule |
-| `references/scoring-rubric.md` | Slide-flavoured 5-dim × 0–4 rubric |
-| `references/process.md` | Read / edit / create / convert workflow detail |
-| `references/editing.md` | Template-based editing path |
-| `references/pptxgenjs.md` | pptxgenjs API reference |
-| `references/qa-protocol.md` | Visual + grammar + grid + banned-pattern + brand-agnostic audit loops |
-| `references/fallback-palettes.md` | 10 generic palettes (last-resort use only) |
-
----
-
 ## External References
 
 - `.claude/rules/design-production.md` — DESIGN.md token format + shadcn integration contract + banned visual patterns + skill authorship contract
-- `.claude/skills/meta/catalog/design-reviewer/references/` — source of truth for design library (anti-patterns, layout-tenets, typeset, distill, polish, cognitive-load, scoring-rubric)
 - `.claude/mcp/gdrive/gdrive-config.json` — brand-source layer 4
 - `.claude/mcp/gdrive/create-slides.mjs` — sibling renderer (Google Slides flavour)
 - `.claude/mcp/gdrive/upload-pptx.mjs` — auto-upload pptx to Drive folder, converts to native Google Slides

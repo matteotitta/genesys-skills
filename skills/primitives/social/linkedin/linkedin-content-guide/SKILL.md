@@ -21,7 +21,6 @@ inputs:
   required: []
   recommended:
   - company-context
-outputs:
 - type: linkedin-content-guide
   feeds_into:
   - linkedin-weekly-content
@@ -29,14 +28,12 @@ outputs:
   - outreach-emails
   - positioning
 depends_on: []
-feeds_into:
 - linkedin-weekly-content
 - linkedin-profile-optimization
 - outreach-emails
 - positioning
 owned_by_agent: content
 mcps_used: []
-push_targets:
 - gdrive
 - notion
 triggers:
@@ -73,7 +70,7 @@ Output complies with [`output-tenets.md`](../../../../../rules/output-tenets.md)
 
 Do NOT run when: user wants market-level ICP (`/icp-research`), behavioural buyer simulation (`/icp-behavioural`), to write a single post (`/linkedin-content`), profile optimization (`/linkedin-profile-optimization`), or competitive research (`/competitor-research`).
 
-See `references/skill-integration.md` for full upstream/downstream wiring.
+See the premium reference for full upstream/downstream wiring.
 
 ## Inputs
 
@@ -98,58 +95,29 @@ If inputs are missing: ask for website URL at minimum. Strongly encourage person
 
 ## Steps
 
-1. **Phase 1 — Research & data gathering.** Scrape website (Firecrawl), search external signals (Exa), load upstream context. → `references/steps/phase-1-research.md`
-2. **Phase 2 — 14-question ICP.** Answer all 14 questions to the quality standard, apply confidence markers, flag experiential questions for user validation. → `references/steps/phase-2-icp-questions.md` and `references/14-question-framework.md`
-3. **Phase 3 — Pains → Goals content guide.** Extract 10-20 pain points from the 14 answers, mirror to goals, format as the canonical Guide table. → `references/steps/phase-3-pains-goals.md`
-4. **Phase 4 — Offer distillation.** List all services, identify the ONE offer (ROI × impact × fulfilment), produce two-part "What I do / What I market" statement. → `references/steps/phase-4-offer-distillation.md`
-5. **Phase 5 — SCART content brief.** Populate the 5 SCART elements, generate 9 post ideas (3 story + 3 expertise + 3 offer), recommend posting frequency and format mix. → `references/steps/phase-5-scart-brief.md` and `references/scart-framework.md`
-6. **Phase 6 — Ongoing ideation engine (optional).** Layer Growth/Authority/Sales pillar split, 22-question ideation bank, posting schedule, repurposing cycle. → `references/steps/phase-6-ongoing-ideation.md`
-7. **Self-evaluation + review gate (Level 2).** Run completeness, depth, honesty checks. → `references/quality-guardrails.md`
-8. **Assemble final output** in canonical format. → `references/output-format.md`
-9. **Suggest chains:** `linkedin-profile-optimization` → `linkedin-content` → `outreach-emails` → `positioning`. → `references/skill-integration.md`
+1. **Phase 1 — Research & data gathering.** Scrape website (Firecrawl), search external signals (Exa), load upstream context. → the premium reference
+2. **Phase 2 — 14-question ICP.** Answer all 14 questions to the quality standard, apply confidence markers, flag experiential questions for user validation. → the premium reference and the premium reference
+3. **Phase 3 — Pains → Goals content guide.** Extract 10-20 pain points from the 14 answers, mirror to goals, format as the canonical Guide table. → the premium reference
+4. **Phase 4 — Offer distillation.** List all services, identify the ONE offer (ROI × impact × fulfilment), produce two-part "What I do / What I market" statement. → the premium reference
+5. **Phase 5 — SCART content brief.** Populate the 5 SCART elements, generate 9 post ideas (3 story + 3 expertise + 3 offer), recommend posting frequency and format mix. → the premium reference and the premium reference
+6. **Phase 6 — Ongoing ideation engine (optional).** Layer Growth/Authority/Sales pillar split, 22-question ideation bank, posting schedule, repurposing cycle. → the premium reference
+7. **Self-evaluation + review gate (Level 2).** Run completeness, depth, honesty checks. → the premium reference
+8. **Assemble final output** in canonical format. → the premium reference
+9. **Suggest chains:** `linkedin-profile-optimization` → `linkedin-content` → `outreach-emails` → `positioning`. → the premium reference
 
-Visual flowchart of the full process: `references/process-flowchart.md`. MCP tools and Exa research substrate: `references/mcp-integration.md`.
+Visual flowchart of the full process: the premium reference. MCP tools and Exa research substrate: the premium reference.
 
 ## What good looks like
 
-### References
-
-- `references/14-question-framework.md` — the 14 questions classified (research-answerable vs. experiential), quality standard per answer
-- `references/scart-framework.md` — Statement / Context / Action / Results / Trigger, mapped per post type
-- `references/writing-tenets.md` — Nick Broekema coach feedback (brevity, hooks, CTAs, formatting, profile)
-- `references/output-format.md` — canonical output template
-- `references/quality-guardrails.md` — anti-hallucination rules, pre-delivery checklist, self-evaluation, gotchas, iteration prompts
-- `references/mcp-integration.md` — Exa protocol, Firecrawl, Apify, fallback path
-- `references/skill-integration.md` — upstream/downstream skill wiring, triggers, workflow sequences
-- `references/process-flowchart.md` — visual flow of the full skill
-- `references/steps/phase-1-research.md` through `phase-6-ongoing-ideation.md` — per-phase walkthroughs
-
-### Examples
-
-- `references/examples/gold-standard-genesys-growth.md` — Matteo Tittarelli's full output as the quality benchmark
-- `references/examples/icp-answer-q1-role.md` — depth bar for a research-answerable question
-- `references/examples/icp-answer-q2-pain.md` — depth bar for a pain question (must be quotable)
-- `references/examples/pain-goal-pairs.md` — the Pains → Goals table at the right specificity
-- `references/examples/offer-statement.md` — two-part "What I do / What I market" with the Louis Vuitton principle
-- `references/examples/archetype-story-post.md` — Story post archetype (makes you human)
-- `references/examples/archetype-expertise-post.md` — Expertise post archetype (makes you credible)
-- `references/examples/archetype-offer-post.md` — Offer post archetype (makes you a business)
-
 ### Evaluations
 
-The output passes when: all 14 ICP questions have 4-8 bullets or a rich paragraph; experiential questions Q5/Q6/Q10/Q13/Q14 carry `[REQUIRES USER VALIDATION]`; the Pains→Goals table has 10-20 specific pairs (not generic); ONE offer is identified with explicit ROI×impact×fulfilment rationale; all 5 SCART elements are populated; 9 post ideas exist (3 each for story/expertise/offer) tied to specific pain→goal pairs; no invented metrics, quotes, or testimonials; confidence markers applied consistently. Full checklist: `references/quality-guardrails.md`.
-
-## Push
-
-Push to client engagement folder under `linkedin/` and to Notion client database. Filename: `MMYY-linkedin-content-guide.md` per CLAUDE.md naming convention. Review gate Level 2 (Standard) — user reviews ICP depth, validates experiential answers, confirms ONE offer choice, and signs off on the SCART brief before downstream skills run. After approval, run `/brand-context-sync` if voice patterns surfaced.
-
----
+The output passes when: all 14 ICP questions have 4-8 bullets or a rich paragraph; experiential questions Q5/Q6/Q10/Q13/Q14 carry `[REQUIRES USER VALIDATION]`; the Pains→Goals table has 10-20 specific pairs (not generic); ONE offer is identified with explicit ROI×impact×fulfilment rationale; all 5 SCART elements are populated; 9 post ideas exist (3 each for story/expertise/offer) tied to specific pain→goal pairs; no invented metrics, quotes, or testimonials; confidence markers applied consistently. Full checklist: the premium reference.
 
 ## Final ship gate
 
 Run `/premortem --output` before ship. See [`/premortem` skill](../../../../meta/orchestration/premortem/SKILL.md) for the 5 execution domains (will-it-resonate / will-it-convert / will-it-stay-on-brand / will-stakeholder-push-back / will-it-degrade-over-time) and output template.
 
-Then run `/voice-reviewer` — the content ship gate: voice + brand quality (pm-loop.md § lens-reviewer).
+Then run `/voice-reviewer` — the content ship gate: voice + brand quality (pm-loop.md).
 
 Trivial-case escape: `## Premortem\nNo failure modes — trivial change` satisfies the contract for genuinely trivial outputs.
 

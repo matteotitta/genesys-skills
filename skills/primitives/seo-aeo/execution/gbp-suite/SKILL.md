@@ -22,18 +22,15 @@ inputs:
   recommended:
   - company-context
   - gbp-category-audit
-outputs:
 - type: local-seo-audit
   feeds_into:
   - local-seo-audit
 depends_on: []
-feeds_into:
 - local-seo-audit
 owned_by_agent: operator
 mcps_used:
 - exa
 - firecrawl
-push_targets:
 - gdrive
 triggers:
   slash_commands: []
@@ -66,7 +63,6 @@ slim_exemption: gbp-cluster-split-deferred-2026-04-30
 
 **Worked examples + tool catalog:** `.claude/skills/meta-skills/exa/`.
 
-
 # GBP review strategy
 
 Analyzes competitor review velocity, keyword mentions in reviews, neighborhood mentions, and recurring complaints. Then generates review response templates (5-star, 4-star, 3-star, 1-2 star) with 3 variations each that naturally incorporate service + location keywords. Covers article prompts #3 (competitor review teardown) and #4 (review response strategy) from the local SEO playbook.
@@ -98,80 +94,80 @@ Output complies with:
 
 ```
 ┌──────────────────────────────────────────────────────────────┐
-│               GBP REVIEW STRATEGY PROCESS                    │
+│ GBP REVIEW STRATEGY PROCESS │
 └──────────────────────────────────────────────────────────────┘
                               │
                               ▼
 ┌──────────────────────────────────────────────────────────────┐
-│ INPUT VALIDATION                                             │
-│ Required:                                                    │
-│ □ Client GBP URL                                             │
-│ □ 2-3 competitor GBP URLs                                    │
-│ □ Target keywords (3+)                                       │
-│ □ Service areas (neighborhoods/cities)                       │
-│ Optional: Current review count, response rate baseline       │
-│ → If missing: Ask for GBP URLs and target keywords           │
+│ INPUT VALIDATION │
+│ Required: │
+│ □ Client GBP URL │
+│ □ 2-3 competitor GBP URLs │
+│ □ Target keywords (3+) │
+│ □ Service areas (neighborhoods/cities) │
+│ Optional: Current review count, response rate baseline │
+│ → If missing: Ask for GBP URLs and target keywords │
 └──────────────────────────────────────────────────────────────┘
                               │
                               ▼
 ┌──────────────────────────────────────────────────────────────┐
-│ PHASE 1: REVIEW DATA EXTRACTION                              │
-│ □ Scrape last 50 reviews per listing (client + competitors)  │
-│ □ Extract: total count, avg rating, 30/60/90 day velocity    │
-│ □ Extract: mentioned services, neighborhoods, complaints     │
-│ ✓ Checkpoint: Review data captured for all listings          │
+│ PHASE 1: REVIEW DATA EXTRACTION │
+│ □ Scrape last 50 reviews per listing (client + competitors) │
+│ □ Extract: total count, avg rating, 30/60/90 day velocity │
+│ □ Extract: mentioned services, neighborhoods, complaints │
+│ ✓ Checkpoint: Review data captured for all listings │
 └──────────────────────────────────────────────────────────────┘
                               │
                               ▼
 ┌──────────────────────────────────────────────────────────────┐
-│ PHASE 2: VELOCITY ANALYSIS                                   │
-│ □ Calculate reviews/month for each listing (30/60/90 day)    │
-│ □ Identify top competitor by velocity                        │
-│ □ Calculate reviews/month needed to catch top competitor      │
-│ □ Estimate time-to-parity at target velocity                 │
-│ ✓ Checkpoint: Velocity gap quantified with catch-up target   │
+│ PHASE 2: VELOCITY ANALYSIS │
+│ □ Calculate reviews/month for each listing (30/60/90 day) │
+│ □ Identify top competitor by velocity │
+│ □ Calculate reviews/month needed to catch top competitor │
+│ □ Estimate time-to-parity at target velocity │
+│ ✓ Checkpoint: Velocity gap quantified with catch-up target │
 └──────────────────────────────────────────────────────────────┘
                               │
                               ▼
 ┌──────────────────────────────────────────────────────────────┐
-│ PHASE 3: RESPONSE AUDIT                                      │
-│ □ Analyze owner responses: response rate, avg response time  │
-│ □ Check keyword usage in existing responses                  │
-│ □ Evaluate tone and negative review handling                 │
-│ □ Compare response quality across all listings               │
-│ ✓ Checkpoint: Response gaps identified vs. competitors       │
+│ PHASE 3: RESPONSE AUDIT │
+│ □ Analyze owner responses: response rate, avg response time │
+│ □ Check keyword usage in existing responses │
+│ □ Evaluate tone and negative review handling │
+│ □ Compare response quality across all listings │
+│ ✓ Checkpoint: Response gaps identified vs. competitors │
 └──────────────────────────────────────────────────────────────┘
                               │
                               ▼
 ┌──────────────────────────────────────────────────────────────┐
-│ PHASE 4: TEMPLATE GENERATION                                 │
-│ □ Create 5-star templates (3 variations)                     │
-│ □ Create 4-star templates (3 variations)                     │
-│ □ Create 3-star templates (3 variations)                     │
-│ □ Create 1-2 star templates (3 variations)                   │
+│ PHASE 4: TEMPLATE GENERATION │
+│ □ Create 5-star templates (3 variations) │
+│ □ Create 4-star templates (3 variations) │
+│ □ Create 3-star templates (3 variations) │
+│ □ Create 1-2 star templates (3 variations) │
 │ □ Each template includes service keywords + location mention │
-│ ✓ Checkpoint: 12 templates ready, keywords naturally placed  │
+│ ✓ Checkpoint: 12 templates ready, keywords naturally placed │
 └──────────────────────────────────────────────────────────────┘
                               │
                               ▼
 ┌──────────────────────────────────────────────────────────────┐
-│ PHASE 5: STRATEGY DOCUMENT                                   │
-│ □ Set monthly review velocity target                         │
-│ □ Identify where/when to ask for reviews                     │
-│ □ Define what to ask customers to mention (service + area)   │
-│ □ Create 90-day review growth roadmap                        │
-│ ✓ Checkpoint: Actionable strategy with measurable targets    │
+│ PHASE 5: STRATEGY DOCUMENT │
+│ □ Set monthly review velocity target │
+│ □ Identify where/when to ask for reviews │
+│ □ Define what to ask customers to mention (service + area) │
+│ □ Create 90-day review growth roadmap │
+│ ✓ Checkpoint: Actionable strategy with measurable targets │
 └──────────────────────────────────────────────────────────────┘
                               │
                               ▼
 ┌────────────────────────────────────┬─────────────────────────┐
-│ REVIEW GATE: Level 1 (Quick)      │ CHAIN SUGGESTIONS       │
+│ REVIEW GATE: Level 1 (Quick) │ CHAIN SUGGESTIONS │
 ├────────────────────────────────────┼─────────────────────────┤
-│ Present: Velocity analysis,       │ → gbp-content-engine    │
-│ response audit, 12 templates,     │ → gbp-listing-opt       │
-│ strategy doc                      │ → content-strategy      │
-│ Actions: [Approve] [Adjust]       │ → Export to Google Docs  │
-│ [Add competitors]                 │                          │
+│ Present: Velocity analysis, │ → gbp-content-engine │
+│ response audit, 12 templates, │ → gbp-listing-opt │
+│ strategy doc │ → content-strategy │
+│ Actions: [Approve] [Adjust] │ → Export to Google Docs │
+│ [Add competitors] │ │
 └────────────────────────────────────┴─────────────────────────┘
 ```
 
@@ -400,18 +396,6 @@ Before proceeding, verify:
 - [ ] 90-day roadmap with measurable milestones
 
 ---
-
-## Output Format
-
-### Standard Output Structure
-
-```markdown
-<!--
-SKILL OUTPUT: GBP Review Strategy
-Generated: YYYY-MM-DD
-Font: Inter (for rendering)
-Version: 1.0
--->
 
 # GBP Review Strategy: [Business Name]
 

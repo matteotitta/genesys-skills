@@ -5,7 +5,7 @@ last_updated: 2026-06-29
 author: genesys-growth
 description: 'Step-by-step runbook to connect any custom MCP to Claude — choosing the source (official plugin / community / custom HTTP / local stdio), deciding the mounting tier, wiring credentials, registering the server, introspecting its tools, and integrating it into skills. Operationalizes the mcp-on-demand.md policy with the Extrovert and Spider MCPs as worked examples. Triggers: "connect an MCP", "add a custom connector", "wire up a new MCP", "set up an MCP server in Claude". NOT for credit/spend policy — that lives in the per-MCP credits rules; this covers setup.'
 goal: Connect any custom MCP to Claude end to end — source, tier, credentials, registration, introspection, and skill integration — following mcp-on-demand policy.
-outcome: A new MCP mounted at the right tier with credentials wired via .claude/apis + load-mcp-env.sh, its tools introspected, and a promotion-review date set — reusing the Extrovert/Spider setup pattern instead of re-deriving it each time.
+outcome: A new MCP mounted at the right tier with credentials wired via.claude/apis + load-mcp-env.sh, its tools introspected, and a promotion-review date set — reusing the Extrovert/Spider setup pattern instead of re-deriving it each time.
 primitive: meta
 sub_primitive: infra
 ontology_type: runbook
@@ -13,14 +13,11 @@ review_gate: 1
 inputs:
   required: []
   recommended: []
-outputs:
 - type: runbook
   feeds_into: []
 depends_on: []
-feeds_into: []
 owned_by_agent: operator
 mcps_used: []
-push_targets: []
 triggers:
   slash_commands:
   - /connect-mcp

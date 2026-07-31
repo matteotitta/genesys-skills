@@ -19,15 +19,12 @@ inputs:
   required:
   - lifecycle-marketing
   recommended: []
-outputs:
 - type: lifecycle-campaign
   feeds_into: []
 depends_on:
 - lifecycle-marketing
-feeds_into: []
 owned_by_agent: growth
 mcps_used: []
-push_targets:
 - gdrive
 - notion
 triggers:
@@ -46,7 +43,7 @@ effort: medium
 
 Create email nurture sequences that move prospects from content engagement to demo request, and from demo to closed deal. Focused on marketing automation sequences — not transactional or onboarding emails.
 
-For full process, sequence templates, and email writing formulas → `references/process.md`.
+For full process, sequence templates, and email writing formulas → the premium reference.
 
 ---
 
@@ -141,7 +138,7 @@ If trigger event, goal, or email count are missing, ask before generating.
 - One CTA per email (no exceptions)
 - Personalization tokens require fallbacks (`{{first_name|there}}`)
 
-For full sequence templates, subject patterns, and copy frameworks → `references/process.md`.
+For full sequence templates, subject patterns, and copy frameworks → the premium reference.
 
 ---
 
@@ -152,27 +149,6 @@ For full sequence templates, subject patterns, and copy frameworks → `referenc
 3. **Mark placeholders.** Use [COMPANY NAME] for unconfirmed references.
 4. **Realistic metrics.** Don't promise specific outcomes unless verified.
 5. **Platform-aware.** Note if formatting needs adjustment for specific ESP (HubSpot, Marketo, Customer.io).
-
----
-
-## Output, Quality, and Auto-Update
-
-| Topic | Reference |
-|-------|-----------|
-| Output template + iteration prompts + handoff | `references/output-format.md` |
-| Pre-delivery checklist + worked example + anti-examples + quality gate | `references/quality.md` |
-| Feedback signals + pattern detection + skill update format | `references/auto-update.md` |
-
----
-
-## Reference Files
-
-| File | Purpose |
-|------|---------|
-| `references/process.md` | Full flowchart, step-by-step, sequence templates, subject patterns, copy frameworks (AIDA/PAS/BAB) |
-| `references/output-format.md` | Standard output template, iteration prompts, downstream handoff |
-| `references/quality.md` | Pre-delivery checklist, worked example, anti-examples, quality gate |
-| `references/auto-update.md` | Feedback signals, pattern detection, suggested skill update format |
 
 ---
 

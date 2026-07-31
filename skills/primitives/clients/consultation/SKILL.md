@@ -24,16 +24,9 @@ inputs:
   required: []
   recommended:
     - company-context
-outputs:
-  - type: client-engagement
-    feeds_into:
-      - client-proposals
 depends_on: []
-feeds_into:
-  - client-proposals
 owned_by_agent: b2b-consultant
 mcps_used: []
-push_targets: []
 triggers:
   slash_commands:
     - /consultation

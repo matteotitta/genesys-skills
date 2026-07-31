@@ -26,7 +26,6 @@ inputs:
   - landing-page-wireframe
   - icp-behavioural
   - brand-kit
-outputs:
 - type: landing-page-copy
   feeds_into:
   - website-pm-score
@@ -34,7 +33,6 @@ outputs:
 depends_on:
 - product-messaging
 - tov-guidelines
-feeds_into:
 - website-pm-score
 - website-pm-score
 owned_by_agent: operator
@@ -42,7 +40,6 @@ mcps_used:
 - gdrive
 - notion
 - trigger-dev
-push_targets:
 - gdrive
 - notion
 triggers:
@@ -59,7 +56,7 @@ paths: projects/consulting/**/website/**,projects/apps/**
 
 # website-copy — 3-phase × N-pages copy orchestrator
 
-Runs the full vomit → tight → voicey copy cycle across all pages of a site in parallel. Each phase inherits the previous, so quality compounds without rework. Designed for the "website refresh" pattern. For single-page work, use the merged `landing-page-copy` workflow in `references/landing-page-copy-merged-2026-04-29.md`.
+Runs the full vomit → tight → voicey copy cycle across all pages of a site in parallel. Each phase inherits the previous, so quality compounds without rework. Designed for the "website refresh" pattern. For single-page work, use the merged `landing-page-copy` workflow in the premium reference.
 
 ---
 
@@ -76,7 +73,7 @@ Output complies with:
 
 | Code | Refinement | How it lands in website-copy |
 |---|---|---|
-| **R1** | Source placement (three layers) | Live pages are **end-customer-facing**. **No sources block on rendered pages.** Working copy markdown carries `[VERIFIED: ...]` tags for QA only; stripped before publish. |
+| **R1** | Source placement (three layers) | Live pages are **end-customer-facing**. **No sources block on rendered pages.** Working copy markdown carries `[VERIFIED:...]` tags for QA only; stripped before publish. |
 | **R2** | Single-doc-with-toggles | Multi-page deliverable ships as **one Notion doc with one toggle per page** — not 7 separate files. Index up top; each page's copy expands inline. Tessa's Step 6 anchor. |
 | **R3** | Product-update tone | Product / pricing / feature pages frame as "we shipped X" not "we are thrilled to announce." Even hero copy on launch pages. |
 | **R5** | Blog as voice anchor | When the site has a published blog, the blog's opening line is the canonical voice anchor for hero copy across home/product pages. Verbatim. Channel-misaligned voice is the biggest tell of multi-author copy. |
@@ -94,7 +91,6 @@ Output complies with:
 - "Copy cycle for all pages"
 - "Vomit → tight → voicey across [page list]"
 - "Full-site copy refresh"
-- "Landing page copy", "homepage copy", "persona page", "competitor page", "pricing page", "use case page", "solution page" (single-page mode — see references/landing-page-copy-merged-2026-04-29.md)
 
 **Do NOT invoke when:**
 - User wants AEO/SEO content → use `aeo-content`
@@ -108,9 +104,9 @@ Output complies with:
 
 | Surface | Mode | Path |
 |---------|------|------|
-| Single landing page | `mode=landing_page` — single-page workflow | references/landing-page-copy-merged-2026-04-29.md |
+| Single landing page | `mode=landing_page` — single-page workflow | the premium reference |
 | 3+ pages of a site | Multi-page orchestrator | This SKILL.md |
-| Pipeline at scale | Trigger.dev pipeline (v3.0) | references/landing-page-copy-merged-2026-04-29.md (Pipeline Mode section) |
+| Pipeline at scale | Trigger.dev pipeline (v3.0) | the premium reference (Pipeline Mode section) |
 
 ---
 
@@ -146,7 +142,7 @@ Output complies with:
 - [ ] Page type confirmed with user
 - [ ] If no DESIGN.md exists → pause and recommend `/brand-kit` first
 
-If inputs missing → list gaps and recommend skills to fill them. The Iron Law: NO COPY WITHOUT UPSTREAM INPUTS. Full red-flag protocol in references/landing-page-copy-merged-2026-04-29.md (Iron Law + Red Flags sections).
+If inputs missing → list gaps and recommend skills to fill them. The Iron Law: NO COPY WITHOUT UPSTREAM INPUTS. Full red-flag protocol in the premium reference (Iron Law + Red Flags sections).
 
 ---
 
@@ -157,12 +153,8 @@ Verify locked product-messaging, TOV, wireframes, client CLAUDE.md voice section
 
 ### 2. Confirm page list and structure
 Per page, load relevant workflow:
-- Home page → references/landing-page-copy-references/home-page-workflow.md
-- Persona page → references/landing-page-copy-references/persona-page-workflow.md
-- Competitor page → references/landing-page-copy-references/competitor-page-workflow.md
-- Use the page-types matrix in references/landing-page-copy-merged-2026-04-29.md (8 page types with key sections, primary goals, when-to-use)
 
-### 3. Load DESIGN.md tokens (per .claude/rules/design-production.md)
+### 3. Load DESIGN.md tokens (per.claude/rules/design-production.md)
 Read: `colors.*` (semantic role per palette), `typography.*` (hierarchy tier per text block), `components.*` (canonical CTA style), Do's and Don'ts (emphasis guardrails). Required citations: DESIGN.md path at top of doc; per-page typography tokens (`typography.headline-lg`, `typography.body-md`, `typography.label-sm`); component tokens for CTAs (`components.button-primary`); WCAG AA contrast logic on dark surfaces. Forbidden: color-name copy ("the orange button") when token names exist; copy demanding shadcn primitives be restyled out of brand.
 
 ### 4. Map messaging framework to sections (per page)
@@ -171,14 +163,14 @@ Hero → positioning statement + primary differentiator. Problem → ICP pain po
 ### 5. Phase 1 — Vomit (parallel fan-out)
 Per-page agent context: product messaging (shared), wireframe for this page (entity-specific), ICP behavioural insights (shared), page purpose + user intent.
 
-Agent prompt: "Dump everything. For the {page} page following the {wireframe}, write a vomit draft of every section — headline, subhead, body, bullets, proof, CTA. Include 3-5 headline options per section. Don't filter. Don't polish. Aim for 2x the final length. Use the product messaging as source of truth. Apply headline formulas from references/landing-page-copy-references/headline-formulas.md. Mark unknowns as [NOT AVAILABLE] per voice rules."
+Agent prompt: "Dump everything. For the {page} page following the {wireframe}, write a vomit draft of every section — headline, subhead, body, bullets, proof, CTA. Include 3-5 headline options per section. Don't filter. Don't polish. Aim for 2x the final length. Use the product messaging as source of truth. Apply headline formulas from the premium reference Mark unknowns as [NOT AVAILABLE] per voice rules."
 
 Output: `projects/consulting/{slug}/website/0{MMYY}-copy/01-vomit/{page}.md`. Phase 1 checkpoint: all sections have headline + sub-headline minimum; each headline traces to a specific messaging framework component; no invented claims. Gate 1: auto-complete (vomit is intentionally rough).
 
 ### 6. Phase 2 — Tight (parallel fan-out)
 Per-page agent context: Phase 1 vomit (entity-specific, read from previous phase), product messaging (shared), TOV "cut ruthlessly" section, character limits (Genesys defaults: headlines <100, sub-headlines <150).
 
-Agent prompt: "Take the vomit draft at {path}. Cut it in half. Kill qualifiers ('really', 'very', 'actually'). Convert passive to active. Enforce headline/sub-headline character limits. Pick the single best headline option per section — delete alternatives. Preserve all value claims but tighten phrasing. Apply tight checklist from references/landing-page-copy-references/phase-2-checklist.md. Run anti-AI messaging check (see references/landing-page-copy-merged-2026-04-29.md Phase 2.3). Return tight version."
+Agent prompt: "Take the vomit draft at {path}. Cut it in half. Kill qualifiers ('really', 'very', 'actually'). Convert passive to active. Enforce headline/sub-headline character limits. Pick the single best headline option per section — delete alternatives. Preserve all value claims but tighten phrasing. Apply tight checklist from the premium reference Run anti-AI messaging check (see the premium reference Phase 2.3). Return tight version."
 
 Word economy targets: hero headline 8-12 words; hero sub-headline 15-25 words; problem block 20-40 each; capability block 25-50 each; CTA headline 6-10 words.
 
@@ -187,7 +179,7 @@ Output: `projects/consulting/{slug}/website/0{MMYY}-copy/02-tight/{page}.md`. Ph
 ### 7. Phase 3 — Voicey (parallel fan-out)
 Per-page agent context: Phase 2 tight output (entity-specific), TOV guidelines (full doc), client CLAUDE.md voice section, Genesys voice rules (no em dashes without spaces, sentence case, contractions freely), client-specific vocabulary.
 
-Agent prompt: "Take the tight draft at {path}. Layer voice. Apply TOV patterns from {tov-path}. Use client's sentence cadence. Add contractions where natural. Apply 'so what' test to every bullet — if reader could reply 'so what?', rewrite or cut. Apply voice techniques from references/landing-page-copy-references/phase-3-voice.md (≥3 per section). Generate 2-3 alternative hero headlines for A/B testing. Run Auto-Challenge Protocol from CLAUDE.md. Flag anything that fails Voice/Value/Quality checks."
+Agent prompt: "Take the tight draft at {path}. Layer voice. Apply TOV patterns from {tov-path}. Use client's sentence cadence. Add contractions where natural. Apply 'so what' test to every bullet — if reader could reply 'so what?', rewrite or cut. Apply voice techniques from the premium reference (≥3 per section). Generate 2-3 alternative hero headlines for A/B testing. Run Auto-Challenge Protocol from CLAUDE.md. Flag anything that fails Voice/Value/Quality checks."
 
 Voice calibration scale: Conservative (1-3) professional/restrained; Balanced (4-6) confident/clear/some personality; Provocative (7-10) bold/irreverent/memorable.
 
@@ -197,7 +189,7 @@ Output: `projects/consulting/{slug}/website/0{MMYY}-copy/03-voicey/{page}.md`. P
 Produce: (1) Master copy doc at `projects/consulting/{slug}/website/0{MMYY}-copy/FINAL.md` (all pages concatenated). (2) Per-page deliverables formatted for `--stack`: `shadcn-vercel` → JSX snippets; `framer` → plain text matching component names; `webflow` → spreadsheet (page + section + copy). (3) Change log: vomit → tight → voicey per page.
 
 ### 9. Self-evaluation + skill auto-update
-Run completeness check, evidence quality check, guardrail check, self-roast questions. Detailed protocols in references/landing-page-copy-merged-2026-04-29.md (Self-Evaluation Protocol + Skill Auto-Update Protocol). Capture user-approved outputs as reference examples in `references/landing-page-copy-examples/`.
+Run completeness check, evidence quality check, guardrail check, self-roast questions. Detailed protocols in the premium reference (Self-Evaluation Protocol + Skill Auto-Update Protocol). Capture user-approved outputs as reference examples in the premium reference.
 
 **Edge cases:**
 - Page with no wireframe → fail fast; run `/landing-page-wireframe` first
@@ -206,81 +198,20 @@ Run completeness check, evidence quality check, guardrail check, self-roast ques
 - Character limit violations in Phase 2 → agent iterates within phase; max 3 retries per headline
 - Client vocabulary missing → fall back to Genesys voice defaults; log as TOV gap
 
-**Pipeline mode (v3.0)** for 3+ pages via Trigger.dev: full spec including context slicing, batch grouping, and Trigger.dev task IDs in references/landing-page-copy-merged-2026-04-29.md (Pipeline Mode section).
+**Pipeline mode (v3.0)** for 3+ pages via Trigger.dev: full spec including context slicing, batch grouping, and Trigger.dev task IDs in the premium reference (Pipeline Mode section).
 
 ---
 
 ## What good looks like
 
-### References
-
-| File | Purpose |
-|------|---------|
-| `references/landing-page-copy-merged-2026-04-29.md` | Full single-page workflow (1033 lines): page types matrix, headline formulas summary, output format spec, anti-hallucination guardrails, quality checklist, self-evaluation protocol, skill auto-update protocol, MCP integration, gotchas, changelog |
-| `references/landing-page-copy-references/headline-formulas.md` | 50+ headline formulas by section (hero, problem, capabilities, differentiation, CTA) |
-| `references/landing-page-copy-references/section-components.md` | Detailed specs for 15 page sections |
-| `references/landing-page-copy-references/home-page-workflow.md` | Full home page structure and process |
-| `references/landing-page-copy-references/persona-page-workflow.md` | Persona page modifications |
-| `references/landing-page-copy-references/competitor-page-workflow.md` | Competitor comparison structure |
-| `references/landing-page-copy-references/phase-2-checklist.md` | Detailed tight copy refinement guide |
-| `references/landing-page-copy-references/phase-3-voice.md` | Voice and memorability techniques |
-| `references/landing-page-copy-references/cro-checklist.md` | Conversion-rate optimization checklist |
-| `references/merged-from.md` | Phase 2 merge audit log (landing-page-copy → website-copy) |
-
-### Examples
-
-| File | Page type |
-|------|-----------|
-| `references/landing-page-copy-examples/home-page-example.md` | Home page hero (RevFlow SaaS) |
-
-Capture future user-approved outputs to this folder as `[date]-[client-slug]-[page-type].md`.
-
-**Inline anti-examples** (full table in references/landing-page-copy-merged-2026-04-29.md):
-- ❌ "RevFlow is a powerful platform that helps companies with their revenue operations needs." (generic, passive, no specificity) → ✅ "RevFlow syncs revenue data in real-time for RevOps leaders."
-- ❌ "Our solution enables data synchronization." (corporate buzzwords) → ✅ "We sync your CRM every 30 seconds."
-- ❌ "Get started today!" (generic CTA) → ✅ "See live sync in action"
-
 ### Evaluations
 
-**Quality discipline before delivery:** run the full pre-delivery quality checklist (content + format + Iron Law guardrails + Anti-AI detector + 5 self-roast questions) → see `references/quality-checklist.md`.
+**Quality discipline before delivery:** run the full pre-delivery quality checklist (content + format + Iron Law guardrails + Anti-AI detector + 5 self-roast questions) → see the premium reference.
 
 If self-roast surfaces real weakness on any page, loop that page back to Phase 3 with specific feedback before shipping.
 
 ---
 
-## Push
-
-| Destination | When | How |
-|-------------|------|-----|
-| `projects/consulting/{slug}/website/0{MMYY}-copy/FINAL.md` | Always (canonical local artifact) | Phase 4 aggregate |
-| Google Doc in `client_folder/execution/landing-pages/` | After Gate 3 approval | `cd .claude/mcp/gdrive && node create-doc-unified.mjs ... --client {slug}` |
-| Notion (Content Database) | When team review needed | `mcp__claude_ai_Notion__notion-create-pages` per `.claude/rules/notion-protocol.md` |
-| Framer draft page (`--stack framer`) | When Framer is target CMS | Plain text blocks matching Framer component names |
-| shadcn JSX snippets (`--stack shadcn-vercel`) | When Vercel/Next is target | Ready-to-paste components |
-| Webflow spreadsheet (`--stack webflow`) | When Webflow is target | Page + section + copy columns |
-| `aeo-content` skill | After approval | Creates SEO/AEO versions |
-| `lifecycle-marketing` skill | After approval | Aligns email copy with page messaging |
-| `linkedin-content` skill | After approval | Creates promotional posts driving to page |
-| `outreach-emails` skill | After approval | Uses messaging for cold outreach |
-| Engagement task chain | Per-client cadence | Each page = task chain (3 subtasks per phase) with review gates |
-
-**Standard workflow sequences** (full ASCII flowcharts in references/landing-page-copy-merged-2026-04-29.md):
-
-```
-positioning → product-messaging → website-copy (home)
-                  ↓
-        ┌─────────┼─────────┐
-        ▼         ▼         ▼
-     persona  use-case  competitor
-                  ↓
-            aeo-content (all pages)
-```
-
-Pairs with `/to-notion` at the end for team review. In the engagement workflow, each page becomes a task chain with review gates matching the skill gates.
-
-**Example invocations:**
-
-```
 # ClientCo full site copy
 /website-copy --client ClientCo --pages "home, pricing, about, treasury, payroll, bookkeeping, team-cards, invoice-pay, reporting, integrations" --stack shadcn-vercel
 
@@ -300,7 +231,7 @@ Pairs with `/to-notion` at the end for team review. In the engagement workflow, 
 
 Run `/premortem --output` before ship. See [`/premortem` skill](../../../../meta/orchestration/premortem/SKILL.md) for the 5 execution domains (will-it-resonate / will-it-convert / will-it-stay-on-brand / will-stakeholder-push-back / will-it-degrade-over-time) and output template.
 
-Then run `/voice-reviewer` — the content ship gate: voice + brand quality (pm-loop.md § lens-reviewer).
+Then run `/voice-reviewer` — the content ship gate: voice + brand quality (pm-loop.md).
 
 Trivial-case escape: `## Premortem\nNo failure modes — trivial change` satisfies the contract for genuinely trivial outputs.
 

@@ -20,16 +20,13 @@ inputs:
   - client-proposals
   - client-discovery
   recommended: []
-outputs:
 - type: client-engagement
   feeds_into: []
 depends_on:
 - client-proposals
 - client-discovery
-feeds_into: []
 owned_by_agent: b2b-consultant
 mcps_used: []
-push_targets:
 - gdrive
 - notion
 triggers:
@@ -72,7 +69,7 @@ Five steps:
 4. Scaffold client folder (`projects/consulting/active/{client}/` + CLAUDE.md template)
 5. Create brand hub if visual assets available (run `/brand-kit` Quick mode), else schedule for Week 2
 
-Full flowchart, step-by-step runbook, self-evaluation gate in `references/process.md`.
+Full flowchart, step-by-step runbook, self-evaluation gate in the premium reference.
 
 ---
 
@@ -140,25 +137,6 @@ Use this framework to identify what assets are needed for common deliverables:
 3. **Include rationale.** Every asset needs a "why you need it."
 4. **Don't invent stakeholders.** Ask client for attendee list.
 5. **Don't assume tools.** Ask what CRM, analytics, etc. they use.
-
----
-
-## Output
-
-Output template, access checklist by category, kick-off agenda template, and iteration prompts live in `references/output-format.md`.
-
-Pre-delivery checklist + worked example + anti-examples in `references/quality.md`.
-
----
-
-## Reference files
-
-| File | Purpose |
-|------|---------|
-| `references/process.md` | Detailed flowchart + step-by-step runbook |
-| `references/output-format.md` | Output template + access checklist + kick-off agenda + iteration prompts |
-| `references/quality.md` | Pre-delivery checklist + worked example + anti-examples |
-| `references/auto-update.md` | Feedback signals + pattern detection rules |
 
 ---
 

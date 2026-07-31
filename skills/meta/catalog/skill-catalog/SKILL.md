@@ -18,16 +18,13 @@ review_gate: 0
 inputs:
   required: []
   recommended: []
-outputs:
 - type: skill-metadata
   feeds_into:
   - orchestrator
 depends_on: []
-feeds_into:
 - orchestrator
 owned_by_agent: operator
 mcps_used: []
-push_targets:
 - gdrive
 - notion
 triggers:
@@ -39,7 +36,7 @@ locked_date: null
 lock_version: null
 sources_count: 0
 effort: low
-paths: .claude/skills/**
+paths:.claude/skills/**
 disable-model-invocation: true
 slim_exemption: auto-generated-catalog-body
 ---
@@ -67,20 +64,20 @@ To use this catalog, scan the table by primitive (research, content, social, etc
 Don't hand-edit between the BEGIN/END markers. Edit individual `SKILL.md` frontmatter — the pre-commit hook regenerates this section automatically. To regenerate manually:
 
 ```bash
-bash .claude/skills/meta/catalog/skill-catalog/scripts/regenerate-catalog.sh
+bash.claude/skills/meta/catalog/skill-catalog/scripts/regenerate-catalog.sh
 ```
 
 To validate chains without regenerating:
 
 ```bash
-bash .claude/skills/meta/catalog/skill-catalog/scripts/chain-lint.sh --validate-ontology
+bash.claude/skills/meta/catalog/skill-catalog/scripts/chain-lint.sh --validate-ontology
 ```
 
 For a one-glance catalog state + health check (totals by primitive / status / owner, graph health, recency) — read-only, built on chain-lint:
 
 ```bash
-bash .claude/skills/meta/catalog/skill-catalog/scripts/catalog-query.sh          # human summary
-bash .claude/skills/meta/catalog/skill-catalog/scripts/catalog-query.sh --json   # machine-readable
+bash.claude/skills/meta/catalog/skill-catalog/scripts/catalog-query.sh # human summary
+bash.claude/skills/meta/catalog/skill-catalog/scripts/catalog-query.sh --json # machine-readable
 ```
 
 ---
@@ -91,7 +88,7 @@ bash .claude/skills/meta/catalog/skill-catalog/scripts/catalog-query.sh --json  
 
 **167 active skills.** Last commit touching `.claude/skills/`: `2026-07-27T15:47:14+01:00`
 
-> AUTO-GENERATED — do not hand-edit between the BEGIN/END markers. Edit individual `SKILL.md` frontmatter; the pre-commit hook regenerates this section. To regenerate manually: `bash .claude/skills/meta/catalog/skill-catalog/scripts/regenerate-catalog.sh`.
+> AUTO-GENERATED — do not hand-edit between the BEGIN/END markers. Edit individual `SKILL.md` frontmatter; the pre-commit hook regenerates this section. To regenerate manually: `bash.claude/skills/meta/catalog/skill-catalog/scripts/regenerate-catalog.sh`.
 
 Skills under `meta/` are graph-exempt by design (utilities, indexes, session helpers, learning loops). They have no `depends_on`/`feeds_into` edges and chain-lint exempts them.
 

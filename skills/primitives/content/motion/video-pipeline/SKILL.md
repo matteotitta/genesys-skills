@@ -16,15 +16,12 @@ inputs:
   recommended:
   - product-messaging
   - transcript-analysis
-outputs:
 - type: video-composition
   feeds_into: []
 depends_on:
 - brand-kit
-feeds_into: []
 owned_by_agent: content
 mcps_used: []
-push_targets:
 - gdrive
 triggers:
   slash_commands: []
@@ -119,7 +116,7 @@ This skill closes the real-footage gap. It's the production pipeline that `gtme-
    - Brand frame (color border, logo top-left)
    - Captions (time-aligned, burned-in for vertical platforms)
    - End-card (last 2 seconds: brand mark + CTA)
-10. Render: `npx remotion render src/composition.tsx ./out/final.mp4`.
+10. Render: `npx remotion render src/composition.tsx./out/final.mp4`.
 
 ### Phase 4 — VideoDB indexes the source for reuse
 
@@ -128,31 +125,6 @@ This skill closes the real-footage gap. It's the production pipeline that `gtme-
 13. Store the index entry so future `/video-pipeline` runs can search "already indexed" before re-uploading.
 
 **Cost gate:** Indexing has a per-minute fee. See `.claude/rules/videodb-credits.md`.
-
----
-
-## Output
-
-```
-projects/[client-or-genesys]/content/execution/video/[MMYY]-[source-slug]-[platform].mp4
-```
-
-Plus a sidecar metadata file:
-
-```
-projects/[client-or-genesys]/content/execution/video/[MMYY]-[source-slug]-[platform].metadata.json
-{
-  "source": "path/to/source.mp4",
-  "videodb_index_id": "...",
-  "in_point": "00:42:17.300",
-  "out_point": "00:43:14.800",
-  "aspect_ratio": "9:16",
-  "platform": "linkedin-vertical",
-  "brand_kit_version": "...",
-  "duration_seconds": 57.5,
-  "render_command": "npx remotion render ..."
-}
-```
 
 ---
 
@@ -188,14 +160,6 @@ After producing a cliplet:
 - "Want me to draft the LinkedIn post that ships with this cliplet?" → `/linkedin-content-guide` + the cliplet path
 - "Should I create the YouTube-short metadata (title, description, hashtags)?" → `/youtube-scripts` adaptation
 - "Should I cascade this into other platform formats?" → `/content-operations` Platform-Native Adaptation Matrix
-
----
-
-## Reference files
-
-- `.claude/rules/videodb-credits.md` — cost-gate rule (mandatory pre-flight for any VideoDB call)
-
-(Additional references — FFmpeg command patterns, Remotion composition templates, VideoDB search patterns — will be added after the first proving run reveals the actual patterns we use repeatedly.)
 
 ---
 

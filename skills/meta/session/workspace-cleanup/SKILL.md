@@ -20,15 +20,12 @@ review_gate: 0
 inputs:
   required: []
   recommended: []
-outputs:
 - type: runbook
   feeds_into: []
 depends_on: []
-feeds_into: []
 owned_by_agent: operator
 mcps_used:
 - clay
-push_targets:
 - gdrive
 - notion
 triggers:
@@ -41,7 +38,7 @@ locked_date: null
 lock_version: null
 sources_count: 0
 effort: medium
-paths: .claude/**
+paths:.claude/**
 disable-model-invocation: true
 ---
 
@@ -111,7 +108,7 @@ For each folder in `projects/prospects/`:
 
 ### Check 3: Skill system health
 
-1. Run `python3 .claude/skills/_schema/validate-frontmatter.py --all` — verify all SKILL.md files parse cleanly
+1. Run `python3.claude/skills/_schema/validate-frontmatter.py --all` — verify all SKILL.md files parse cleanly
 2. Check each skill's `last_updated` field — **FLAG** if >90 days old
 3. List all commands in `.claude/commands/` — check each has a corresponding skill
 4. Count total skills, agents, commands — report summary
@@ -140,9 +137,6 @@ For each folder in `projects/prospects/`:
 
 ---
 
-## Output Format
-
-```markdown
 # Workspace cleanup report — {date}
 
 ## Summary

@@ -21,16 +21,13 @@ inputs:
   recommended:
   - icp-research
   - competitor-research
-outputs:
 - type: pricing-research
   feeds_into:
   - pricing-strategy
 depends_on: []
-feeds_into:
 - pricing-strategy
 owned_by_agent: pmm
 mcps_used: []
-push_targets:
 - gdrive
 - notion
 triggers:
@@ -74,7 +71,7 @@ Think of this as the evidence gathering that makes pricing-strategy decisions de
 
 ## Methodologies (overview)
 
-Four methodologies are documented in `references/methodologies.md`. Choose by goal:
+Four methodologies are documented in the premium reference. Choose by goal:
 
 | Methodology | Best for | Sample size | Output |
 |-------------|----------|-------------|--------|
@@ -94,7 +91,7 @@ Present in this exact order:
 3. **Expensive (getting pricey):** "At what price would you consider [product] to be starting to get expensive — not out of the question, but you'd have to think about it?"
 4. **Too expensive:** "At what price would you consider [product] to be so expensive that you'd never consider buying it?"
 
-The four cumulative-distribution intersections produce **PMC** (point of marginal cheapness), **PME** (point of marginal expensiveness), **OPP** (optimal price point), and **IDP** (indifference price point). Acceptable range = PMC→PME. Optimal zone = OPP→IDP. Full curve plotting + sample survey + practical notes: `references/methodologies.md`.
+The four cumulative-distribution intersections produce **PMC** (point of marginal cheapness), **PME** (point of marginal expensiveness), **OPP** (optimal price point), and **IDP** (indifference price point). Acceptable range = PMC→PME. Optimal zone = OPP→IDP. Full curve plotting + sample survey + practical notes: the premium reference.
 
 ### When to use Gabor-Granger instead
 
@@ -103,68 +100,6 @@ You already have 3-5 candidate price points; you need a demand curve, not just a
 ### Competitive pricing intel — do this first
 
 Desk research before primary research, so you have context for interpreting WTP data. Public pricing pages + review sites + sales intelligence + indirect signals (ARPU implied from customer count + revenue). Track price points per tier, feature gates, billing options, pricing model, discounting signals.
-
----
-
-## Output template
-
-The skill produces a pricing research report with these sections:
-
-### 1. Research summary
-
-- Methodology used (Van Westendorp, Gabor-Granger, or both)
-- Sample size and composition
-- Segments analyzed
-- Data collection period
-- Confidence level in findings
-
-### 2. Willingness-to-pay findings
-
-**Van Westendorp results (if used):**
-
-| Metric | Value |
-|--------|-------|
-| Point of marginal cheapness (PMC) | $X |
-| Optimal price point (OPP) | $X |
-| Indifference price point (IDP) | $X |
-| Point of marginal expensiveness (PME) | $X |
-| Acceptable price range | $X - $X |
-| Optimal pricing zone | $X - $X |
-
-**Gabor-Granger results (if used):**
-
-| Price point | % willing to buy | Implied revenue index |
-|-------------|-----------------|----------------------|
-| $X | X% | X |
-
-### 3. Competitive pricing landscape
-
-- Competitive pricing matrix (filled in)
-- Market positioning map (price vs. feature completeness)
-- Pricing model trends in the category
-- Gaps and white space
-
-### 4. Segment-level analysis
-
-Break out findings by ICP segment. Different buyer types will have different WTP.
-
-| Segment | Acceptable range | Optimal zone | Key value drivers |
-|---------|-----------------|--------------|-------------------|
-| SMB | $X - $X | $X - $X | [What they value most] |
-| Mid-market | $X - $X | $X - $X | [What they value most] |
-| Enterprise | $X - $X | $X - $X | [What they value most] |
-
-### 5. Price range recommendation
-
-Based on the research data, provide:
-
-- **Recommended price range** with rationale
-- **Risk assessment** for pricing at different points within the range
-- **Segment-specific pricing signals** (where different segments diverge)
-- **Data gaps** that should be filled before making final pricing decisions
-- **Confidence level** per finding: `[VERIFIED]`, `[INFERRED]`, or `[ESTIMATED]`
-
-This output feeds directly into `/pricing-strategy` for packaging, tier design, and go-to-market pricing decisions.
 
 ---
 
@@ -180,14 +115,6 @@ This output feeds directly into `/pricing-strategy` for packaging, tier design, 
 - Skipping value anchoring. If respondents don't understand the value before you ask about price, their answers are noise.
 - Using this skill to make packaging decisions. This is research. Packaging is strategy. Use `/pricing-strategy` for that.
 - Small sample overconfidence. Under 30 respondents, treat everything as directional, not definitive.
-
----
-
-## Reference files
-
-| File | Purpose |
-|------|---------|
-| `references/methodologies.md` | Full deep-dive on Van Westendorp, Gabor-Granger, conjoint, and competitive intel — survey templates, plotting, tools, sample sizes |
 
 ---
 

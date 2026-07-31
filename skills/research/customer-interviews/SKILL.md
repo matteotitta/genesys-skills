@@ -22,7 +22,6 @@ inputs:
   recommended:
   - company-context
   - icp-research
-outputs:
 - type: interview-guide
   feeds_into:
   - icp-research
@@ -30,14 +29,12 @@ outputs:
   - positioning
   - win-loss-analysis
 depends_on: []
-feeds_into:
 - icp-behavioural
 - icp-research
 - positioning
 - win-loss-analysis
 owned_by_agent: researcher
 mcps_used: []
-push_targets:
 - gdrive
 - notion
 triggers:
@@ -68,7 +65,7 @@ Prepare structured interview guides for B2B SaaS customer research. Produces que
 
 ## Interview types
 
-Full question banks (10-15 questions per type) live in `references/question-banks.md`. Use this table to pick the right type, then pull 8-12 questions from the bank.
+Full question banks (10-15 questions per type) live in the premium reference. Use this table to pick the right type, then pull 8-12 questions from the bank.
 
 | Type | Purpose | When to use |
 |------|---------|-------------|
@@ -168,20 +165,3 @@ After the interview, map findings to these categories. Each one feeds directly i
 - Skipping synthesis. Raw notes decay fast. Synthesize within 24 hours or the context fades.
 - Treating one interview as truth. A single data point is an anecdote. You need 5-8 interviews per segment to see patterns.
 
-## Output format
-
-The skill produces a customized interview guide document with:
-
-1. **Interview brief** — type, goals, interviewee context, hypotheses being tested
-2. **Customized question bank** — 8-12 questions ordered by priority with follow-up probes
-3. **Preparation checklist** — completed with interviewee-specific research
-4. **Synthesis template** — blank framework ready to fill during/after the interview
-5. **Downstream mapping** — which skills and deliverables this interview feeds into
-
----
-
-## Reference files
-
-| File | Purpose |
-|------|---------|
-| `references/question-banks.md` | Full question banks (10-15 per type) for discovery, win/loss (won + lost), churn, expansion, testimonial |

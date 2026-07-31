@@ -16,20 +16,17 @@ inputs:
   - icp-research
   - apollo-find
   - clay-search
-outputs:
 - type: list-grade
   feeds_into:
   - deepline-enrich
   - outreach-emails
   - abm-campaign
 depends_on: []
-feeds_into:
 - deepline-enrich
 - outreach-emails
 - abm-campaign
 owned_by_agent: operator
 mcps_used: []
-push_targets: []
 triggers:
   slash_commands:
   - /list-quality
@@ -95,13 +92,13 @@ Running list-quality BEFORE deepline-enrich saves $0.05-0.20 per row in wasted e
 
 ## Process
 
-Five phases — full step detail in `references/process.md`.
+Five phases — full step detail in the premium reference.
 
 1. **Phase 1 — Load + normalize.** Parse CSV, lowercase emails, derive `company_domain` from email if missing, mark missing columns.
-2. **Phase 2 — Score 8 dimensions.** Apply per-dimension scoring rules from `references/dimensions.md`. Each dimension returns a 0-100 score.
-3. **Phase 3 — Composite + grade.** Weighted average across the 8 dimensions (verification + ICP fit weighted 2× per dimension docs); map composite to A+ to F via `references/grade-mapping.md`.
+2. **Phase 2 — Score 8 dimensions.** Apply per-dimension scoring rules from the premium reference. Each dimension returns a 0-100 score.
+3. **Phase 3 — Composite + grade.** Weighted average across the 8 dimensions (verification + ICP fit weighted 2× per dimension docs); map composite to A+ to F via the premium reference.
 4. **Phase 4 — Top issues + checklist.** Surface the 5 highest-impact problems in priority order with row counts and concrete fix actions; emit pre-send checklist.
-5. **Phase 5 — Write report.** Markdown scorecard per `references/output-template.md` saved alongside the input CSV.
+5. **Phase 5 — Write report.** Markdown scorecard per the premium reference saved alongside the input CSV.
 
 ## MCP data integration
 
@@ -113,12 +110,11 @@ Five phases — full step detail in `references/process.md`.
 
 ## Quality
 
-Pre-delivery checklist + minimum row threshold + composite weighting: `references/quality.md`.
+Pre-delivery checklist + minimum row threshold + composite weighting: the premium reference.
 
 Headline rules:
 - Minimum row count: 100. Below that → refuse to grade.
 - Composite weighting: verification + ICP fit weighted 2× the others (these two are the load-bearing dimensions for outbound success).
-- Always cite the rubric source (this skill's `references/dimensions.md`) in the report header for traceability.
 
 ## Anti-hallucination guardrails
 
@@ -127,16 +123,6 @@ Headline rules:
 3. **Don't hide failed dimensions.** If a dimension can't run (missing column, no ICP file), it appears in the report with status NOT EVALUATED, not omitted.
 4. **Cite row counts for every issue.** "23 emails are duplicates" — never "many duplicates."
 5. **Never auto-modify the input CSV.** This skill grades; it doesn't fix. Fixes happen in the next step (back to list-builder, or via a separate cleanup script).
-
-## Reference files
-
-| File | Purpose |
-|------|---------|
-| `references/dimensions.md` | Per-dimension scoring rule for the 8 content-side dimensions; explicit deferral of 3 email-side dimensions to deepline-enrich |
-| `references/grade-mapping.md` | A+ to F mapping + action per grade (ship / minor fixes / serious cleanup / rebuild) |
-| `references/process.md` | 5-phase step-by-step from CSV load to scorecard write |
-| `references/quality.md` | Pre-delivery checklist, minimum row threshold, composite weighting protocol |
-| `references/output-template.md` | Canonical markdown scorecard format + pre-send checklist |
 
 ## Integration with other skills
 
@@ -153,15 +139,6 @@ Headline rules:
 **Sideways:**
 - `lead-scoring` — different layer (per-account fit + signals); list-quality runs first (mechanical hygiene), lead-scoring after on the qualified subset
 - `/reply-scoring` — closes the measurement loop: list-quality before send, reply-scoring after
-
-## Output routing
-
-List quality scorecard lands at:
-
-- **Per-list scorecard:** `projects/consulting/active/{client}/sales/audit/MMYY-{list-name}-list-quality.md`
-- **Pre-send checklist:** appended to `projects/consulting/active/{client}/latest.md` ("List X graded {grade} — checklist in sales/audit/...")
-
-For non-client outbound: `projects/genesys/sales/audit/MMYY-{list-name}-list-quality.md`.
 
 ## Final ship gate
 

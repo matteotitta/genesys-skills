@@ -23,15 +23,12 @@ inputs:
   - linkedin-profile-optimization
   - linkedin-algo-audit
   - tov-guidelines
-outputs:
 - type: runbook
   feeds_into: []
 depends_on:
 - linkedin-content-guide
-feeds_into: []
 owned_by_agent: content
 mcps_used: []
-push_targets: []
 triggers:
   slash_commands: []
   natural_language: []
@@ -115,7 +112,7 @@ Output complies with [`output-tenets.md`](../../../../../rules/output-tenets.md)
 | **Phase 3: Optimization** | Month 2+ | Analytics, TWE scoring, LinkedIn Ads |
 | **Phase 4: Scale** | Month 3+ | Multi-channel cascade, team scaling, social selling integration |
 
-Phase 1-4 detail in `references/process.md`. Phase 0 (load-bearing operational constants) lives in body below.
+Phase 1-4 detail in the premium reference. Phase 0 (load-bearing operational constants) lives in body below.
 
 ---
 
@@ -152,7 +149,7 @@ Phase 1-4 detail in `references/process.md`. Phase 0 (load-bearing operational c
 
 ## Process
 
-Phases 1-4 (Foundation → Content Engine → Optimization → Scale) cover the full 6+ month engagement. Each phase has its own checklists, cadences, and integration points with downstream skills (`linkedin-expert-posts`, `linkedin-personal-posts`, `linkedin-sales-posts`, `linkedin-comment`, `linkedin-social-selling`). Full step-by-step in `references/process.md`.
+Phases 1-4 (Foundation → Content Engine → Optimization → Scale) cover the full 6+ month engagement. Each phase has its own checklists, cadences, and integration points with downstream skills (`linkedin-expert-posts`, `linkedin-personal-posts`, `linkedin-sales-posts`, `linkedin-comment`, `linkedin-social-selling`). Full step-by-step in the premium reference.
 
 ---
 
@@ -165,26 +162,9 @@ Phases 1-4 (Foundation → Content Engine → Optimization → Scale) cover the 
 
 ---
 
-## Output Format
-
-Program doc output includes program overview, Phase 0 account-health check (current vs target metrics), Phase 1 setup tables, Phase 2 production schedule, Phase 3 analytics cadence + ads plan, Phase 4 scale plan, and 6-month success metrics with baselines and targets. Full template in `references/output-format.md`.
-
----
-
 ## Quality
 
-Pre-delivery checklist covers Phase 0 compliance (LinkedIn 2026 constants), foundation quality (SME, pillars, profile audit), content engine realism (capacity vs. cadence), and optimization/scale quality (analytics, ads, derivative content). Anti-examples + signals in `references/quality.md` and `references/auto-update.md`.
-
----
-
-## Reference Files
-
-| File | Purpose |
-|------|---------|
-| `references/process.md` | Phase 1-4 detailed runbook + skill integration table |
-| `references/output-format.md` | Program-doc template |
-| `references/quality.md` | Pre-delivery checklist + anti-examples |
-| `references/auto-update.md` | Self-evaluation protocol + feedback signals (LinkedIn algorithm changes drive updates) |
+Pre-delivery checklist covers Phase 0 compliance (LinkedIn 2026 constants), foundation quality (SME, pillars, profile audit), content engine realism (capacity vs. cadence), and optimization/scale quality (analytics, ads, derivative content). Anti-examples + signals in the premium reference and the premium reference.
 
 ---
 

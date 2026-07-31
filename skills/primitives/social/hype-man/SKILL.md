@@ -25,20 +25,17 @@ inputs:
   - competitor-research
   - positioning
   - product-messaging
-outputs:
 - type: hype-man-program-brief
   feeds_into:
   - linkedin-weekly-content
   - linkedin-comment
   - linkedin-social-selling
 depends_on: []
-feeds_into:
 - linkedin-comment
 - linkedin-weekly-content
 - linkedin-social-selling
 owned_by_agent: content
 mcps_used: []
-push_targets:
 - gdrive
 - notion
 triggers:
@@ -59,7 +56,7 @@ Design a dedicated "hype man" LinkedIn program that builds brand awareness throu
 
 **Source:** [Marketing Ideas — Get yourself a "hype monkey"](https://www.marketingideas.com/p/get-yourself-a-hype-monkey)
 
-For full process, flywheel diagram, humor calibration matrix, and real-world examples → `references/process.md`.
+For full process, flywheel diagram, humor calibration matrix, and real-world examples → the premium reference.
 
 ## Doctrine inherited (Step 7 — 0626 rollout, locked 2026-06-04)
 
@@ -160,7 +157,7 @@ If inputs missing: check client CLAUDE.md first. If still missing, offer to run 
 - 50-100 targeted connection requests per week from hype man profile
 - Employee amplification: full team likes/comments daily, staggered
 
-For full humor calibration matrix and real-world examples → `references/process.md`.
+For full humor calibration matrix and real-world examples → the premium reference.
 
 ---
 
@@ -178,10 +175,10 @@ For full humor calibration matrix and real-world examples → `references/proces
 
 | Topic | Reference |
 |-------|-----------|
-| 5-phase process + flywheel diagram + humor matrix + real-world examples | `references/process.md` |
-| Output template + iteration prompts + downstream handoff | `references/output-format.md` |
-| Pre-delivery checklist + worked example + anti-examples + quality gate | `references/quality.md` |
-| Distilled Marketing Ideas article with full playbook | `references/article-playbook.md` |
+| 5-phase process + flywheel diagram + humor matrix + real-world examples | the premium reference |
+| Output template + iteration prompts + downstream handoff | the premium reference |
+| Pre-delivery checklist + worked example + anti-examples + quality gate | the premium reference |
+| Distilled Marketing Ideas article with full playbook | the premium reference |
 
 ---
 

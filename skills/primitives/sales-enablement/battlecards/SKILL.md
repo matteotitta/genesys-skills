@@ -22,20 +22,17 @@ inputs:
   - product-messaging
   - win-loss-analysis
   - positioning
-outputs:
 - type: battlecard
   feeds_into:
   - sales-deck
   - outreach-emails
   - demo-script
 depends_on: []
-feeds_into:
 - demo-script
 - outreach-emails
 - sales-deck
 owned_by_agent: sales
 mcps_used: []
-push_targets:
 - gdrive
 triggers:
   slash_commands: []
@@ -53,7 +50,7 @@ effort: high
 
 Quick-reference competitive intelligence battlecards for live sales conversations. Designed to be scanned in 30 seconds during a call. Supports batch generation for multiple competitors with confidence-level sourcing on every claim.
 
-The body of this file holds decision-grade context (when to invoke, inputs, structure, anti-hallucination guardrails, gotchas). Step-by-step process, output template, quality gates, and feedback loops live in `references/`.
+The body of this file holds decision-grade context (when to invoke, inputs, structure, anti-hallucination guardrails, gotchas). Step-by-step process, output template, quality gates, and feedback loops live in the premium reference.
 
 ---
 
@@ -70,7 +67,7 @@ Output complies with:
 
 | Code | Refinement | How it lands in battlecards |
 |---|---|---|
-| **R1** | Source placement (three layers) | Battlecards are **internal-reference** (rep-facing). Inline `[VERIFIED: ...]` tags stay — auditability matters more than polish for sales QA. Working markdown keeps citations inline. Published Notion playbook can move them to a per-card toggle if reps prefer the cleaner read. |
+| **R1** | Source placement (three layers) | Battlecards are **internal-reference** (rep-facing). Inline `[VERIFIED:...]` tags stay — auditability matters more than polish for sales QA. Working markdown keeps citations inline. Published Notion playbook can move them to a per-card toggle if reps prefer the cleaner read. |
 | **R2** | Single-doc-with-toggles | Multi-competitor battlecard packs ship as **one doc with one toggle per competitor** — not 8 separate files. Reps scan the index, expand the competitor that came up on the call. |
 | **R3** | Product-update tone | Capability framing in win themes — "we ship X" not "we are thrilled to announce." Reps repeat what they see. |
 | **R9** | Action-oriented section names | "Win themes / Landmines to plant / Objection handlers / Counter-positioning" — already verb-led. Preserve. |
@@ -137,7 +134,7 @@ Before proceeding, verify:
 | 3. Battlecard generation | Fill template, add confidence levels, write talk tracks + landmines | Draft battlecard(s) |
 | 4. Validation & delivery | Verify sources, format for delivery | Final battlecard(s) |
 
-Full step-by-step (with checkpoints, confidence framework, workflow sequences, GDrive export commands) in `references/process.md`.
+Full step-by-step (with checkpoints, confidence framework, workflow sequences, GDrive export commands) in the premium reference.
 
 ---
 
@@ -156,7 +153,7 @@ Every battlecard contains these sections — in this order, no exceptions:
 9. **Red flags** — When to walk away (qualification-out criteria)
 10. **Sources** — Every claim with URL + access date + confidence
 
-Full template with field-level guidance in `references/battlecard-template.md`. Output wrapper format and iteration prompts in `references/auto-update.md`.
+Full template with field-level guidance in the premium reference. Output wrapper format and iteration prompts in the premium reference.
 
 ---
 
@@ -204,18 +201,6 @@ Full template with field-level guidance in `references/battlecard-template.md`. 
 
 ---
 
-## Reference files
-
-| File | Purpose |
-|------|---------|
-| `references/process.md` | 4-phase runbook + flowchart + confidence framework + workflow sequences |
-| `references/battlecard-template.md` | Complete battlecard structure with field-level examples |
-| `references/quality.md` | Pre-delivery checklist + self-evaluation protocol + anti-examples |
-| `references/auto-update.md` | Output wrapper, iteration prompts, feedback signal detection, pattern rules |
-| `projects/research/taste-library/resources/0626-sales-qualification-frameworks/` | Qualification frameworks (BANT, SPICED, MEDDPICC, Gap Selling, Sandler, Command of the Message, Next Steps) — vocabulary for objection-handling and deal-stage qualification per competitor |
-
----
-
 ## MCP data integration
 
 **Level:** 2 — PM Execution (inherits upstream, no unique pulls)
@@ -232,7 +217,7 @@ Full template with field-level guidance in `references/battlecard-template.md`. 
 
 Run `/premortem --output` before ship. See [`/premortem` skill](../../../meta/orchestration/premortem/SKILL.md) for the 5 execution domains (will-it-resonate / will-it-convert / will-it-stay-on-brand / will-stakeholder-push-back / will-it-degrade-over-time) and output template.
 
-Then run `/scope-guardian-reviewer` — the client-deliverable ship gate: scope-creep check on proposals/SOWs (pm-loop.md § lens-reviewer).
+Then run `/scope-guardian-reviewer` — the client-deliverable ship gate: scope-creep check on proposals/SOWs (pm-loop.md).
 
 Trivial-case escape: `## Premortem\nNo failure modes — trivial change` satisfies the contract for genuinely trivial outputs.
 

@@ -12,20 +12,17 @@ review_gate: 1
 inputs:
   required: []
   recommended: []
-outputs:
 - type: transcript-insights
   feeds_into:
   - content-strategy
   - thought-leadership
 depends_on: []
-feeds_into:
 - content-strategy
 - thought-leadership
 owned_by_agent: researcher
 mcps_used:
 - youtube-transcript
 - firecrawl
-push_targets: []
 triggers:
   slash_commands:
   - /watch-video
@@ -84,7 +81,7 @@ From the timestamped transcript alone — no frames needed:
 
 1. **Transcript** — cleaned, timestamped, speaker-attributed where the source distinguishes speakers.
 2. **Key moments** — a timestamped list: view or topic changes, the moment a claim lands, anything that reads as a decision, action, or notable event. Each entry cites the transcript.
-3. **Summary** — TL;DR, key moments, action items, decisions, quotes worth keeping, open questions. Full template: `references/output-format.md`.
+3. **Summary** — TL;DR, key moments, action items, decisions, quotes worth keeping, open questions. Full template: the premium reference.
 
 ### 4. Optional — capture to the taste-library
 
@@ -103,7 +100,7 @@ Citation shape:
 
 ## Deferred capabilities (future)
 
-v1 ships transcript-first. Three capabilities from the source skill are deferred until there's a live use case; the full design is preserved in `references/depth-modes.md` so implementation is a wire-up, not a redesign:
+v1 ships transcript-first. Three capabilities from the source skill are deferred until there's a live use case; the full design is preserved in the premium reference so implementation is a wire-up, not a redesign:
 
 - **Local transcription (Whisper).** For videos with no platform captions. Deferred — v1 asks for a transcript instead.
 - **Visual mode (ffmpeg frame extraction + Claude vision).** Frames on a per-source cadence, paired with the transcript window, for demos and slide decks where the screen carries meaning the words don't.
@@ -118,17 +115,6 @@ When a capability lands it becomes a selectable depth mode; the user picks depth
 3. Keep timestamps on every moment and quote.
 4. Mark confidence per `ontology.md` when a claim isn't directly supported.
 5. Say "not available" when the transcript is thin — don't fill the gap.
-
-## Output format
-
-Full templates — transcript, key moments, summary, taste-library capture: `references/output-format.md`.
-
-## Reference files
-
-| File | Purpose |
-|---|---|
-| `references/output-format.md` | Transcript / key-moments / summary templates + taste-library capture format |
-| `references/depth-modes.md` | The 3-mode depth design; deferred visual + multimodal tooling preserved for future |
 
 ## Attribution
 

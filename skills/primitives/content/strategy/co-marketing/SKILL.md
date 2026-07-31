@@ -16,19 +16,16 @@ inputs:
   - icp-research
   - positioning
   - company-context
-outputs:
 - type: content-strategy
   feeds_into:
   - content-strategy
 depends_on: []
-feeds_into:
 - content-strategy
 - product-launch
 owned_by_agent: growth
 mcps_used:
 - exa
 - firecrawl
-push_targets:
 - gdrive
 triggers:
   slash_commands:

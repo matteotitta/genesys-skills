@@ -23,17 +23,14 @@ inputs:
   - outreach-emails
   recommended:
   - deepline-enrich
-outputs:
 - type: outreach-sequence
   feeds_into: []
 depends_on:
 - outreach-emails
-feeds_into: []
 owned_by_agent: operator
 mcps_used:
 - google-workspace
 - slack
-push_targets: []
 triggers:
   slash_commands:
   - /outbound-send-orchestrator
@@ -68,7 +65,6 @@ Do NOT use for:
 
 ## Prerequisites
 
-- A SEND_SHEET.md from `/outreach-emails` campaign-mode runner (see `references/send-sheet-format.md` for the parser-friendly format).
 - Validated emails (run `/deepline-enrich` first if any contact has a placeholder or unverified email).
 - LinkedIn URLs for every contact (the T+24h DM includes the URL inline).
 - Slack MCP (`mcp__087d4f9f-*__slack_schedule_message`) and Google Workspace MCP (`mcp__google-workspace__draft_gmail_message`) connected.
@@ -90,11 +86,11 @@ A second invariant from the same source: **always pass an `htmlBody` to `draft_g
 
 ## Steps
 
-1. **Parse the send sheet.** Read SEND_SHEET.md and extract one entry per H2 (`## N. First Last — Title, Company`). Each entry must yield: contact name, title, company, email, subject, body paragraphs, LinkedIn URL, LI 1/2 copy, LI 2/2 copy. Format spec in `references/send-sheet-format.md`. **Count entries before fanning out** — if the count looks wrong, the markdown drifted; stop and reformat.
+1. **Parse the send sheet.** Read SEND_SHEET.md and extract one entry per H2 (`## N. First Last — Title, Company`). Each entry must yield: contact name, title, company, email, subject, body paragraphs, LinkedIn URL, LI 1/2 copy, LI 2/2 copy. Format spec in the premium reference. **Count entries before fanning out** — if the count looks wrong, the markdown drifted; stop and reformat.
 
 2. **Cross-check each entry has a LinkedIn URL.** The T+24h DM needs it. If missing, look it up from the campaign's `people/shortlist.json` or `/clay-search` output. If still missing, flag the contact with a ⚠️ and decide: skip the LI followup for that contact, or stop and source.
 
-3. **Plan the timing grid.** Compute the send schedule per `references/scheduler-rules.md`:
+3. **Plan the timing grid.** Compute the send schedule per the premium reference:
    - First send: next weekday at 9:03 AM in the operator's local timezone (push to tomorrow if past today's 9 AM).
    - Per-day cap: 10 sends. Overflow rolls to next weekday.
    - Inter-send gap: random 11–18 min (non-uniform — avoids burst-send patterns).
@@ -103,8 +99,8 @@ A second invariant from the same source: **always pass an `htmlBody` to `draft_g
 
 4. **For each contact (in order, NOT in parallel within a contact):**
    1. **Create the Gmail draft** via `mcp__google-workspace__draft_gmail_message` with `to`, `subject`, `body` (plain-text), and `htmlBody` (one `<p>` per paragraph in the plain body). Confirm a draft ID came back.
-   2. **Only after draft confirmation** — schedule the T+0 Slack DM via `mcp__087d4f9f-*__slack_schedule_message` with the format from `references/dm-templates.md` (email send reminder + LinkedIn URL + connect-task note).
-   3. **Then schedule the T+24h-weekday Slack DM** with the LinkedIn 1/2 connect note + LI 2/2 followup copy inline (per `references/dm-templates.md`).
+   2. **Only after draft confirmation** — schedule the T+0 Slack DM via `mcp__087d4f9f-*__slack_schedule_message` with the format from the premium reference (email send reminder + LinkedIn URL + connect-task note).
+   3. **Then schedule the T+24h-weekday Slack DM** with the LinkedIn 1/2 connect note + LI 2/2 followup copy inline (per the premium reference).
    4. If any of (a)/(b)/(c) fails, stop the loop, surface the contact + error, and DO NOT proceed to the next contact. Partial completion is recoverable; out-of-order completion is not.
 
 5. **Batch in parallel ACROSS contacts** (5–10 tool calls per message) for throughput. **Do not batch within a contact.** The invariant is per-contact ordering, not global ordering.
@@ -128,7 +124,7 @@ A second invariant from the same source: **always pass an `htmlBody` to `draft_g
 | Weekdays only for LI delay | Mon connects get better accept rates than Sat/Sun |
 | Human-click-to-send via drafts | Carries normal session signals vs bulk API send |
 
-These constants are in `references/scheduler-rules.md` and can be tuned per campaign with explicit override.
+These constants are in the premium reference and can be tuned per campaign with explicit override.
 
 ---
 
@@ -154,14 +150,6 @@ Before reporting "done":
 - [ ] All `htmlBody` fields populated (no plain-text-only drafts)
 - [ ] SEND_SCHEDULE.md written at campaign root with timing table + Monday pager-map (if applicable)
 - [ ] Pilot mode used if this is the first campaign with this operator-Slack-channel pairing
-
----
-
-## Reference files
-
-- `references/send-sheet-format.md` — parser-friendly SEND_SHEET.md schema (H2 contact / email in backticks / Subject / body paragraphs / LI 1/2 / LI 2/2)
-- `references/dm-templates.md` — exact text for T+0 email-send reminder DM + T+24h-weekday LI followup DM, with placeholder substitution rules
-- `references/scheduler-rules.md` — timing grid logic (per-day cap, gap range, send window, LI delay, weekend skip), with per-campaign override pattern
 
 ---
 

@@ -19,16 +19,13 @@ review_gate: 2
 inputs:
   required: []
   recommended: []
-outputs:
 - type: newsletter
   feeds_into: []
 depends_on: []
-feeds_into: []
 owned_by_agent: operator
 mcps_used:
 - exa
 - gdrive
-push_targets:
 - gdrive
 - notion
 triggers:
@@ -60,7 +57,7 @@ Output complies with [`output-tenets.md`](../../../../../rules/output-tenets.md)
 
 **No:** general LinkedIn content → `linkedin-content`. Job board management only → handle directly. Edit existing edition → handle as direct edit task.
 
-Full trigger detail + edge cases → `references/inputs.md`.
+Full trigger detail + edge cases → the premium reference.
 
 ---
 
@@ -71,7 +68,7 @@ User must provide:
 - Recent News (4-5 URLs), LinkedIn Hot Takes (5-7 URLs), GTME Jobs (5-10 URLs), Top GTMEs (4-5 LinkedIn profiles), Recommended Resources (5-8 URLs)
 - Optional: theme, cohort CTA status (`active` | `waitlist` | `none`), cohort number, cohort start month + enrollment deadline, cohort link, special announcement, spots remaining (only if Matteo gives a real current number — never inferred)
 
-If counts are below minimum, ask for more before proceeding. Full table + format spec → `references/inputs.md`.
+If counts are below minimum, ask for more before proceeding. Full table + format spec → the premium reference.
 
 ---
 
@@ -80,7 +77,7 @@ If counts are below minimum, ask for more before proceeding. Full table + format
 ### Phase 1 — fetch
 Parse input → categorize links → fetch LinkedIn posts via Apify (`supreme_coder~linkedin-post`) → fetch profiles via Apify (`harvestapi~linkedin-profile-scraper`) → fetch other URLs via WebFetch → supplement profiles with WebSearch for generalized bios.
 
-API token: `api-keys/.env` → `APIFY_API_TOKEN`. Full curl commands + extraction-per-section spec → `references/steps/phase-1-fetch.md`.
+API token: `api-keys/.env` → `APIFY_API_TOKEN`. Full curl commands + extraction-per-section spec → the premium reference.
 
 ### Phase 2 — generate
 Write intro (multiple paragraphs, each 2-3 sentences, casual, reference highlights) → Recent News (bold linked headline + body inline, ONE paragraph of 2-3 sentences, NO line breaks within the bullet) → LinkedIn Hot Takes (link on headline NOT author, same one-paragraph 2-3 sentence rule) → GTME Jobs (`**[Role @ Company](url)** | salary | location — body of 2-3 sentences inline, NO line break between meta-line and body`) → Top GTMEs (`**[Name](url)** — Role @ Company. Bio sentence + last-30-days post activity sentence(s), 2-3 sentences total, ONE paragraph, NO "Follow for X" closer`) → Recommended Resources (`**[Title](url)** by Author (context). Body of 2-3 sentences inline, ONE paragraph`).
@@ -90,17 +87,16 @@ Write intro (multiple paragraphs, each 2-3 sentences, casual, reference highligh
 - **No `**` (bold) inside the body paragraph.** The bold-link headline at the start is fine; nothing else in the body gets bold for emphasis. Use italics with single `*` for quotes/titles only.
 - **No "pairs with X" phrasing.** If the pairing is real, state the parallel directly without the meta-commentary. Most of the time, just say the thing.
 - **Full conversational sentences, no abrupt sentence changes.** Connect clauses with commas, em-dashes, or semicolons so the paragraph flows as one thought. No fragment punchlines.
-- **Strip AI-speak before shipping.** The "AI-speak phrases — never use" block in `references/voice-guidelines.md` is the canonical blocklist. Replace meta-commentary phrases ("the strategic read is", "the operator-canonical reading", "pairs directly with X — different angles on the same compound thesis") with the actual statement.
 - **Sound like Matteo.** Direct, operator-first, contractions ("you're", "it's", "won't"), em-dashes with spaces, sentence case headers. The 100 Posts Test is the final check.
 
 **Top GTMEs section — special rule:** instead of a generic "Follow for X" closer, mention something from the person's last 30 days of LinkedIn activity if active; if inactive, pull a freshness angle from their profile (latest role change, headline, current company traction). The bio should ground in their lineage; the closer should ground in what they're doing NOW.
 
-Per-section instructions → `references/steps/phase-2-generate.md`. Templates with link rules → `references/section-elements.md`. Voice rules → `references/voice-guidelines.md`. Section-level templates → `references/section-templates.md`.
+Per-section instructions → the premium reference. Templates with link rules → the premium reference. Voice rules → the premium reference. Section-level templates → the premium reference.
 
 ### Phase 3 — assemble + polish
 GDrive manifest line (auto, line 1) → sections (NO editor-notes HTML comment block — strip if present from prior edits) → closing ("Keep shipping, Matteo") → image suggestions (2-3, single-line each, no headshot grids unless the bullet has a real reason) → format polish (em dashes with spaces, bullets `-`, sentence case, link spans full title) → 2 Cialdini-powered CTAs (mid + end).
 
-Detailed steps → `references/steps/phase-3-assemble.md`. Cialdini CTA templates → `references/section-elements.md`. Output structure → `references/output-format.md`. Process flowchart → `references/process-flowchart.md`.
+Detailed steps → the premium reference. Cialdini CTA templates → the premium reference. Output structure → the premium reference. Process flowchart → the premium reference.
 
 ### Phase 4 — asset bundle (REQUIRED)
 Download GTME Jobs company logos (logo.dev) + Top GTMEs LinkedIn headshots (Apify) for the edition. Output to `~/Downloads/pulse-{N}-assets/` with subfolders `logos/` and `headshots/`, plus a `manifest.md`. Run before Phase 5 follow-ups so assets are ready when the GDoc / Substack publish step fires.
@@ -111,7 +107,7 @@ Download GTME Jobs company logos (logo.dev) + Top GTMEs LinkedIn headshots (Apif
 
 **Hit rate from Pulse #30:** 5/5 logos via logo.dev + 4/4 headshots via Apify `apimaestro/linkedin-profile-batch-scraper-no-cookies-required` ($0.02 total spend, under the apify-credits no-gate threshold).
 
-Full procedure → `references/steps/phase-4-assets.md`.
+Full procedure → the premium reference.
 
 ---
 
@@ -125,14 +121,9 @@ Full procedure → `references/steps/phase-4-assets.md`.
 6. **Hyphens `-` for body list items** — not `•`, not `→`. Applies to ALL body items including CTA action links and job board link. One carve-out: the LinkedIn promo block uses `•` (plain text, LinkedIn renders no markdown).
 7. **News source verification** — never write a summary from fallback web search if the source URL failed to fetch. Flag the failed URL; never fabricate.
 
-Plus 7 anti-hallucination rules: never invent metrics, fabricate quotes, guess salary, assume titles, invent expertise. Mark missing as `[Not available]`. Full guardrails + per-rule examples + pre-delivery quality checklist → `references/guardrails.md`.
+Plus 7 anti-hallucination rules: never invent metrics, fabricate quotes, guess salary, assume titles, invent expertise. Mark missing as `[Not available]`. Full guardrails + per-rule examples + pre-delivery quality checklist → the premium reference.
 
 ---
-
-## Output structure
-
-```markdown
-<!-- GTM Engineer Pulse #[X] · Generated: [date] · Author: Matteo Tittarelli · Font: Inter -->
 
 # The GTM Engineer Pulse | #[X]
 
@@ -143,9 +134,9 @@ Plus 7 anti-hallucination rules: never invent metrics, fabricate quotes, guess s
 
 ---
 
-## Recent News        [4-5 items]
+## Recent News [4-5 items]
 ## LinkedIn Hot Takes [5-7 items]
-## GTME Jobs          [Cohort CTA if active] [5-10 items] • Check our full job board: [gtm-engineer-jobs.com](...)
+## GTME Jobs [Cohort CTA if active] [5-10 items] • Check our full job board: [gtm-engineer-jobs.com](...)
 ## Top GTMEs to Follow [4-5 profiles]
 ## Recommended Resources [5-8 items]
 
@@ -155,7 +146,7 @@ Matteo
 ## Recommended Images to Add [3-5 items]
 ```
 
-Full structure with separators + formatting rules table → `references/output-format.md`. Section-level good/bad examples → `references/what-good-looks-like.md`. Full reference editions → `examples/pulse-14-example.md`, `examples/pulse-15-reference.md`.
+Full structure with separators + formatting rules table → the premium reference. Section-level good/bad examples → the premium reference. Full reference editions → `examples/pulse-14-example.md`, `examples/pulse-15-reference.md`.
 
 ---
 
@@ -164,10 +155,10 @@ Full structure with separators + formatting rules table → `references/output-f
 After approval:
 
 1. **LinkedIn promo post** — REQUIRED. Template + 12 rules → `examples/linkedin-promo-template.md`. Real reference → `examples/pulse-20-linkedin-promo.md`.
-2. **Publish — Notion + Substack draft (default since #32)** — create the Notion page (sibling of previous edition, manifest line added to local md) and stage the Substack draft via Claude in Chrome: title `The GTM Engineer Pulse | #N`, subtitle = meta description, body via synthetic HTML paste into the Tiptap editor, then the 4 CTA elements (2 blockquoted cohort CTAs + 2 native `subscribeWidget` nodes). Full procedure → `references/substack-publish.md`. Legacy GDoc path: `create-pulse.mjs` (NOT `create-doc-unified.mjs`) → `references/google-docs-export.md`.
-3. **Self-improvement loop** — REQUIRED. Ask user the 4 capture questions (what worked, what to fix, new guardrails, new examples). Full prompt + auto-capture triggers + pattern detection → `references/self-improvement-loop.md`.
+2. **Publish — Notion + Substack draft (default since #32)** — create the Notion page (sibling of previous edition, manifest line added to local md) and stage the Substack draft via Claude in Chrome: title `The GTM Engineer Pulse | #N`, subtitle = meta description, body via synthetic HTML paste into the Tiptap editor, then the 4 CTA elements (2 blockquoted cohort CTAs + 2 native `subscribeWidget` nodes). Full procedure → the premium reference. Legacy GDoc path: `create-pulse.mjs` (NOT `create-doc-unified.mjs`) → the premium reference.
+3. **Self-improvement loop** — REQUIRED. Ask user the 4 capture questions (what worked, what to fix, new guardrails, new examples). Full prompt + auto-capture triggers + pattern detection → the premium reference.
 
-Iteration prompts (refine / expand / quality) → `references/iteration-prompts.md`.
+Iteration prompts (refine / expand / quality) → the premium reference.
 
 ---
 
@@ -203,40 +194,11 @@ Worked examples + full tool catalog → `.claude/skills/meta-skills/exa/`.
 
 ---
 
-## References
-
-| File | Purpose |
-| ---- | ------- |
-| `references/process-flowchart.md` | Full pipeline visualization |
-| `references/inputs.md` | Required + optional inputs, validation, triggers |
-| `references/steps/phase-1-fetch.md` | Phase 1 detailed steps + Apify curl |
-| `references/steps/phase-2-generate.md` | Phase 2 detailed steps |
-| `references/steps/phase-3-assemble.md` | Phase 3 detailed steps |
-| `references/steps/phase-4-assets.md` | Phase 4 detailed steps + Clearbit curl loop + Exa LinkedIn headshot extraction |
-| `references/section-templates.md` | Per-section templates (legacy depth) |
-| `references/section-elements.md` | Section templates with link rules + Cialdini CTAs |
-| `references/voice-guidelines.md` | Voice attributes, formatting, anti-patterns, 100 Posts Test |
-| `references/output-format.md` | Full output structure + formatting rules |
-| `references/guardrails.md` | 7 critical guardrails + 7 anti-hallucination rules + quality checklist |
-| `references/what-good-looks-like.md` | Section-level good/bad examples |
-| `references/iteration-prompts.md` | Refine / expand / quality prompts |
-| `references/self-improvement-loop.md` | Capture questions, auto-triggers, pattern detection |
-| `references/substack-publish.md` | Notion + Substack-via-Chrome publish pipeline + CTA widget insertion (default since #32) |
-| `references/google-docs-export.md` | create-pulse.mjs procedure + format table (legacy path) |
-| `references/changelog.md` | Version history (1.0 → 2.5) |
-| `examples/pulse-14-example.md` | Reference edition #14 (voice/format) |
-| `examples/pulse-15-reference.md` | Reference edition #15 (all v2.0 guardrails) |
-| `examples/linkedin-promo-template.md` | LinkedIn promo template + 12 rules |
-| `examples/pulse-20-linkedin-promo.md` | Pulse #20 LinkedIn promo (real reference) |
-| `output/create-pulse-15.js` | docx-js template (local Word export) |
-
----
-
 ## Final ship gate
 
 Run `/premortem --output` before ship. See [`/premortem` skill](../../../../meta/orchestration/premortem/SKILL.md) for the 5 execution domains (will-it-resonate / will-it-convert / will-it-stay-on-brand / will-stakeholder-push-back / will-it-degrade-over-time) and output template.
 
-Then run `/voice-reviewer` — the content ship gate: voice + brand quality (pm-loop.md § lens-reviewer). The LinkedIn readability dimension is N/A for the Pulse body and fires on the promo post.
+Then run `/voice-reviewer` — the content ship gate: voice + brand quality (pm-loop.md). The LinkedIn readability dimension is N/A for the Pulse body and fires on the promo post.
 
 Trivial-case escape: `## Premortem\nNo failure modes — trivial change` satisfies the contract for genuinely trivial outputs.
 

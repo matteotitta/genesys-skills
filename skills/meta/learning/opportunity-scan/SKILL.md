@@ -13,18 +13,15 @@ review_gate: 0
 inputs:
   required: []
   recommended: []
-outputs:
 - type: runbook
   feeds_into:
   - weekly-plan
   - skill-catalog
 depends_on: []
-feeds_into:
 - weekly-plan
 - skill-catalog
 owned_by_agent: operator
 mcps_used: []
-push_targets: []
 triggers:
   slash_commands: []
   natural_language: []
@@ -50,7 +47,7 @@ Solution: a local `launchd` cron job at `.claude/automation/opportunity-scan/com
 
 Install:
 ```bash
-cp .claude/automation/opportunity-scan/com.genesys.opportunity-scan.plist \
+cp.claude/automation/opportunity-scan/com.genesys.opportunity-scan.plist \
    ~/Library/LaunchAgents/com.genesys.opportunity-scan.plist
 launchctl unload ~/Library/LaunchAgents/com.genesys.opportunity-scan.plist 2>/dev/null
 launchctl load ~/Library/LaunchAgents/com.genesys.opportunity-scan.plist
@@ -170,7 +167,7 @@ Pattern: <one-line>
 Suggested build: <S/M/L>. Primitive: <primitive>/<sub_primitive>.
 Evidence: session <id> + N others.
 
-Verdict? [B]uild  [D]efer  [K]ill  [S]kip
+Verdict? [B]uild [D]efer [K]ill [S]kip
 ```
 
 On `B` / `D` / `K`: edit OPPORTUNITIES.md in place — replace `Verdict (Matteo to set): BUILD / DEFER / KILL` with `Verdict: BUILD` (or DEFER/KILL). Optionally prompt for one-line rationale.
@@ -185,7 +182,7 @@ Precedent: `/discover status`, `/discover dismiss <name>`, `/discover built <nam
 - **Cap 3 candidates per run.** Past 3, save the rest for next cycle (better signal-to-noise per OPPORTUNITIES.md review).
 - **Respect the scratchpad's locked decisions.** Per `.claude/rules/iterative-strategy-scratchpad.md`: cycle 2+ reads "things to stop doing" first and suppresses matching patterns.
 - **Approval-loop discipline.** Per `.claude/rules/approval-loop-pattern.md`: if 3 consecutive weeks pass with zero BUILD verdicts (all DEFER or KILL), the routine flags itself in the scratchpad and recommends retuning detection thresholds.
-- **Never use the word "substrate"** — per `.claude/rules/auto-memory.md` § exact-phrasing capture.
+- **Never use the word "substrate"** — per `.claude/rules/auto-memory.md`.
 
 ## Integration with other skills
 

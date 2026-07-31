@@ -16,18 +16,15 @@ inputs:
   - icp-research
   - funnel-strategy
   - analytics-tracking-plan
-outputs:
 - type: content-audit
   feeds_into:
   - funnel-strategy
 depends_on: []
-feeds_into:
 - funnel-strategy
 - sales-enablement
 owned_by_agent: sales
 mcps_used:
 - exa
-push_targets:
 - gdrive
 triggers:
   slash_commands:
@@ -60,7 +57,7 @@ Output complies with:
 
 | Code | Refinement | How it lands in revops |
 |---|---|---|
-| **R1** | Source placement | Audit output is **internal-reference** (rep/marketing team). Inline `[VERIFIED: ...]` tags stay for QA auditability. |
+| **R1** | Source placement | Audit output is **internal-reference** (rep/marketing team). Inline `[VERIFIED:...]` tags stay for QA auditability. |
 | **R3** | Product-update tone | Audit findings frame as "X is broken / Y is leaking" — operator-direct, never "we are thrilled to report." |
 | **R9** | Action-oriented section names | "Audit the funnel / Find the leak / Hand off to triage" — verb-led. |
 
@@ -146,7 +143,7 @@ Score each finding on Impact × Ease (1–5 each):
 | No shared MQL/SQL definition | Workshop with marketing + sales + RevOps; sign off in 1 page | 5 | 4 | 20 | P0 |
 | 32% of contacts have duplicates | HubSpot dedupe + ongoing dedupe rule | 4 | 3 | 12 | P1 |
 | Lead scoring model 24 months old | Refresh inputs + recalibrate against last 6mo closed deals | 4 | 2 | 8 | P2 |
-| ... |
+|... |
 
 Top 3 land in the action queue.
 
@@ -196,7 +193,7 @@ This skill adapts patterns from [`coreyhaines31/marketingskills/revops/SKILL.md`
 
 Run `/premortem --output` before ship. See [`/premortem` skill](../../../meta/orchestration/premortem/SKILL.md) for the 5 execution domains (will-it-resonate / will-it-convert / will-it-stay-on-brand / will-stakeholder-push-back / will-it-degrade-over-time) and output template.
 
-Then run `/scope-guardian-reviewer` — the client-deliverable ship gate: scope-creep check on proposals/SOWs (pm-loop.md § lens-reviewer). A RevOps audit surfaces every broken thing in the CRM at once; this is the gate that keeps a scoped fix-list from becoming an unscoped cleanup project.
+Then run `/scope-guardian-reviewer` — the client-deliverable ship gate: scope-creep check on proposals/SOWs (pm-loop.md). A RevOps audit surfaces every broken thing in the CRM at once; this is the gate that keeps a scoped fix-list from becoming an unscoped cleanup project.
 
 Trivial-case escape: `## Premortem\nNo failure modes — trivial change` satisfies the contract for genuinely trivial outputs.
 

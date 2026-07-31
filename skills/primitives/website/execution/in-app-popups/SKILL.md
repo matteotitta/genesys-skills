@@ -16,17 +16,14 @@ inputs:
   - product-messaging
   - icp-behavioural
   - signup-onboarding-audit
-outputs:
 - type: landing-page-copy
   feeds_into:
   - landing-page-copy
 depends_on: []
-feeds_into:
 - ab-testing
 owned_by_agent: growth
 mcps_used:
 - exa
-push_targets: []
 triggers:
   slash_commands:
   - /in-app-popups

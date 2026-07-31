@@ -20,18 +20,15 @@ review_gate: 2
 inputs:
   required: []
   recommended: []
-outputs:
 - type: content-audit
   feeds_into:
   - content-strategy
 depends_on: []
-feeds_into:
 - content-strategy
 owned_by_agent: operator
 mcps_used:
 - exa
 - gdrive
-push_targets:
 - gdrive
 - notion
 triggers:
@@ -61,10 +58,7 @@ Invoke when the user asks for: `audit [company]'s content`, `content audit for [
 
 Two run modes:
 
-- **Published-content audit** (default) — full 6-phase walkthrough across newsletter/blog, LinkedIn, YouTube, events. Use the rubric in `references/scoring-framework.md` and the 4-pillar mix in `references/frameworks.md`.
-- **Pre-production validator** — when invoked with `mode=pre_production`, apply the 10-signal BOFU validator from `references/content-check-merged-2026-04-29.md` instead. Returns PASS/REVISE/REJECT verdict for a single piece of intent-stage content.
-
-Visual phase map → `references/process-flowchart.md`.
+Visual phase map → the premium reference.
 
 ## Inputs
 
@@ -86,37 +80,20 @@ Visual phase map → `references/process-flowchart.md`.
 
 ## Steps
 
-1. **Discover content channels and confirm scope** → `references/steps/phases.md` (Phase 1). Fetch footer/nav, run `site:[domain] blog OR newsletter OR resources` and `site:linkedin.com / youtube.com / lu.ma / eventbrite.com` searches. Verify access, note rate limits, prioritize by activity, lock time range.
-2. **Audit newsletter/blog** → `references/steps/phases.md` (Phase 2). Fetch archive, sample 10–15 recent posts, calculate cadence, categorize topics by pillar, assess formats and quality signals (headlines, CTAs, lead magnets, depth). Per-channel scraping methods → `references/channel-scraping-guide.md`.
-3. **Audit LinkedIn** → `references/steps/phases.md` (Phase 3). Pull last 20–30 posts, calculate cadence, categorize formats (text/carousel/video/image/poll/article), map topics, assess engagement, sample 5–10 posts for voice and hook patterns.
-4. **Audit YouTube (if applicable)** → `references/steps/phases.md` (Phase 4). Pull channel data (subs, video count), calculate cadence, categorize content types, note view counts on recent videos, sample 2–3 videos for production quality (audio, visuals, editing, branding, thumbnails).
-5. **Audit events (if applicable)** → `references/steps/phases.md` (Phase 5). Pull events from Luma/Eventbrite/LinkedIn Events, calculate cadence, categorize types (webinar/workshop/meetup/conference), note virtual vs. in-person mix, assess community signals (attendance, speakers, recordings).
-6. **Cross-channel synthesis** → `references/steps/phases.md` (Phase 6). Calculate total monthly volume, aggregate pillar mix vs. 40/25/25/10 target, identify gaps, assess voice/topic/brand consistency, surface success patterns, generate recommendations (quick wins, strategic, long-term), assign 1–5 scores per dimension.
-7. **Apply scoring rubric** → `references/scoring-framework.md` for detailed per-dimension rubrics; `references/frameworks.md` for the 4-pillar definitions, 7-dimension audit table, 1–5 scale, and B2B benchmarks (newsletter, LinkedIn, YouTube, events).
-8. **Pre-production validator path (only if `mode=pre_production`)** — apply the 10-signal BOFU rubric in `references/content-check-merged-2026-04-29.md` instead of Phases 2–6. Returns PASS/REVISE/REJECT verdict.
-9. **Write output** per `references/output-template.md` (full structure: header, exec summary, scorecard, channel inventory, per-channel sections, cross-channel analysis, gap analysis, success patterns, recommendations, content-strategy input summary, data gaps, iteration prompts).
-10. **Self-evaluate against quality gates** → `references/quality-gates.md`. Run anti-hallucination guardrails (6 rules), data-quality / analysis-quality / handoff-quality / format-quality checklists, anti-example check.
+1. **Discover content channels and confirm scope** → the premium reference (Phase 1). Fetch footer/nav, run `site:[domain] blog OR newsletter OR resources` and `site:linkedin.com / youtube.com / lu.ma / eventbrite.com` searches. Verify access, note rate limits, prioritize by activity, lock time range.
+2. **Audit newsletter/blog** → the premium reference (Phase 2). Fetch archive, sample 10–15 recent posts, calculate cadence, categorize topics by pillar, assess formats and quality signals (headlines, CTAs, lead magnets, depth). Per-channel scraping methods → the premium reference.
+3. **Audit LinkedIn** → the premium reference (Phase 3). Pull last 20–30 posts, calculate cadence, categorize formats (text/carousel/video/image/poll/article), map topics, assess engagement, sample 5–10 posts for voice and hook patterns.
+4. **Audit YouTube (if applicable)** → the premium reference (Phase 4). Pull channel data (subs, video count), calculate cadence, categorize content types, note view counts on recent videos, sample 2–3 videos for production quality (audio, visuals, editing, branding, thumbnails).
+5. **Audit events (if applicable)** → the premium reference (Phase 5). Pull events from Luma/Eventbrite/LinkedIn Events, calculate cadence, categorize types (webinar/workshop/meetup/conference), note virtual vs. in-person mix, assess community signals (attendance, speakers, recordings).
+6. **Cross-channel synthesis** → the premium reference (Phase 6). Calculate total monthly volume, aggregate pillar mix vs. 40/25/25/10 target, identify gaps, assess voice/topic/brand consistency, surface success patterns, generate recommendations (quick wins, strategic, long-term), assign 1–5 scores per dimension.
+7. **Apply scoring rubric** → the premium reference for detailed per-dimension rubrics; the premium reference for the 4-pillar definitions, 7-dimension audit table, 1–5 scale, and B2B benchmarks (newsletter, LinkedIn, YouTube, events).
+8. **Pre-production validator path (only if `mode=pre_production`)** — apply the 10-signal BOFU rubric in the premium reference instead of Phases 2–6. Returns PASS/REVISE/REJECT verdict.
+9. **Write output** per the premium reference (full structure: header, exec summary, scorecard, channel inventory, per-channel sections, cross-channel analysis, gap analysis, success patterns, recommendations, content-strategy input summary, data gaps, iteration prompts).
+10. **Self-evaluate against quality gates** → the premium reference. Run anti-hallucination guardrails (6 rules), data-quality / analysis-quality / handoff-quality / format-quality checklists, anti-example check.
 11. **Push** to Google Docs per the export destination in `Push` below. Run review gate Level 2 (spot check) — present executive summary, scorecard, channel audits, recommendations.
-12. **Offer iteration prompts** → `references/iteration-prompts.md` (refinement, expansion, quality prompts; feedback signal table; reference-example capture protocol).
+12. **Offer iteration prompts** → the premium reference (refinement, expansion, quality prompts; feedback signal table; reference-example capture protocol).
 
 ## What good looks like
-
-### References
-
-- **Output template (canonical)** → `references/output-template.md` — full output structure including exec summary, audit scorecard, channel inventory, 4 per-channel sections (newsletter/blog, LinkedIn, YouTube, events), cross-channel analysis, gap analysis, success patterns, 3-tier recommendations (quick wins, strategic, long-term), content-strategy input summary, data gaps, iteration prompts.
-- **Per-phase walkthrough** → `references/steps/phases.md` — full step-by-step for each of the 6 phases (channel discovery, newsletter/blog, LinkedIn, YouTube, events, cross-channel synthesis), with checkpoints.
-- **Process flowchart (visual)** → `references/process-flowchart.md` — ASCII flowchart of input validation → discover → scrape → analyze → synthesize → review.
-- **Scoring framework (detailed rubrics)** → `references/scoring-framework.md` — per-dimension scoring rubric across volume, cadence, topics, formats, quality, engagement, voice. Calibration guidance.
-- **Core frameworks** → `references/frameworks.md` — 4-pillar mix (Educational 40 / Personal 25 / Promotional 25 / Organizational 10), 7-dimension channel audit, 1–5 scoring scale, B2B benchmarks per channel, API integration notes (YouTube Data API v3, LinkedIn limited API, newsletter platforms, events platforms), MCP data integration table (Firecrawl, GTM, GSC, Exa).
-- **Channel scraping guide** → `references/channel-scraping-guide.md` — per-channel access methods, scraping tools, rate limits, fallbacks.
-- **Pre-production BOFU validator** → `references/content-check-merged-2026-04-29.md` — absorbed from `/content-check`. 10 strategic intent signals → PASS/REVISE/REJECT verdict for pre-production content. Use when `mode=pre_production`. Merge log: `references/merged-from.md`.
-- **Quality gates** → `references/quality-gates.md` — anti-hallucination guardrails (6 rules), pre-delivery checklist (data / analysis / handoff / format), anti-examples table.
-- **Iteration prompts + skill auto-update** → `references/iteration-prompts.md` — refinement / expansion / quality prompts, feedback-signal interpretation table, reference-example capture protocol, pattern-detection rules (3+ occurrences trigger).
-- **Worked snippets** → `references/worked-snippets.md` — newsletter cadence analysis, cross-channel cascade assessment snippets demonstrating specific-numbers discipline. Plus changelog.
-
-### Examples
-
-- **B2B SaaS content audit (full)** → `examples/example-audit-b2b-saas.md` — DataSync (fictional). Demonstrates exec summary, scorecard, all 6 phases, cross-channel synthesis, gap analysis, recommendations, and content-strategy input summary in the canonical output format.
 
 ### Evaluations (binary pass/fail before declaring "done")
 
@@ -131,11 +108,6 @@ Visual phase map → `references/process-flowchart.md`.
 - Voice patterns summarized for downstream `/tov-guidelines` handoff.
 - Data gaps surfaced explicitly with workaround — no silent omissions.
 - Output title is `# Content Audit: [Company Name]` exactly. Header includes website, audit period, prepared-by, channels audited, audit date.
-
-## Push
-
-- **Google Docs** → `client_folder/content/audit/` (per-client GDrive folder via `.claude/mcp/gdrive/create-doc-unified.mjs --client {slug}`). Each audit ships as a branded doc.
-- **Local file** → `projects/consulting/{client}/content/audit/MMYY-content-audit.md` per the auto-routing rule (audit verb → `audit/` lane).
 
 ## Integration with other skills
 
@@ -155,4 +127,4 @@ Visual phase map → `references/process-flowchart.md`.
 
 ## Pre-slim original
 
-Pre-slim SKILL.md (1171 lines, v1.0) archived at `.claude/skills/_archive/content-audit/SKILL-pre-slim-20260429.md`. Slim performed 2026-04-29 — see `references/worked-snippets.md` ("Changelog") for the v1.2 entry.
+Pre-slim SKILL.md (1171 lines, v1.0) archived at `.claude/skills/_archive/content-audit/SKILL-pre-slim-20260429.md`. Slim performed 2026-04-29 — see the premium reference ("Changelog") for the v1.2 entry.

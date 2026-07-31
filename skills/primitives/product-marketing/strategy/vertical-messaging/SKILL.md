@@ -27,7 +27,6 @@ inputs:
   - win-loss
   - positioning
   - customer-interviews
-outputs:
 - type: segment-messaging-map
   feeds_into:
   - landing-page-copy
@@ -37,7 +36,6 @@ outputs:
   - email-nurture
 depends_on:
 - product-messaging
-feeds_into:
 - landing-page-copy
 - outreach-emails
 - abm-campaign
@@ -47,7 +45,6 @@ owned_by_agent: pmm
 mcps_used:
 - gdrive
 - notion
-push_targets:
 - gdrive
 - notion
 triggers:
@@ -103,14 +100,10 @@ Do **NOT** invoke for: building the core messaging library (use `/product-messag
 4. **Define the buying lens + must-have outcome** → per segment: how this buyer evaluates solutions once triggered (what's non-negotiable, what they compare against) and the tangible result they need to see to buy. Pull from pain-point consequence chains and benefit sections of the messaging library, sharpened by segment VOC.
 5. **Assign the leading pillar** → for each segment, pick the ONE messaging pillar most likely to resonate given trigger + lens. Quote the pillar verbatim from the library. A secondary pillar may support; if no pillar fits a segment, that's a messaging-library gap — flag it, don't invent a pillar.
 6. **Write the entry-point message** → 1–2 lines per segment that meet the buyer in their trigger moment and open the leading pillar. Entry points are doorways into the core message, not new messaging. Apply client TOV rules.
-7. **Assemble the map** → per `references/output-template.md`: the routing table + per-segment briefs + confidence tags per ontology (`[VERIFIED]`/`[INFERRED]`/`[ESTIMATED]`) + validation flags on every estimated row + data gaps.
+7. **Assemble the map** → per the premium reference: the routing table + per-segment briefs + confidence tags per ontology (`[VERIFIED]`/`[INFERRED]`/`[ESTIMATED]`) + validation flags on every estimated row + data gaps.
 8. **Write to client folder** → `messaging/MMYY-vertical-messaging-{axis-or-line}.md`. Push to GDoc/Notion per frontmatter targets. Hand off downstream: the map briefs `/landing-page-copy` (per-vertical pages), `/outreach-emails` and `/abm-campaign` (segment sequences), `/lifecycle-marketing` (segment nurture).
 
 ## What good looks like
-
-### References
-
-- **Output template** → `references/output-template.md` — routing table schema, per-segment brief format, validation-flag conventions, source appendix.
 
 ### Evaluations (binary pass/fail before declaring "done")
 
@@ -122,15 +115,6 @@ Do **NOT** invoke for: building the core messaging library (use `/product-messag
 - Segment axis is single and named; segments come from client-approved segmentation.
 - Confidence distribution meets strategy-output thresholds (≥60% verified, ≤10% estimated per ontology).
 - Data gaps section lists every segment where VOC was thin, with the recommended fill (interviews to run, transcripts to pull).
-
-## Push
-
-- **Google Docs** → `client_folder/strategy/` (per-client GDrive folder via `.claude/mcp/gdrive/create-doc-unified.mjs --client {slug}`).
-- **Notion** → per-client messaging database/page. Refresh runs UPDATE the existing page — don't duplicate.
-
-Downstream chain: this skill's output is the brief for `/landing-page-copy` (per-vertical pages), `/outreach-emails`, `/abm-campaign`, `/lifecycle-marketing`, `/email-nurture`.
-
----
 
 ## Final ship gate
 

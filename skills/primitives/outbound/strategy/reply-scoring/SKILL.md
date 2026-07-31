@@ -15,19 +15,16 @@ inputs:
   recommended:
   - outreach-emails
   - lead-scoring
-outputs:
 - type: reply-classification
   feeds_into:
   - outreach-emails
   - lead-scoring
 depends_on: []
-feeds_into:
 - outreach-emails
 - lead-scoring
 owned_by_agent: operator
 mcps_used:
 - google-workspace
-push_targets:
 - gdrive
 triggers:
   slash_commands:
@@ -89,10 +86,10 @@ Reply rate tells you if people are paying attention. Positive reply rate tells y
 
 ## Process
 
-Three phases — full step detail in `references/process.md`.
+Three phases — full step detail in the premium reference.
 
 1. **Phase 1 — Fetch.** Use Gmail MCP (`mcp__google-workspace__search_gmail_messages` + `get_gmail_threads_content_batch`) to pull the campaign's reply threads. Filter to the FIRST reply per lead only (later messages are conversation, not signal).
-2. **Phase 2 — Classify.** For batches of 20-30 replies, dispatch the locked classification prompt (see `references/scoring-prompt.md`) via the Agent tool (subagent_type: general-purpose). Each reply returns `{lead_id, label, confidence, one_line_reason}`. Confidence < 0.7 → label as `other`.
+2. **Phase 2 — Classify.** For batches of 20-30 replies, dispatch the locked classification prompt (see the premium reference) via the Agent tool (subagent_type: general-purpose). Each reply returns `{lead_id, label, confidence, one_line_reason}`. Confidence < 0.7 → label as `other`.
 3. **Phase 3 — Aggregate.** Compute bucket counts, exclude `ooo` + `bounce` from net replies, derive `positive_reply_rate = (interested + soft + referral) / total_sent`. Compare to baseline (target from `goals/MMYY-scope.md` if available). Flag hostile rate >0.3% and unsub rate >2% as deliverability risks.
 
 ## MCP data integration
@@ -105,7 +102,7 @@ Three phases — full step detail in `references/process.md`.
 
 ## Quality
 
-Pre-delivery checklist: `references/quality.md`.
+Pre-delivery checklist: the premium reference.
 
 Headline rules:
 - Confidence threshold: 0.7. Below that → `other`, surface for manual review.
@@ -127,16 +124,7 @@ Apply `.claude/rules/approval-loop-pattern.md` (auto-loaded for this skill). For
 
 For routine cycle scoring on already-tuned campaigns, skip the loop — apply the locked prompt straight to the batch.
 
-**Composes with the scoring-validity gate.** The 2-zero-correction lock proves the classifier *labels* correctly on the tuning batch; it does not prove classification *accuracy generalizes*. If you ever claim an accuracy number for the classifier (not just the ≥200-send `positive_reply_rate` floor already in § Quality), hold out a labeled slice per [`.claude/rules/scoring-validity.md`](../../../../../rules/scoring-validity.md) and report the tuning-vs-holdout gap. For routine bucket classification, the approval loop + sample floor are enough — this fires only when a generalization claim is made.
-
-## Reference files
-
-| File | Purpose |
-|------|---------|
-| `references/classification-schema.md` | 11-bucket definitions + decision rules + edge-case examples + the positive_reply_rate formula |
-| `references/scoring-prompt.md` | Canonical classification prompt with Genesys voice rules and confidence guidance |
-| `references/process.md` | Three-phase step-by-step — Gmail fetch → batch classify → aggregate + write to cycle.md |
-| `references/quality.md` | Pre-delivery checklist + benchmarks (good/great positive reply rate) + risk thresholds |
+**Composes with the scoring-validity gate.** The 2-zero-correction lock proves the classifier *labels* correctly on the tuning batch; it does not prove classification *accuracy generalizes*. If you ever claim an accuracy number for the classifier (not just the ≥200-send `positive_reply_rate` floor already in), hold out a labeled slice per [`.claude/rules/scoring-validity.md`](../../../../../rules/scoring-validity.md) and report the tuning-vs-holdout gap. For routine bucket classification, the approval loop + sample floor are enough — this fires only when a generalization claim is made.
 
 ## Integration with other skills
 
@@ -153,16 +141,6 @@ For routine cycle scoring on already-tuned campaigns, skip the loop — apply th
 **Sideways:**
 - Pairs with `/list-quality` (pre-send) to close the measurement loop: list-quality before send, reply-scoring after
 - Pairs with `experiment` skill — positive_reply_rate is the success metric for outbound A/B tests
-
-## Output routing
-
-Reply scoring output lands at:
-
-- **Per-campaign report:** `projects/consulting/active/{client}/sales/audit/MMYY-{campaign}-reply-scoring.md`
-- **Cycle update:** appended to `projects/consulting/active/{client}/goals/MMYY-NN-cycle.md` under the metrics section
-- **Action items:** added to `projects/consulting/active/{client}/latest.md` (high-positive replies needing a human, ranked most-recent first)
-
-For non-client (Genesys-internal) outbound: results land in `projects/genesys/sales/audit/MMYY-{campaign}-reply-scoring.md`.
 
 ## Final ship gate
 

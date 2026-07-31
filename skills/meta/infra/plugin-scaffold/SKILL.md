@@ -5,10 +5,10 @@ last_updated: 2026-04-19
 author: genesys-growth
 description: 'Scaffolds a Claude Code / Cowork plugin bundle from a short YAML spec or from an existing agent definition''s
   skills list. Produces the canonical bundle layout (.claude-plugin/plugin.json, settings.json with default agent, agents/,
-  commands/, skills/ as symlinks to canonical sources in .claude/skills/, README, examples/). Use when creating a new personal
+  commands/, skills/ as symlinks to canonical sources in.claude/skills/, README, examples/). Use when creating a new personal
   plugin bundle in projects/apps/genesys-plugins/ or promoting an existing agent into a distributable plugin. Triggers: "scaffold
   a plugin", "create a bundle", "package [agent-name] as a plugin", "new plugin bundle". NOT for editing canonical skills
-  — that stays in .claude/skills/. NOT for publishing to a marketplace — use a separate publish step.'
+  — that stays in.claude/skills/. NOT for publishing to a marketplace — use a separate publish step.'
 goal: Scaffolds a Claude Code / Cowork plugin bundle from a short YAML spec or from an existing agent definition's skills
   list.
 outcome: Scaffolds a Claude Code / Cowork plugin bundle from a short YAML spec or from an existing agent definition's skills
@@ -21,14 +21,11 @@ review_gate: 0
 inputs:
   required: []
   recommended: []
-outputs:
 - type: runbook
   feeds_into: []
 depends_on: []
-feeds_into: []
 owned_by_agent: operator
 mcps_used: []
-push_targets:
 - gdrive
 - notion
 triggers:
@@ -54,7 +51,7 @@ Generates a fresh plugin bundle under `projects/apps/genesys-plugins/bundles/{bu
 - "scaffold a plugin for [agent/workflow]"
 - "create a new bundle"
 - "package [agent-name] as a plugin"
-- "bundle these skills together: ..."
+- "bundle these skills together:..."
 - "new plugin bundle: [name]"
 
 **Do NOT invoke when:**
@@ -73,21 +70,21 @@ The skill accepts a bundle spec in one of two forms:
 ```yaml
 bundle: linkedin-engine
 description: "Personal LinkedIn content engine. Voice memo or thought → drafted post on brand in 60s."
-agent: social-marketer     # defaults to bundle name if omitted
+agent: social-marketer # defaults to bundle name if omitted
 author: genesys-growth
 version: "0.1.0"
 skills:
   - content-skills/linkedin-skills/linkedin-hooks
   - content-skills/linkedin-skills/linkedin-expert-posts
   - content-skills/linkedin-skills/linkedin-personal-posts
-  # … add more paths relative to .claude/skills/
+  # … add more paths relative to.claude/skills/
 commands:
   - name: draft-from-thought
     description: "Turn a raw thought into a voice-checked LinkedIn post."
   - name: weekly-batch
     description: "Run the weekly content batch."
-cowork_ready: true          # false if any skill or MCP is local-only
-resale_candidate: true      # leave true so a future voice-scrub fork stays on the table
+cowork_ready: true # false if any skill or MCP is local-only
+resale_candidate: true # leave true so a future voice-scrub fork stays on the table
 ```
 
 ### Form 2 — From an existing agent
@@ -102,28 +99,22 @@ If the user says "package the social-marketer agent as a plugin", read `.claude/
 2. **Create folder structure**:
    ```
    projects/apps/genesys-plugins/bundles/{bundle}/
-   ├── .claude-plugin/plugin.json
+   ├──.claude-plugin/plugin.json
    ├── settings.json
    ├── README.md
-   ├── agents/{agent}.md          (copy + adapt from .claude/agents/{agent}.md)
+   ├── agents/{agent}.md (copy + adapt from.claude/agents/{agent}.md)
    ├── commands/{each}.md
-   ├── skills/                     (symlinks to .claude/skills/...)
-   └── examples/                   (empty placeholder + README)
+   ├── skills/ (symlinks to.claude/skills/...)
+   └── examples/ (empty placeholder + README)
    ```
-3. **Render `plugin.json`** from `references/plugin.json.template` using the spec.
+3. **Render `plugin.json`** from the premium reference using the spec.
 4. **Render `settings.json`** with `"agent": "{agent}"` as the default.
 5. **Copy + adapt the agent definition** from `.claude/agents/{agent}.md`. Keep the body. Strip the `skills:` frontmatter (Cowork doesn't read it the same way). Add a short "Bundle context" section referencing the plugin name.
 6. **Create symlinks** for each skill: `ln -s {absolute-path-to-.claude-skill} skills/{skill-name}`. Use absolute paths so symlinks survive bundle moves.
 7. **Stub each command** under `commands/` with a frontmatter + description. Leave the body as a TODO marker for the user to fill with the opinionated chain.
-8. **Render `README.md`** from `references/README.md.template` with the bundle name, description, skill list, and install command.
+8. **Render `README.md`** from the premium reference with the bundle name, description, skill list, and install command.
 9. **Update the top-level `projects/apps/genesys-plugins/marketplace.json`** to include the new bundle.
 10. **Report** the created paths and a 1-line install command the user can run to test the bundle locally.
-
----
-
-## Output format
-
-Print a tree of files created, the install command to test locally, and a punch list of TODOs (commands to fill in, examples to add).
 
 ---
 
@@ -143,9 +134,3 @@ Suggest the user:
 2. Seed `examples/` with 2-3 real outputs for in-context reference.
 3. Test locally: `/plugin install file:///Users/matteotittarelli/Desktop/CORE/WORK/CLAUDE\ CODE/projects/apps/genesys-plugins {bundle-name}`.
 
-## References
-
-- `references/plugin.json.template`
-- `references/marketplace.json.template`
-- `references/README.md.template`
-- [Claude Code plugins docs](https://code.claude.com/docs/en/plugins.md)

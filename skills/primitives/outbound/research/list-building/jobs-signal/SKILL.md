@@ -24,21 +24,18 @@ inputs:
   recommended:
   - icp-research
   - company-context
-outputs:
 - type: signal-enriched-account-list
   feeds_into:
   - niche-signal-discovery
   - abm-campaign
   - lead-scoring
 depends_on: []
-feeds_into:
 - niche-signal-discovery
 - abm-campaign
 - lead-scoring
 owned_by_agent: researcher
 mcps_used:
 - apify
-push_targets:
 - gdrive
 - notion
 triggers:
@@ -124,7 +121,7 @@ Returns everything Mode 1 returns, plus: recruiter LinkedIn URL, recruiter email
 2. Show estimate to user
 3. Wait for confirmation if estimate >$5
 
-Cost cheat sheet + invocation patterns in `references/process.md`.
+Cost cheat sheet + invocation patterns in the premium reference.
 
 ---
 
@@ -142,7 +139,7 @@ Cost cheat sheet + invocation patterns in `references/process.md`.
 
 ## Process
 
-**Five-phase flow:** Input validation → Cost estimation + credit gate → Actor call (Mode 1 or 2) → Signal extraction (job_count, role_types, most_recent_posting, target_role_match_count, signal_strength) → Output. Step-by-step + actor invocation patterns + cost cheat sheet in `references/process.md`.
+**Five-phase flow:** Input validation → Cost estimation + credit gate → Actor call (Mode 1 or 2) → Signal extraction (job_count, role_types, most_recent_posting, target_role_match_count, signal_strength) → Output. Step-by-step + actor invocation patterns + cost cheat sheet in the premium reference.
 
 ---
 
@@ -156,15 +153,9 @@ Cost cheat sheet + invocation patterns in `references/process.md`.
 
 ---
 
-## Output Format
-
-CSV + summary header with company-level aggregation: `company_name`, `linkedin_url`, `job_count`, `role_types`, `target_role_match_count`, `most_recent_posting`, `signal_strength`, `signal_summary`. Mode 2 adds recruiter contact + AI-enriched columns. Iteration prompts + downstream-skill handoff in `references/output-format.md`.
-
----
-
 ## Quality
 
-Pre-delivery checks cover coverage (date filter set, empty-result reporting), quality (counts match actor exactly, recruiter emails marked `[UNAVAILABLE]` when not returned, signal-strength applied per matrix), and cost discipline (Apify gate, Mode 2 only when justified). Worked example (ClientCo 100-firm sweep at $1.60) + anti-examples (Mode 2 by default, all-jobs-ever, fabricated recruiter emails, soft-language inference) + quality gate in `references/quality.md`.
+Pre-delivery checks cover coverage (date filter set, empty-result reporting), quality (counts match actor exactly, recruiter emails marked `[UNAVAILABLE]` when not returned, signal-strength applied per matrix), and cost discipline (Apify gate, Mode 2 only when justified). Worked example (ClientCo 100-firm sweep at $1.60) + anti-examples (Mode 2 by default, all-jobs-ever, fabricated recruiter emails, soft-language inference) + quality gate in the premium reference.
 
 ---
 
@@ -209,17 +200,6 @@ In the engagement workflow: slots into the **AEO visibility loop** as an optiona
 | `valig/linkedin-jobs-scraper` (Apify MCP) | Bulk jobs scrape | $0.32–$0.40/1k jobs |
 | `fantastic-jobs/advanced-linkedin-job-search-api` (Apify MCP) | Enriched jobs + recruiter data | $1.50–$5/1k jobs |
 | `/deepline-enrich` (downstream, Mode 2 only) | Recruiter email validation | Deepline credits |
-
----
-
-## Reference Files
-
-| File | Purpose |
-|------|---------|
-| `references/process.md` | Five-phase flow + actor invocation patterns + cost cheat sheet |
-| `references/output-format.md` | CSV schema (Mode 1 + Mode 2 columns) + iteration prompts + downstream handoff |
-| `references/quality.md` | Pre-delivery checks + worked ClientCo 100-firm example + anti-examples + quality gate |
-| `references/auto-update.md` | Self-evaluation + feedback signals (actor success rate, signal-matrix recalibration) |
 
 ---
 

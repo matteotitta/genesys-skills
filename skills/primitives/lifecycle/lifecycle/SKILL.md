@@ -19,19 +19,16 @@ inputs:
   - icp-behavioural
   - product-messaging
   recommended: []
-outputs:
 - type: lifecycle-campaign
   feeds_into:
   - email-nurture
 depends_on:
 - icp-behavioural
 - product-messaging
-feeds_into:
 - email-nurture
 owned_by_agent: growth
 mcps_used:
 - exa
-push_targets:
 - gdrive
 - notion
 triggers:
@@ -49,7 +46,7 @@ effort: high
 
 Generate production-ready lifecycle marketing campaigns for B2B SaaS products across email, push, SMS, in-app messaging, and paid social.
 
-For full process, lifecycle stages, campaign templates, and emotional cue framework → `references/process.md`.
+For full process, lifecycle stages, campaign templates, and emotional cue framework → the premium reference.
 
 ---
 
@@ -67,7 +64,7 @@ Output complies with:
 
 | Code | Refinement | How it lands in lifecycle-marketing |
 |---|---|---|
-| **R1** | Source placement (three layers) | Customer-facing surfaces (email, push, SMS, in-app, paid social) → **no sources block.** Campaign planning doc (client-team review) → cleaned `[VERIFIED: ...]` tags in a collapsed appendix toggle. |
+| **R1** | Source placement (three layers) | Customer-facing surfaces (email, push, SMS, in-app, paid social) → **no sources block.** Campaign planning doc (client-team review) → cleaned `[VERIFIED:...]` tags in a collapsed appendix toggle. |
 | **R2** | Single-doc-with-toggles | Cross-channel campaigns ship as **one campaign doc with one toggle per channel/asset** — not 5 separate files for email + push + SMS + in-app + paid. Index up top. |
 | **R3** | Product-update tone | Even feature-driven campaigns frame as "[Product] now does X" not "we're thrilled to announce." |
 | **R5** | Blog as voice anchor | Cross-channel campaigns with an anchor blog post mirror the blog's opening line across every channel verbatim. Voice drift across channels is the loudest tell of multi-author lifecycle campaigns. |
@@ -110,7 +107,7 @@ Effective lifecycle marketing isn't about sending more messages — it's about s
 | **2. Strategy** | Map lifecycle stages, triggers, messaging hierarchy | Strategy doc |
 | **3. Generation** | Produce channel-specific copy with variants | Production-ready copy files |
 
-For full discovery questions, lifecycle stage mapping, campaign templates, and per-channel specs → `references/process.md`.
+For full discovery questions, lifecycle stage mapping, campaign templates, and per-channel specs → the premium reference.
 
 ---
 
@@ -138,22 +135,6 @@ For full discovery questions, lifecycle stage mapping, campaign templates, and p
 4. **Mark missing context.** Use `[PLACEHOLDER: description]` for unconfirmed details.
 5. **Respect channel constraints.** Stay within word count limits.
 6. **No fake urgency.** Only use urgency cues when there's real time pressure.
-
----
-
-## Reference Files
-
-| File | Purpose |
-|------|---------|
-| `references/process.md` | Full 3-phase process, lifecycle stages, campaign templates, emotional cue framework, channel specs |
-| `references/channel-specs.md` | Detailed specifications for each channel |
-| `references/emotional-cues.md` | Complete emotional cue framework with examples |
-| `references/lifecycle-stages.md` | Lifecycle stage definitions and triggers |
-| `references/campaign-templates.md` | Full templates for each campaign type |
-| `references/apps-script-template.md` | Google Apps Script output format |
-| `examples/spotdraft-activation.md` | Worked example: contract management activation |
-| `examples/camassist-lifecycle.md` | Worked example: CAM software lifecycle |
-| `examples/verifai-lifecycle.md` | Worked example: AI contract review lifecycle |
 
 ---
 
