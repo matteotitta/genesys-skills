@@ -1,7 +1,7 @@
 ---
 name: google-ads-weekly
-version: "1.0"
-last_updated: 2026-07-28
+version: "1.1"
+last_updated: 2026-07-30
 author: genesys-growth
 description: |
   Runs a weekly optimise-and-report cycle on a Google Ads search account. Pulls the account (via the read-only google-ads MCP, or a pasted CSV export when the API is not live), runs ten optimisation levers split by the data volume each needs, proposes a ranked change list, applies what the operator approves through the gated google-ads-write MCP, then drafts a Slack update and a cycle record. Levers: search-terms negatives, budget pacing, impression share, conversion health, structure drift (weekly); keyword performance, CPC discipline, RSA assets, Quality Score (28-day). Every write is gated by google-ads-spend.md. Triggers: "Google Ads weekly", "run the Google Ads optimisation", "weekly paid search update", "add negatives". NOT for LinkedIn (use /paid-ads-report), one-off account audits (/paid-ads-audit), or writing ad copy (/google-ads-copy).
@@ -57,7 +57,7 @@ Reads a Google Ads search account, proposes a ranked change list, applies what i
 - **[`quantitative-evidence-floors.md`](../../../../rules/quantitative-evidence-floors.md)** governs whether the data supports a call at all. This is the load-bearing rule for a small account: at £1,500/mo a single week is a few hundred pounds and a handful of conversions, which is below the floor for any kill decision. The weekly/28-day lever split in `references/levers.md` exists entirely because of this.
 - **[`pii-redaction.md`](../../../../rules/pii-redaction.md)** applies to search-terms data, which is free text people typed into a search box and routinely carries names, employers and phone numbers.
 - **[`output-simplicity.md`](../../../../rules/output-simplicity.md)** caps the Slack update. It is a skim artifact for senior readers, so one screen, not a metrics dump.
-- **[`persuasion-and-stickiness.md`](../../../../rules/persuasion-and-stickiness.md)** binds only where lever 9 touches RSA assets. This skill does not generate ad copy: it flags which assets are underperforming and hands off to `/google-ads-copy`, which owns the Cialdini + SUCCESs pass. Where a replacement asset is proposed inline, that rule's pre-ship gate applies to it, and the client's banned-claim list applies first.
+- **[`persuasion-and-stickiness.md`](../../../../rules/persuasion-and-stickiness.md)** binds only where lever 9 touches RSA assets. This skill does not generate ad copy: it flags which assets are underperforming and hands off to `/google-ads-copy`, which owns the Cialdini + SUCCESs pass. Where a replacement asset is proposed inline, that rule's pre-ship gate applies to it, and the client's banned-claim list applies first. Lever 9 scores *which* text angle to refresh via the [angle matrix](../ad-creative-brief/references/angle-matrix.md) before the handoff.
 
 ## When to use
 

@@ -1,7 +1,7 @@
 ---
 name: ad-creative-brief
-version: '1.1'
-last_updated: 2026-05-01
+version: '1.2'
+last_updated: 2026-07-30
 author: genesys-growth
 description: Generates creative briefs for ad designers and video production teams, bridging ad copy (what it says) with creative
   direction (what it looks like). Produces visual concept descriptions, format specifications, brand alignment notes, asset
@@ -139,6 +139,8 @@ Test in order. Each level has diminishing returns compared to the one above:
 
 Never test color before concept. Concept gets the largest delta in performance; color almost never moves the needle when the angle is wrong.
 
+**Which concept to test first is the angle matrix's job** ([`references/angle-matrix.md`](references/angle-matrix.md)) — it scores the candidate angles by evidence so the mandatory first test starts from the highest-opportunity cell, not a guess.
+
 ---
 
 ## Inputs
@@ -150,12 +152,13 @@ Never test color before concept. Concept gets the largest delta in performance; 
 | **paid-campaign-strategy** | Campaign architecture | Required |
 | **DESIGN.md (brand-kit)** | Tokens for color, type, components | Required |
 | **tov-guidelines** | Voice patterns for hero text overlays | Recommended |
+| **linkedin-ad-teardown** | Competitor gaps → the matrix's competition-density axis | Recommended |
 
 ---
 
 ## Process
 
-**Six-phase flow:** Platform/format identification → Messaging-angle extraction (3-5 distinct angles) → Visual direction per angle → Format specs per platform → A/B test plan → Structured brief output. Full flowchart, creative-angle framework, image specs per platform (Google Display + LinkedIn), test rules, and brief quality standards in `references/process.md`.
+**Six-phase flow:** Platform/format identification → **the angle matrix** (score angle × persona × awareness on evidence, brief the top band) → Visual direction per angle → Format specs per platform → A/B test plan → Structured brief output. Full flowchart, image specs per platform (Google Display + LinkedIn), test rules, and brief quality standards in `references/process.md`; the scored-matrix method in [`references/angle-matrix.md`](references/angle-matrix.md).
 
 ---
 
@@ -204,6 +207,7 @@ Terminal deliverable — output goes directly to a designer or video producer. N
 | File | Purpose |
 |------|---------|
 | `references/process.md` | Six-phase flowchart + creative-angle framework + image specs per platform + A/B test hierarchy + brief quality standards |
+| `references/angle-matrix.md` | The scored angle × persona × awareness engine — Phase 2's selection method (evidence-scored, floored, banned-claim-blocked) |
 | `references/output-format.md` | Brief template (token-cited per angle) + iteration prompts + designer/video handoff |
 | `references/quality.md` | Self-evaluation checklist + worked example + anti-examples + quality gate + failure-mode triage |
 | `references/auto-update.md` | Self-evaluation + feedback signals + spec-table drift check + token-fluency improvement |
