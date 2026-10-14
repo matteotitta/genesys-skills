@@ -35,7 +35,7 @@ Plus `_schema/` — the authoring SOP, frontmatter schema, and output templates 
 2. Drop the skill folder into your own `.claude/skills/` to run it in Claude Code — or just read it as a playbook.
 3. Fork it, adapt it to your stack, ship it.
 
-New to Claude Code for GTM? Start with [claude-code-marketing-quickstart](https://github.com/matteotitta/claude-code-marketing-quickstart).
+New to Claude Code for GTM? Start with a workspace template: [repo-structure-in-house](https://github.com/matteotitta/repo-structure-in-house) or [repo-structure-agency](https://github.com/matteotitta/repo-structure-agency). Want one workstream at a time? Install a free plugin: [context](https://github.com/matteotitta/claude-marketing-context), [launch](https://github.com/matteotitta/claude-marketing-launch), [website](https://github.com/matteotitta/claude-marketing-website), [AEO](https://github.com/matteotitta/claude-marketing-aeo), [LinkedIn](https://github.com/matteotitta/claude-marketing-linkedin), [content](https://github.com/matteotitta/claude-marketing-content).
 
 ## What's included (and what isn't)
 This is the **methodology** layer — every skill's `SKILL.md`. To keep client work confidential, the `references/` worked-examples and internal assets are **not** part of this public release, so a few in-skill links point to files you won't find here — the skills read as complete playbooks regardless. Skills also reference an internal workspace layout (`.claude/rules/`, `references/`, MCP tool names); treat those as adapt-to-your-own pointers.
