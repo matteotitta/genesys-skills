@@ -5,36 +5,29 @@
 ```
 skills/
 └── skill-name/
-    ├── SKILL.md          ← Core skill prompt
-    └── references/       ← Templates, schemas, examples
+    └── SKILL.md          ← the whole skill
 ```
 
-Each skill is a self-contained folder. Drop it into `.claude/skills/` and it works.
+Each skill is one folder with one file. Drop the folder into `.claude/skills/` and it works.
 
 ## Skill format
 
-Skills use YAML frontmatter + markdown:
+Skills use YAML frontmatter plus markdown:
 
 ```yaml
 ---
 name: skill-name
-version: "1.0"
-description: |
-  When to use this skill.
+description: What the skill does and when to use it.
 ---
 
 # Skill title
 
-Process steps, quality gates, and output format.
+When to run, inputs, steps, and what good looks like.
 ```
 
-## New skills
+## Requests and bugs
 
-New skills are added weekly via the [Genesys newsletter](https://newsletter.genesysgrowth.com). If you'd like to request a skill or suggest improvements, [open an issue](https://github.com/matteotitta/genesys-skills/issues).
-
-## Bug reports
-
-If a skill has issues (broken search patterns, outdated templates), please [open an issue](https://github.com/matteotitta/genesys-skills/issues) with:
+To suggest a skill or report a problem, [open an issue](https://github.com/matteotitta/genesys-skills/issues) with:
 - Which skill
 - What went wrong
 - Your Claude Code version
