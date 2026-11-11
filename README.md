@@ -1,3 +1,5 @@
+![genesys-skills cover](.github/cover.png)
+
 # genesys-skills
 
 ![Skills](https://img.shields.io/badge/skills-10-6400D7) ![Stars](https://img.shields.io/github/stars/matteotitta/genesys-skills?color=6400D7&labelColor=181723) ![License](https://img.shields.io/badge/license-MIT-BAFDFF?labelColor=181723)
